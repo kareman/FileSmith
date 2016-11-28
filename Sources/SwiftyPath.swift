@@ -30,21 +30,15 @@ extension Path {
 	}
 
 	public var string: String {
-		return DirectoryPath.separator + components.joined(separator: DirectoryPath.separator)
+		return relativeString ?? (DirectoryPath.separator + components.joined(separator: DirectoryPath.separator))
 	}
 
 	public var description: String {
 		return string
 	}
 
-	public var baseString: String? {
-		return _relativestart.map { DirectoryPath.separator +
-			components[components.startIndex..<$0].joined(separator: DirectoryPath.separator)
-		}
-	}
-
-	public var baseURL: URL? {
-		return baseString.map { URL(fileURLWithPath: $0, isDirectory: true) }
+	public var base: DirectoryPath? {
+		return _relativestart.map { DirectoryPath([DirectoryPath.separator] + self.components.prefix(upTo: $0)) }
 	}
 
 	public var relativeString: String? {
@@ -58,10 +52,10 @@ extension Path {
 	}
 
 	public var url: URL {
-		return URL(fileURLWithPath: relativeString ?? string, isDirectory: isDirectory, relativeTo: baseURL)
+		return URL(fileURLWithPath: relativeString ?? string, isDirectory: isDirectory, relativeTo: base?.url)
 	}
 
-	func exists() -> Bool {
+	public func exists() -> Bool {
 		return Files.fileExists(atPath: string)
 	}
 }
@@ -73,10 +67,11 @@ func initPath <C: Collection>(_ c: C) -> ([String], Array<String>.Index?)
 	let relativestart: Array<String>.Index?
 	if c.first == "~" {
 		components = DirectoryPath.home.components + c.dropFirst()
-		relativestart = DirectoryPath.home.components.count
+		relativestart = nil
 	} else if c.first != "/" { // relative path
-		components = DirectoryPath.current.components + c
-		relativestart = DirectoryPath.current.components.count
+		let base = DirectoryPath.current.components
+		components = base + c
+		relativestart = base.count
 	} else {
 		components = Array(c.dropFirst())
 		relativestart = nil
@@ -88,6 +83,9 @@ func initPath(_ string: String) -> ([String], Array<String>.Index?) {
 	var components = string.components(separatedBy: FilePath.separator)
 	if components.first == "" {
 		components[0] = "/"
+	}
+	if components.last == "" {
+		components.removeLast()
 	}
 	return initPath(components)
 }
@@ -148,7 +146,17 @@ extension DirectoryPath: ExpressibleByStringLiteral {
 	}
 }
 
+
+extension String {
+
+	// This is never called by Swift, 'func +(leftdir: DirectoryPath, rightdir: DirectoryPath)' is called instead.
+	public static func +(dir: DirectoryPath, file: String) -> DirectoryPath {
+		fatalError("String literals used with the + operator after a DirectoryPath are always interpreted by Swift as a DirectoryPath, and never a FilePath. Use DirectoryPath/FilePath initialisers directly for clarity.")
+	}
+}
+
 extension DirectoryPath {
+
 	public static func +(dir: DirectoryPath, file: FilePath) -> FilePath {
 		return FilePath([DirectoryPath.separator] + dir.components
 			+ file.components.suffix(from: file._relativestart ?? file.components.startIndex))
