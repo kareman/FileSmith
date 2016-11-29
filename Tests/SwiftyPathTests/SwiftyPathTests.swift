@@ -52,9 +52,15 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssertEqual(directorypath.string, "/tmp/directory1/directory2")
 	}
 
-	func test() {
-		let folder: DirectoryPath = "/tmp"
-		let l = "ljlkj" + folder
+	func testName() {
+		XCTAssertEqual(FilePath("file.txt").name, "file.txt")
+		XCTAssertEqual(FilePath("file.txt").extension, "txt")
+		XCTAssertEqual(FilePath(".file.txt").name, ".file.txt")
+		XCTAssertEqual(FilePath(".file.txt").extension, "txt")
+		XCTAssertEqual(FilePath(".file").name, ".file")
+		XCTAssertEqual(FilePath(".file").extension, nil)
+		XCTAssertEqual(FilePath("file").name, "file")
+		XCTAssertEqual(FilePath("file").extension, nil)
 	}
 
 	static var allTests : [(String, (SwiftyPathTests) -> () throws -> Void)] {

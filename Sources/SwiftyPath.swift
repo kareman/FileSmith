@@ -58,6 +58,15 @@ extension Path {
 	public func exists() -> Bool {
 		return Files.fileExists(atPath: string)
 	}
+
+	public var name: String {
+		return components.last!
+	}
+
+	public var `extension`: String? {
+		let nameparts = name.components(separatedBy: ".")
+		return (nameparts.count == 1) || (nameparts.count == 2 && nameparts.first == "") ? nil : nameparts.last
+	}
 }
 
 func initPath <C: Collection>(_ c: C) -> ([String], Array<String>.Index?)
