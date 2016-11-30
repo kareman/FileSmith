@@ -1,7 +1,7 @@
 
 import Foundation
 
-let Files = FileManager.default
+let Files = FileManager()
 
 public protocol Path: CustomStringConvertible {
 	var components: [String] { get }
@@ -38,7 +38,7 @@ extension Path {
 	}
 
 	public var base: DirectoryPath? {
-		return _relativestart.map { DirectoryPath([DirectoryPath.separator] + self.components.prefix(upTo: $0)) }
+		return _relativestart.map { DirectoryPath(absolute: Array(self.components.prefix(upTo: $0))) }
 	}
 
 	public var relativeString: String? {
@@ -49,6 +49,14 @@ extension Path {
 
 	public var relativeURL: URL? {
 		return relativeString.map { URL(fileURLWithPath: $0, isDirectory: isDirectory) }
+	}
+
+	var relativeComponents: [String]? {
+		return _relativestart.map { Array(components.suffix(from: $0)) }
+	}
+
+	var baseComponents: [String]? {
+		return _relativestart.map { Array(components.prefix(upTo: $0)) }
 	}
 
 	public var url: URL {
@@ -104,6 +112,16 @@ public struct DirectoryPath: Path {
 	public let components: [String]
 	public let _relativestart: Array<String>.Index?
 
+	init(absolute components: [String]) {
+		self.components = components
+		_relativestart = nil
+	}
+
+	init(base: [String], relative: [String]) {
+		components = base + relative
+		_relativestart = base.endIndex
+	}
+
 	public init <C: Collection>(_ c: C)
 		where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
 		(components, _relativestart) = initPath(c)
@@ -112,12 +130,28 @@ public struct DirectoryPath: Path {
 	public init(_ string: String) {
 		(components, _relativestart) = initPath(string)
 	}
+
+	public init(_ url: URL) {
+		precondition(url.isFileURL && url.hasDirectoryPath, "The provided URL does not point to a directory.")
+		components = (url.baseURL?.pathComponents ?? []) + url.pathComponents
+		_relativestart = components.index(components.startIndex, offsetBy: url.baseURL?.pathComponents.count ?? 0 )
+	}
 }
 
 public struct FilePath: Path {
 	public let components: [String]
 	public let _relativestart: Array<String>.Index?
 
+	init(absolute components: [String]) {
+		self.components = components
+		_relativestart = nil
+	}
+
+	init(base: [String], relative: [String]) {
+		components = base + relative
+		_relativestart = base.endIndex
+	}
+	
 	public init <C: Collection>(_ c: C)
 		where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
 		precondition(c.count > 0)
@@ -167,13 +201,16 @@ extension String {
 extension DirectoryPath {
 
 	public static func +(dir: DirectoryPath, file: FilePath) -> FilePath {
-		return FilePath([DirectoryPath.separator] + dir.components
-			+ file.components.suffix(from: file._relativestart ?? file.components.startIndex))
+		// FIXME: Make result relative, just swap out the base of the right side.
+		return FilePath(base: dir.components, relative: file.relativeComponents ?? file.components)
 	}
 
 	public static func +(leftdir: DirectoryPath, rightdir: DirectoryPath) -> DirectoryPath {
-		return DirectoryPath([DirectoryPath.separator] + leftdir.components
-			+ rightdir.components.suffix(from: rightdir._relativestart ?? rightdir.components.startIndex))
+		// FIXME: Make result relative, just swap out the base of the right side.
+		return DirectoryPath(base: leftdir.components, relative: rightdir.relativeComponents ?? rightdir.components)
+
+			//DirectoryPath([DirectoryPath.separator] + leftdir.components
+		//+ rightdir.components.suffix(from: rightdir._relativestart ?? rightdir.components.startIndex))
 	}
 
 	public func exists(filepath: FilePath) -> Bool {
@@ -182,5 +219,15 @@ extension DirectoryPath {
 
 	public func exists(filepath: String) -> Bool {
 		return Files.fileExists(atPath: (self + FilePath(string)).string)
+	}
+
+	public var absolute: DirectoryPath {
+		return DirectoryPath(absolute: components)
+	}
+}
+
+extension FilePath {
+	public var absolute: FilePath {
+		return FilePath(absolute: components)
 	}
 }
