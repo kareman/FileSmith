@@ -64,6 +64,11 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssertEqual(FilePath("file").extension, nil)
 	}
 
+	func testURL() {
+		XCTAssertEqual(DirectoryPath(URL(fileURLWithPath:"/tmp/directory1/directory2/")).string, "/tmp/directory1/directory2")
+		XCTAssertEqual(DirectoryPath(URL(fileURLWithPath:"directory1/directory2/", isDirectory: true, relativeTo: URL(fileURLWithPath:"/tmp"))).string, "directory1/directory2")
+	}
+
 	static var allTests : [(String, (SwiftyPathTests) -> () throws -> Void)] {
 		return [
 			("testAddURLs", testAddURLs),
