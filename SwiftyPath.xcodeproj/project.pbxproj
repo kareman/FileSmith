@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA900F7C1DEE1B4A008F13B5 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA900F7B1DEE1B4A008F13B5 /* Directory.swift */; };
+		BA900F7E1DEE1DBA008F13B5 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA900F7D1DEE1DBA008F13B5 /* DirectoryTests.swift */; };
 		OBJ_21 /* SwiftyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* SwiftyPath.swift */; };
 		OBJ_28 /* SwiftyPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SwiftyPathTests.swift */; };
 		OBJ_30 /* SwiftyPath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* SwiftyPath.framework */; };
@@ -23,6 +25,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA900F7B1DEE1B4A008F13B5 /* Directory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
+		BA900F7D1DEE1DBA008F13B5 /* DirectoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTests.swift; sourceTree = "<group>"; };
 		OBJ_12 /* SwiftyPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyPathTests.swift; sourceTree = "<group>"; };
 		OBJ_14 /* SwiftyPath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyPath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_15 /* SwiftyPathTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwiftyPathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_12 /* SwiftyPathTests.swift */,
+				BA900F7D1DEE1DBA008F13B5 /* DirectoryTests.swift */,
 			);
 			name = SwiftyPathTests;
 			path = Tests/SwiftyPathTests;
@@ -75,7 +80,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -83,7 +88,6 @@
 				OBJ_10 /* Tests */,
 				OBJ_13 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -98,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* SwiftyPath.swift */,
+				BA900F7B1DEE1B4A008F13B5 /* Directory.swift */,
 			);
 			name = SwiftyPath;
 			path = Sources;
@@ -154,7 +159,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_13 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -171,6 +176,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_21 /* SwiftyPath.swift in Sources */,
+				BA900F7C1DEE1B4A008F13B5 /* Directory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +185,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_28 /* SwiftyPathTests.swift in Sources */,
+				BA900F7E1DEE1DBA008F13B5 /* DirectoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
