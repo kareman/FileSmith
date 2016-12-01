@@ -39,11 +39,11 @@ extension Path {
 
 	/// Creates a path from a URL.
 	///
-	/// - warning: Will crash if provided URL is not a file URL or does not have a directory path.
+	/// - warning: Will crash if URL is not a file URL or does not have a directory path.
 	/// - bug: If the URL has a relative path and it uses .. to refer to its parent directories,
 	/// the behaviour is undefined. Things may not end well.
 	public init(_ url: URL) {
-		precondition(url.isFileURL && url.hasDirectoryPath, "The provided URL does not point to a directory.")
+		precondition(url.isFileURL && url.hasDirectoryPath, "The URL does not point to a directory.")
 		if let base = url.baseURL?.pathComponents {
 			self.init(base: Array(base.dropFirst()), relative: Array(url.pathComponents.suffix(from: base.count)))
 		} else {
@@ -52,18 +52,24 @@ extension Path {
 	}
 }
 
+/// Tries to create a new Path by detecting if it is a directory or a file.
+///
+/// If the path ends in a '/', it is a directory.
+/// If the path is valid, check the file system.
+/// Otherwise return nil.
+public func path(detectTypeOf stringpath: String) -> Path? {
+	guard !stringpath.hasSuffix(pathseparator) else {
+		return DirectoryPath(stringpath)
+	}
+
+	var isdirectory: ObjCBool = false
+	guard Files.fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
+		return nil
+	}
+	return isdirectory.boolValue ? DirectoryPath(stringpath) : FilePath(stringpath)
+}
+
 extension Path {
-	public static var current: DirectoryPath {
-		return DirectoryPath(Files.currentDirectoryPath)
-	}
-
-	public static var home: DirectoryPath {
-		return DirectoryPath(NSHomeDirectoryForUser(NSUserName())!)
-	}
-
-	public static var root: DirectoryPath {
-		return DirectoryPath(pathseparator)
-	}
 
 	public var isDirectory: Bool {
 		return self is DirectoryPath
@@ -206,6 +212,18 @@ extension String {
 }
 
 extension DirectoryPath {
+
+	public static var current: DirectoryPath {
+		return DirectoryPath(Files.currentDirectoryPath)
+	}
+
+	public static var home: DirectoryPath {
+		return DirectoryPath(NSHomeDirectoryForUser(NSUserName())!)
+	}
+
+	public static var root: DirectoryPath {
+		return DirectoryPath(pathseparator)
+	}
 
 	public static func +(dir: DirectoryPath, file: FilePath) -> FilePath {
 		return FilePath(base: dir.components, relative: file.relativeComponents ?? file.components)

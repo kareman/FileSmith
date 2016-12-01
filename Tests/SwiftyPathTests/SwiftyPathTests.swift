@@ -16,7 +16,7 @@ class SwiftyPathTests: XCTestCase {
 
 		XCTAssertFalse(filepath.isDirectory)
 		XCTAssertEqual(filepath.base?.string, FileManager.default.currentDirectoryPath)
-		XCTAssertEqual(filepath.base?.url, FilePath.current.url)
+		XCTAssertEqual(filepath.base?.url, DirectoryPath.current.url)
 		XCTAssertEqual(filepath.relativeString, "folder1/file1.txt")
 		XCTAssertEqual(filepath.relativeURL, URL(fileURLWithPath: "folder1/file1.txt", isDirectory: false))
 		XCTAssertEqual(filepath.string, "folder1/file1.txt")
@@ -27,7 +27,7 @@ class SwiftyPathTests: XCTestCase {
 
 		XCTAssertTrue(directorypath.isDirectory)
 		XCTAssertEqual(directorypath.base?.string, FileManager.default.currentDirectoryPath)
-		XCTAssertEqual(directorypath.base?.url, FilePath.current.url)
+		XCTAssertEqual(directorypath.base?.url, DirectoryPath.current.url)
 		XCTAssertEqual(directorypath.relativeString, "directory1/directory2")
 		XCTAssertEqual(directorypath.relativeURL, URL(fileURLWithPath: "directory1/directory2", isDirectory: true))
 		XCTAssertEqual(directorypath.string, "directory1/directory2")
@@ -69,9 +69,10 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssertEqual(DirectoryPath(URL(fileURLWithPath:"directory1/directory2/", isDirectory: true, relativeTo: URL(fileURLWithPath:"/tmp"))).string, "directory1/directory2")
 	}
 
-	static var allTests : [(String, (SwiftyPathTests) -> () throws -> Void)] {
-		return [
-			("testAddURLs", testAddURLs),
-		]
+	func testPathTypeDetection() {
+		XCTAssertNil(path(detectTypeOf:"sdfsf/ljljlk"))
+		XCTAssert(path(detectTypeOf:"sdfsf/ljljlk/") is DirectoryPath)
+		XCTAssert(path(detectTypeOf:"/tmp") is DirectoryPath)
+		XCTAssert(path(detectTypeOf:#file) is FilePath)
 	}
 }
