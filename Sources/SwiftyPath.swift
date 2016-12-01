@@ -211,6 +211,25 @@ extension DirectoryPath: ExpressibleByStringLiteral {
 	}
 }
 
+extension FilePath: Equatable {
+	public static func ==(left: FilePath, right: FilePath) -> Bool {
+		if let l = left.relativeComponents, let r = right.relativeComponents {
+			return l == r
+		} else {
+			return left.components == right.components
+		}
+	}
+}
+
+extension DirectoryPath: Equatable {
+	public static func ==(left: DirectoryPath, right: DirectoryPath) -> Bool {
+		if let l = left.relativeComponents, let r = right.relativeComponents {
+			return l == r
+		} else {
+			return left.components == right.components
+		}
+	}
+}
 
 extension String {
 	// This is never called by Swift, 'func +(leftdir: DirectoryPath, rightdir: DirectoryPath)' is called instead.
