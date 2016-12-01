@@ -2,17 +2,57 @@
 import Foundation
 
 let Files = FileManager()
+let pathseparator = "/"
+let homedir = NSHomeDirectoryForUser(NSUserName())!
+let homedircomponents = homedir.components(separatedBy: pathseparator)
 
 public protocol Path: CustomStringConvertible {
 	var components: [String] { get }
-	var _relativestart: Array<String>.Index? { get }
-	static var separator: String { get }
-	static var home: DirectoryPath { get }
+	var relativeComponents: [String]? { get }
+	var baseComponents: [String]? { get }
+	init(absolute components: [String])
+	init(base: [String], relative: [String])
+	init(_ stringpath: String)
 }
 
 extension Path {
-	public static var separator: String { return "/" }
+	private static func prepareComponents<C: Collection>(_ components: C) -> [String]
+		where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
+			return components.filter { $0 != "" && $0 != "." }
+	}
 
+	public init(_ stringpath: String) {
+		let components = stringpath.components(separatedBy: pathseparator)
+		if components.first == "" {
+			self.init(absolute: Self.prepareComponents(components))
+		} else if components.first == "~" {
+			self.init(absolute: homedircomponents + Self.prepareComponents(components.dropFirst()))
+		} else {
+			let current = Array(Files.currentDirectoryPath.components(separatedBy: pathseparator).dropFirst())
+			self.init(base: current, relative: Self.prepareComponents(components))
+		}
+		if self is FilePath {
+			precondition(!stringpath.hasSuffix(pathseparator),
+				"Trying to create a FilePath with a directory path (ending in '\(pathseparator)'). Use DirectoryPath instead.")
+		}
+	}
+
+	/// Creates a path from a URL.
+	///
+	/// - warning: Will crash if provided URL is not a file URL or does not have a directory path.
+	/// - bug: If the URL has a relative path and it uses .. to refer to its parent directories,
+	/// the behaviour is undefined. Things may not end well.
+	public init(_ url: URL) {
+		precondition(url.isFileURL && url.hasDirectoryPath, "The provided URL does not point to a directory.")
+		if let base = url.baseURL?.pathComponents {
+			self.init(base: Array(base.dropFirst()), relative: Array(url.pathComponents.suffix(from: base.count)))
+		} else {
+			self.init(absolute: Array(url.pathComponents.dropFirst()))
+		}
+	}
+}
+
+extension Path {
 	public static var current: DirectoryPath {
 		return DirectoryPath(Files.currentDirectoryPath)
 	}
@@ -22,7 +62,7 @@ extension Path {
 	}
 
 	public static var root: DirectoryPath {
-		return DirectoryPath(DirectoryPath.separator)
+		return DirectoryPath(pathseparator)
 	}
 
 	public var isDirectory: Bool {
@@ -30,7 +70,7 @@ extension Path {
 	}
 
 	public var string: String {
-		return relativeString ?? (DirectoryPath.separator + components.joined(separator: DirectoryPath.separator))
+		return relativeString ?? (pathseparator + components.joined(separator: pathseparator))
 	}
 
 	public var description: String {
@@ -38,23 +78,15 @@ extension Path {
 	}
 
 	public var base: DirectoryPath? {
-		return _relativestart.map { DirectoryPath(absolute: Array(self.components.prefix(upTo: $0))) }
+		return baseComponents.map { DirectoryPath(absolute: $0) }
 	}
 
 	public var relativeString: String? {
-		return relativeComponents?.joined(separator: DirectoryPath.separator)
+		return relativeComponents?.joined(separator: pathseparator)
 	}
 
 	public var relativeURL: URL? {
 		return relativeString.map { URL(fileURLWithPath: $0, isDirectory: isDirectory) }
-	}
-
-	public var relativeComponents: [String]? {
-		return _relativestart.map { Array(components.suffix(from: $0)) }
-	}
-
-	public var baseComponents: [String]? {
-		return _relativestart.map { Array(components.prefix(upTo: $0)) }
 	}
 
 	public var url: URL {
@@ -75,114 +107,68 @@ extension Path {
 	}
 }
 
-func initPath <C: Collection>(_ c: C) -> ([String], Array<String>.Index?)
-	where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
-
-		let components: [String]
-		let relativestart: Array<String>.Index?
-		if c.first == "~" {
-			components = DirectoryPath.home.components + c.dropFirst()
-			relativestart = nil
-		} else if c.first != "/" { // relative path
-			let base = DirectoryPath.current.components
-			components = base + c
-			relativestart = base.count
-		} else {
-			components = Array(c.dropFirst())
-			relativestart = nil
-		}
-		return (components, relativestart)
-}
-
-func initPath(_ string: String) -> ([String], Array<String>.Index?) {
-	var components = string.components(separatedBy: FilePath.separator)
-	if components.first == "" {
-		components[0] = "/"
-	}
-	if components.last == "" {
-		components.removeLast()
-	}
-	return initPath(components)
-}
-
-
 public struct DirectoryPath: Path {
 	public let components: [String]
-	public let _relativestart: Array<String>.Index?
+	let _relativestart: Array<String>.Index?
 
-	init(absolute components: [String]) {
+	public init(absolute components: [String]) {
 		self.components = components
 		_relativestart = nil
 	}
 
-	init(base: [String], relative: [String]) {
+	public init(base: [String], relative: [String]) {
 		components = base + relative
 		_relativestart = base.endIndex
 	}
 
-	public init <C: Collection>(_ c: C)
-		where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
-			(components, _relativestart) = initPath(c)
+	public var relativeComponents: [String]? {
+		return _relativestart.map { Array(components.suffix(from: $0)) }
 	}
 
-	public init(_ string: String) {
-		(components, _relativestart) = initPath(string)
-	}
-
-	/// Creates a path from a URL.
-	///
-	/// - warning: Will crash if provided URL is not a file URL or does not have a directory path.
-	///
-	/// If the URL has a relative path and it uses ..  to refer to its enclosing directories,
-	/// the behaviour is undefined. Things may not end well.
-	public init(_ url: URL) {
-		precondition(url.isFileURL && url.hasDirectoryPath, "The provided URL does not point to a directory.")
-		if let base = url.baseURL?.pathComponents {
-			self.init(base: Array(base.dropFirst()), relative: Array(url.pathComponents.suffix(from: base.count)))
-		} else {
-			self.init(absolute: Array(url.pathComponents.dropFirst()))
-		}
+	public var baseComponents: [String]? {
+		return _relativestart.map { Array(components.prefix(upTo: $0)) }
 	}
 }
 
 public struct FilePath: Path {
 	public let components: [String]
-	public let _relativestart: Array<String>.Index?
+	let _relativestart: Array<String>.Index?
 
-	init(absolute components: [String]) {
+	public init(absolute components: [String]) {
 		self.components = components
 		_relativestart = nil
 	}
 
-	init(base: [String], relative: [String]) {
+	public init(base: [String], relative: [String]) {
 		components = base + relative
 		_relativestart = base.endIndex
 	}
 
-	public init <C: Collection>(_ c: C)
-		where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
-			precondition(c.count > 0)
-			(components, _relativestart) = initPath(c)
-			precondition(components.last != "/", "A file path cannot end in a /. Use DirectoryPath for directories.")
+	public var relativeComponents: [String]? {
+		return _relativestart.map { Array(components.suffix(from: $0)) }
 	}
 
-	public init(_ string: String) {
-		precondition(string.characters.last != "/", "A file path cannot end in a /. Use DirectoryPath for directories.")
-		(components, _relativestart) = initPath(string)
+	public var baseComponents: [String]? {
+		return _relativestart.map { Array(components.prefix(upTo: $0)) }
 	}
+}
 
-	/// Creates a path from a URL.
-	///
-	/// - warning: Will crash if provided URL is not a file URL or has a directory path.
-	///
-	/// If the URL has a relative path and it uses ..  to refer to its enclosing directories,
-	/// the behaviour is undefined. Things may not end well.
-	public init(_ url: URL) {
-		precondition(url.isFileURL && !url.hasDirectoryPath, "The provided URL points to a directory.")
-		if let base = url.baseURL?.pathComponents {
-			self.init(base: Array(base.dropFirst()), relative: Array(url.pathComponents.suffix(from: base.count)))
+extension FilePath: Equatable {
+	public static func ==(left: FilePath, right: FilePath) -> Bool {
+		if let l = left.relativeComponents, let r = right.relativeComponents {
+			return l == r
 		} else {
-			self.init(absolute: Array(url.pathComponents.dropFirst()))
+			return left.components == right.components
+		}
+	}
+}
+
+extension DirectoryPath: Equatable {
+	public static func ==(left: DirectoryPath, right: DirectoryPath) -> Bool {
+		if let l = left.relativeComponents, let r = right.relativeComponents {
+			return l == r
+		} else {
+			return left.components == right.components
 		}
 	}
 }
@@ -208,26 +194,6 @@ extension DirectoryPath: ExpressibleByStringLiteral {
 	}
 	public init(unicodeScalarLiteral value: String) {
 		self.init(value)
-	}
-}
-
-extension FilePath: Equatable {
-	public static func ==(left: FilePath, right: FilePath) -> Bool {
-		if let l = left.relativeComponents, let r = right.relativeComponents {
-			return l == r
-		} else {
-			return left.components == right.components
-		}
-	}
-}
-
-extension DirectoryPath: Equatable {
-	public static func ==(left: DirectoryPath, right: DirectoryPath) -> Bool {
-		if let l = left.relativeComponents, let r = right.relativeComponents {
-			return l == r
-		} else {
-			return left.components == right.components
-		}
 	}
 }
 

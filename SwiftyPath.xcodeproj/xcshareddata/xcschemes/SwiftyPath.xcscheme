@@ -38,6 +38,11 @@
                BlueprintName = "SwiftyPathTests"
                ReferencedContainer = "container:SwiftyPath.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "DirectoryTests/testSubDirectoryPaths()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <AdditionalOptions>
