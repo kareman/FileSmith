@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Glob
 
 public class Directory {
 	let path: DirectoryPath
@@ -22,16 +23,17 @@ public class Directory {
 		guard Files.isReadableFile(atPath: stringpath) else {
 			throw FileSystemError.invalidAccess(path: stringpath)
 		}
-		self.path = DirectoryPath(stringpath)
+		self.path = DirectoryPath(stringpath).absolute
 	}
 }
 
 extension Directory {
 	public func subDirectoryPaths() throws -> [DirectoryPath] {
-		return try Files
-			.contentsOfDirectory(atPath: path.string)
-			.filter { URL(fileURLWithPath:$0, relativeTo: path.url).hasDirectoryPath }
-			.map { path + DirectoryPath($0) }
+		let curdir = DirectoryPath.current
+		Files.changeCurrentDirectoryPath(path.string)
+		defer { Files.changeCurrentDirectoryPath(curdir.string) }
+
+		return Glob(pattern: "*/", behavior: GlobBehaviorBashV3).map(DirectoryPath.init(_:))
 	}
 }
 

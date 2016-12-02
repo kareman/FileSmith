@@ -24,13 +24,5 @@ class DirectoryTests: XCTestCase {
 		} catch {
 			XCTFail(String(describing: error))
 		}
-		/*
-		do {
-		try Files.createDirectory(atPath: "/lsdjfl/lsdkfjlskj", withIntermediateDirectories: false, attributes: nil)
-		} catch {
-			dump(error)
-			debugPrint(error)
-		}
-*/
 	}
 }

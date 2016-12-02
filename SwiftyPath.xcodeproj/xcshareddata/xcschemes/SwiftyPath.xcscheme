@@ -14,7 +14,21 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_16"
+               BlueprintIdentifier = "OBJ_21"
+               BuildableName = "Glob.framework"
+               BlueprintName = "Glob"
+               ReferencedContainer = "container:SwiftyPath.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_28"
                BuildableName = "SwiftyPath.framework"
                BlueprintName = "SwiftyPath"
                ReferencedContainer = "container:SwiftyPath.xcodeproj">
@@ -26,23 +40,17 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_23"
+               BlueprintIdentifier = "OBJ_38"
                BuildableName = "SwiftyPathTests.xctest"
                BlueprintName = "SwiftyPathTests"
                ReferencedContainer = "container:SwiftyPath.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "DirectoryTests/testSubDirectoryPaths()">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <AdditionalOptions>
@@ -61,9 +69,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_16"
-            BuildableName = "SwiftyPath.framework"
-            BlueprintName = "SwiftyPath"
+            BlueprintIdentifier = "OBJ_21"
+            BuildableName = "Glob.framework"
+            BlueprintName = "Glob"
             ReferencedContainer = "container:SwiftyPath.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
