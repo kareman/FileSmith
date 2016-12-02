@@ -111,6 +111,10 @@ extension Path {
 		let nameparts = name.components(separatedBy: ".")
 		return (nameparts.count == 1) || (nameparts.count == 2 && nameparts.first == "") ? nil : nameparts.last
 	}
+
+	public var absolute: Self {
+		return Self(absolute: components)
+	}
 }
 
 public struct DirectoryPath: Path {
@@ -231,15 +235,5 @@ extension DirectoryPath {
 
 	public static func +(leftdir: DirectoryPath, rightdir: DirectoryPath) -> DirectoryPath {
 		return DirectoryPath(base: leftdir.components, relative: rightdir.relativeComponents ?? rightdir.components)
-	}
-
-	public var absolute: DirectoryPath {
-		return DirectoryPath(absolute: components)
-	}
-}
-
-extension FilePath {
-	public var absolute: FilePath {
-		return FilePath(absolute: components)
 	}
 }
