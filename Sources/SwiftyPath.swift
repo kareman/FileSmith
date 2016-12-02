@@ -207,14 +207,6 @@ extension DirectoryPath: ExpressibleByStringLiteral {
 	}
 }
 
-extension String {
-	// This is never called by Swift, 'func +(leftdir: DirectoryPath, rightdir: DirectoryPath)' is called instead.
-	// Which means this entire extension has no effect, other than to document the problem.
-	public static func +(dir: DirectoryPath, file: String) -> DirectoryPath {
-		fatalError("String literals used with the + operator after a DirectoryPath are always interpreted by Swift as a DirectoryPath, and never a FilePath. Use DirectoryPath/FilePath initialisers directly for clarity.")
-	}
-}
-
 extension DirectoryPath {
 
 	public static var current: DirectoryPath {
@@ -234,6 +226,16 @@ extension DirectoryPath {
 	}
 
 	public static func +(leftdir: DirectoryPath, rightdir: DirectoryPath) -> DirectoryPath {
+		return DirectoryPath(base: leftdir.components, relative: rightdir.relativeComponents ?? rightdir.components)
+	}
+
+	public static func +(dir: DirectoryPath, file: String) -> FilePath {
+		let file = FilePath(file)
+		return FilePath(base: dir.components, relative: file.relativeComponents ?? file.components)
+	}
+
+	public static func +(leftdir: DirectoryPath, rightdir: String) -> DirectoryPath {
+		let rightdir = DirectoryPath(rightdir)
 		return DirectoryPath(base: leftdir.components, relative: rightdir.relativeComponents ?? rightdir.components)
 	}
 }
