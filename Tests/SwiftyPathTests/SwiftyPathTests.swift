@@ -56,12 +56,19 @@ class SwiftyPathTests: XCTestCase {
 	func testName() {
 		XCTAssertEqual(FilePath("file.txt").name, "file.txt")
 		XCTAssertEqual(FilePath("file.txt").extension, "txt")
+		XCTAssertEqual(FilePath("file.txt").nameWithoutExtension, "file")
 		XCTAssertEqual(FilePath(".file.txt").name, ".file.txt")
 		XCTAssertEqual(FilePath(".file.txt").extension, "txt")
+		XCTAssertEqual(FilePath(".file.txt").nameWithoutExtension, ".file")
 		XCTAssertEqual(FilePath(".file").name, ".file")
 		XCTAssertEqual(FilePath(".file").extension, nil)
+		XCTAssertEqual(FilePath(".file").nameWithoutExtension, ".file")
+		XCTAssertEqual(FilePath("file.txt.").name, "file.txt.")
+		XCTAssertEqual(FilePath("file.txt.").extension, nil)
+		XCTAssertEqual(FilePath("file.txt.").nameWithoutExtension, "file.txt")
 		XCTAssertEqual(FilePath("file").name, "file")
 		XCTAssertEqual(FilePath("file").extension, nil)
+		XCTAssertEqual(FilePath("file").nameWithoutExtension, "file")
 		XCTAssertEqual(DirectoryPath(".").name, DirectoryPath.current.name)
 	}
 

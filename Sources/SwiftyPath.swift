@@ -109,8 +109,19 @@ extension Path {
 	}
 
 	public var `extension`: String? {
-		let nameparts = name.components(separatedBy: ".")
-		return (nameparts.count == 1) || (nameparts.count == 2 && nameparts.first == "") ? nil : nameparts.last
+		guard let lastdot = name.characters.lastIndex(of: "."),
+			lastdot != name.startIndex,
+			lastdot != name.index(before: name.endIndex)
+			else { return nil	}
+		return name.substring(from: name.index(after: lastdot))
+	}
+
+	public var nameWithoutExtension: String {
+		if let lastdot = name.characters.lastIndex(of: "."), lastdot != name.startIndex {
+			return name.substring(to: lastdot)
+		} else {
+			return name
+		}
 	}
 
 	public var absolute: Self {
