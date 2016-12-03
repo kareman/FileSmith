@@ -22,6 +22,7 @@ extension Path {
 	}
 
 	public init(_ stringpath: String) {
+		precondition(stringpath != "", "The path cannot be empty.")
 		let components = stringpath.components(separatedBy: pathseparator)
 		if components.first == "" {
 			self.init(absolute: Self.prepareComponents(components))
@@ -55,7 +56,7 @@ extension Path {
 /// Tries to create a new Path by detecting if it is a directory or a file.
 ///
 /// If the path ends in a '/', it is a directory.
-/// If the path is valid, check the file system.
+/// If the path is valid, check in the file system.
 /// Otherwise return nil.
 public func path(detectTypeOf stringpath: String) -> Path? {
 	guard !stringpath.hasSuffix(pathseparator) else {
@@ -117,6 +118,7 @@ extension Path {
 	}
 }
 
+
 public struct DirectoryPath: Path {
 	public let components: [String]
 	let _relativestart: Array<String>.Index?
@@ -163,6 +165,11 @@ public struct FilePath: Path {
 	}
 }
 
+
+public func ==<P:Path>(left: P, right: P) -> Bool where P:Equatable {
+	return left == right
+}
+
 extension FilePath: Equatable {
 	public static func ==(left: FilePath, right: FilePath) -> Bool {
 		if let l = left.relativeComponents, let r = right.relativeComponents {
@@ -206,6 +213,7 @@ extension DirectoryPath: ExpressibleByStringLiteral {
 		self.init(value)
 	}
 }
+
 
 extension DirectoryPath {
 

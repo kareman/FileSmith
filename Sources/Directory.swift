@@ -32,7 +32,7 @@ extension Directory {
 		let curdir = DirectoryPath.current
 		Files.changeCurrentDirectoryPath(path.string)
 		defer { Files.changeCurrentDirectoryPath(curdir.string) }
-
+		
 		return Glob(pattern: "*/", behavior: GlobBehaviorBashV3).map(DirectoryPath.init(_:))
 	}
 }
