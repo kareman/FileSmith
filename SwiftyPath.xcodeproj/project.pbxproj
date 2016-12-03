@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA04D1631DF35DAB0047336A /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04D1621DF35DAB0047336A /* General.swift */; };
+		BA04D1651DF368E50047336A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04D1641DF368E50047336A /* File.swift */; };
 		OBJ_26 /* Glob.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Glob.swift */; };
 		OBJ_33 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Directory.swift */; };
 		OBJ_34 /* SwiftyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SwiftyPath.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		BA04D1621DF35DAB0047336A /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		BA04D1641DF368E50047336A /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
 		OBJ_12 /* SwiftyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyPath.swift; sourceTree = "<group>"; };
 		OBJ_15 /* DirectoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTests.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				OBJ_11 /* Directory.swift */,
 				OBJ_12 /* SwiftyPath.swift */,
 				BA04D1621DF35DAB0047336A /* General.swift */,
+				BA04D1641DF368E50047336A /* File.swift */,
 			);
 			name = SwiftyPath;
 			path = Sources;
@@ -246,6 +249,7 @@
 			buildActionMask = 0;
 			files = (
 				BA04D1631DF35DAB0047336A /* General.swift in Sources */,
+				BA04D1651DF368E50047336A /* File.swift in Sources */,
 				OBJ_33 /* Directory.swift in Sources */,
 				OBJ_34 /* SwiftyPath.swift in Sources */,
 			);
