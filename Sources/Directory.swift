@@ -15,7 +15,17 @@ public enum AlreadyExistsOptions {
 	case open, throwError, replace
 }
 
+extension Path {
+	internal func verifyIsInSandbox() throws {
+		if Directory.sandbox && !DirectoryPath.current.isAParentOf(self) {
+			throw FileSystemError.outsideSandbox(path: self.string)
+		}
+	}
+}
+
 public class Directory {
+	public static var sandbox = true
+
 	let path: DirectoryPath
 
 	public convenience init(open stringpath: String) throws {
@@ -57,6 +67,7 @@ public class Directory {
 			case .replace:	break
 			}
 		}
+		try self.path.verifyIsInSandbox()
 		try Files.createDirectory(atPath: stringpath, withIntermediateDirectories: true, attributes: nil)
 	}
 }
@@ -100,7 +111,6 @@ extension Directory {
 		let newpath = self.path + DirectoryPath(stringpath)
 		return try Directory(create: newpath, ifExists: ifExists)
 	}
-
 }
 
 enum FileSystemError: Error {
@@ -110,4 +120,5 @@ enum FileSystemError: Error {
 	case notDirectory(path: String)
 	case invalidAccess(path: String)
 	case couldNotCreate(path: String)
+	case outsideSandbox(path: String)
 }

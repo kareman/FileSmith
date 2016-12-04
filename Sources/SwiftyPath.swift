@@ -128,6 +128,7 @@ extension Path {
 		return Self(absolute: components)
 	}
 
+	/// - bug: Doesn't work with .. in the path.
 	public func parent(levels: Int = 1) -> DirectoryPath {
 		precondition(levels > 0, "Cannot go up less than one level of parent directories")
 		if let relative = relativeComponents, levels < relative.count {
@@ -136,6 +137,10 @@ extension Path {
 			let parentcomponents = components.dropLast(levels)
 			return DirectoryPath(absolute: Array(parentcomponents))
 		}
+	}
+
+	public var hashValue: Int {
+		return string.hashValue
 	}
 }
 
@@ -191,7 +196,7 @@ public func ==<P:Path>(left: P, right: P) -> Bool where P:Equatable {
 	return left == right
 }
 
-extension FilePath: Equatable {
+extension FilePath: Equatable, Hashable {
 	public static func ==(left: FilePath, right: FilePath) -> Bool {
 		if let l = left.relativeComponents, let r = right.relativeComponents {
 			return l == r
@@ -201,7 +206,7 @@ extension FilePath: Equatable {
 	}
 }
 
-extension DirectoryPath: Equatable {
+extension DirectoryPath: Equatable, Hashable {
 	public static func ==(left: DirectoryPath, right: DirectoryPath) -> Bool {
 		if let l = left.relativeComponents, let r = right.relativeComponents {
 			return l == r
@@ -266,5 +271,9 @@ extension DirectoryPath {
 	public static func +(leftdir: DirectoryPath, rightdir: String) -> DirectoryPath {
 		let rightdir = DirectoryPath(rightdir)
 		return DirectoryPath(base: leftdir.components, relative: rightdir.relativeComponents ?? rightdir.components)
+	}
+
+	func isAParentOf(_ path: Path) -> Bool {
+		return path.components.starts(with: self.components)
 	}
 }

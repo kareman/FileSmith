@@ -52,6 +52,7 @@ public class File {
 		} else {
 			try path.parent().create(ifExists: .open)
 		}
+		try self.path.verifyIsInSandbox()
 		guard Files.createFile(atPath: stringpath, contents: Data(), attributes: nil) else {
 			throw FileSystemError.couldNotCreate(path: stringpath)
 		}
