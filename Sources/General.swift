@@ -19,3 +19,9 @@ extension BidirectionalCollection where Iterator.Element: Equatable {
 		return self[startIndex] == element ? idx : nil
 	}
 }
+
+extension Sequence {
+	var array: [Iterator.Element] {
+		return Array(self)
+	}
+}

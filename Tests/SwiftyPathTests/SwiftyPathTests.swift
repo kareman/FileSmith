@@ -74,7 +74,7 @@ class SwiftyPathTests: XCTestCase {
 
 	func testURL() {
 		XCTAssertEqual(DirectoryPath(URL(fileURLWithPath:"/tmp/directory1/directory2/")).string, "/tmp/directory1/directory2")
-		XCTAssertEqual(DirectoryPath(URL(fileURLWithPath:"directory1/directory2/", isDirectory: true, relativeTo: URL(fileURLWithPath:"/tmp"))).string, "directory1/directory2")
+		XCTAssertEqual(DirectoryPath(URL(fileURLWithPath:"directory1/directory2/", isDirectory: true, relativeTo: URL(fileURLWithPath:"/tmp"))).string, "/tmp/directory1/directory2")
 	}
 
 	func testPathTypeDetection() {

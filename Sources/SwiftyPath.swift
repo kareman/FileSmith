@@ -41,15 +41,9 @@ extension Path {
 	/// Creates a path from a URL.
 	///
 	/// - warning: Will crash if URL is not a file URL or does not have a directory path.
-	/// - bug: If the URL has a relative path and it uses .. to refer to its parent directories,
-	/// the behaviour is undefined. Things may not end well.
 	public init(_ url: URL) {
 		precondition(url.isFileURL && url.hasDirectoryPath, "The URL does not point to a directory.")
-		if let base = url.baseURL?.pathComponents {
-			self.init(base: Array(base.dropFirst()), relative: Array(url.pathComponents.suffix(from: base.count)))
-		} else {
-			self.init(absolute: Array(url.pathComponents.dropFirst()))
-		}
+		self.init(absolute: url.standardizedFileURL.pathComponents.dropFirst().array)
 	}
 }
 
