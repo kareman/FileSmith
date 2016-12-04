@@ -127,6 +127,16 @@ extension Path {
 	public var absolute: Self {
 		return Self(absolute: components)
 	}
+
+	public func parent(levels: Int = 1) -> DirectoryPath {
+		precondition(levels > 0, "Cannot go up less than one level of parent directories")
+		if let relative = relativeComponents, levels < relative.count {
+			return DirectoryPath(base: baseComponents!, relative: Array(relative.dropLast(levels)))
+		} else {
+			let parentcomponents = components.dropLast(levels)
+			return DirectoryPath(absolute: Array(parentcomponents))
+		}
+	}
 }
 
 

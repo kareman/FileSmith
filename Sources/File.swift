@@ -31,11 +31,11 @@ public class File {
 		}
 	}
 
-	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions = .throwError) throws {
+	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
 		try self.init(create: FilePath(stringpath), ifExists: ifExists)
 	}
 
-	public init(create path: FilePath, ifExists: AlreadyExistsOptions = .throwError) throws {
+	public init(create path: FilePath, ifExists: AlreadyExistsOptions) throws {
 		self.path = path.absolute
 		let stringpath = self.path.string
 
@@ -49,6 +49,8 @@ public class File {
 			case .open: return
 			case .replace:	break
 			}
+		} else {
+			try path.parent().create(ifExists: .open)
 		}
 		guard Files.createFile(atPath: stringpath, contents: Data(), attributes: nil) else {
 			throw FileSystemError.couldNotCreate(path: stringpath)
@@ -61,7 +63,8 @@ extension FilePath {
 		return try File(open: self)
 	}
 
-	public func create() throws -> File {
-		return try File(create: self)
+	@discardableResult
+	public func create(ifExists: AlreadyExistsOptions) throws -> File {
+		return try File(create: self, ifExists: ifExists)
 	}
 }

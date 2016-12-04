@@ -38,11 +38,11 @@ public class Directory {
 		}
 	}
 
-	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions = .throwError) throws {
+	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
 		try self.init(create: DirectoryPath(stringpath), ifExists: ifExists)
 	}
 
-	public init(create path: DirectoryPath, ifExists: AlreadyExistsOptions = .throwError) throws {
+	public init(create path: DirectoryPath, ifExists: AlreadyExistsOptions) throws {
 		self.path = path.absolute
 		let stringpath = self.path.string
 
@@ -66,8 +66,9 @@ extension DirectoryPath {
 		return try Directory(open: self)
 	}
 
-	public func create() throws -> Directory {
-		return try Directory(create: self)
+	@discardableResult
+	public func create(ifExists: AlreadyExistsOptions) throws -> Directory {
+		return try Directory(create: self, ifExists: ifExists)
 	}
 }
 
@@ -90,14 +91,14 @@ extension Directory {
 		}
 	}
 
-	public func add(file stringpath: String) throws -> File {
+	public func add(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> File {
 		let newpath = self.path + FilePath(stringpath)
-		return try File(create: newpath)
+		return try File(create: newpath, ifExists: ifExists)
 	}
 
-	public func add(directory stringpath: String) throws -> Directory {
+	public func add(directory stringpath: String, ifExists: AlreadyExistsOptions) throws -> Directory {
 		let newpath = self.path + DirectoryPath(stringpath)
-		return try Directory(create: newpath)
+		return try Directory(create: newpath, ifExists: ifExists)
 	}
 
 }
