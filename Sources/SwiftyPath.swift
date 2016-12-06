@@ -89,7 +89,7 @@ public func path(detectTypeOf stringpath: String) -> Path? {
 
 extension Path {
 
-	public var isDirectory: Bool {
+	internal var isDirectory: Bool {
 		return self is DirectoryPath
 	}
 
@@ -114,7 +114,7 @@ extension Path {
 	}
 
 	public var url: URL {
-		return URL(fileURLWithPath: relativeString ?? string, isDirectory: isDirectory, relativeTo: base?.url)
+		return URL(fileURLWithPath: absolute.string, isDirectory: isDirectory)
 	}
 
 	public func exists() -> Bool {
@@ -316,7 +316,11 @@ extension DirectoryPath {
 	///
 	/// - returns: Path if URL is a file URL and has a directory path. Otherwise nil.
 	public init?(_ url: URL) {
-		guard url.isFileURL && url.hasDirectoryPath else { return nil }
+		if #available(OSX 10.11, *) {
+			guard url.isFileURL && url.hasDirectoryPath else { return nil }
+		} else {
+			guard url.isFileURL else { return nil }
+		}
 		self.init(absolute: url.standardizedFileURL.pathComponents.dropFirst().array)
 	}
 }
@@ -326,7 +330,11 @@ extension FilePath {
 	///
 	/// - returns: Path if URL is a file URL and does not have a directory path. Otherwise nil.
 	public init?(_ url: URL) {
-		guard url.isFileURL && !url.hasDirectoryPath else { return nil }
+		if #available(OSX 10.11, *) {
+			guard url.isFileURL && !url.hasDirectoryPath else { return nil }
+		} else {
+			guard url.isFileURL else { return nil }
+		}
 		self.init(absolute: url.standardizedFileURL.pathComponents.dropFirst().array)
 	}
 }
