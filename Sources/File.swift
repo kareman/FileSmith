@@ -9,7 +9,7 @@
 import Foundation
 
 public class File {
-	let path: FilePath
+	public let path: FilePath
 
 	public convenience init(open stringpath: String) throws {
 		try self.init(open: FilePath(stringpath))

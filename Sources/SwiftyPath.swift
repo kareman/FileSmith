@@ -252,7 +252,12 @@ extension DirectoryPath: ExpressibleByStringLiteral {
 extension DirectoryPath {
 
 	public static var current: DirectoryPath {
-		return DirectoryPath(Files.currentDirectoryPath)
+		get {
+			return DirectoryPath(Files.currentDirectoryPath)
+		}
+		set {
+			Files.changeCurrentDirectoryPath(newValue.absolute.string)
+		}
 	}
 
 	public static var home: DirectoryPath {

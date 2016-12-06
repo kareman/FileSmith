@@ -26,7 +26,7 @@ extension Path {
 public class Directory {
 	public static var sandbox = true
 
-	let path: DirectoryPath
+	public let path: DirectoryPath
 
 	public convenience init(open stringpath: String) throws {
 		try self.init(open: DirectoryPath(stringpath))
@@ -113,7 +113,7 @@ extension Directory {
 	}
 }
 
-enum FileSystemError: Error {
+public enum FileSystemError: Error {
 	case alreadyExists(path: String)
 	case notFound(path: String, base: String?)
 	case isDirectory(path: String)
