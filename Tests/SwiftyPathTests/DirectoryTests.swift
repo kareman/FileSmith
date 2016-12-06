@@ -8,6 +8,7 @@
 
 import XCTest
 import SwiftyPath
+import Foundation
 
 let Files = FileManager.default
 
@@ -30,7 +31,7 @@ class DirectoryTests: XCTestCase {
 		Directory.sandbox = true
 		DirectoryPath.current = DirectoryPath(createTempdirectory())
 		do {
-			let trespassingfolder = "/tmp/"+ProcessInfo().globallyUniqueString
+			let trespassingfolder = "/tmp/"+ProcessInfo.processInfo.globallyUniqueString
 			_ = try Directory(create: trespassingfolder, ifExists: .throwError)
 			XCTFail("Should not be able to create folder outside of current folder \(DirectoryPath.current)")
 		} catch FileSystemError.outsideSandbox {
