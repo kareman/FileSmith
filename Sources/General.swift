@@ -25,3 +25,31 @@ extension Sequence {
 		return Array(self)
 	}
 }
+
+#if os(Linux)
+	import Glibc
+#else
+	import Darwin
+#endif
+
+func filterFiles(glob pattern: String) -> [String] {
+	var globresult = glob_t()
+	let cpattern = strdup(pattern)
+	defer {
+		globfree(&globresult)
+		free(cpattern)
+	}
+
+	let flags = GLOB_TILDE | GLOB_BRACE | GLOB_MARK
+	if glob(cpattern, flags, nil, &globresult) == 0 {
+		#if os(Linux)
+			let matchc = globresult.gl_pathc
+		#else
+			let matchc = globresult.gl_matchc
+		#endif
+		return (0..<Int(matchc)).flatMap { index in
+			return String(validatingUTF8: globresult.gl_pathv[index]!)
+		}
+	}
+	return []
+}

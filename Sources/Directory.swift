@@ -7,9 +7,6 @@
 //
 
 import Foundation
-import Glob
-
-let defaultGlobBehavior = GlobBehaviorBashV3
 
 public enum AlreadyExistsOptions {
 	case open, throwError, replace
@@ -89,7 +86,7 @@ extension Directory {
 		Files.changeCurrentDirectoryPath(path.string)
 		defer { Files.changeCurrentDirectoryPath(curdir.string) }
 		
-		return Glob(pattern: "*/", behavior: defaultGlobBehavior).map(DirectoryPath.init(_:))
+		return filterFiles(glob: "*/").flatMap(path(detectTypeOf:)).flatMap {$0 as? DirectoryPath}
 	}
 
 	public func contains(_ stringpath: String) -> Bool {

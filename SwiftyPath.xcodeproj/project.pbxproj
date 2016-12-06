@@ -9,31 +9,14 @@
 /* Begin PBXBuildFile section */
 		BA04D1631DF35DAB0047336A /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04D1621DF35DAB0047336A /* General.swift */; };
 		BA04D1651DF368E50047336A /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA04D1641DF368E50047336A /* File.swift */; };
-		OBJ_26 /* Glob.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Glob.swift */; };
 		OBJ_33 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Directory.swift */; };
 		OBJ_34 /* SwiftyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SwiftyPath.swift */; };
-		OBJ_36 /* Glob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Glob.framework */; };
 		OBJ_43 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* DirectoryTests.swift */; };
 		OBJ_44 /* SwiftyPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* SwiftyPathTests.swift */; };
-		OBJ_46 /* Glob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Glob.framework */; };
 		OBJ_47 /* SwiftyPath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* SwiftyPath.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BA04D15F1DF217B90047336A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_21;
-			remoteInfo = Glob;
-		};
-		BA04D1601DF217B90047336A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_21;
-			remoteInfo = Glob;
-		};
 		BA04D1611DF217B90047336A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
@@ -50,26 +33,16 @@
 		OBJ_12 /* SwiftyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyPath.swift; sourceTree = "<group>"; };
 		OBJ_15 /* DirectoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTests.swift; sourceTree = "<group>"; };
 		OBJ_16 /* SwiftyPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyPathTests.swift; sourceTree = "<group>"; };
-		OBJ_18 /* Glob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Glob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_19 /* SwiftyPath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyPath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_20 /* SwiftyPathTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwiftyPathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_20 /* SwiftyPathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SwiftyPathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_9 /* Glob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Glob.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_27 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		OBJ_35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_36 /* Glob.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,7 +50,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_46 /* Glob.framework in Frameworks */,
 				OBJ_47 /* SwiftyPath.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,7 +90,6 @@
 		OBJ_17 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_18 /* Glob.framework */,
 				OBJ_19 /* SwiftyPath.framework */,
 				OBJ_20 /* SwiftyPathTests.xctest */,
 			);
@@ -138,40 +109,14 @@
 		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_8 /* Glob */,
 				OBJ_10 /* SwiftyPath */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		OBJ_8 /* Glob */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_9 /* Glob.swift */,
-			);
-			name = Glob;
-			path = "Packages/Glob-1.0.3/Sources";
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		OBJ_21 /* Glob */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_22 /* Build configuration list for PBXNativeTarget "Glob" */;
-			buildPhases = (
-				OBJ_25 /* Sources */,
-				OBJ_27 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Glob;
-			productName = Glob;
-			productReference = OBJ_18 /* Glob.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		OBJ_28 /* SwiftyPath */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = OBJ_29 /* Build configuration list for PBXNativeTarget "SwiftyPath" */;
@@ -182,7 +127,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_37 /* PBXTargetDependency */,
 			);
 			name = SwiftyPath;
 			productName = SwiftyPath;
@@ -199,7 +143,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_48 /* PBXTargetDependency */,
 				OBJ_49 /* PBXTargetDependency */,
 			);
 			name = SwiftyPathTests;
@@ -227,7 +170,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				OBJ_21 /* Glob */,
 				OBJ_28 /* SwiftyPath */,
 				OBJ_38 /* SwiftyPathTests */,
 			);
@@ -235,14 +177,6 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_25 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_26 /* Glob.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		OBJ_32 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -266,16 +200,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_37 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = OBJ_21 /* Glob */;
-			targetProxy = BA04D15F1DF217B90047336A /* PBXContainerItemProxy */;
-		};
-		OBJ_48 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = OBJ_21 /* Glob */;
-			targetProxy = BA04D1601DF217B90047336A /* PBXContainerItemProxy */;
-		};
 		OBJ_49 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = OBJ_28 /* SwiftyPath */;
@@ -284,46 +208,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_23 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = SwiftyPath.xcodeproj/Glob_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = Glob;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SUPPORTED_PLATFORMS = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
-				SWIFT_VERSION = 3.0;
-				TARGET_NAME = Glob;
-			};
-			name = Debug;
-		};
-		OBJ_24 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
-				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = SwiftyPath.xcodeproj/Glob_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = Glob;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SUPPORTED_PLATFORMS = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
-				SWIFT_VERSION = 3.0;
-				TARGET_NAME = Glob;
-			};
-			name = Release;
-		};
 		OBJ_3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -442,15 +326,6 @@
 			buildConfigurations = (
 				OBJ_3 /* Debug */,
 				OBJ_4 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		OBJ_22 /* Build configuration list for PBXNativeTarget "Glob" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_23 /* Debug */,
-				OBJ_24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
