@@ -1,6 +1,11 @@
+
 import XCTest
+
 @testable import SwiftyPathTests
 
-XCTMain([
-     testCase(SwiftyPathTests.allTests),
-])
+let tests: [XCTestCaseEntry] = [
+	testCase(SwiftyPathTests.allTests),
+	testCase(DirectoryTests.allTests),
+	]
+
+XCTMain(tests)

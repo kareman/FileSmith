@@ -117,3 +117,17 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssertEqual(relativedir.absolute.string, "/../rel1")
 	}
 }
+
+extension SwiftyPathTests {
+	public static var allTests = [
+		("testAddURLs", testAddURLs),
+		("testRelativeFileURL", testRelativeFileURL),
+		("testRelativeDirectoryURL", testRelativeDirectoryURL),
+		("testAbsoluteFileURL", testAbsoluteFileURL),
+		("testAbsoluteDirectoryURL", testAbsoluteDirectoryURL),
+		("testName", testName),
+		("testURL", testURL),
+		("testPathTypeDetection", testPathTypeDetection),
+		("testDotDot", testDotDot),
+		]
+}

@@ -94,3 +94,11 @@ private func createTempdirectory () -> String {
 		fatalError("Unexpected error: \(error)")
 	}
 }
+
+extension DirectoryTests {
+	public static var allTests = [
+		("testSubDirectoryPaths", testSubDirectoryPaths),
+		("testSandboxMode", testSandboxMode),
+		("testDirectory", testDirectory),
+		]
+}
