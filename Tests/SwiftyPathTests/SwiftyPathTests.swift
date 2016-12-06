@@ -23,7 +23,7 @@ class SwiftyPathTests: XCTestCase {
 	}
 
 	func testRelativeDirectoryURL() {
-		let directorypath: DirectoryPath = "directory1/directory2"
+		var directorypath: DirectoryPath = "directory1/directory2"
 
 		XCTAssertTrue(directorypath.isDirectory)
 		XCTAssertEqual(directorypath.base?.string, FileManager.default.currentDirectoryPath)
@@ -31,6 +31,11 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssertEqual(directorypath.relativeString, "directory1/directory2")
 		XCTAssertEqual(directorypath.relativeURL, URL(fileURLWithPath: "directory1/directory2", isDirectory: true))
 		XCTAssertEqual(directorypath.string, "directory1/directory2")
+
+		directorypath = "."
+		XCTAssertEqual(directorypath.string, "")
+		XCTAssertEqual((directorypath.relativeComponents)!, [])
+		XCTAssertEqual(directorypath.base?.string, FileManager.default.currentDirectoryPath)
 	}
 
 	func testAbsoluteFileURL() {
@@ -54,11 +59,11 @@ class SwiftyPathTests: XCTestCase {
 	}
 
 	func testName() {
-		XCTAssertEqual(FilePath("file.txt").name, "file.txt")
+		XCTAssertEqual(FilePath("/file.txt").name, "file.txt")
 		XCTAssertEqual(FilePath("file.txt").extension, "txt")
-		XCTAssertEqual(FilePath("file.txt").nameWithoutExtension, "file")
+		XCTAssertEqual(FilePath("dir/file.txt").nameWithoutExtension, "file")
 		XCTAssertEqual(FilePath(".file.txt").name, ".file.txt")
-		XCTAssertEqual(FilePath(".file.txt").extension, "txt")
+		XCTAssertEqual(FilePath("/dir/.file.txt").extension, "txt")
 		XCTAssertEqual(FilePath(".file.txt").nameWithoutExtension, ".file")
 		XCTAssertEqual(FilePath(".file").name, ".file")
 		XCTAssertEqual(FilePath(".file").extension, nil)
@@ -73,8 +78,15 @@ class SwiftyPathTests: XCTestCase {
 	}
 
 	func testURL() {
-		XCTAssertEqual(DirectoryPath(URL(fileURLWithPath:"/tmp/directory1/directory2/")).string, "/tmp/directory1/directory2")
-		XCTAssertEqual(DirectoryPath(URL(fileURLWithPath:"directory1/directory2/", isDirectory: true, relativeTo: URL(fileURLWithPath:"/tmp"))).string, "/tmp/directory1/directory2")
+		XCTAssertEqual(
+			DirectoryPath(URL(fileURLWithPath:"/tmp/directory1/directory2/"))?.string,
+			"/tmp/directory1/directory2")
+		XCTAssertEqual(FilePath(URL(fileURLWithPath:"/tmp/directory1/file2"))?.string, "/tmp/directory1/file2")
+		XCTAssertEqual(
+			DirectoryPath(
+				URL(fileURLWithPath:"directory1/directory2/", isDirectory: true,
+				    relativeTo: URL(fileURLWithPath:"/tmp")))?.string,
+			"/tmp/directory1/directory2")
 	}
 
 	func testPathTypeDetection() {
@@ -82,5 +94,30 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssert(path(detectTypeOf:"sdfsf/ljljlk/") is DirectoryPath)
 		XCTAssert(path(detectTypeOf:"/tmp") is DirectoryPath)
 		XCTAssert(path(detectTypeOf:#file) is FilePath)
+	}
+
+	func testDotDot() {
+		XCTAssertEqual(FilePath("/dir1/dir2/..").string, "/dir1")
+		XCTAssertEqual(FilePath("/../dir1/dir2/..").string, "/../dir1")
+		XCTAssertEqual(FilePath("/dir/dir/../../dir2").string, "/dir2")
+		XCTAssertEqual(FilePath("/dir/../dir/../../dir2").string, "/../dir2")
+		XCTAssertEqual(FilePath("/dir/dir/../../../dir2").string, "/../dir2")
+		XCTAssertEqual(FilePath("/../dir1/dir2/..").string, "/../dir1")
+		XCTAssertEqual(FilePath("/../dir1/../dir2/..").string, "/..")
+
+		let relative = FilePath("rel1/..", relativeTo: "/base1/../base2")
+		XCTAssertEqual(relative.relativeString, "")
+		XCTAssertEqual(relative.base?.string, "/base2")
+		XCTAssertEqual(relative.absolute.string, "/base2")
+
+		var relativedir = DirectoryPath("/rel1/../rel2", relativeTo: "/base1/../")
+		XCTAssertEqual(relativedir.relativeString, "rel2")
+		XCTAssertEqual(relativedir.base?.string, "/")
+		XCTAssertEqual(relativedir.absolute.string, "/rel2")
+
+		relativedir = DirectoryPath("../rel1", relativeTo: "/../base1")
+		XCTAssertEqual(relativedir.relativeString, "../rel1")
+		XCTAssertEqual(relativedir.base?.string, "/../base1")
+		XCTAssertEqual(relativedir.absolute.string, "/../rel1")
 	}
 }

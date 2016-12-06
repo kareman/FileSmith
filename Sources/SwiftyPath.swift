@@ -15,35 +15,49 @@ public protocol Path: CustomStringConvertible {
 	init(_ stringpath: String)
 }
 
+func fixDotDots(_ components: [String]) -> [String] {
+	guard let firstdotdot = components.index(of: "..") else { return components }
+	var components = components
+	var i = max(1,firstdotdot)
+	while i < components.endIndex {
+		if i > 0 && components[i] == ".." && components[i-1] != ".." {
+			components.removeSubrange((i-1)...i)
+			i -= 1
+		} else {
+			i += 1
+		}
+	}
+	return components
+}
+
+func prepareComponents<C: Collection>(_ components: C) -> [String]
+	where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
+
+		return fixDotDots(components.filter { $0 != "" && $0 != "." })
+}
+
 extension Path {
-	private static func prepareComponents<C: Collection>(_ components: C) -> [String]
-		where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
-			return components.filter { $0 != "" && $0 != "." }
+	public init(_ stringpath: String, relativeTo base: String) {
+		let rel = Self(stringpath)
+		let base = DirectoryPath(base)
+		self.init(base: base.components, relative: rel.relativeComponents ?? rel.components)
 	}
 
 	public init(_ stringpath: String) {
 		precondition(stringpath != "", "The path cannot be empty.")
 		let components = stringpath.components(separatedBy: pathseparator)
 		if components.first == "" {
-			self.init(absolute: Self.prepareComponents(components))
+			self.init(absolute: prepareComponents(components))
 		} else if components.first == "~" {
-			self.init(absolute: homedircomponents + Self.prepareComponents(components.dropFirst()))
+			self.init(absolute: homedircomponents + prepareComponents(components.dropFirst()))
 		} else {
 			let current = Array(Files.currentDirectoryPath.components(separatedBy: pathseparator).dropFirst())
-			self.init(base: current, relative: Self.prepareComponents(components))
+			self.init(base: current, relative: prepareComponents(components))
 		}
 		if self is FilePath {
 			precondition(!stringpath.hasSuffix(pathseparator),
 				"Trying to create a FilePath with a directory path (ending in '\(pathseparator)'). Use DirectoryPath instead.")
 		}
-	}
-
-	/// Creates a path from a URL.
-	///
-	/// - warning: Will crash if URL is not a file URL or does not have a directory path.
-	public init(_ url: URL) {
-		precondition(url.isFileURL && url.hasDirectoryPath, "The URL does not point to a directory.")
-		self.init(absolute: url.standardizedFileURL.pathComponents.dropFirst().array)
 	}
 }
 
@@ -119,7 +133,7 @@ extension Path {
 	}
 
 	public var absolute: Self {
-		return Self(absolute: components)
+		return Self(absolute: relativeComponents?.first == ".." ? fixDotDots(components) : components)
 	}
 
 	/// - bug: Doesn't work with .. in the path.
@@ -269,5 +283,23 @@ extension DirectoryPath {
 
 	func isAParentOf(_ path: Path) -> Bool {
 		return path.components.starts(with: self.components)
+	}
+
+	/// Creates a path from a URL.
+	///
+	/// - returns: Path if URL is a file URL and has a directory path. Otherwise nil.
+	public init?(_ url: URL) {
+		guard url.isFileURL && url.hasDirectoryPath else { return nil }
+		self.init(absolute: url.standardizedFileURL.pathComponents.dropFirst().array)
+	}
+}
+
+extension FilePath {
+	/// Creates a path from a URL.
+	///
+	/// - returns: Path if URL is a file URL and does not have a directory path. Otherwise nil.
+	public init?(_ url: URL) {
+		guard url.isFileURL && !url.hasDirectoryPath else { return nil }
+		self.init(absolute: url.standardizedFileURL.pathComponents.dropFirst().array)
 	}
 }
