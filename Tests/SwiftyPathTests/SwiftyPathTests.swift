@@ -5,10 +5,12 @@ import Foundation
 
 class SwiftyPathTests: XCTestCase {
 	func testAddURLs() {
-		let folder: DirectoryPath = "/tmp"
+		let absolutedir: DirectoryPath = "/tmp"
+		let relativedir: DirectoryPath = "relativedir"
 		let file: FilePath = "file"
-		XCTAssertEqual(String(describing: folder + file), "file")
-		XCTAssertEqual((folder + file).absolute.string, "/tmp/file")
+
+		XCTAssertEqual(String(describing: absolutedir + file), "/tmp/file")
+		XCTAssertEqual((relativedir + file).string, "relativedir/file")
 	}
 
 	func testRelativeFileURL() {

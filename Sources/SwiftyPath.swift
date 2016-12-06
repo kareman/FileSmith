@@ -30,10 +30,21 @@ func fixDotDots(_ components: [String]) -> [String] {
 	return components
 }
 
-func prepareComponents<C: Collection>(_ components: C) -> [String]
-	where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
+func parseComponents(_ stringpath: String) -> (components: [String], isRelative: Bool) {
+	func prepareComponents<C: Collection>(_ components: C) -> [String]
+		where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
+			return fixDotDots(components.filter { $0 != "" && $0 != "." })
+	}
 
-		return fixDotDots(components.filter { $0 != "" && $0 != "." })
+	let stringpath = stringpath.isEmpty ? "." : stringpath
+	let components = stringpath.components(separatedBy: pathseparator)
+	if components.first == "" {
+		return (prepareComponents(components), false)
+	} else if components.first == "~" {
+		return (homedircomponents + prepareComponents(components.dropFirst()), false)
+	} else {
+		return (prepareComponents(components), true)
+	}
 }
 
 extension Path {
@@ -44,16 +55,14 @@ extension Path {
 	}
 
 	public init(_ stringpath: String) {
-		precondition(stringpath != "", "The path cannot be empty.")
-		let components = stringpath.components(separatedBy: pathseparator)
-		if components.first == "" {
-			self.init(absolute: prepareComponents(components))
-		} else if components.first == "~" {
-			self.init(absolute: homedircomponents + prepareComponents(components.dropFirst()))
+		let (components, isrelative) = parseComponents(stringpath)
+		if isrelative {
+			let current = Files.currentDirectoryPath.components(separatedBy: pathseparator).dropFirst().array
+			self.init(base: current, relative: components)
 		} else {
-			let current = Array(Files.currentDirectoryPath.components(separatedBy: pathseparator).dropFirst())
-			self.init(base: current, relative: prepareComponents(components))
+			self.init(absolute: components)
 		}
+
 		if self is FilePath {
 			precondition(!stringpath.hasSuffix(pathseparator),
 				"Trying to create a FilePath with a directory path (ending in '\(pathseparator)'). Use DirectoryPath instead.")
@@ -268,22 +277,35 @@ extension DirectoryPath {
 		return DirectoryPath(pathseparator)
 	}
 
-	public static func +(dir: DirectoryPath, file: FilePath) -> FilePath {
-		return FilePath(base: dir.components, relative: file.relativeComponents ?? file.components)
+	internal func appendComponents<P: Path>(_ newcomponents: [String]) -> P {
+		if let relativeComponents = self.relativeComponents {
+			return P(base: self.baseComponents!, relative: fixDotDots(relativeComponents + newcomponents))
+		} else {
+			return P(absolute: fixDotDots(self.components + newcomponents))
+		}
 	}
 
-	public static func +(leftdir: DirectoryPath, rightdir: DirectoryPath) -> DirectoryPath {
-		return DirectoryPath(base: leftdir.components, relative: rightdir.relativeComponents ?? rightdir.components)
+	public func append(file stringpath: String) -> FilePath {
+		let (newcomponents, _) = parseComponents(stringpath)
+		return appendComponents(newcomponents)
+	}
+
+	public func append(directory stringpath: String) -> DirectoryPath {
+		let (newcomponents, _) = parseComponents(stringpath)
+		return appendComponents(newcomponents)
+	}
+
+	public static func +<P: Path>(leftdir: DirectoryPath, rightpath: P) -> P {
+		let rightcomponents = rightpath.relativeComponents ?? rightpath.components
+		return leftdir.appendComponents(rightcomponents)
 	}
 
 	public static func +(dir: DirectoryPath, file: String) -> FilePath {
-		let file = FilePath(file)
-		return FilePath(base: dir.components, relative: file.relativeComponents ?? file.components)
+		return dir.append(file: file)
 	}
 
 	public static func +(leftdir: DirectoryPath, rightdir: String) -> DirectoryPath {
-		let rightdir = DirectoryPath(rightdir)
-		return DirectoryPath(base: leftdir.components, relative: rightdir.relativeComponents ?? rightdir.components)
+		return leftdir.append(directory: rightdir)
 	}
 
 	func isAParentOf(_ path: Path) -> Bool {
