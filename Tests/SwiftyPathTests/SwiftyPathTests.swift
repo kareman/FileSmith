@@ -116,6 +116,10 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssertEqual(relativedir.base?.string, "/../base1")
 		XCTAssertEqual(relativedir.absolute.string, "/../rel1")
 	}
+
+	func testSymbolicLink() {
+		XCTAssertEqual(DirectoryPath("/tmp").symbolicLinkPointsTo, "/private/tmp")
+	}
 }
 
 extension SwiftyPathTests {
@@ -129,5 +133,6 @@ extension SwiftyPathTests {
 		("testURL", testURL),
 		("testPathTypeDetection", testPathTypeDetection),
 		("testDotDot", testDotDot),
+		("testSymbolicLink", testSymbolicLink),
 		]
 }

@@ -145,15 +145,20 @@ extension Path {
 		return Self(absolute: relativeComponents?.first == ".." ? fixDotDots(components) : components)
 	}
 
-	/// - bug: Doesn't work with .. in the path.
-	public func parent(levels: Int = 1) -> DirectoryPath {
+	/// Remove the last `nr` components of the path.
+	/// - parameter nr: How many directories to go up the file tree. Defaults to 1.
+	public func parent(nr levels: Int = 1) -> DirectoryPath {
 		precondition(levels > 0, "Cannot go up less than one level of parent directories")
-		if let relative = relativeComponents, levels < relative.count {
+		if let relative = relativeComponents, levels < relative.count, relative[relative.count - levels] != ".." {
 			return DirectoryPath(base: baseComponents!, relative: Array(relative.dropLast(levels)))
 		} else {
-			let parentcomponents = components.dropLast(levels)
+			let parentcomponents = self.absolute.components.dropLast(levels)
 			return DirectoryPath(absolute: Array(parentcomponents))
 		}
+	}
+
+	public var symbolicLinkPointsTo: Self? {
+		return (try? Files.destinationOfSymbolicLink(atPath: absolute.string)).map { Self.init("/"+$0) }
 	}
 
 	public var hashValue: Int {
@@ -308,8 +313,10 @@ extension DirectoryPath {
 		return leftdir.append(directory: rightdir)
 	}
 
-	func isAParentOf(_ path: Path) -> Bool {
-		return path.components.starts(with: self.components)
+
+	/// Checks if the absolute version of the provided path begins with the absolute version of this path.
+	func isAParentOf<P: Path>(_ path: P) -> Bool {
+		return path.absolute.components.starts(with: self.absolute.components)
 	}
 
 	/// Creates a path from a URL.
