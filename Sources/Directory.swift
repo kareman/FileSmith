@@ -86,7 +86,7 @@ extension Directory {
 		Files.changeCurrentDirectoryPath(path.string)
 		defer { Files.changeCurrentDirectoryPath(curdir.string) }
 		
-		return filterFiles(glob: "*/").flatMap(path(detectTypeOf:)).flatMap {$0 as? DirectoryPath}
+		return filterFiles(glob: "*/").filter { $0.hasSuffix(pathseparator) }.map(DirectoryPath.init(_:))
 	}
 
 	public func contains(_ stringpath: String) -> Bool {
