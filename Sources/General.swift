@@ -21,14 +21,14 @@ extension BidirectionalCollection where Iterator.Element: Equatable {
 }
 
 extension Sequence {
-	var array: [Iterator.Element] {
+	public var array: [Iterator.Element] {
 		return Array(self)
 	}
 }
 
-#if os(Linux)
-	import Foundation
+import Foundation
 
+#if os(Linux)
 	extension ObjCBool {
 		var boolValue: Bool { return self }
 	}
@@ -60,4 +60,41 @@ func filterFiles(glob pattern: String) -> [String] {
 		}
 	}
 	return []
+}
+
+extension FileHandle {
+
+	func readSome(encoding: String.Encoding = .utf8) -> String? {
+		let data = self.availableData
+
+		guard data.count > 0 else { return nil }
+		guard let result = String(data: data, encoding: encoding) else {
+			fatalError("Could not convert binary data to text.")
+		}
+
+		return result
+	}
+
+	func read(encoding: String.Encoding = .utf8) -> String {
+		let data = self.readDataToEndOfFile()
+
+		guard let result = String(data: data, encoding: encoding) else {
+			fatalError("Could not convert binary data to text.")
+		}
+
+		return result
+	}
+}
+
+extension FileHandle {
+
+	func write(_ string: String, encoding: String.Encoding = .utf8) {
+		#if os(Linux)
+			guard !string.isEmpty else {return}
+		#endif
+		guard let data = string.data(using: encoding, allowLossyConversion: false) else {
+			fatalError("Could not convert text to binary data.")
+		}
+		self.write(data)
+	}
 }
