@@ -75,7 +75,7 @@ public class File {
 
 
 extension File: TextOutputStreamable {
-	/// Writes the text in this file into the given output stream.
+	/// Writes the text in this file to the given output stream.
 	public func write<Target : TextOutputStream>(to target: inout Target) {
 		while let text = filehandle.readSome(encoding: encoding) {
 			target.write(text)
@@ -95,33 +95,29 @@ extension FilePath {
 	public func open() throws -> File {
 		return try File(open: self)
 	}
-
-	@discardableResult
-	public func create(ifExists: AlreadyExistsOptions) throws -> File {
-		return try File(create: self, ifExists: ifExists)
-	}
 }
 
 
 
 public class EditableFile: File {
 
-	public init(open path: FilePath) throws {
+	public init(edit path: FilePath) throws {
 		try path.verifyIsInSandbox()
 		guard let filehandle = FileHandle(forWritingAtPath: path.absolute.string) else {
 			try File.errorForFile(at: path.absolute.string)
 			fatalError("Should have thrown error when opening \(path.absolute.string)")
 		}
 		super.init(path: path, filehandle: filehandle)
+		filehandle.seekToEndOfFile()
 	}
 
-	public convenience init(open stringpath: String) throws {
-		try self.init(open: FilePath(stringpath))
+	public convenience init(edit stringpath: String) throws {
+		try self.init(edit: FilePath(stringpath))
 	}
 
 	public convenience init(create path: FilePath, ifExists: AlreadyExistsOptions) throws {
 		try File.createFile(path: path, ifExists: ifExists)
-		try self.init(open: path)
+		try self.init(edit: path)
 	}
 
 	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
@@ -133,5 +129,16 @@ extension EditableFile: TextOutputStream {
 	/// Appends the given string to the stream.
 	public func write(_ string: String) {
 		filehandle.write(string, encoding: encoding)
+	}
+}
+
+extension FilePath {
+	public func edit() throws -> EditableFile {
+		return try EditableFile(edit: self)
+	}
+
+	@discardableResult
+	public func create(ifExists: AlreadyExistsOptions) throws -> EditableFile {
+		return try EditableFile(create: self, ifExists: ifExists)
 	}
 }
