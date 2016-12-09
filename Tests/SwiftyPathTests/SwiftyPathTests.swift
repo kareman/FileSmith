@@ -73,6 +73,7 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssertEqual(FilePath("file").extension, nil)
 		XCTAssertEqual(FilePath("file").nameWithoutExtension, "file")
 		XCTAssertEqual(DirectoryPath(".").name, DirectoryPath.current.name)
+		XCTAssertEqual(DirectoryPath("/").name, "/")
 	}
 
 	func testURL() {
@@ -115,6 +116,15 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssertEqual(relativedir.relativeString, "../rel1")
 		XCTAssertEqual(relativedir.base?.string, "/../base1")
 		XCTAssertEqual(relativedir.absolute.string, "/../rel1")
+
+		XCTAssertEqual(relativedir.absolute.parent().string, "/..")
+		XCTAssertEqual(relativedir.parent().string, "..")
+		XCTAssertEqual(relativedir.parent(nr: 2).string, "/")
+		XCTAssertEqual(relativedir.parent().parent().string, "/")
+
+		XCTAssertEqual(relativedir.name, "rel1")
+		XCTAssertEqual(relativedir.parent().name, "..")
+		XCTAssertEqual(FilePath("/../dir1/dir2/..").name, "dir1")
 	}
 
 	func testSymbolicLink() {

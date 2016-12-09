@@ -73,7 +73,7 @@ extension Path {
 /// Tries to create a new Path by detecting if it is a directory or a file.
 ///
 /// If the path ends in a '/', it is a directory.
-/// If the path is valid, check in the file system.
+/// If the path exists, check in the file system.
 /// Otherwise return nil.
 public func path(detectTypeOf stringpath: String) -> Path? {
 	guard !stringpath.hasSuffix(pathseparator) else {
@@ -122,7 +122,7 @@ extension Path {
 	}
 
 	public var name: String {
-		return components.last!
+		return components.last ?? "/"
 	}
 
 	public var `extension`: String? {
@@ -142,18 +142,17 @@ extension Path {
 	}
 
 	public var absolute: Self {
-		return Self(absolute: relativeComponents?.first == ".." ? fixDotDots(components) : components)
+		return Self(absolute: components)
 	}
 
-	/// Remove the last `nr` components of the path.
+	/// Go up `nr` directories.
 	/// - parameter nr: How many directories to go up the file tree. Defaults to 1.
 	public func parent(nr levels: Int = 1) -> DirectoryPath {
 		precondition(levels > 0, "Cannot go up less than one level of parent directories")
 		if let relative = relativeComponents, levels < relative.count, relative[relative.count - levels] != ".." {
 			return DirectoryPath(base: baseComponents!, relative: Array(relative.dropLast(levels)))
 		} else {
-			let parentcomponents = self.absolute.components.dropLast(levels)
-			return DirectoryPath(absolute: Array(parentcomponents))
+			return DirectoryPath(absolute: Array(self.components.dropLast(levels)))
 		}
 	}
 
@@ -168,48 +167,64 @@ extension Path {
 
 
 public struct DirectoryPath: Path {
-	public let components: [String]
-	let _relativestart: Array<String>.Index?
+	private let _components: [String]
+	private let _relativestart: Array<String>.Index?
 
 	public init(absolute components: [String]) {
-		self.components = components
+		self._components = components
 		_relativestart = nil
 	}
 
 	public init(base: [String], relative: [String]) {
-		components = base + relative
+		_components = base + relative
 		_relativestart = base.endIndex
 	}
 
 	public var relativeComponents: [String]? {
-		return _relativestart.map { Array(components.suffix(from: $0)) }
+		return _relativestart.map { Array(_components.suffix(from: $0)) }
 	}
 
 	public var baseComponents: [String]? {
-		return _relativestart.map { Array(components.prefix(upTo: $0)) }
+		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
+	}
+
+	public var components: [String] {
+		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
+			return fixDotDots(_components)
+		} else {
+			return _components
+		}
 	}
 }
 
 public struct FilePath: Path {
-	public let components: [String]
-	let _relativestart: Array<String>.Index?
+	private let _components: [String]
+	private let _relativestart: Array<String>.Index?
 
 	public init(absolute components: [String]) {
-		self.components = components
+		self._components = components
 		_relativestart = nil
 	}
 
 	public init(base: [String], relative: [String]) {
-		components = base + relative
+		_components = base + relative
 		_relativestart = base.endIndex
 	}
 
 	public var relativeComponents: [String]? {
-		return _relativestart.map { Array(components.suffix(from: $0)) }
+		return _relativestart.map { Array(_components.suffix(from: $0)) }
 	}
 
 	public var baseComponents: [String]? {
-		return _relativestart.map { Array(components.prefix(upTo: $0)) }
+		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
+	}
+
+	public var components: [String] {
+		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
+			return fixDotDots(_components)
+		} else {
+			return _components
+		}
 	}
 }
 
