@@ -18,7 +18,7 @@ public class File {
 		self.path = path
 	}
 
-	fileprivate static func errorForFile(at stringpath: String) throws {
+	fileprivate static func errorForFile(at stringpath: String, writing: Bool) throws {
 		var isdirectory: ObjCBool = true
 		guard Files.fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
 			throw FileSystemError.notFound(path: stringpath, base: nil)
@@ -26,12 +26,12 @@ public class File {
 		guard !isdirectory.boolValue else {
 			throw FileSystemError.isDirectory(path: stringpath)
 		}
-		throw FileSystemError.invalidAccess(path: stringpath)
+		throw FileSystemError.invalidAccess(path: stringpath, writing: writing)
 	}
 
 	public convenience init(open path: FilePath) throws {
 		guard let filehandle = FileHandle(forReadingAtPath: path.absolute.string) else {
-			try File.errorForFile(at: path.absolute.string)
+			try File.errorForFile(at: path.absolute.string, writing: false)
 			fatalError("Should have thrown error when opening \(path.absolute.string)")
 		}
 		self.init(path: path, filehandle: filehandle)
@@ -104,7 +104,7 @@ public class EditableFile: File {
 	public init(edit path: FilePath) throws {
 		try path.verifyIsInSandbox()
 		guard let filehandle = FileHandle(forWritingAtPath: path.absolute.string) else {
-			try File.errorForFile(at: path.absolute.string)
+			try File.errorForFile(at: path.absolute.string, writing: true)
 			fatalError("Should have thrown error when opening \(path.absolute.string)")
 		}
 		super.init(path: path, filehandle: filehandle)

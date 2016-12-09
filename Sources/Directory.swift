@@ -41,7 +41,7 @@ public class Directory {
 			throw FileSystemError.notDirectory(path: stringpath)
 		}
 		guard Files.isReadableFile(atPath: stringpath) else {
-			throw FileSystemError.invalidAccess(path: stringpath)
+			throw FileSystemError.invalidAccess(path: stringpath, writing: false)
 		}
 	}
 
@@ -115,7 +115,7 @@ public enum FileSystemError: Error {
 	case notFound(path: String, base: String?)
 	case isDirectory(path: String)
 	case notDirectory(path: String)
-	case invalidAccess(path: String)
+	case invalidAccess(path: String, writing: Bool)
 	case couldNotCreate(path: String)
 	case outsideSandbox(path: String)
 }
