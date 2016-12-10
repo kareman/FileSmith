@@ -1,9 +1,9 @@
 
 import XCTest
-import SwiftyPath
+import FilesAndDirectories
 import Foundation
 
-class SwiftyPathTests: XCTestCase {
+class PathTests: XCTestCase {
 	func testAddURLs() {
 		let absolutedir: DirectoryPath = "/tmp"
 		let relativedir: DirectoryPath = "relativedir"
@@ -132,7 +132,7 @@ class SwiftyPathTests: XCTestCase {
 	}
 }
 
-extension SwiftyPathTests {
+extension PathTests {
 	public static var allTests = [
 		("testAddURLs", testAddURLs),
 		("testRelativeFileURL", testRelativeFileURL),

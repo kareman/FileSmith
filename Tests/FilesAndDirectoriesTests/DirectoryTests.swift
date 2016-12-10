@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import SwiftyPath
+import FilesAndDirectories
 import Foundation
 
 let Files = FileManager.default
