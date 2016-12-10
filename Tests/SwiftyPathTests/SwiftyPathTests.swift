@@ -33,7 +33,7 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssertEqual(directorypath.string, "directory1/directory2")
 
 		directorypath = "."
-		XCTAssertEqual(directorypath.string, "")
+		XCTAssertEqual(directorypath.string, ".")
 		XCTAssertEqual((directorypath.relativeComponents)!, [])
 		XCTAssertEqual(directorypath.base?.string, FileManager.default.currentDirectoryPath)
 	}
@@ -103,7 +103,7 @@ class SwiftyPathTests: XCTestCase {
 		XCTAssertEqual(FilePath("/../dir1/../dir2/..").string, "/..")
 
 		let relative = FilePath("rel1/..", relativeTo: "/base1/../base2")
-		XCTAssertEqual(relative.relativeString, "")
+		XCTAssertEqual(relative.relativeString, ".")
 		XCTAssertEqual(relative.base?.string, "/base2")
 		XCTAssertEqual(relative.absolute.string, "/base2")
 

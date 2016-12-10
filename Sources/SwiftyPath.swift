@@ -6,7 +6,12 @@ let pathseparator = "/"
 let homedir = NSHomeDirectoryForUser(NSUserName())!
 let homedircomponents = homedir.components(separatedBy: pathseparator)
 
+/// The location of an item _which may not exist_ in the local file system.
+/// It is either a DirectoryPath or a FilePath.
 public protocol Path: CustomStringConvertible {
+
+	/// The individual parts of the absolute version of this path, from (but not including) the root folder.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
 	var components: [String] { get }
 	var relativeComponents: [String]? { get }
 	var baseComponents: [String]? { get }
@@ -14,6 +19,74 @@ public protocol Path: CustomStringConvertible {
 	init(base: [String], relative: [String])
 	init(_ stringpath: String)
 }
+
+// MARK: Structs.
+
+/// The path to either a directory or the symbolic link to a directory.
+public struct DirectoryPath: Path {
+	private let _components: [String]
+	private let _relativestart: Array<String>.Index?
+
+	public init(absolute components: [String]) {
+		self._components = components
+		_relativestart = nil
+	}
+
+	public init(base: [String], relative: [String]) {
+		_components = base + relative
+		_relativestart = base.endIndex
+	}
+
+	public var relativeComponents: [String]? {
+		return _relativestart.map { Array(_components.suffix(from: $0)) }
+	}
+
+	public var baseComponents: [String]? {
+		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
+	}
+
+	public var components: [String] {
+		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
+			return fixDotDots(_components)
+		} else {
+			return _components
+		}
+	}
+}
+
+/// The path to a file system item which is not a directory or the symbolic link to a directory.
+public struct FilePath: Path {
+	private let _components: [String]
+	private let _relativestart: Array<String>.Index?
+
+	public init(absolute components: [String]) {
+		self._components = components
+		_relativestart = nil
+	}
+
+	public init(base: [String], relative: [String]) {
+		_components = base + relative
+		_relativestart = base.endIndex
+	}
+
+	public var relativeComponents: [String]? {
+		return _relativestart.map { Array(_components.suffix(from: $0)) }
+	}
+
+	public var baseComponents: [String]? {
+		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
+	}
+
+	public var components: [String] {
+		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
+			return fixDotDots(_components)
+		} else {
+			return _components
+		}
+	}
+}
+
+// MARK: Initialise from String.
 
 func fixDotDots(_ components: [String]) -> [String] {
 	guard let firstdotdot = components.index(of: "..") else { return components }
@@ -70,6 +143,30 @@ extension Path {
 	}
 }
 
+extension FilePath: ExpressibleByStringLiteral {
+	public init(extendedGraphemeClusterLiteral value: String) {
+		self.init(value)
+	}
+	public init(stringLiteral value: String) {
+		self.init(value)
+	}
+	public init(unicodeScalarLiteral value: String) {
+		self.init(value)
+	}
+}
+
+extension DirectoryPath: ExpressibleByStringLiteral {
+	public init(extendedGraphemeClusterLiteral value: String) {
+		self.init(value)
+	}
+	public init(stringLiteral value: String) {
+		self.init(value)
+	}
+	public init(unicodeScalarLiteral value: String) {
+		self.init(value)
+	}
+}
+
 /// Tries to create a new Path by detecting if it is a directory or a file.
 ///
 /// If the path ends in a '/', it is a directory.
@@ -86,6 +183,8 @@ public func path(detectTypeOf stringpath: String) -> Path? {
 	}
 	return isdirectory.boolValue ? DirectoryPath(stringpath) : FilePath(stringpath)
 }
+
+// MARK: Common methods.
 
 extension Path {
 
@@ -106,15 +205,8 @@ extension Path {
 	}
 
 	public var relativeString: String? {
-		return relativeComponents?.joined(separator: pathseparator)
-	}
-
-	public var relativeURL: URL? {
-		return relativeString.map { URL(fileURLWithPath: $0, isDirectory: isDirectory) }
-	}
-
-	public var url: URL {
-		return URL(fileURLWithPath: absolute.string, isDirectory: isDirectory)
+		let result = relativeComponents?.joined(separator: pathseparator)
+		return result?.isEmpty == true ? "." : result
 	}
 
 	public func exists() -> Bool {
@@ -165,118 +257,7 @@ extension Path {
 	}
 }
 
-
-public struct DirectoryPath: Path {
-	private let _components: [String]
-	private let _relativestart: Array<String>.Index?
-
-	public init(absolute components: [String]) {
-		self._components = components
-		_relativestart = nil
-	}
-
-	public init(base: [String], relative: [String]) {
-		_components = base + relative
-		_relativestart = base.endIndex
-	}
-
-	public var relativeComponents: [String]? {
-		return _relativestart.map { Array(_components.suffix(from: $0)) }
-	}
-
-	public var baseComponents: [String]? {
-		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
-	}
-
-	public var components: [String] {
-		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
-			return fixDotDots(_components)
-		} else {
-			return _components
-		}
-	}
-}
-
-public struct FilePath: Path {
-	private let _components: [String]
-	private let _relativestart: Array<String>.Index?
-
-	public init(absolute components: [String]) {
-		self._components = components
-		_relativestart = nil
-	}
-
-	public init(base: [String], relative: [String]) {
-		_components = base + relative
-		_relativestart = base.endIndex
-	}
-
-	public var relativeComponents: [String]? {
-		return _relativestart.map { Array(_components.suffix(from: $0)) }
-	}
-
-	public var baseComponents: [String]? {
-		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
-	}
-
-	public var components: [String] {
-		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
-			return fixDotDots(_components)
-		} else {
-			return _components
-		}
-	}
-}
-
-
-public func ==<P:Path>(left: P, right: P) -> Bool where P:Equatable {
-	return left == right
-}
-
-extension FilePath: Equatable, Hashable {
-	public static func ==(left: FilePath, right: FilePath) -> Bool {
-		if let l = left.relativeComponents, let r = right.relativeComponents {
-			return l == r
-		} else {
-			return left.components == right.components
-		}
-	}
-}
-
-extension DirectoryPath: Equatable, Hashable {
-	public static func ==(left: DirectoryPath, right: DirectoryPath) -> Bool {
-		if let l = left.relativeComponents, let r = right.relativeComponents {
-			return l == r
-		} else {
-			return left.components == right.components
-		}
-	}
-}
-
-extension FilePath: ExpressibleByStringLiteral {
-	public init(extendedGraphemeClusterLiteral value: String) {
-		self.init(value)
-	}
-	public init(stringLiteral value: String) {
-		self.init(value)
-	}
-	public init(unicodeScalarLiteral value: String) {
-		self.init(value)
-	}
-}
-
-extension DirectoryPath: ExpressibleByStringLiteral {
-	public init(extendedGraphemeClusterLiteral value: String) {
-		self.init(value)
-	}
-	public init(stringLiteral value: String) {
-		self.init(value)
-	}
-	public init(unicodeScalarLiteral value: String) {
-		self.init(value)
-	}
-}
-
+// MARK: DirectoryPath methods.
 
 extension DirectoryPath {
 
@@ -328,12 +309,51 @@ extension DirectoryPath {
 		return leftdir.append(directory: rightdir)
 	}
 
-
 	/// Checks if the absolute version of the provided path begins with the absolute version of this path.
 	func isAParentOf<P: Path>(_ path: P) -> Bool {
 		return path.absolute.components.starts(with: self.absolute.components)
 	}
+}
 
+// MARK: Equatable
+
+public func ==<P:Path>(left: P, right: P) -> Bool where P:Equatable {
+	return left == right
+}
+
+extension FilePath: Equatable, Hashable {
+	public static func ==(left: FilePath, right: FilePath) -> Bool {
+		if let l = left.relativeComponents, let r = right.relativeComponents {
+			return l == r
+		} else {
+			return left.components == right.components
+		}
+	}
+}
+
+extension DirectoryPath: Equatable, Hashable {
+	public static func ==(left: DirectoryPath, right: DirectoryPath) -> Bool {
+		if let l = left.relativeComponents, let r = right.relativeComponents {
+			return l == r
+		} else {
+			return left.components == right.components
+		}
+	}
+}
+
+// MARK: URL
+
+extension Path {
+	public var relativeURL: URL? {
+		return relativeString.map { URL(fileURLWithPath: $0, isDirectory: isDirectory) }
+	}
+
+	public var url: URL {
+		return URL(fileURLWithPath: absolute.string, isDirectory: isDirectory)
+	}
+}
+
+extension DirectoryPath {
 	/// Creates a path from a URL.
 	///
 	/// - returns: Path if URL is a file URL and has a directory path. Otherwise nil.
