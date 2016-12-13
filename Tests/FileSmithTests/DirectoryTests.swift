@@ -15,8 +15,7 @@ class DirectoryTests: XCTestCase {
 	func testSubDirectoryPaths() {
 		do {
 			let dir = try Directory(open: "/")
-			let subdirs = try dir.subDirectoryPaths()
-
+			let subdirs = dir.directories()
 			XCTAssert(subdirs.contains(DirectoryPath("tmp")))
 			XCTAssert(subdirs.contains(DirectoryPath("bin")))
 			XCTAssert(subdirs.contains(DirectoryPath("usr")))
@@ -38,7 +37,7 @@ class DirectoryTests: XCTestCase {
 		}
 
 		do {
-			_ = try DirectoryPath.current.open().add(directory: "newdir", ifExists: .throwError)
+			try DirectoryPath.current.open().add(directory: "newdir", ifExists: .throwError)
 		} catch {
 			XCTFail(String(describing: error))
 		}
@@ -48,36 +47,49 @@ class DirectoryTests: XCTestCase {
 		do {
 			DirectoryPath.current = DirectoryPath(createTempdirectory())
 			let current = try DirectoryPath.current.open()
-			//current.content().isEmpty
 			XCTAssertTrue(current.path.exists())
 
-			XCTAssertFalse(current.contains("newfile.txt"))
-			let newfile = try current.add(file: "newfile.txt", ifExists: .throwError)
-			XCTAssertTrue(current.contains("newfile.txt"))
-			XCTAssertThrowsError(_ = try current.add(file: "newfile.txt", ifExists: .throwError))
-			XCTAssertTrue(newfile.path.exists())
+			XCTAssertFalse(current.contains("file.txt"))
+			let file = try current.add(file: "file.txt", ifExists: .throwError)
+			XCTAssertTrue(current.contains("file.txt"))
+			try current.verifyContains("file.txt")
+			XCTAssertThrowsError(try current.verifyContains("This does not exist.txt"))
+			XCTAssertThrowsError(try current.add(file: "file.txt", ifExists: .throwError))
+			try current.add(file: "file.txt", ifExists: .open)
+			XCTAssertTrue(file.path.exists())
 
-			XCTAssertFalse(current.contains("newdir"))
-			let newdir = try current.add(directory: "newdir", ifExists: .throwError)
-			XCTAssertTrue(current.contains("newdir"))
-			XCTAssertThrowsError(_ = try current.add(directory: "newdir", ifExists: .throwError))
-			XCTAssertTrue(newdir.path.exists())
+			XCTAssertFalse(current.contains("dir"))
+			let dir = try current.add(directory: "dir", ifExists: .throwError)
+			try current.add(directory: "dir", ifExists: .replace)
+			XCTAssertTrue(current.contains("dir"))
+			XCTAssertThrowsError(_ = try current.add(directory: "dir", ifExists: .throwError))
+			try current.add(directory: "dir", ifExists: .open)
+			XCTAssertTrue(dir.path.exists())
 
-			let newerdirpath = DirectoryPath("newdir/newerdir")
+			let newerdirpath = DirectoryPath("dir/newerdir")
 			XCTAssertFalse(newerdirpath.exists())
-			XCTAssertFalse(current.contains("newdir/newerdir"))
-			XCTAssertFalse(newdir.contains("newerdir"))
+			XCTAssertFalse(current.contains("dir/newerdir"))
+			XCTAssertFalse(dir.contains("newerdir"))
 			let newerdir = try newerdirpath.create(ifExists: .throwError)
-			XCTAssertTrue(current.contains("newdir/newerdir"))
-			XCTAssertTrue(newdir.contains("newerdir"))
+			XCTAssertTrue(current.contains("dir/newerdir"))
+			XCTAssertTrue(dir.contains("newerdir"))
 			let newerdir2 = try newerdirpath.create(ifExists: .open)
 			XCTAssertEqual(newerdir.path, newerdir2.path)
+
+			try current.add(file: "file2.txt", ifExists: .throwError)
+			try current.add(file: "file2.txt", ifExists: .replace)
+			XCTAssertEqual(current.files().map {$0.string}, ["file.txt", "file2.txt"])
+			XCTAssertEqual(current.files("file?.*").map {$0.string}, ["file2.txt"])
+			XCTAssertEqual(current.directories().map {$0.string}, ["dir"])
+
+			XCTAssertEqual(current.directories("dir/*").map {$0.string}, ["dir/newerdir"])
+			try current.add(directory: "dir", ifExists: .replace)
+			XCTAssertEqual(current.directories("dir/*"), [])
 
 		} catch {
 			XCTFail(String(describing: error))
 		}
 	}
-
 }
 
 private func createTempdirectory () -> String {

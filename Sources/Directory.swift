@@ -61,7 +61,9 @@ public class Directory {
 			switch ifExists {
 			case .throwError:	throw FileSystemError.alreadyExists(path: stringpath)
 			case .open: return
-			case .replace:	break
+			case .replace:
+				try self.path.verifyIsInSandbox()
+				try FileManager().trashItem(at: self.path.url, resultingItemURL: nil)
 			}
 		}
 		try self.path.verifyIsInSandbox()
@@ -81,12 +83,20 @@ extension DirectoryPath {
 }
 
 extension Directory {
-	public func subDirectoryPaths() throws -> [DirectoryPath] {
+	public func directories(_ pattern: String = "*/") -> [DirectoryPath] {
 		let curdir = DirectoryPath.current
-		FileManager().changeCurrentDirectoryPath(path.string)
-		defer { FileManager().changeCurrentDirectoryPath(curdir.string) }
-		
-		return filterFiles(glob: "*/").filter { $0.hasSuffix(pathseparator) }.map(DirectoryPath.init(_:))
+		DirectoryPath.current = path
+		defer { DirectoryPath.current = curdir }
+
+		return filterFiles(glob: pattern).filter { $0.hasSuffix(pathseparator) }.map(DirectoryPath.init(_:))
+	}
+
+	public func files(_ pattern: String = "*") -> [FilePath] {
+		let curdir = DirectoryPath.current
+		DirectoryPath.current = path
+		defer { DirectoryPath.current = curdir }
+
+		return filterFiles(glob: pattern).filter { !$0.hasSuffix(pathseparator) }.map(FilePath.init(_:))
 	}
 
 	public func contains(_ stringpath: String) -> Bool {
@@ -99,11 +109,13 @@ extension Directory {
 		}
 	}
 
+	@discardableResult
 	public func add(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> File {
 		let newpath = self.path + FilePath(stringpath)
 		return try File(create: newpath, ifExists: ifExists)
 	}
 
+	@discardableResult
 	public func add(directory stringpath: String, ifExists: AlreadyExistsOptions) throws -> Directory {
 		let newpath = self.path + DirectoryPath(stringpath)
 		return try Directory(create: newpath, ifExists: ifExists)
