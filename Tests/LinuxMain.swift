@@ -1,10 +1,10 @@
 
 import XCTest
 
-@testable import SwiftyPathTests
+@testable import FileSmithTests
 
 let tests: [XCTestCaseEntry] = [
-	testCase(SwiftyPathTests.allTests),
+	testCase(PathTests.allTests),
 	testCase(DirectoryTests.allTests),
 	]
 

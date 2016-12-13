@@ -20,19 +20,19 @@
 		BAD418491DFCB61200137546 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418451DFCB61200137546 /* Directory.swift */; };
 		BAD4184A1DFCB61200137546 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418461DFCB61200137546 /* File.swift */; };
 		BAD4184B1DFCB61200137546 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418471DFCB61200137546 /* General.swift */; };
-		BAD4184C1DFCB61200137546 /* SwiftyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* SwiftyPath.swift */; };
+		BAD4184C1DFCB61200137546 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* Paths.swift */; };
 		BAD4184D1DFCB61F00137546 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418451DFCB61200137546 /* Directory.swift */; };
 		BAD4184E1DFCB61F00137546 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418461DFCB61200137546 /* File.swift */; };
 		BAD4184F1DFCB61F00137546 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418471DFCB61200137546 /* General.swift */; };
-		BAD418501DFCB61F00137546 /* SwiftyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* SwiftyPath.swift */; };
+		BAD418501DFCB61F00137546 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* Paths.swift */; };
 		BAD418511DFCB61F00137546 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418451DFCB61200137546 /* Directory.swift */; };
 		BAD418521DFCB61F00137546 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418461DFCB61200137546 /* File.swift */; };
 		BAD418531DFCB61F00137546 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418471DFCB61200137546 /* General.swift */; };
-		BAD418541DFCB61F00137546 /* SwiftyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* SwiftyPath.swift */; };
+		BAD418541DFCB61F00137546 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* Paths.swift */; };
 		BAD418551DFCB62100137546 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418451DFCB61200137546 /* Directory.swift */; };
 		BAD418561DFCB62100137546 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418461DFCB61200137546 /* File.swift */; };
 		BAD418571DFCB62100137546 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418471DFCB61200137546 /* General.swift */; };
-		BAD418581DFCB62100137546 /* SwiftyPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* SwiftyPath.swift */; };
+		BAD418581DFCB62100137546 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* Paths.swift */; };
 		DD7502881C68FEDE006590AF /* FileSmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6DA0F1BF000BD002C0205 /* FileSmith.framework */; };
 		DD7502921C690C7A006590AF /* FileSmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D9F01BEFFFBE002C0205 /* FileSmith.framework */; };
 /* End PBXBuildFile section */
@@ -72,7 +72,7 @@
 		BAD418451DFCB61200137546 /* Directory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Directory.swift; path = Sources/Directory.swift; sourceTree = "<group>"; };
 		BAD418461DFCB61200137546 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = Sources/File.swift; sourceTree = "<group>"; };
 		BAD418471DFCB61200137546 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = General.swift; path = Sources/General.swift; sourceTree = "<group>"; };
-		BAD418481DFCB61200137546 /* SwiftyPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyPath.swift; path = Sources/SwiftyPath.swift; sourceTree = "<group>"; };
+		BAD418481DFCB61200137546 /* Paths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Paths.swift; path = Sources/Paths.swift; sourceTree = "<group>"; };
 		BAD418591DFCB64800137546 /* DirectoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTests.swift; sourceTree = "<group>"; };
 		BAD4185A1DFCB64800137546 /* FileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
 		BAD4185B1DFCB64800137546 /* PathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathTests.swift; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 				BAD418451DFCB61200137546 /* Directory.swift */,
 				BAD418461DFCB61200137546 /* File.swift */,
 				BAD418471DFCB61200137546 /* General.swift */,
-				BAD418481DFCB61200137546 /* SwiftyPath.swift */,
+				BAD418481DFCB61200137546 /* Paths.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -489,7 +489,7 @@
 			files = (
 				BAD4184B1DFCB61200137546 /* General.swift in Sources */,
 				BAD418491DFCB61200137546 /* Directory.swift in Sources */,
-				BAD4184C1DFCB61200137546 /* SwiftyPath.swift in Sources */,
+				BAD4184C1DFCB61200137546 /* Paths.swift in Sources */,
 				BAD4184A1DFCB61200137546 /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,7 +510,7 @@
 			files = (
 				BAD418531DFCB61F00137546 /* General.swift in Sources */,
 				BAD418511DFCB61F00137546 /* Directory.swift in Sources */,
-				BAD418541DFCB61F00137546 /* SwiftyPath.swift in Sources */,
+				BAD418541DFCB61F00137546 /* Paths.swift in Sources */,
 				BAD418521DFCB61F00137546 /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,7 +521,7 @@
 			files = (
 				BAD418571DFCB62100137546 /* General.swift in Sources */,
 				BAD418551DFCB62100137546 /* Directory.swift in Sources */,
-				BAD418581DFCB62100137546 /* SwiftyPath.swift in Sources */,
+				BAD418581DFCB62100137546 /* Paths.swift in Sources */,
 				BAD418561DFCB62100137546 /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,7 +532,7 @@
 			files = (
 				BAD4184F1DFCB61F00137546 /* General.swift in Sources */,
 				BAD4184D1DFCB61F00137546 /* Directory.swift in Sources */,
-				BAD418501DFCB61F00137546 /* SwiftyPath.swift in Sources */,
+				BAD418501DFCB61F00137546 /* Paths.swift in Sources */,
 				BAD4184E1DFCB61F00137546 /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

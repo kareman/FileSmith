@@ -128,7 +128,11 @@ class PathTests: XCTestCase {
 	}
 
 	func testSymbolicLink() {
+#if os(Linux)
+		XCTAssertEqual(DirectoryPath("/bin/systemd").symbolicLinkPointsTo, "/lib/systemd/systemd")
+#else
 		XCTAssertEqual(DirectoryPath("/tmp").symbolicLinkPointsTo, "/private/tmp")
+#endif
 	}
 }
 
