@@ -136,7 +136,7 @@ extension EditableFile: TextOutputStream {
 	/// Appends the given string to the file.
 	/// Nothing is overwritten, just added to the end of the file.
 	public func write(_ string: String) {
-		if isRegularFile { filehandle.seekToEndOfFile() }
+		if isRegularFile { _ = filehandle.seekToEndOfFile() }
 		filehandle.write(string, encoding: encoding)
 	}
 

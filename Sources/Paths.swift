@@ -265,7 +265,9 @@ extension DirectoryPath {
 			return DirectoryPath(FileManager().currentDirectoryPath)
 		}
 		set {
-			FileManager().changeCurrentDirectoryPath(newValue.absolute.string)
+			guard FileManager().changeCurrentDirectoryPath(newValue.absolute.string) else {
+				fatalError("Could not change current directory to \(newValue.absolute.string)")
+			}
 		}
 	}
 
