@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import FilesAndDirectories
+import FileSmith
 import Foundation
 
 let Files = FileManager.default

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import FilesAndDirectories
+import FileSmith
 import Foundation
 
 class FileTests: XCTestCase {

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "52D6D9EF1BEFFFBE002C0205"
-               BuildableName = "FilesAndDirectories.framework"
-               BlueprintName = "FilesAndDirectories-tvOS"
-               ReferencedContainer = "container:FilesAndDirectories.xcodeproj">
+               BuildableName = "FileSmith.framework"
+               BlueprintName = "FileSmith-tvOS"
+               ReferencedContainer = "container:FileSmith.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DD75028C1C690C7A006590AF"
-               BuildableName = "FilesAndDirectories-tvOS Tests.xctest"
-               BlueprintName = "FilesAndDirectories-tvOS Tests"
-               ReferencedContainer = "container:FilesAndDirectories.xcodeproj">
+               BuildableName = "FileSmith-tvOS Tests.xctest"
+               BlueprintName = "FileSmith-tvOS Tests"
+               ReferencedContainer = "container:FileSmith.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52D6D9EF1BEFFFBE002C0205"
-            BuildableName = "FilesAndDirectories.framework"
-            BlueprintName = "FilesAndDirectories-tvOS"
-            ReferencedContainer = "container:FilesAndDirectories.xcodeproj">
+            BuildableName = "FileSmith.framework"
+            BlueprintName = "FileSmith-tvOS"
+            ReferencedContainer = "container:FileSmith.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52D6D9EF1BEFFFBE002C0205"
-            BuildableName = "FilesAndDirectories.framework"
-            BlueprintName = "FilesAndDirectories-tvOS"
-            ReferencedContainer = "container:FilesAndDirectories.xcodeproj">
+            BuildableName = "FileSmith.framework"
+            BlueprintName = "FileSmith-tvOS"
+            ReferencedContainer = "container:FileSmith.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "52D6D9EF1BEFFFBE002C0205"
-            BuildableName = "FilesAndDirectories.framework"
-            BlueprintName = "FilesAndDirectories-tvOS"
-            ReferencedContainer = "container:FilesAndDirectories.xcodeproj">
+            BuildableName = "FileSmith.framework"
+            BlueprintName = "FileSmith-tvOS"
+            ReferencedContainer = "container:FileSmith.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

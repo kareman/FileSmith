@@ -1,6 +1,6 @@
 
 import XCTest
-import FilesAndDirectories
+import FileSmith
 import Foundation
 
 class PathTests: XCTestCase {
