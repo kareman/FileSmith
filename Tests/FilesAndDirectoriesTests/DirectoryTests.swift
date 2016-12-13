@@ -36,7 +36,7 @@ class DirectoryTests: XCTestCase {
 			XCTFail("Should not be able to create folder outside of current folder \(DirectoryPath.current)")
 		} catch FileSystemError.outsideSandbox {
 		} catch {
-			XCTFail("Should not throw other errors.")
+			XCTFail(String(describing: error))
 		}
 
 		do {

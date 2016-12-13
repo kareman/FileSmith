@@ -93,7 +93,7 @@ extension Directory {
 		return Files.fileExists(atPath: path.string + pathseparator + stringpath)
 	}
 
-	public func ensureContains(_ stringpath: String) throws {
+	public func verifyContains(_ stringpath: String) throws {
 		guard self.contains(stringpath) else {
 			throw FileSystemError.notFound(path: stringpath, base: path.string)
 		}

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class File {
+public class File: TextOutputStreamable {
 	public let path: FilePath
 	let filehandle: FileHandle
 	public var encoding: String.Encoding = .utf8
@@ -71,11 +71,9 @@ public class File {
 	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
 		try self.init(create: FilePath(stringpath), ifExists: ifExists)
 	}
-}
 
 
-extension File: TextOutputStreamable {
-	/// Writes the text in this file to the given output stream.
+	/// Writes the text in this file to the given TextOutputStream.
 	public func write<Target : TextOutputStream>(to target: inout Target) {
 		while let text = filehandle.readSome(encoding: encoding) {
 			target.write(text)
@@ -103,12 +101,11 @@ public class EditableFile: File {
 
 	public init(edit path: FilePath) throws {
 		try path.verifyIsInSandbox()
-		guard let filehandle = FileHandle(forWritingAtPath: path.absolute.string) else {
+		guard let filehandle = FileHandle(forUpdatingAtPath: path.absolute.string) else {
 			try File.errorForFile(at: path.absolute.string, writing: true)
 			fatalError("Should have thrown error when opening \(path.absolute.string)")
 		}
 		super.init(path: path, filehandle: filehandle)
-		filehandle.seekToEndOfFile()
 	}
 
 	public convenience init(edit stringpath: String) throws {
@@ -126,9 +123,20 @@ public class EditableFile: File {
 }
 
 extension EditableFile: TextOutputStream {
-	/// Appends the given string to the stream.
+	/// Appends the given string to the file.
+	/// Nothing is overwritten, just added to the end of the file.
 	public func write(_ string: String) {
+		filehandle.seekToEndOfFile()
 		filehandle.write(string, encoding: encoding)
+	}
+
+	/// Replaces the entire contents of the file with the string.
+	/// - warning: The current contents of the file will be lost.
+	/// - warning: Will crash if this is not a regular file. 
+	public func overwrite(_ string: String) {
+		filehandle.seek(toFileOffset: 0)
+		filehandle.write(string, encoding: encoding)
+		filehandle.truncateFile(atOffset: filehandle.offsetInFile)
 	}
 }
 
