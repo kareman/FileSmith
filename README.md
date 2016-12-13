@@ -6,7 +6,7 @@ A strongly typed Swift library for working with local files and directories.
 
 Still very much a work in progress and has not been properly tested, so use at your own risk.
 
-And also, obviously there is supposed to be more documentation here.
+And also, some more documentation would be nice.
 
 ## License
 
