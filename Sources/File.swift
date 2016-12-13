@@ -14,9 +14,9 @@ public class File: TextOutputStreamable {
 	let filehandle: FileHandle
 
 	lazy var attributes: [FileAttributeKey : Any] = {
-		var attributes = try! Files.attributesOfItem(atPath: self.path.absolute.string)
+		var attributes = try! FileManager().attributesOfItem(atPath: self.path.absolute.string)
 		if attributes[.type] as! FileAttributeType == .typeSymbolicLink {
-			attributes = try! Files.attributesOfItem(atPath: self.path.absolute.symbolicLinkPointsTo!.string)
+			attributes = try! FileManager().attributesOfItem(atPath: self.path.absolute.symbolicLinkPointsTo!.string)
 		}
 		return attributes
 	}()
@@ -30,7 +30,7 @@ public class File: TextOutputStreamable {
 
 	fileprivate static func errorForFile(at stringpath: String, writing: Bool) throws {
 		var isdirectory: ObjCBool = true
-		guard Files.fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
+		guard FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
 			throw FileSystemError.notFound(path: stringpath, base: nil)
 		}
 		guard !isdirectory.boolValue else {
@@ -55,7 +55,7 @@ public class File: TextOutputStreamable {
 		let stringpath = path.absolute.string
 
 		var isdirectory: ObjCBool = true
-		if Files.fileExists(atPath: stringpath, isDirectory: &isdirectory) {
+		if FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) {
 			guard !isdirectory.boolValue else {
 				throw FileSystemError.isDirectory(path: stringpath)
 			}
@@ -68,7 +68,7 @@ public class File: TextOutputStreamable {
 			try path.parent().create(ifExists: .open)
 		}
 		try path.verifyIsInSandbox()
-		guard Files.createFile(atPath: stringpath, contents: Data(), attributes: nil) else {
+		guard FileManager().createFile(atPath: stringpath, contents: Data(), attributes: nil) else {
 			throw FileSystemError.couldNotCreate(path: stringpath)
 		}
 	}

@@ -1,7 +1,6 @@
 
 import Foundation
 
-let Files = FileManager()
 let pathseparator = "/"
 let homedir = NSHomeDirectoryForUser(NSUserName())!
 let homedircomponents = homedir.components(separatedBy: pathseparator)
@@ -130,7 +129,7 @@ extension Path {
 	public init(_ stringpath: String) {
 		let (components, isrelative) = parseComponents(stringpath)
 		if isrelative {
-			let current = Files.currentDirectoryPath.components(separatedBy: pathseparator).dropFirst().array
+			let current = FileManager().currentDirectoryPath.components(separatedBy: pathseparator).dropFirst().array
 			self.init(base: current, relative: components)
 		} else {
 			self.init(absolute: components)
@@ -178,7 +177,7 @@ public func path(detectTypeOf stringpath: String) -> Path? {
 	}
 
 	var isdirectory: ObjCBool = false
-	guard Files.fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
+	guard FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
 		return nil
 	}
 	return isdirectory.boolValue ? DirectoryPath(stringpath) : FilePath(stringpath)
@@ -210,7 +209,7 @@ extension Path {
 	}
 
 	public func exists() -> Bool {
-		return Files.fileExists(atPath: string)
+		return FileManager().fileExists(atPath: string)
 	}
 
 	public var name: String {
@@ -249,7 +248,7 @@ extension Path {
 	}
 
 	public var symbolicLinkPointsTo: Self? {
-		return (try? Files.destinationOfSymbolicLink(atPath: absolute.string)).map { Self.init("/"+$0) }
+		return (try? FileManager().destinationOfSymbolicLink(atPath: absolute.string)).map { Self.init("/"+$0) }
 	}
 
 	public var hashValue: Int {
@@ -263,10 +262,10 @@ extension DirectoryPath {
 
 	public static var current: DirectoryPath {
 		get {
-			return DirectoryPath(Files.currentDirectoryPath)
+			return DirectoryPath(FileManager().currentDirectoryPath)
 		}
 		set {
-			Files.changeCurrentDirectoryPath(newValue.absolute.string)
+			FileManager().changeCurrentDirectoryPath(newValue.absolute.string)
 		}
 	}
 

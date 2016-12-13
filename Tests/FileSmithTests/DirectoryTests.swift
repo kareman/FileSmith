@@ -10,8 +10,6 @@ import XCTest
 import FileSmith
 import Foundation
 
-let Files = FileManager.default
-
 class DirectoryTests: XCTestCase {
 
 	func testSubDirectoryPaths() {
@@ -86,7 +84,7 @@ private func createTempdirectory () -> String {
 	let name = ProcessInfo.processInfo.processName
 	let tempdirectory = NSTemporaryDirectory() + "/" + (name + "-" + ProcessInfo.processInfo.globallyUniqueString)
 	do {
-		try Files.createDirectory(atPath: tempdirectory, withIntermediateDirectories: true, attributes: nil)
+		try FileManager().createDirectory(atPath: tempdirectory, withIntermediateDirectories: true, attributes: nil)
 		return tempdirectory + "/"
 	} catch let error as NSError {
 		fatalError("Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")

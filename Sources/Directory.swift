@@ -34,13 +34,13 @@ public class Directory {
 		let stringpath = self.path.string
 
 		var isdirectory: ObjCBool = false
-		guard Files.fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
+		guard FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
 			throw FileSystemError.notFound(path: stringpath, base: nil)
 		}
 		guard isdirectory.boolValue else {
 			throw FileSystemError.notDirectory(path: stringpath)
 		}
-		guard Files.isReadableFile(atPath: stringpath) else {
+		guard FileManager().isReadableFile(atPath: stringpath) else {
 			throw FileSystemError.invalidAccess(path: stringpath, writing: false)
 		}
 	}
@@ -54,7 +54,7 @@ public class Directory {
 		let stringpath = self.path.string
 
 		var isdirectory: ObjCBool = false
-		if Files.fileExists(atPath: stringpath, isDirectory: &isdirectory) {
+		if FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) {
 			guard isdirectory.boolValue else {
 				throw FileSystemError.notDirectory(path: stringpath)
 			}
@@ -65,7 +65,7 @@ public class Directory {
 			}
 		}
 		try self.path.verifyIsInSandbox()
-		try Files.createDirectory(atPath: stringpath, withIntermediateDirectories: true, attributes: nil)
+		try FileManager().createDirectory(atPath: stringpath, withIntermediateDirectories: true, attributes: nil)
 	}
 }
 
@@ -83,14 +83,14 @@ extension DirectoryPath {
 extension Directory {
 	public func subDirectoryPaths() throws -> [DirectoryPath] {
 		let curdir = DirectoryPath.current
-		Files.changeCurrentDirectoryPath(path.string)
-		defer { Files.changeCurrentDirectoryPath(curdir.string) }
+		FileManager().changeCurrentDirectoryPath(path.string)
+		defer { FileManager().changeCurrentDirectoryPath(curdir.string) }
 		
 		return filterFiles(glob: "*/").filter { $0.hasSuffix(pathseparator) }.map(DirectoryPath.init(_:))
 	}
 
 	public func contains(_ stringpath: String) -> Bool {
-		return Files.fileExists(atPath: path.string + pathseparator + stringpath)
+		return FileManager().fileExists(atPath: path.string + pathseparator + stringpath)
 	}
 
 	public func verifyContains(_ stringpath: String) throws {
