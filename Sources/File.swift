@@ -10,8 +10,18 @@ import Foundation
 
 public class File: TextOutputStreamable {
 	public let path: FilePath
-	let filehandle: FileHandle
 	public var encoding: String.Encoding = .utf8
+	let filehandle: FileHandle
+
+	lazy var attributes: [FileAttributeKey : Any] = {
+		var attributes = try! Files.attributesOfItem(atPath: self.path.absolute.string)
+		if attributes[.type] as! FileAttributeType == .typeSymbolicLink {
+			attributes = try! Files.attributesOfItem(atPath: self.path.absolute.symbolicLinkPointsTo!.string)
+		}
+		return attributes
+	}()
+
+	lazy var isRegularFile: Bool = { self.attributes[.type] as! FileAttributeType == .typeRegular }()
 
 	fileprivate init(path: FilePath, filehandle: FileHandle) {
 		self.filehandle = filehandle
@@ -126,7 +136,7 @@ extension EditableFile: TextOutputStream {
 	/// Appends the given string to the file.
 	/// Nothing is overwritten, just added to the end of the file.
 	public func write(_ string: String) {
-		filehandle.seekToEndOfFile()
+		if isRegularFile { filehandle.seekToEndOfFile() }
 		filehandle.write(string, encoding: encoding)
 	}
 
