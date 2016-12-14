@@ -126,14 +126,6 @@ class PathTests: XCTestCase {
 		XCTAssertEqual(relativedir.parent().name, "..")
 		XCTAssertEqual(FilePath("/../dir1/dir2/..").name, "dir1")
 	}
-
-	func testSymbolicLink() {
-#if os(Linux)
-		XCTAssertEqual(DirectoryPath("/bin/systemd").symbolicLinkPointsTo, "/lib/systemd/systemd")
-#else
-		XCTAssertEqual(DirectoryPath("/tmp").symbolicLinkPointsTo, "/private/tmp")
-#endif
-	}
 }
 
 extension PathTests {
@@ -147,6 +139,5 @@ extension PathTests {
 		("testURL", testURL),
 		("testPathTypeDetection", testPathTypeDetection),
 		("testDotDot", testDotDot),
-		("testSymbolicLink", testSymbolicLink),
 		]
 }

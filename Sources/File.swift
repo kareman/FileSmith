@@ -16,12 +16,13 @@ public class File: TextOutputStreamable {
 	lazy var attributes: [FileAttributeKey : Any] = {
 		var attributes = try! FileManager().attributesOfItem(atPath: self.path.absolute.string)
 		if attributes[.type] as! FileAttributeType == .typeSymbolicLink {
-			attributes = try! FileManager().attributesOfItem(atPath: self.path.absolute.symbolicLinkPointsTo!.string)
+			let realpath  = try! FileManager().destinationOfSymbolicLink(atPath: self.path.absolute.string)
+			attributes = try! FileManager().attributesOfItem(atPath: realpath)
 		}
 		return attributes
 	}()
 
-	lazy var isRegularFile: Bool = { self.attributes[.type] as! FileAttributeType == .typeRegular }()
+	lazy var isRegularFile: Bool = { (self.attributes[.type] as! FileAttributeType) == .typeRegular }()
 
 	fileprivate init(path: FilePath, filehandle: FileHandle) {
 		self.filehandle = filehandle

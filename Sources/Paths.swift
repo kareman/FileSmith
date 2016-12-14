@@ -187,10 +187,6 @@ public func path(detectTypeOf stringpath: String) -> Path? {
 
 extension Path {
 
-	internal var isDirectory: Bool {
-		return self is DirectoryPath
-	}
-
 	public var string: String {
 		return relativeString ?? (pathseparator + components.joined(separator: pathseparator))
 	}
@@ -245,10 +241,6 @@ extension Path {
 		} else {
 			return DirectoryPath(absolute: Array(self.components.dropLast(levels)))
 		}
-	}
-
-	public var symbolicLinkPointsTo: Self? {
-		return (try? FileManager().destinationOfSymbolicLink(atPath: absolute.string)).map { Self.init("/"+$0) }
 	}
 
 	public var hashValue: Int {
@@ -346,11 +338,11 @@ extension DirectoryPath: Equatable, Hashable {
 
 extension Path {
 	public var relativeURL: URL? {
-		return relativeString.map { URL(fileURLWithPath: $0, isDirectory: isDirectory) }
+		return relativeString.map { URL(fileURLWithPath: $0, isDirectory: self is DirectoryPath) }
 	}
 
 	public var url: URL {
-		return URL(fileURLWithPath: absolute.string, isDirectory: isDirectory)
+		return URL(fileURLWithPath: absolute.string, isDirectory: self is DirectoryPath)
 	}
 }
 
