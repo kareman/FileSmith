@@ -66,6 +66,7 @@ public class File: TextOutputStreamable {
 			case .replace: break
 			}
 		} else {
+			try path.verifyIsInSandbox()
 			try path.parent().create(ifExists: .open)
 		}
 		try path.verifyIsInSandbox()

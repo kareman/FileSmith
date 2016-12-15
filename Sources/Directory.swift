@@ -69,7 +69,7 @@ public class Directory {
 			case .open: return
 			case .replace:
 				try self.path.verifyIsInSandbox()
-				try FileManager().trashItem(at: self.path.url, resultingItemURL: nil)
+				try FileManager().removeItem(atPath: stringpath)
 			}
 		}
 		try self.path.verifyIsInSandbox()
