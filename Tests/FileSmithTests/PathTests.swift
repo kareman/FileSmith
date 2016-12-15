@@ -4,7 +4,7 @@ import FileSmith
 import Foundation
 
 class PathTests: XCTestCase {
-	func testAddURLs() {
+	func testAddPaths() {
 		let absolutedir: DirectoryPath = "/tmp"
 		let relativedir: DirectoryPath = "relativedir"
 		let file: FilePath = "file"
@@ -13,7 +13,7 @@ class PathTests: XCTestCase {
 		XCTAssertEqual((relativedir + file).string, "relativedir/file")
 	}
 
-	func testRelativeFileURL() {
+	func testRelativeFilePath() {
 		let filepath = FilePath("folder1/file1.txt")
 
 		XCTAssertEqual(filepath.base?.string, FileManager.default.currentDirectoryPath)
@@ -23,7 +23,7 @@ class PathTests: XCTestCase {
 		XCTAssertEqual(filepath.string, "folder1/file1.txt")
 	}
 
-	func testRelativeDirectoryURL() {
+	func testRelativeDirectoryPath() {
 		var directorypath: DirectoryPath = "directory1/directory2"
 
 		XCTAssertEqual(directorypath.base?.string, FileManager.default.currentDirectoryPath)
@@ -38,7 +38,7 @@ class PathTests: XCTestCase {
 		XCTAssertEqual(directorypath.base?.string, FileManager.default.currentDirectoryPath)
 	}
 
-	func testAbsoluteFileURL() {
+	func testAbsoluteFilePath() {
 		let filepath = FilePath("/tmp/folder1/file1.txt")
 
 		XCTAssertNil(filepath.base)
@@ -47,7 +47,7 @@ class PathTests: XCTestCase {
 		XCTAssertEqual(filepath.string, "/tmp/folder1/file1.txt")
 	}
 
-	func testAbsoluteDirectoryURL() {
+	func testAbsoluteDirectoryPath() {
 		let directorypath = DirectoryPath("/tmp/directory1/directory2/")
 
 		XCTAssertNil(directorypath.base)
@@ -130,11 +130,11 @@ class PathTests: XCTestCase {
 
 extension PathTests {
 	public static var allTests = [
-		("testAddURLs", testAddURLs),
-		("testRelativeFileURL", testRelativeFileURL),
-		("testRelativeDirectoryURL", testRelativeDirectoryURL),
-		("testAbsoluteFileURL", testAbsoluteFileURL),
-		("testAbsoluteDirectoryURL", testAbsoluteDirectoryURL),
+		("testAddPaths", testAddPaths),
+		("testRelativeFilePath", testRelativeFilePath),
+		("testRelativeDirectoryPath", testRelativeDirectoryPath),
+		("testAbsoluteFilePath", testAbsoluteFilePath),
+		("testAbsoluteDirectoryPath", testAbsoluteDirectoryPath),
 		("testName", testName),
 		("testURL", testURL),
 		("testPathTypeDetection", testPathTypeDetection),
