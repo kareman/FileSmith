@@ -14,10 +14,16 @@ public enum AlreadyExistsOptions {
 
 extension Path {
 	internal func verifyIsInSandbox() throws {
-		if Directory.sandbox && !DirectoryPath.current.isAParentOf(self) {
-			throw FileSystemError.outsideSandbox(path: self.string)
-		}
+		if !Directory.sandbox { return }
+		if DirectoryPath.current.isAParentOf(self) { return }
+		if let s = symbolicLinkTo, DirectoryPath.current.isAParentOf(s) { return }
+		throw FileSystemError.outsideSandbox(path: self.string)
 	}
+
+	internal var symbolicLinkTo: Self? {
+		return (try? FileManager().destinationOfSymbolicLink(atPath: absolute.string)).map { Self.init("/"+$0) }
+	}
+
 }
 
 public class Directory {
