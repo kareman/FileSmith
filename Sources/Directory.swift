@@ -116,9 +116,9 @@ extension Directory {
 	}
 
 	@discardableResult
-	public func add(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> File {
+	public func add(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> EditableFile {
 		let newpath = self.path + FilePath(stringpath)
-		return try File(create: newpath, ifExists: ifExists)
+		return try EditableFile(create: newpath, ifExists: ifExists)
 	}
 
 	@discardableResult
