@@ -99,6 +99,11 @@ public class File: TextOutputStreamable {
 	public func readSome() -> String? {
 		return filehandle.readSome(encoding: encoding)
 	}
+
+	/** Split stream lazily into lines. */
+	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
+		return PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }
+	}
 }
 
 extension FilePath {
