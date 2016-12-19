@@ -1,19 +1,28 @@
 
 import Foundation
 
-let pathseparator = "/"
+public let pathseparator = "/"
 let homedir = NSHomeDirectoryForUser(NSUserName())!
 let homedircomponents = homedir.components(separatedBy: pathseparator)
 
-/// The location of an item _which may not exist_ in the local file system.
+/// The location of an item _which may or may not exist_ in the local file system.
 /// It is either a DirectoryPath or a FilePath.
 public protocol Path: CustomStringConvertible {
 
 	/// The individual parts of the absolute version of this path, from (but not including) the root folder.
 	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
 	var components: [String] { get }
+
+	/// The individual parts of the relative part (if any) of this path.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
+	/// If this exists, then so do baseComponents.
 	var relativeComponents: [String]? { get }
+
+	/// The individual parts of the base part (if any) of this path, from (but not including) the root folder.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
+	/// If this exists, then so do relativeComponents.
 	var baseComponents: [String]? { get }
+
 	init(absolute components: [String])
 	init(base: [String], relative: [String])
 	init(_ stringpath: String)
@@ -26,24 +35,39 @@ public struct DirectoryPath: Path {
 	private let _components: [String]
 	private let _relativestart: Array<String>.Index?
 
+	/// Creates an absolute path to a directory from (but not including) the root folder through all the 
+	/// directories listed in the array.
+	/// - Parameter components: The names of the directories in the path, in order. Each name must not be empty or contain only a '.', and any '..' must be at the beginning.
 	public init(absolute components: [String]) {
 		self._components = components
 		_relativestart = nil
 	}
 
+	/// Creates a relative path to a directory, from the provided base.
+	/// Each name in the parameter arrays must not be empty or contain only a '.', and any '..' must be at the beginning.
+	/// - Parameter base: The names of the directories in the base, in order.
+	/// - Parameter relative: The names of the directories in the relative part, in order. If empty the path refers to the base directory.
 	public init(base: [String], relative: [String]) {
 		_components = base + relative
 		_relativestart = base.endIndex
 	}
 
+	/// The individual parts of the relative part (if any) of this path.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
+	/// If this exists, then so do baseComponents.
 	public var relativeComponents: [String]? {
 		return _relativestart.map { Array(_components.suffix(from: $0)) }
 	}
 
+	/// The individual parts of the base part (if any) of this path, from (but not including) the root folder.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
+	/// If this exists, then so do relativeComponents.
 	public var baseComponents: [String]? {
 		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
 	}
 
+	/// The individual parts of the absolute version of this path, from (but not including) the root folder.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
 	public var components: [String] {
 		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
 			return fixDotDots(_components)
@@ -58,24 +82,39 @@ public struct FilePath: Path {
 	private let _components: [String]
 	private let _relativestart: Array<String>.Index?
 
+	/// Creates an absolute path to a file from (but not including) the root folder through all the 
+	/// directories listed in the array.
+	/// - Parameter components: The names of the directories in the path, ending with the file name. Each name must not be empty or contain only a '.', and any '..' must be at the beginning. Cannot be empty.
 	public init(absolute components: [String]) {
 		self._components = components
 		_relativestart = nil
 	}
 
+	/// Creates a relative path to a file, from the provided base.
+	/// Each name in the parameter arrays must not be empty or contain only a '.', and any '..' must be at the beginning.
+	/// - Parameter base: The names of the directories in the base, in order.
+	/// - Parameter relative: The names of the directories in the relative part, ending with the file name. Cannot be empty.
 	public init(base: [String], relative: [String]) {
 		_components = base + relative
 		_relativestart = base.endIndex
 	}
 
+	/// The individual parts of the relative part (if any) of this path.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
+	/// If this exists, then so do baseComponents.
 	public var relativeComponents: [String]? {
 		return _relativestart.map { Array(_components.suffix(from: $0)) }
 	}
 
+	/// The individual parts of the base part (if any) of this path, from (but not including) the root folder.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
+	/// If this exists, then so do relativeComponents.
 	public var baseComponents: [String]? {
 		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
 	}
 
+	/// The individual parts of the absolute version of this path, from (but not including) the root folder.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
 	public var components: [String] {
 		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
 			return fixDotDots(_components)
@@ -87,6 +126,8 @@ public struct FilePath: Path {
 
 // MARK: Initialise from String.
 
+/// Removes any pair of [<directory name>, '..'].
+/// - Returns: an array where any '..' are only at the beginning. 
 func fixDotDots(_ components: [String]) -> [String] {
 	guard let firstdotdot = components.index(of: "..") else { return components }
 	var components = components
@@ -102,6 +143,7 @@ func fixDotDots(_ components: [String]) -> [String] {
 	return components
 }
 
+/// Creates an array of path components from a string.
 func parseComponents(_ stringpath: String) -> (components: [String], isRelative: Bool) {
 	func prepareComponents<C: Collection>(_ components: C) -> [String]
 		where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
@@ -120,12 +162,21 @@ func parseComponents(_ stringpath: String) -> (components: [String], isRelative:
 }
 
 extension Path {
+
+	/// Creates a relative path from two strings.
+	///
+	/// - Parameters:
+	///   - base: The path to the directory this path is relative to. If it does not begin with a '/' it will be appended to the current working directory.
+	///   - relative: The relative path. It doesn't matter if this begins with a '/'.
 	public init(base: String, relative: String) {
 		let rel = Self("/"+relative)
 		let base = DirectoryPath(base)
 		self.init(base: base.components, relative: rel.components)
 	}
 
+
+	/// Creates a path from a string. 
+	/// If the string begins with a '/' it is absolute, otherwise it is relative to the current working directory.
 	public init(_ stringpath: String) {
 		let (components, isrelative) = parseComponents(stringpath)
 		if isrelative {
@@ -187,31 +238,39 @@ public func path(detectTypeOf stringpath: String) -> Path? {
 
 extension Path {
 
+	/// The relative or absolute string representation of this path.
 	public var string: String {
 		return relativeString ?? (pathseparator + components.joined(separator: pathseparator))
 	}
 
+	/// The relative or absolute string representation of this path.
 	public var description: String {
 		return string
 	}
 
+	/// The base of this path, if it is relative. Otherwise nil.
 	public var base: DirectoryPath? {
 		return baseComponents.map { DirectoryPath(absolute: $0) }
 	}
 
+	/// The string representation of the relative part of this path, if any.
 	public var relativeString: String? {
 		let result = relativeComponents?.joined(separator: pathseparator)
 		return result?.isEmpty == true ? "." : result
 	}
 
+	/// Checks if this path points to an existing item in the local filesystem.
+	/// - Note: does not check if this past points to the correct type of item (file/directory).
 	public func exists() -> Bool {
 		return FileManager().fileExists(atPath: string)
 	}
 
+	/// The main part of this path (the last component).
 	public var name: String {
 		return components.last ?? "/"
 	}
 
+	/// The extension of the name (as in "file.extension").
 	public var `extension`: String? {
 		guard let lastdot = name.characters.lastIndex(of: "."),
 			lastdot != name.startIndex,
@@ -220,6 +279,7 @@ extension Path {
 		return name.substring(from: name.index(after: lastdot))
 	}
 
+	/// The name without any extension.
 	public var nameWithoutExtension: String {
 		if let lastdot = name.characters.lastIndex(of: "."), lastdot != name.startIndex {
 			return name.substring(to: lastdot)
@@ -228,6 +288,7 @@ extension Path {
 		}
 	}
 
+	/// If relative, turns this into an absolute path.
 	public var absolute: Self {
 		return Self(absolute: components)
 	}
@@ -243,6 +304,7 @@ extension Path {
 		}
 	}
 
+	/// The hash value of the string representation of this path.
 	public var hashValue: Int {
 		return string.hashValue
 	}
@@ -252,6 +314,7 @@ extension Path {
 
 extension DirectoryPath {
 
+	/// The path to the current working directory.
 	public static var current: DirectoryPath {
 		get {
 			return DirectoryPath(FileManager().currentDirectoryPath)
@@ -263,10 +326,12 @@ extension DirectoryPath {
 		}
 	}
 
+	/// The path to the current user's home directory.
 	public static var home: DirectoryPath {
 		return DirectoryPath(NSHomeDirectoryForUser(NSUserName())!)
 	}
 
+	/// The path to the root directory in the local file system.
 	public static var root: DirectoryPath {
 		return DirectoryPath(pathseparator)
 	}
@@ -279,11 +344,13 @@ extension DirectoryPath {
 		}
 	}
 
+	/// Add a file path to the end of this directory path.
 	public func append(file stringpath: String) -> FilePath {
 		let (newcomponents, _) = parseComponents(stringpath)
 		return appendComponents(newcomponents)
 	}
 
+	/// Add a directory path to the end of this directory path.
 	public func append(directory stringpath: String) -> DirectoryPath {
 		let (newcomponents, _) = parseComponents(stringpath)
 		return appendComponents(newcomponents)
@@ -337,10 +404,13 @@ extension DirectoryPath: Equatable, Hashable {
 // MARK: URL
 
 extension Path {
+
+	/// If relative, converts this path to a Foundation.URL.
 	public var relativeURL: URL? {
 		return relativeString.map { URL(fileURLWithPath: $0, isDirectory: self is DirectoryPath) }
 	}
 
+	/// Converts this path to a Foundation.URL.
 	public var url: URL {
 		return URL(fileURLWithPath: absolute.string, isDirectory: self is DirectoryPath)
 	}

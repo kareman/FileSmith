@@ -177,11 +177,11 @@
 		BAD418441DFCB5E700137546 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */,
+				BAD418481DFCB61200137546 /* Paths.swift */,
 				BAD418451DFCB61200137546 /* Directory.swift */,
 				BAD418461DFCB61200137546 /* File.swift */,
 				BAD418471DFCB61200137546 /* General.swift */,
-				BAD418481DFCB61200137546 /* Paths.swift */,
+				BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -189,9 +189,9 @@
 		BAD4185F1DFCB65400137546 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				BAD4185B1DFCB64800137546 /* PathTests.swift */,
 				BAD418591DFCB64800137546 /* DirectoryTests.swift */,
 				BAD4185A1DFCB64800137546 /* FileTests.swift */,
-				BAD4185B1DFCB64800137546 /* PathTests.swift */,
 			);
 			name = Tests;
 			path = Tests/FileSmithTests;
