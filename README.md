@@ -6,7 +6,7 @@ A strongly typed Swift library for working with local files and directories.
 
 Still very much a work in progress and has not been properly tested, so use at your own risk.
 
-And also, some more documentation would be nice.
+[API documentation](https://kareman.github.io/FileSmith/)
 
 ## License
 
