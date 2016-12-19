@@ -37,7 +37,7 @@ class DirectoryTests: XCTestCase {
 		}
 
 		do {
-			try DirectoryPath.current.open().add(directory: "newdir", ifExists: .throwError)
+			try DirectoryPath.current.open().create(directory: "newdir", ifExists: .throwError)
 		} catch {
 			XCTFail(String(describing: error))
 		}
@@ -50,20 +50,20 @@ class DirectoryTests: XCTestCase {
 			XCTAssertTrue(current.path.exists())
 
 			XCTAssertFalse(current.contains("file.txt"))
-			let file = try current.add(file: "file.txt", ifExists: .throwError)
+			let file = try current.create(file: "file.txt", ifExists: .throwError)
 			XCTAssertTrue(current.contains("file.txt"))
 			try current.verifyContains("file.txt")
 			XCTAssertThrowsError(try current.verifyContains("This does not exist.txt"))
-			XCTAssertThrowsError(try current.add(file: "file.txt", ifExists: .throwError))
-			try current.add(file: "file.txt", ifExists: .open)
+			XCTAssertThrowsError(try current.create(file: "file.txt", ifExists: .throwError))
+			try current.create(file: "file.txt", ifExists: .open)
 			XCTAssertTrue(file.path.exists())
 
 			XCTAssertFalse(current.contains("dir"))
-			let dir = try current.add(directory: "dir", ifExists: .throwError)
-			try current.add(directory: "dir", ifExists: .replace)
+			let dir = try current.create(directory: "dir", ifExists: .throwError)
+			try current.create(directory: "dir", ifExists: .replace)
 			XCTAssertTrue(current.contains("dir"))
-			XCTAssertThrowsError(_ = try current.add(directory: "dir", ifExists: .throwError))
-			try current.add(directory: "dir", ifExists: .open)
+			XCTAssertThrowsError(_ = try current.create(directory: "dir", ifExists: .throwError))
+			try current.create(directory: "dir", ifExists: .open)
 			XCTAssertTrue(dir.path.exists())
 
 			let newerdirpath = DirectoryPath("dir/newerdir")
@@ -76,14 +76,14 @@ class DirectoryTests: XCTestCase {
 			let newerdir2 = try newerdirpath.create(ifExists: .open)
 			XCTAssertEqual(newerdir.path, newerdir2.path)
 
-			try current.add(file: "file2.txt", ifExists: .throwError)
-			try current.add(file: "file2.txt", ifExists: .replace)
+			try current.create(file: "file2.txt", ifExists: .throwError)
+			try current.create(file: "file2.txt", ifExists: .replace)
 			XCTAssertEqual(current.files().map {$0.string}, ["file.txt", "file2.txt"])
 			XCTAssertEqual(current.files("file?.*").map {$0.string}, ["file2.txt"])
 			XCTAssertEqual(current.directories().map {$0.string}, ["dir"])
 
 			XCTAssertEqual(current.directories("dir/*").map {$0.string}, ["dir/newerdir"])
-			try current.add(directory: "dir", ifExists: .replace)
+			try current.create(directory: "dir", ifExists: .replace)
 			XCTAssertEqual(current.directories("dir/*"), [])
 
 		} catch {

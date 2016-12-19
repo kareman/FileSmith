@@ -116,13 +116,13 @@ extension Directory {
 	}
 
 	@discardableResult
-	public func add(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> EditableFile {
+	public func create(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> EditableFile {
 		let newpath = self.path + FilePath(stringpath)
 		return try EditableFile(create: newpath, ifExists: ifExists)
 	}
 
 	@discardableResult
-	public func add(directory stringpath: String, ifExists: AlreadyExistsOptions) throws -> Directory {
+	public func create(directory stringpath: String, ifExists: AlreadyExistsOptions) throws -> Directory {
 		let newpath = self.path + DirectoryPath(stringpath)
 		return try Directory(create: newpath, ifExists: ifExists)
 	}
