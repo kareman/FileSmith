@@ -120,10 +120,10 @@ func parseComponents(_ stringpath: String) -> (components: [String], isRelative:
 }
 
 extension Path {
-	public init(_ stringpath: String, relativeTo base: String) {
-		let rel = Self(stringpath)
+	public init(base: String, relative: String) {
+		let rel = Self("/"+relative)
 		let base = DirectoryPath(base)
-		self.init(base: base.components, relative: rel.relativeComponents ?? rel.components)
+		self.init(base: base.components, relative: rel.components)
 	}
 
 	public init(_ stringpath: String) {
