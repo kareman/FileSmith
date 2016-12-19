@@ -262,7 +262,7 @@ extension Path {
 	/// Checks if this path points to an existing item in the local filesystem.
 	/// - Note: does not check if this past points to the correct type of item (file/directory).
 	public func exists() -> Bool {
-		return FileManager().fileExists(atPath: string)
+		return FileManager().fileExists(atPath: absolute.string)
 	}
 
 	/// The main part of this path (the last component).
