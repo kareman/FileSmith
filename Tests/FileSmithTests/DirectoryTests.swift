@@ -83,6 +83,8 @@ class DirectoryTests: XCTestCase {
 			XCTAssertEqual(testdir.files("file?.*").map {$0.string}, ["file2.txt"])
 			XCTAssertEqual(testdir.directories().map {$0.string}, ["dir"])
 
+			XCTAssertEqual(Set(testdir.directories(recursive: true)), Set(["dir", "dir/newerdir"]))
+
 			XCTAssertEqual(testdir.directories("dir/*").map {$0.string}, ["dir/newerdir"])
 			try testdir.create(directory: "dir", ifExists: .replace)
 			XCTAssertEqual(testdir.directories("dir/*"), [])
