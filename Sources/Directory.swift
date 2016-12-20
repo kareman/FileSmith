@@ -90,19 +90,21 @@ extension DirectoryPath {
 
 extension Directory {
 	public func directories(_ pattern: String = "*/") -> [DirectoryPath] {
-		let curdir = DirectoryPath.current
-		DirectoryPath.current = path
-		defer { DirectoryPath.current = curdir }
-
-		return filterFiles(glob: pattern).filter { $0.hasSuffix(pathseparator) }.map(DirectoryPath.init(_:))
+		let pathprefix = path.absolute.string + pathseparator
+		let pathprefixcount = pathprefix.utf8.count
+		return filterFiles(glob: pathprefix + pattern)
+			.filter { $0.hasSuffix(pathseparator) }
+			.map { DirectoryPath(base: path.components,
+			                     relative: parseComponents(String($0.utf8.dropFirst(pathprefixcount))!).components) }
 	}
 
 	public func files(_ pattern: String = "*") -> [FilePath] {
-		let curdir = DirectoryPath.current
-		DirectoryPath.current = path
-		defer { DirectoryPath.current = curdir }
-
-		return filterFiles(glob: pattern).filter { !$0.hasSuffix(pathseparator) }.map(FilePath.init(_:))
+		let pathprefix = path.absolute.string + pathseparator
+		let pathprefixcount = pathprefix.utf8.count
+		return filterFiles(glob: pathprefix + pattern)
+			.filter { !$0.hasSuffix(pathseparator) }
+			.map { FilePath(base: path.components,
+			                relative: parseComponents(String($0.utf8.dropFirst(pathprefixcount))!).components) }
 	}
 
 	public func contains(_ stringpath: String) -> Bool {

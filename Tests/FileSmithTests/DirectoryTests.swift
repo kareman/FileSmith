@@ -12,7 +12,7 @@ import Foundation
 
 class DirectoryTests: XCTestCase {
 
-	func testSubDirectoryPaths() {
+	func testSubDirectories() {
 		do {
 			let dir = try Directory(open: "/")
 			let subdirs = dir.directories()
@@ -48,43 +48,44 @@ class DirectoryTests: XCTestCase {
 			DirectoryPath.current = DirectoryPath(createTempdirectory())
 			let current = try DirectoryPath.current.open()
 			XCTAssertTrue(current.path.exists())
+			let testdir = try current.create(directory: "testdir", ifExists: .throwError)
 
-			XCTAssertFalse(current.contains("file.txt"))
-			let file = try current.create(file: "file.txt", ifExists: .throwError)
-			XCTAssertTrue(current.contains("file.txt"))
-			try current.verifyContains("file.txt")
-			XCTAssertThrowsError(try current.verifyContains("This does not exist.txt"))
-			XCTAssertThrowsError(try current.create(file: "file.txt", ifExists: .throwError))
-			try current.create(file: "file.txt", ifExists: .open)
+			XCTAssertFalse(testdir.contains("file.txt"))
+			let file = try testdir.create(file: "file.txt", ifExists: .throwError)
+			XCTAssertTrue(testdir.contains("file.txt"))
+			try testdir.verifyContains("file.txt")
+			XCTAssertThrowsError(try testdir.verifyContains("This does not exist.txt"))
+			XCTAssertThrowsError(try testdir.create(file: "file.txt", ifExists: .throwError))
+			try testdir.create(file: "file.txt", ifExists: .open)
 			XCTAssertTrue(file.path.exists())
 
-			XCTAssertFalse(current.contains("dir"))
-			let dir = try current.create(directory: "dir", ifExists: .throwError)
-			try current.create(directory: "dir", ifExists: .replace)
-			XCTAssertTrue(current.contains("dir"))
-			XCTAssertThrowsError(_ = try current.create(directory: "dir", ifExists: .throwError))
-			try current.create(directory: "dir", ifExists: .open)
+			XCTAssertFalse(testdir.contains("dir"))
+			let dir = try testdir.create(directory: "dir", ifExists: .throwError)
+			try testdir.create(directory: "dir", ifExists: .replace)
+			XCTAssertTrue(testdir.contains("dir"))
+			XCTAssertThrowsError(_ = try testdir.create(directory: "dir", ifExists: .throwError))
+			try testdir.create(directory: "dir", ifExists: .open)
 			XCTAssertTrue(dir.path.exists())
 
-			let newerdirpath = DirectoryPath("dir/newerdir")
+			let newerdirpath = DirectoryPath("testdir/dir/newerdir")
 			XCTAssertFalse(newerdirpath.exists())
-			XCTAssertFalse(current.contains("dir/newerdir"))
+			XCTAssertFalse(testdir.contains("dir/newerdir"))
 			XCTAssertFalse(dir.contains("newerdir"))
 			let newerdir = try newerdirpath.create(ifExists: .throwError)
-			XCTAssertTrue(current.contains("dir/newerdir"))
+			XCTAssertTrue(testdir.contains("dir/newerdir"))
 			XCTAssertTrue(dir.contains("newerdir"))
 			let newerdir2 = try newerdirpath.create(ifExists: .open)
 			XCTAssertEqual(newerdir.path, newerdir2.path)
 
-			try current.create(file: "file2.txt", ifExists: .throwError)
-			try current.create(file: "file2.txt", ifExists: .replace)
-			XCTAssertEqual(current.files().map {$0.string}, ["file.txt", "file2.txt"])
-			XCTAssertEqual(current.files("file?.*").map {$0.string}, ["file2.txt"])
-			XCTAssertEqual(current.directories().map {$0.string}, ["dir"])
+			try testdir.create(file: "file2.txt", ifExists: .throwError)
+			try testdir.create(file: "file2.txt", ifExists: .replace)
+			XCTAssertEqual(testdir.files().map {$0.string}, ["file.txt", "file2.txt"])
+			XCTAssertEqual(testdir.files("file?.*").map {$0.string}, ["file2.txt"])
+			XCTAssertEqual(testdir.directories().map {$0.string}, ["dir"])
 
-			XCTAssertEqual(current.directories("dir/*").map {$0.string}, ["dir/newerdir"])
-			try current.create(directory: "dir", ifExists: .replace)
-			XCTAssertEqual(current.directories("dir/*"), [])
+			XCTAssertEqual(testdir.directories("dir/*").map {$0.string}, ["dir/newerdir"])
+			try testdir.create(directory: "dir", ifExists: .replace)
+			XCTAssertEqual(testdir.directories("dir/*"), [])
 
 		} catch {
 			XCTFail(String(describing: error))
@@ -107,7 +108,7 @@ private func createTempdirectory () -> String {
 
 extension DirectoryTests {
 	public static var allTests = [
-		("testSubDirectoryPaths", testSubDirectoryPaths),
+		("testSubDirectories", testSubDirectories),
 		("testSandboxMode", testSandboxMode),
 		("testDirectory", testDirectory),
 		]
