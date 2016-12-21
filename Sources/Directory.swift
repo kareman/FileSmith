@@ -91,7 +91,7 @@ extension DirectoryPath {
 extension Directory {
 	public func directories(_ pattern: String = "*/") -> [DirectoryPath] {
 		let pathprefix = path.absolute.string + pathseparator
-		let pathprefixcount = pathprefix.utf8.count
+		let pathprefixcount = pathprefix.utf8.count - 1
 		return filterFiles(glob: pathprefix + pattern)
 			.filter { $0.hasSuffix(pathseparator) }
 			.map { DirectoryPath(base: path.components,
@@ -100,7 +100,7 @@ extension Directory {
 
 	public func files(_ pattern: String = "*") -> [FilePath] {
 		let pathprefix = path.absolute.string + pathseparator
-		let pathprefixcount = pathprefix.utf8.count
+		let pathprefixcount = pathprefix.utf8.count - 1
 		return filterFiles(glob: pathprefix + pattern)
 			.filter { !$0.hasSuffix(pathseparator) }
 			.map { FilePath(base: path.components,

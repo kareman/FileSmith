@@ -41,6 +41,9 @@ import Foundation
 #endif
 
 func filterFiles(glob pattern: String) -> [String] {
+	#if !os(Linux)
+		let pattern = pattern.hasPrefix("//") ? String(pattern.characters.dropFirst()) : pattern
+	#endif
 	var globresult = glob_t()
 	let cpattern = strdup(pattern)
 	defer {
