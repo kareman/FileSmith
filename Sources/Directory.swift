@@ -98,6 +98,12 @@ extension Directory {
 			                     relative: parseComponents(String($0.utf8.dropFirst(pathprefixcount))!).components) }
 	}
 
+	public func directories(_ pattern: String = "*/", recursive: Bool) -> [DirectoryPath] {
+		guard recursive else { return directories(pattern) }
+		return (subdirectoriesRecursively(at: path.absolute.string) + [""])
+			.flatMap { directories($0 + pathseparator + pattern) }
+	}
+
 	public func files(_ pattern: String = "*") -> [FilePath] {
 		let pathprefix = path.absolute.string + pathseparator
 		let pathprefixcount = pathprefix.utf8.count - 1
