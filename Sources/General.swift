@@ -67,19 +67,12 @@ func filterFiles(glob pattern: String) -> [String] {
 
 func subdirectoriesRecursively(at stringpath: String) -> [String] {
 	let stringpathlength = stringpath.characters.count + 1
-	let resourceKeys = [URLResourceKey.isDirectoryKey, .pathKey]
-	let directoryEnumerator = FileManager().enumerator(at: URL(fileURLWithPath: stringpath), includingPropertiesForKeys: resourceKeys)!
+	let directoryEnumerator = FileManager().enumerator(at: URL(fileURLWithPath: stringpath), includingPropertiesForKeys: [])!
 
-	var dirpaths = [String]()
-	for case let fileURL as NSURL in directoryEnumerator {
-		if let resourceValues = try? fileURL.resourceValues(forKeys: resourceKeys),
-			resourceValues[.isDirectoryKey] as? Bool == true,
-			let fullpath = resourceValues[.pathKey] as? String {
-
-			dirpaths.append(String(fullpath.characters.dropFirst(stringpathlength)))
-		}
+	return directoryEnumerator.flatMap {
+		let fileURL = $0 as! URL
+		return fileURL.hasDirectoryPath ? String(fileURL.path.characters.dropFirst(stringpathlength)) : nil
 	}
-	return dirpaths
 }
 
 extension FileHandle {
