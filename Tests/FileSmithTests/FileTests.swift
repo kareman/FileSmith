@@ -1,9 +1,8 @@
 //
 //  FileTests.swift
-//  SwiftyPath
+//  FileSmith
 //
 //  Created by Kåre Morstøl on 08/12/2016.
-//
 //
 
 import XCTest

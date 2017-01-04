@@ -1,12 +1,10 @@
-/*
-* Released under the MIT License (MIT), http://opensource.org/licenses/MIT
-*
-* Copyright (c) 2015 Kåre Morstøl, NotTooBad Software (nottoobadsoftware.com)
-*
-*/
+//
+// Released under the MIT License (MIT), http://opensource.org/licenses/MIT
+//
+// Copyright (c) 2015 Kåre Morstøl, NotTooBad Software (nottoobadsoftware.com)
+//
 
 extension Collection where Iterator.Element: Equatable {
-
 
 	/// Returns everything before the first occurrence of ‘separator’ as 'head', and everything after it as 'tail'.
 	/// Including empty sequences if ‘separator’ is first or last.

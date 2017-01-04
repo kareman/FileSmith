@@ -1,3 +1,9 @@
+//
+//  Paths.swift
+//  FileSmith
+//
+//  Created by Kåre Morstøl on 29/11/2016.
+//
 
 import Foundation
 

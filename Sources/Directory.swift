@@ -1,9 +1,8 @@
 //
 //  Directory.swift
-//  SwiftyPath
+//  FileSmith
 //
 //  Created by Kåre Morstøl on 29/11/2016.
-//
 //
 
 import Foundation
@@ -134,14 +133,4 @@ extension Directory {
 		let newpath = self.path + DirectoryPath(stringpath)
 		return try Directory(create: newpath, ifExists: ifExists)
 	}
-}
-
-public enum FileSystemError: Error {
-	case alreadyExists(path: String)
-	case notFound(path: String, base: String?)
-	case isDirectory(path: String)
-	case notDirectory(path: String)
-	case invalidAccess(path: String, writing: Bool)
-	case couldNotCreate(path: String)
-	case outsideSandbox(path: String)
 }

@@ -1,9 +1,8 @@
 //
 //  General.swift
-//  SwiftyPath
+//  FileSmith
 //
 //  Created by Kåre Morstøl on 03/12/2016.
-//
 //
 
 extension BidirectionalCollection where Iterator.Element: Equatable {
