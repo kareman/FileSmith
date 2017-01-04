@@ -112,6 +112,12 @@ extension Directory {
 			                relative: parseComponents(String($0.utf8.dropFirst(pathprefixcount))!).components) }
 	}
 
+	public func files(_ pattern: String = "*/", recursive: Bool) -> [FilePath] {
+		guard recursive else { return files(pattern) }
+		return (subdirectoriesRecursively(at: path.absolute.string) + [""])
+			.flatMap { files($0 + pathseparator + pattern) }
+	}
+
 	public func contains(_ stringpath: String) -> Bool {
 		return FileManager().fileExists(atPath: path.string + pathseparator + stringpath)
 	}
