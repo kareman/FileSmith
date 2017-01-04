@@ -16,3 +16,36 @@ public enum FileSystemError: Error {
 	case couldNotCreate(path: Path)
 	case outsideSandbox(path: Path)
 }
+
+extension Path {
+	fileprivate var locationDescription: String {
+		return string + (base.map {" in " + $0.string} ?? "")
+	}
+
+	fileprivate var typeDescription: String {
+		return self is DirectoryPath ? "Directory " : "File "
+	}
+}
+
+extension FileSystemError: CustomStringConvertible {
+	public var description: String {
+		switch self {
+		case .alreadyExists(path: let path):
+			return path.locationDescription + " already exists."
+		case .notFound(path: let path):
+			return path.typeDescription + path.locationDescription + " does not exist."
+		case .notFoundOfUnknownType(let unknownpath):
+			return unknownpath.stringpath + (unknownpath.base.map {" in " + $0.string} ?? "")
+		case .isDirectory(path: let path):
+			return path.locationDescription + " is a directory. Expected a file."
+		case .notDirectory(path: let path):
+			return path.locationDescription + " is not a directory."
+		case .invalidAccess(path: let path, writing: let writing):
+			return "Could not access \(path.locationDescription)" + (writing ? " for writing." : ".")
+		case .couldNotCreate(path: let path):
+			return "Could not create \(path.typeDescription)in \(path.locationDescription)."
+		case .outsideSandbox(path: let path):
+			return FilePath(absolute: path.components).locationDescription + " is not in the current working directory \(DirectoryPath.current.string). Set Directory.sandbox to 'false' if you want to change the file system outside of the current working directory."
+		}
+	}
+}
