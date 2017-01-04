@@ -124,13 +124,13 @@ extension Directory {
 
 	@discardableResult
 	public func create(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> EditableFile {
-		let newpath = self.path + FilePath(stringpath)
+		let newpath = self.path.append(file: stringpath)
 		return try EditableFile(create: newpath, ifExists: ifExists)
 	}
 
 	@discardableResult
 	public func create(directory stringpath: String, ifExists: AlreadyExistsOptions) throws -> Directory {
-		let newpath = self.path + DirectoryPath(stringpath)
+		let newpath = self.path.append(directory: stringpath)
 		return try Directory(create: newpath, ifExists: ifExists)
 	}
 }
