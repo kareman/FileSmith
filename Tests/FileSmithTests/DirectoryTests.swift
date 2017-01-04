@@ -78,11 +78,13 @@ class DirectoryTests: XCTestCase {
 
 			try testdir.create(file: "file2.txt", ifExists: .throwError)
 			try testdir.create(file: "file2.txt", ifExists: .replace)
+			try testdir.create(file: "dir/file.txt", ifExists: .throwError)
 			XCTAssertEqual(testdir.files().map {$0.string}, ["file.txt", "file2.txt"])
 			XCTAssertEqual(testdir.files("file?.*").map {$0.string}, ["file2.txt"])
 			XCTAssertEqual(testdir.directories().map {$0.string}, ["dir"])
 
 			XCTAssertEqual(Set(testdir.directories(recursive: true)), Set(["dir", "dir/newerdir"]))
+			XCTAssertEqual(Set(testdir.files(recursive: true)), Set(["file.txt", "file2.txt", "dir/file.txt"]))
 
 			XCTAssertEqual(testdir.directories("dir/*").map {$0.string}, ["dir/newerdir"])
 			try testdir.create(directory: "dir", ifExists: .replace)
