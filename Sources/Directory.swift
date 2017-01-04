@@ -16,7 +16,7 @@ extension Path {
 		if !Directory.sandbox { return }
 		if DirectoryPath.current.isAParentOf(self) { return }
 		if let s = symbolicLinkTo, DirectoryPath.current.isAParentOf(s) { return }
-		throw FileSystemError.outsideSandbox(path: self.string)
+		throw FileSystemError.outsideSandbox(path: self)
 	}
 
 	internal var symbolicLinkTo: Self? {
@@ -40,13 +40,13 @@ public class Directory {
 
 		var isdirectory: ObjCBool = false
 		guard FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
-			throw FileSystemError.notFound(path: stringpath, base: nil)
+			throw FileSystemError.notFound(path: path)
 		}
 		guard isdirectory.boolValue else {
-			throw FileSystemError.notDirectory(path: stringpath)
+			throw FileSystemError.notDirectory(path: FilePath(stringpath))
 		}
 		guard FileManager().isReadableFile(atPath: stringpath) else {
-			throw FileSystemError.invalidAccess(path: stringpath, writing: false)
+			throw FileSystemError.invalidAccess(path: path, writing: false)
 		}
 	}
 
@@ -61,10 +61,10 @@ public class Directory {
 		var isdirectory: ObjCBool = false
 		if FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) {
 			guard isdirectory.boolValue else {
-				throw FileSystemError.notDirectory(path: stringpath)
+				throw FileSystemError.notDirectory(path: FilePath(stringpath))
 			}
 			switch ifExists {
-			case .throwError:	throw FileSystemError.alreadyExists(path: stringpath)
+			case .throwError:	throw FileSystemError.alreadyExists(path: path)
 			case .open: return
 			case .replace:
 				try self.path.verifyIsInSandbox()
@@ -118,7 +118,7 @@ extension Directory {
 
 	public func verifyContains(_ stringpath: String) throws {
 		guard self.contains(stringpath) else {
-			throw FileSystemError.notFound(path: stringpath, base: path.string)
+			throw FileSystemError.notFoundOfUnknownType(stringpath: stringpath, base: path)
 		}
 	}
 

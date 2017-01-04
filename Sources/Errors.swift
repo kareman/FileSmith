@@ -7,11 +7,12 @@
 //
 
 public enum FileSystemError: Error {
-	case alreadyExists(path: String)
-	case notFound(path: String, base: String?)
-	case isDirectory(path: String)
-	case notDirectory(path: String)
-	case invalidAccess(path: String, writing: Bool)
-	case couldNotCreate(path: String)
-	case outsideSandbox(path: String)
+	case alreadyExists(path: Path)
+	case notFound(path: Path)
+	case notFoundOfUnknownType(stringpath: String, base: DirectoryPath?)
+	case isDirectory(path: DirectoryPath)
+	case notDirectory(path: FilePath)
+	case invalidAccess(path: Path, writing: Bool)
+	case couldNotCreate(path: Path)
+	case outsideSandbox(path: Path)
 }

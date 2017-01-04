@@ -31,12 +31,12 @@ public class File: TextOutputStreamable {
 	fileprivate static func errorForFile(at stringpath: String, writing: Bool) throws {
 		var isdirectory: ObjCBool = true
 		guard FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
-			throw FileSystemError.notFound(path: stringpath, base: nil)
+			throw FileSystemError.notFound(path: FilePath(stringpath))
 		}
 		guard !isdirectory.boolValue else {
-			throw FileSystemError.isDirectory(path: stringpath)
+			throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
 		}
-		throw FileSystemError.invalidAccess(path: stringpath, writing: writing)
+		throw FileSystemError.invalidAccess(path: FilePath(stringpath), writing: writing)
 	}
 
 	public convenience init(open path: FilePath) throws {
@@ -57,10 +57,10 @@ public class File: TextOutputStreamable {
 		var isdirectory: ObjCBool = true
 		if FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) {
 			guard !isdirectory.boolValue else {
-				throw FileSystemError.isDirectory(path: stringpath)
+				throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
 			}
 			switch ifExists {
-			case .throwError:	throw FileSystemError.alreadyExists(path: stringpath)
+			case .throwError:	throw FileSystemError.alreadyExists(path: path)
 			case .open: return
 			case .replace: break
 			}
@@ -70,7 +70,7 @@ public class File: TextOutputStreamable {
 		}
 		try path.verifyIsInSandbox()
 		guard FileManager().createFile(atPath: stringpath, contents: Data(), attributes: nil) else {
-			throw FileSystemError.couldNotCreate(path: stringpath)
+			throw FileSystemError.couldNotCreate(path: FilePath(stringpath))
 		}
 	}
 
