@@ -65,13 +65,15 @@ func filterFiles(glob pattern: String) -> [String] {
 	return []
 }
 
-func subdirectoriesRecursively(at stringpath: String) -> [String] {
-	let stringpathlength = stringpath.characters.count + 1
-	let directoryEnumerator = FileManager().enumerator(at: URL(fileURLWithPath: stringpath), includingPropertiesForKeys: [])!
+func subdirectoriesRecursively(at dirpath: String) -> [String] {
+	let stringpathlength = dirpath.characters.count + 1
+	let directoryEnumerator = FileManager().enumerator(at: URL(fileURLWithPath: dirpath), includingPropertiesForKeys: [])!
 
 	return directoryEnumerator.flatMap {
-		let fileURL = $0 as! URL
-		return fileURL.hasDirectoryPath ? String(fileURL.path.characters.dropFirst(stringpathlength)) : nil
+		// URL.path drops the / at the end. And absoluteString begins with "file://".
+		let filepath = ($0 as! URL).absoluteString.characters
+		guard filepath.last == Character(pathseparator) else { return nil }
+		return String(filepath.dropFirst(stringpathlength+7))
 	}
 }
 
