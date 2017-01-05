@@ -15,7 +15,7 @@ public class File: TextOutputStreamable {
 	lazy var attributes: [FileAttributeKey : Any] = {
 		var attributes = try! FileManager().attributesOfItem(atPath: self.path.absolute.string)
 		if attributes[.type] as! FileAttributeType == .typeSymbolicLink {
-			let realpath  = try! FileManager().destinationOfSymbolicLink(atPath: self.path.absolute.string)
+			let realpath = try! FileManager().destinationOfSymbolicLink(atPath: self.path.absolute.string)
 			attributes = try! FileManager().attributesOfItem(atPath: realpath)
 		}
 		return attributes
@@ -29,11 +29,10 @@ public class File: TextOutputStreamable {
 	}
 
 	fileprivate static func errorForFile(at stringpath: String, writing: Bool) throws {
-		var isdirectory: ObjCBool = true
-		guard FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
+		guard let type = FileType(path: stringpath) else {
 			throw FileSystemError.notFound(path: FilePath(stringpath))
 		}
-		guard !isdirectory.boolValue else {
+		if case .directory = type {
 			throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
 		}
 		throw FileSystemError.invalidAccess(path: FilePath(stringpath), writing: writing)

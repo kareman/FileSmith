@@ -25,6 +25,10 @@
 		BA877D1E1DFCC21200595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
 		BA877D1F1DFCC21300595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
 		BA877D201DFCC21400595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
+		BACC7F8F1E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
+		BACC7F901E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
+		BACC7F911E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
+		BACC7F921E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
 		BAD418491DFCB61200137546 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418451DFCB61200137546 /* Directory.swift */; };
 		BAD4184A1DFCB61200137546 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418461DFCB61200137546 /* File.swift */; };
 		BAD4184B1DFCB61200137546 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418471DFCB61200137546 /* General.swift */; };
@@ -79,6 +83,7 @@
 		AD2FAA281CD0B6E100659CF4 /* FileSmithTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = FileSmithTests.plist; path = FileSmith.xcodeproj/FileSmithTests.plist; sourceTree = SOURCE_ROOT; };
 		BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Lazy-split.swift"; path = "Sources/Lazy-split.swift"; sourceTree = "<group>"; };
 		BA8527CF1E1D6AC500D89498 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Sources/Errors.swift; sourceTree = "<group>"; };
+		BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Attributes.swift; path = Sources/Attributes.swift; sourceTree = "<group>"; };
 		BAD418451DFCB61200137546 /* Directory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Directory.swift; path = Sources/Directory.swift; sourceTree = "<group>"; };
 		BAD418461DFCB61200137546 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = Sources/File.swift; sourceTree = "<group>"; };
 		BAD418471DFCB61200137546 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = General.swift; path = Sources/General.swift; sourceTree = "<group>"; };
@@ -188,6 +193,7 @@
 				BAD418471DFCB61200137546 /* General.swift */,
 				BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */,
 				BA8527CF1E1D6AC500D89498 /* Errors.swift */,
+				BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -505,6 +511,7 @@
 				BAD4184C1DFCB61200137546 /* Paths.swift in Sources */,
 				BA8527D01E1D6AC500D89498 /* Errors.swift in Sources */,
 				BAD4184A1DFCB61200137546 /* File.swift in Sources */,
+				BACC7F8F1E1ED7B700F754C0 /* Attributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +535,7 @@
 				BAD418541DFCB61F00137546 /* Paths.swift in Sources */,
 				BA8527D21E1D6AC500D89498 /* Errors.swift in Sources */,
 				BAD418521DFCB61F00137546 /* File.swift in Sources */,
+				BACC7F911E1ED7B700F754C0 /* Attributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +549,7 @@
 				BAD418581DFCB62100137546 /* Paths.swift in Sources */,
 				BA8527D31E1D6AC500D89498 /* Errors.swift in Sources */,
 				BAD418561DFCB62100137546 /* File.swift in Sources */,
+				BACC7F921E1ED7B700F754C0 /* Attributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,6 +563,7 @@
 				BAD418501DFCB61F00137546 /* Paths.swift in Sources */,
 				BA8527D11E1D6AC500D89498 /* Errors.swift in Sources */,
 				BAD4184E1DFCB61F00137546 /* File.swift in Sources */,
+				BACC7F901E1ED7B700F754C0 /* Attributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
