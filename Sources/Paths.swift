@@ -36,17 +36,62 @@ public protocol Path: CustomStringConvertible {
 
 // MARK: Structs.
 
-/// The path to either a directory or the symbolic link to a directory.
-public struct DirectoryPath: Path {
+/// The path to a file system item of unknown type.
+public struct AnyPath: Path {
 	private let _components: [String]
 	private let _relativestart: Array<String>.Index?
+
+	/// Creates an absolute path to an item from (but not including) the root folder through all the
+	/// directories listed in the array.
+	/// - Parameter components: The names of the directories in the path, ending with the item name. Each name must not be empty or contain only a '.', and any '..' must be at the beginning. Cannot be empty.
+	public init(absolute components: [String]) {
+		self._components = components
+		_relativestart = nil
+	}
+
+	/// Creates a relative path to an item, from the provided base.
+	/// Each name in the parameter arrays must not be empty or contain only a '.', and any '..' must be at the beginning.
+	/// - Parameter base: The names of the directories in the base, in order.
+	/// - Parameter relative: The names of the directories in the relative part, ending with the item name. Cannot be empty.
+	public init(base: [String], relative: [String]) {
+		_components = base + relative
+		_relativestart = base.endIndex
+	}
+
+	/// The individual parts of the relative part (if any) of this path.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
+	/// If this exists, then so do baseComponents.
+	public var relativeComponents: [String]? {
+		return _relativestart.map { Array(_components.suffix(from: $0)) }
+	}
+
+	/// The individual parts of the base part (if any) of this path, from (but not including) the root folder.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
+	/// If this exists, then so do relativeComponents.
+	public var baseComponents: [String]? {
+		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
+	}
+
+	/// The individual parts of the absolute version of this path, from (but not including) the root folder.
+	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
+	public var components: [String] {
+		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
+			return fixDotDots(_components)
+		} else {
+			return _components
+		}
+	}
+}
+
+/// The path to either a directory or the symbolic link to a directory.
+public struct DirectoryPath: Path {
+	private let _path: AnyPath
 
 	/// Creates an absolute path to a directory from (but not including) the root folder through all the 
 	/// directories listed in the array.
 	/// - Parameter components: The names of the directories in the path, in order. Each name must not be empty or contain only a '.', and any '..' must be at the beginning.
 	public init(absolute components: [String]) {
-		self._components = components
-		_relativestart = nil
+		_path = AnyPath(absolute: components)
 	}
 
 	/// Creates a relative path to a directory, from the provided base.
@@ -54,46 +99,39 @@ public struct DirectoryPath: Path {
 	/// - Parameter base: The names of the directories in the base, in order.
 	/// - Parameter relative: The names of the directories in the relative part, in order. If empty the path refers to the base directory.
 	public init(base: [String], relative: [String]) {
-		_components = base + relative
-		_relativestart = base.endIndex
+		_path = AnyPath(base: base, relative: relative)
 	}
 
 	/// The individual parts of the relative part (if any) of this path.
 	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
 	/// If this exists, then so do baseComponents.
 	public var relativeComponents: [String]? {
-		return _relativestart.map { Array(_components.suffix(from: $0)) }
+		return _path.relativeComponents
 	}
 
 	/// The individual parts of the base part (if any) of this path, from (but not including) the root folder.
 	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
 	/// If this exists, then so do relativeComponents.
 	public var baseComponents: [String]? {
-		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
+		return _path.baseComponents
 	}
 
 	/// The individual parts of the absolute version of this path, from (but not including) the root folder.
 	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
 	public var components: [String] {
-		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
-			return fixDotDots(_components)
-		} else {
-			return _components
-		}
+		return _path.components
 	}
 }
 
 /// The path to a file system item which is not a directory or the symbolic link to a directory.
 public struct FilePath: Path {
-	private let _components: [String]
-	private let _relativestart: Array<String>.Index?
+	private let _path: AnyPath
 
 	/// Creates an absolute path to a file from (but not including) the root folder through all the 
 	/// directories listed in the array.
 	/// - Parameter components: The names of the directories in the path, ending with the file name. Each name must not be empty or contain only a '.', and any '..' must be at the beginning. Cannot be empty.
 	public init(absolute components: [String]) {
-		self._components = components
-		_relativestart = nil
+		_path = AnyPath(absolute: components)
 	}
 
 	/// Creates a relative path to a file, from the provided base.
@@ -101,34 +139,30 @@ public struct FilePath: Path {
 	/// - Parameter base: The names of the directories in the base, in order.
 	/// - Parameter relative: The names of the directories in the relative part, ending with the file name. Cannot be empty.
 	public init(base: [String], relative: [String]) {
-		_components = base + relative
-		_relativestart = base.endIndex
+		_path = AnyPath(base: base, relative: relative)
 	}
 
 	/// The individual parts of the relative part (if any) of this path.
 	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
 	/// If this exists, then so do baseComponents.
 	public var relativeComponents: [String]? {
-		return _relativestart.map { Array(_components.suffix(from: $0)) }
+		return _path.relativeComponents
 	}
 
 	/// The individual parts of the base part (if any) of this path, from (but not including) the root folder.
 	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
 	/// If this exists, then so do relativeComponents.
 	public var baseComponents: [String]? {
-		return _relativestart.map { Array(_components.prefix(upTo: $0)) }
+		return _path.baseComponents
 	}
 
 	/// The individual parts of the absolute version of this path, from (but not including) the root folder.
 	/// Any '..' not at the beginning have been resolved, and there are no empty parts or only '.'.
 	public var components: [String] {
-		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
-			return fixDotDots(_components)
-		} else {
-			return _components
-		}
+		return _path.components
 	}
 }
+
 
 // MARK: Initialise from String.
 

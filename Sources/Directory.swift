@@ -124,7 +124,7 @@ extension Directory {
 
 	public func verifyContains(_ stringpath: String) throws {
 		guard self.contains(stringpath) else {
-			throw FileSystemError.notFoundOfUnknownType(stringpath: stringpath, base: path)
+			throw FileSystemError.notFound(path: AnyPath(base: path.absolute.string, relative: stringpath))
 		}
 	}
 

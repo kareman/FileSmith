@@ -9,7 +9,6 @@
 public enum FileSystemError: Error {
 	case alreadyExists(path: Path)
 	case notFound(path: Path)
-	case notFoundOfUnknownType(stringpath: String, base: DirectoryPath?)
 	case isDirectory(path: DirectoryPath)
 	case notDirectory(path: FilePath)
 	case invalidAccess(path: Path, writing: Bool)
@@ -23,7 +22,11 @@ extension Path {
 	}
 
 	fileprivate var typeDescription: String {
-		return self is DirectoryPath ? "Directory " : "File "
+		switch self {
+		case is DirectoryPath: return "Directory "
+		case is FilePath:      return "File "
+		default:               return ""
+		}
 	}
 }
 
@@ -34,8 +37,6 @@ extension FileSystemError: CustomStringConvertible {
 			return path.locationDescription + " already exists."
 		case .notFound(path: let path):
 			return path.typeDescription + path.locationDescription + " does not exist."
-		case .notFoundOfUnknownType(let unknownpath):
-			return unknownpath.stringpath + (unknownpath.base.map {" in " + $0.string} ?? "")
 		case .isDirectory(path: let path):
 			return path.locationDescription + " is a directory. Expected a file."
 		case .notDirectory(path: let path):
