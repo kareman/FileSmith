@@ -13,9 +13,9 @@ public class File: TextOutputStreamable {
 	let filehandle: FileHandle
 
 	lazy var attributes: [FileAttributeKey : Any] = {
-		var attributes = try! FileManager().attributesOfItem(atPath: self.path.absolute.string)
+		var attributes = try! FileManager().attributesOfItem(atPath: self.path.absoluteString)
 		if attributes[.type] as! FileAttributeType == .typeSymbolicLink {
-			let realpath = try! FileManager().destinationOfSymbolicLink(atPath: self.path.absolute.string)
+			let realpath = try! FileManager().destinationOfSymbolicLink(atPath: self.path.absoluteString)
 			attributes = try! FileManager().attributesOfItem(atPath: realpath)
 		}
 		return attributes
@@ -39,9 +39,9 @@ public class File: TextOutputStreamable {
 	}
 
 	public convenience init(open path: FilePath) throws {
-		guard let filehandle = FileHandle(forReadingAtPath: path.absolute.string) else {
-			try File.errorForFile(at: path.absolute.string, writing: false)
-			fatalError("Should have thrown error when opening \(path.absolute.string)")
+		guard let filehandle = FileHandle(forReadingAtPath: path.absoluteString) else {
+			try File.errorForFile(at: path.absoluteString, writing: false)
+			fatalError("Should have thrown error when opening \(path.absoluteString)")
 		}
 		self.init(path: path, filehandle: filehandle)
 	}
@@ -51,7 +51,7 @@ public class File: TextOutputStreamable {
 	}
 
 	fileprivate static func createFile(path: FilePath, ifExists: AlreadyExistsOptions) throws {
-		let stringpath = path.absolute.string
+		let stringpath = path.absoluteString
 
 		var isdirectory: ObjCBool = true
 		if FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) {
@@ -116,9 +116,9 @@ public class EditableFile: File {
 
 	public init(edit path: FilePath) throws {
 		try path.verifyIsInSandbox()
-		guard let filehandle = FileHandle(forUpdatingAtPath: path.absolute.string) else {
-			try File.errorForFile(at: path.absolute.string, writing: true)
-			fatalError("Should have thrown error when opening \(path.absolute.string)")
+		guard let filehandle = FileHandle(forUpdatingAtPath: path.absoluteString) else {
+			try File.errorForFile(at: path.absoluteString, writing: true)
+			fatalError("Should have thrown error when opening \(path.absoluteString)")
 		}
 		super.init(path: path, filehandle: filehandle)
 	}

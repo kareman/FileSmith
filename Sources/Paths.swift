@@ -280,7 +280,7 @@ extension Path {
 
 	/// The relative or absolute string representation of this path.
 	public var string: String {
-		return relativeString ?? (pathseparator + components.joined(separator: pathseparator))
+		return relativeString ?? absoluteString
 	}
 
 	/// The relative or absolute string representation of this path.
@@ -299,10 +299,15 @@ extension Path {
 		return result?.isEmpty == true ? "." : result
 	}
 
+	/// The string representation of the absolute version of this path.
+	public var absoluteString: String {
+		return pathseparator + components.joined(separator: pathseparator)
+	}
+
 	/// Checks if this path points to an existing item in the local filesystem.
 	/// - Note: Does not check if this path points to the correct type of item (file or directory).
 	public func exists() -> Bool {
-		return FileManager().fileExists(atPath: absolute.string)
+		return FileManager().fileExists(atPath: absoluteString)
 	}
 
 	/// The main part of this path (the last component).
@@ -360,8 +365,8 @@ extension DirectoryPath {
 			return DirectoryPath(FileManager().currentDirectoryPath)
 		}
 		set {
-			guard FileManager().changeCurrentDirectoryPath(newValue.absolute.string) else {
-				fatalError("Could not change current directory to \(newValue.absolute.string)")
+			guard FileManager().changeCurrentDirectoryPath(newValue.absoluteString) else {
+				fatalError("Could not change current directory to \(newValue.absoluteString)")
 			}
 		}
 	}
@@ -452,7 +457,7 @@ extension Path {
 
 	/// Converts this path to a Foundation.URL.
 	public var url: URL {
-		return URL(fileURLWithPath: absolute.string, isDirectory: self is DirectoryPath)
+		return URL(fileURLWithPath: absoluteString, isDirectory: self is DirectoryPath)
 	}
 }
 

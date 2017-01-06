@@ -20,7 +20,7 @@ extension Path {
 	}
 
 	internal var symbolicLinkTo: Self? {
-		return (try? FileManager().destinationOfSymbolicLink(atPath: absolute.string)).map { Self.init("/"+$0) }
+		return (try? FileManager().destinationOfSymbolicLink(atPath: absoluteString)).map { Self.init("/"+$0) }
 	}
 
 }
@@ -89,7 +89,7 @@ extension DirectoryPath {
 
 extension Directory {
 	public func directories(_ pattern: String = "*/") -> [DirectoryPath] {
-		let pathprefix = path.absolute.string + pathseparator
+		let pathprefix = path.absoluteString + pathseparator
 		let pathprefixcount = pathprefix.utf8.count - 1
 		return filterFiles(glob: pathprefix + pattern)
 			.filter { $0.hasSuffix(pathseparator) }
@@ -99,12 +99,12 @@ extension Directory {
 
 	public func directories(_ pattern: String = "*/", recursive: Bool) -> [DirectoryPath] {
 		guard recursive else { return directories(pattern) }
-		return (subdirectoriesRecursively(at: path.absolute.string) + [""])
+		return (subdirectoriesRecursively(at: path.absoluteString) + [""])
 			.flatMap { directories($0 + pathseparator + pattern) }
 	}
 
 	public func files(_ pattern: String = "*") -> [FilePath] {
-		let pathprefix = path.absolute.string + pathseparator
+		let pathprefix = path.absoluteString + pathseparator
 		let pathprefixcount = pathprefix.utf8.count - 1
 		return filterFiles(glob: pathprefix + pattern)
 			.filter { !$0.hasSuffix(pathseparator) }
@@ -114,7 +114,7 @@ extension Directory {
 
 	public func files(_ pattern: String = "*", recursive: Bool) -> [FilePath] {
 		guard recursive else { return files(pattern) }
-		return (subdirectoriesRecursively(at: path.absolute.string) + [""])
+		return (subdirectoriesRecursively(at: path.absoluteString) + [""])
 			.flatMap { files($0 + pathseparator + pattern) }
 	}
 
@@ -124,7 +124,7 @@ extension Directory {
 
 	public func verifyContains(_ stringpath: String) throws {
 		guard self.contains(stringpath) else {
-			throw FileSystemError.notFound(path: AnyPath(base: path.absolute.string, relative: stringpath))
+			throw FileSystemError.notFound(path: AnyPath(base: path.absoluteString, relative: stringpath))
 		}
 	}
 

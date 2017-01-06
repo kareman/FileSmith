@@ -111,17 +111,17 @@ class PathTests: XCTestCase {
 		let relative = FilePath(base: "/base1/../base2", relative: "rel1/..")
 		XCTAssertEqual(relative.relativeString, ".")
 		XCTAssertEqual(relative.base?.string, "/base2")
-		XCTAssertEqual(relative.absolute.string, "/base2")
+		XCTAssertEqual(relative.absoluteString, "/base2")
 
 		var relativedir = DirectoryPath(base: "/base1/../", relative: "/rel1/../rel2")
 		XCTAssertEqual(relativedir.relativeString, "rel2")
 		XCTAssertEqual(relativedir.base?.string, "/")
-		XCTAssertEqual(relativedir.absolute.string, "/rel2")
+		XCTAssertEqual(relativedir.absoluteString, "/rel2")
 
 		relativedir = DirectoryPath(base: "/../base1", relative: "../rel1")
 		XCTAssertEqual(relativedir.relativeString, "../rel1")
 		XCTAssertEqual(relativedir.base?.string, "/../base1")
-		XCTAssertEqual(relativedir.absolute.string, "/../rel1")
+		XCTAssertEqual(relativedir.absoluteString, "/../rel1")
 
 		XCTAssertEqual(relativedir.absolute.parent().string, "/..")
 		XCTAssertEqual(relativedir.parent().string, "..")
