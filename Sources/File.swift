@@ -10,26 +10,17 @@ import Foundation
 public class File: TextOutputStreamable {
 	public let path: FilePath
 	public var encoding: String.Encoding = .utf8
+	public let type: FileType
 	let filehandle: FileHandle
 
-	lazy var attributes: [FileAttributeKey : Any] = {
-		var attributes = try! FileManager().attributesOfItem(atPath: self.path.absoluteString)
-		if attributes[.type] as! FileAttributeType == .typeSymbolicLink {
-			let realpath = try! FileManager().destinationOfSymbolicLink(atPath: self.path.absoluteString)
-			attributes = try! FileManager().attributesOfItem(atPath: realpath)
-		}
-		return attributes
-	}()
-
-	lazy var isRegularFile: Bool = { (self.attributes[.type] as! FileAttributeType) == .typeRegular }()
-
-	fileprivate init(path: FilePath, filehandle: FileHandle) {
+	fileprivate init(path: FilePath, filehandle: FileHandle, type: FileType? = nil) {
 		self.filehandle = filehandle
 		self.path = path
+		self.type = type ?? FileType(fileDescriptor: filehandle.fileDescriptor)
 	}
 
 	fileprivate static func errorForFile(at stringpath: String, writing: Bool) throws {
-		guard let type = FileType(path: stringpath) else {
+		guard let type = FileType(stringpath) else {
 			throw FileSystemError.notFound(path: FilePath(stringpath))
 		}
 		if case .directory = type {
@@ -53,9 +44,8 @@ public class File: TextOutputStreamable {
 	fileprivate static func createFile(path: FilePath, ifExists: AlreadyExistsOptions) throws {
 		let stringpath = path.absoluteString
 
-		var isdirectory: ObjCBool = true
-		if FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) {
-			guard !isdirectory.boolValue else {
+		if let type = FileType(stringpath) {
+			guard type != .directory else {
 				throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
 			}
 			switch ifExists {
@@ -141,7 +131,7 @@ extension EditableFile: TextOutputStream {
 	/// Appends the string to the file.
 	/// Nothing is overwritten, just added to the end of the file.
 	public func write(_ string: String) {
-		if isRegularFile { _ = filehandle.seekToEndOfFile() }
+		if type == .regularFile { _ = filehandle.seekToEndOfFile() }
 		filehandle.write(string, encoding: encoding)
 	}
 

@@ -22,7 +22,6 @@ extension Path {
 	internal var symbolicLinkTo: Self? {
 		return (try? FileManager().destinationOfSymbolicLink(atPath: absoluteString)).map { Self.init("/"+$0) }
 	}
-
 }
 
 public class Directory {
@@ -30,19 +29,14 @@ public class Directory {
 
 	public let path: DirectoryPath
 
-	public convenience init(open stringpath: String) throws {
-		try self.init(open: DirectoryPath(stringpath))
-	}
-
 	public init(open path: DirectoryPath) throws {
 		self.path = path.absolute
 		let stringpath = self.path.string
 
-		var isdirectory: ObjCBool = false
-		guard FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
+		guard let type = FileType(stringpath) else {
 			throw FileSystemError.notFound(path: path)
 		}
-		guard isdirectory.boolValue else {
+		guard type == .directory else {
 			throw FileSystemError.notDirectory(path: FilePath(stringpath))
 		}
 		guard FileManager().isReadableFile(atPath: stringpath) else {
@@ -50,17 +44,16 @@ public class Directory {
 		}
 	}
 
-	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
-		try self.init(create: DirectoryPath(stringpath), ifExists: ifExists)
+	public convenience init(open stringpath: String) throws {
+		try self.init(open: DirectoryPath(stringpath))
 	}
 
 	public init(create path: DirectoryPath, ifExists: AlreadyExistsOptions) throws {
 		self.path = path.absolute
 		let stringpath = self.path.string
 
-		var isdirectory: ObjCBool = false
-		if FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) {
-			guard isdirectory.boolValue else {
+		if let type = FileType(stringpath) {
+			guard type == .directory else {
 				throw FileSystemError.notDirectory(path: FilePath(stringpath))
 			}
 			switch ifExists {
@@ -73,6 +66,10 @@ public class Directory {
 		}
 		try self.path.verifyIsInSandbox()
 		try FileManager().createDirectory(atPath: stringpath, withIntermediateDirectories: true, attributes: nil)
+	}
+
+	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
+		try self.init(create: DirectoryPath(stringpath), ifExists: ifExists)
 	}
 }
 

@@ -28,12 +28,6 @@ extension Sequence {
 import Foundation
 
 #if os(Linux)
-	extension ObjCBool {
-		var boolValue: Bool { return self }
-	}
-#endif
-
-#if os(Linux)
 	import Glibc
 #else
 	import Darwin

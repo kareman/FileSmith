@@ -266,12 +266,10 @@ public func path(detectTypeOf stringpath: String) -> Path? {
 	guard !stringpath.hasSuffix(pathseparator) else {
 		return DirectoryPath(stringpath)
 	}
-
-	var isdirectory: ObjCBool = false
-	guard FileManager().fileExists(atPath: stringpath, isDirectory: &isdirectory) else {
+	guard let type = FileType(stringpath) else {
 		return nil
 	}
-	return isdirectory.boolValue ? DirectoryPath(stringpath) : FilePath(stringpath)
+	return type == .directory ? DirectoryPath(stringpath) : FilePath(stringpath)
 }
 
 // MARK: Common methods.
