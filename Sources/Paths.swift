@@ -233,6 +233,18 @@ extension Path {
 	}
 }
 
+extension AnyPath: ExpressibleByStringLiteral {
+	public init(extendedGraphemeClusterLiteral value: String) {
+		self.init(value)
+	}
+	public init(stringLiteral value: String) {
+		self.init(value)
+	}
+	public init(unicodeScalarLiteral value: String) {
+		self.init(value)
+	}
+}
+
 extension FilePath: ExpressibleByStringLiteral {
 	public init(extendedGraphemeClusterLiteral value: String) {
 		self.init(value)
@@ -424,6 +436,16 @@ public func ==<P:Path>(left: P, right: P) -> Bool where P:Equatable {
 	return left == right
 }
 
+extension AnyPath: Equatable, Hashable {
+	public static func ==(left: AnyPath, right: AnyPath) -> Bool {
+		if let l = left.relativeComponents, let r = right.relativeComponents {
+			return l == r
+		} else {
+			return left.components == right.components
+		}
+	}
+}
+
 extension FilePath: Equatable, Hashable {
 	public static func ==(left: FilePath, right: FilePath) -> Bool {
 		if let l = left.relativeComponents, let r = right.relativeComponents {
@@ -456,6 +478,16 @@ extension Path {
 	/// Converts this path to a Foundation.URL.
 	public var url: URL {
 		return URL(fileURLWithPath: absoluteString, isDirectory: self is DirectoryPath)
+	}
+}
+
+extension AnyPath {
+	/// Creates a path from a URL.
+	///
+	/// - returns: AnyPath if URL is a file URL. Otherwise nil.
+	public init?(_ url: URL) {
+		guard url.isFileURL else { return nil }
+		self.init(absolute: url.standardizedFileURL.pathComponents.dropFirst().array)
 	}
 }
 
