@@ -44,6 +44,12 @@ public enum FileType: Equatable, Hashable {
 		self.init(fileinfo)
 	}
 
+	/// Returns the file type of the item at the path. Follows symbolic links, so the type is never 'symbolicLink'.
+	/// - returns: The file type, or nil if the item does not exist.
+	public init?(_ path: Path) {
+		self.init(path.absoluteString)
+	}
+
 	/// Returns the file type of the item referenced by the provided file descriptor. Crashes if the file descriptor is invalid.
 	public init(fileDescriptor: Int32) {
 		var fileinfo = stat()
