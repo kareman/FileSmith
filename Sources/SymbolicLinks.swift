@@ -66,12 +66,12 @@ extension Directory {
 	@discardableResult
 	public func create(symbolicLink newlink: String, to target: Directory, ifExists: AlreadyExistsOptions) throws -> Directory {
 		let newpath = self.path.append(directory: newlink)
-		return try Directory(create: newpath, ifExists: ifExists)
+		return try Directory(createSymbolicLink: newpath, to: target, ifExists: ifExists)
 	}
 
 	@discardableResult
 	public func create(symbolicLink newlink: String, to target: File, ifExists: AlreadyExistsOptions) throws -> File {
 		let newpath = self.path.append(file: newlink)
-		return try File(create: newpath, ifExists: ifExists)
+		return try File(createSymbolicLink: newpath, to: target, ifExists: ifExists)
 	}
 }

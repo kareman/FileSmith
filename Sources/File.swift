@@ -41,37 +41,6 @@ public class File: TextOutputStreamable {
 		try self.init(open: FilePath(stringpath))
 	}
 
-	fileprivate static func createFile(path: FilePath, ifExists: AlreadyExistsOptions) throws {
-		let stringpath = path.absoluteString
-
-		if let type = FileType(stringpath) {
-			guard type != .directory else {
-				throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
-			}
-			switch ifExists {
-			case .throwError:	throw FileSystemError.alreadyExists(path: path)
-			case .open: return
-			case .replace: break
-			}
-		} else {
-			try path.verifyIsInSandbox()
-			try path.parent().create(ifExists: .open)
-		}
-		try path.verifyIsInSandbox()
-		guard FileManager().createFile(atPath: stringpath, contents: Data(), attributes: nil) else {
-			throw FileSystemError.couldNotCreate(path: FilePath(stringpath))
-		}
-	}
-
-	public convenience init(create path: FilePath, ifExists: AlreadyExistsOptions) throws {
-		try File.createFile(path: path, ifExists: ifExists)
-		try self.init(open: path)
-	}
-
-	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
-		try self.init(create: FilePath(stringpath), ifExists: ifExists)
-	}
-
 
 	/// Writes the text in this file to the given TextOutputStream.
 	public func write<Target : TextOutputStream>(to target: inout Target) {
@@ -104,22 +73,40 @@ extension FilePath {
 
 public class EditableFile: File {
 
-	public init(edit path: FilePath) throws {
+	public convenience init(open path: FilePath, type: FileType? = nil) throws {
 		try path.verifyIsInSandbox()
 		guard let filehandle = FileHandle(forUpdatingAtPath: path.absoluteString) else {
 			try File.errorForFile(at: path.absoluteString, writing: true)
 			fatalError("Should have thrown error when opening \(path.absoluteString)")
 		}
-		super.init(path: path, filehandle: filehandle)
+		self.init(path: path, filehandle: filehandle)
 	}
 
-	public convenience init(edit stringpath: String) throws {
-		try self.init(edit: FilePath(stringpath))
+	fileprivate static func createFile(path: FilePath, ifExists: AlreadyExistsOptions) throws {
+		let stringpath = path.absoluteString
+
+		if let type = FileType(stringpath) {
+			guard type != .directory else {
+				throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
+			}
+			switch ifExists {
+			case .throwError:	throw FileSystemError.alreadyExists(path: path)
+			case .open: return
+			case .replace: break
+			}
+		} else {
+			try path.verifyIsInSandbox()
+			try path.parent().create(ifExists: .open)
+		}
+		try path.verifyIsInSandbox()
+		guard FileManager().createFile(atPath: stringpath, contents: Data(), attributes: nil) else {
+			throw FileSystemError.couldNotCreate(path: FilePath(stringpath))
+		}
 	}
 
 	public convenience init(create path: FilePath, ifExists: AlreadyExistsOptions) throws {
-		try File.createFile(path: path, ifExists: ifExists)
-		try self.init(edit: path)
+		try EditableFile.createFile(path: path, ifExists: ifExists)
+		try self.init(open: path)
 	}
 
 	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
@@ -137,7 +124,7 @@ extension EditableFile: TextOutputStream {
 
 	/// Replaces the entire contents of the file with the string.
 	/// - warning: The current contents of the file will be lost.
-	/// - warning: Will crash if this is not a regular file. 
+	/// - warning: Will crash if this is not a regular file.
 	public func overwrite(_ string: String) {
 		filehandle.seek(toFileOffset: 0)
 		filehandle.write(string, encoding: encoding)
@@ -147,7 +134,7 @@ extension EditableFile: TextOutputStream {
 
 extension FilePath {
 	public func edit() throws -> EditableFile {
-		return try EditableFile(edit: self)
+		return try EditableFile(open: self)
 	}
 
 	@discardableResult
