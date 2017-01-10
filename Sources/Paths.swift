@@ -391,7 +391,7 @@ extension DirectoryPath {
 		return DirectoryPath(pathseparator)
 	}
 
-	internal func appendComponents<P: Path>(_ newcomponents: [String]) -> P {
+	internal func append<P: Path>(_ newcomponents: [String]) -> P {
 		if let relativeComponents = self.relativeComponents {
 			return P(base: self.baseComponents!, relative: fixDotDots(relativeComponents + newcomponents))
 		} else {
@@ -402,18 +402,18 @@ extension DirectoryPath {
 	/// Add a file path to the end of this directory path.
 	public func append(file stringpath: String) -> FilePath {
 		let (newcomponents, _) = parseComponents(stringpath)
-		return appendComponents(newcomponents)
+		return append(newcomponents)
 	}
 
 	/// Add a directory path to the end of this directory path.
 	public func append(directory stringpath: String) -> DirectoryPath {
 		let (newcomponents, _) = parseComponents(stringpath)
-		return appendComponents(newcomponents)
+		return append(newcomponents)
 	}
 
 	public static func +<P: Path>(leftdir: DirectoryPath, rightpath: P) -> P {
 		let rightcomponents = rightpath.relativeComponents ?? rightpath.components
-		return leftdir.appendComponents(rightcomponents)
+		return leftdir.append(rightcomponents)
 	}
 
 	public static func +(dir: DirectoryPath, file: String) -> FilePath {
