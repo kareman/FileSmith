@@ -25,6 +25,10 @@
 		BA877D1E1DFCC21200595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
 		BA877D1F1DFCC21300595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
 		BA877D201DFCC21400595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
+		BACC4A541E246A9400AFFC69 /* SymbolicLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */; };
+		BACC4A551E246A9400AFFC69 /* SymbolicLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */; };
+		BACC4A561E246A9400AFFC69 /* SymbolicLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */; };
+		BACC4A571E246A9400AFFC69 /* SymbolicLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */; };
 		BACC7F8F1E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
 		BACC7F901E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
 		BACC7F911E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
@@ -83,6 +87,7 @@
 		AD2FAA281CD0B6E100659CF4 /* FileSmithTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = FileSmithTests.plist; path = FileSmith.xcodeproj/FileSmithTests.plist; sourceTree = SOURCE_ROOT; };
 		BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Lazy-split.swift"; path = "Sources/Lazy-split.swift"; sourceTree = "<group>"; };
 		BA8527CF1E1D6AC500D89498 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Sources/Errors.swift; sourceTree = "<group>"; };
+		BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SymbolicLinks.swift; path = Sources/SymbolicLinks.swift; sourceTree = "<group>"; };
 		BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Attributes.swift; path = Sources/Attributes.swift; sourceTree = "<group>"; };
 		BAD418451DFCB61200137546 /* Directory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Directory.swift; path = Sources/Directory.swift; sourceTree = "<group>"; };
 		BAD418461DFCB61200137546 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = Sources/File.swift; sourceTree = "<group>"; };
@@ -194,6 +199,7 @@
 				BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */,
 				BA8527CF1E1D6AC500D89498 /* Errors.swift */,
 				BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */,
+				BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -506,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD4184B1DFCB61200137546 /* General.swift in Sources */,
+				BACC4A541E246A9400AFFC69 /* SymbolicLinks.swift in Sources */,
 				BAD418491DFCB61200137546 /* Directory.swift in Sources */,
 				BA68BBE71E037A2F00F13E62 /* Lazy-split.swift in Sources */,
 				BAD4184C1DFCB61200137546 /* Paths.swift in Sources */,
@@ -530,6 +537,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD418531DFCB61F00137546 /* General.swift in Sources */,
+				BACC4A561E246A9400AFFC69 /* SymbolicLinks.swift in Sources */,
 				BAD418511DFCB61F00137546 /* Directory.swift in Sources */,
 				BA68BBE91E037A4A00F13E62 /* Lazy-split.swift in Sources */,
 				BAD418541DFCB61F00137546 /* Paths.swift in Sources */,
@@ -544,6 +552,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD418571DFCB62100137546 /* General.swift in Sources */,
+				BACC4A571E246A9400AFFC69 /* SymbolicLinks.swift in Sources */,
 				BAD418551DFCB62100137546 /* Directory.swift in Sources */,
 				BA68BBEA1E037A4A00F13E62 /* Lazy-split.swift in Sources */,
 				BAD418581DFCB62100137546 /* Paths.swift in Sources */,
@@ -558,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD4184F1DFCB61F00137546 /* General.swift in Sources */,
+				BACC4A551E246A9400AFFC69 /* SymbolicLinks.swift in Sources */,
 				BAD4184D1DFCB61F00137546 /* Directory.swift in Sources */,
 				BA68BBE81E037A4900F13E62 /* Lazy-split.swift in Sources */,
 				BAD418501DFCB61F00137546 /* Paths.swift in Sources */,
