@@ -29,6 +29,7 @@ extension File {
 				return
 			}
 		}
+		try newlink.verifyIsInSandbox()
 		try FileManager().createSymbolicLink(atPath: newlink.absoluteString, withDestinationPath: target.path.absoluteString)
 		try self.init(open: newlink)
 	}
@@ -55,6 +56,7 @@ extension Directory {
 				return
 			}
 		}
+		try newlink.verifyIsInSandbox()
 		try FileManager().createSymbolicLink(atPath: newlink.absoluteString, withDestinationPath: target.path.absoluteString)
 		try self.init(open: newlink)
 	}
