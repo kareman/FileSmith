@@ -136,4 +136,18 @@ extension Directory {
 		let newpath = self.path.append(directory: stringpath)
 		return try Directory(create: newpath, ifExists: ifExists)
 	}
+
+	/// Creates a new empty temporary directory, guaranteed to be unique every time.
+	public static func createTempDirectory() -> Directory {
+		let name = ProcessInfo.processInfo.processName
+		let tempdirectory = NSTemporaryDirectory() + "/" + name + "-" + ProcessInfo.processInfo.globallyUniqueString
+		do {
+			try FileManager().createDirectory(atPath: tempdirectory, withIntermediateDirectories: true, attributes: nil)
+			return try Directory(open: tempdirectory)
+		} catch let error as NSError {
+			fatalError("Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
+		} catch {
+			fatalError("Unexpected error: \(error)")
+		}
+	}
 }

@@ -25,7 +25,7 @@ class DirectoryTests: XCTestCase {
 
 	func testSandboxMode() {
 		Directory.sandbox = true
-		DirectoryPath.current = DirectoryPath(createTempdirectory())
+		DirectoryPath.current = Directory.createTempDirectory().path
 		do {
 			let trespassingfolder = "/tmp/"+ProcessInfo.processInfo.globallyUniqueString
 			_ = try Directory(create: trespassingfolder, ifExists: .throwError)
@@ -44,8 +44,9 @@ class DirectoryTests: XCTestCase {
 
 	func testDirectory() {
 		do {
-			DirectoryPath.current = DirectoryPath(createTempdirectory())
+			DirectoryPath.current = Directory.createTempDirectory().path
 			let current = try DirectoryPath.current.open()
+
 			XCTAssertTrue(current.path.exists())
 			let testdir = try current.create(directory: "testdir", ifExists: .throwError)
 
@@ -93,19 +94,6 @@ class DirectoryTests: XCTestCase {
 		} catch {
 			XCTFail(String(describing: error))
 		}
-	}
-}
-
-private func createTempdirectory () -> String {
-	let name = ProcessInfo.processInfo.processName
-	let tempdirectory = NSTemporaryDirectory() + "/" + (name + "-" + ProcessInfo.processInfo.globallyUniqueString)
-	do {
-		try FileManager().createDirectory(atPath: tempdirectory, withIntermediateDirectories: true, attributes: nil)
-		return tempdirectory + "/"
-	} catch let error as NSError {
-		fatalError("Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
-	} catch {
-		fatalError("Unexpected error: \(error)")
 	}
 }
 
