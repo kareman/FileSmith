@@ -44,8 +44,8 @@ class DirectoryTests: XCTestCase {
 
 	func testDirectory() {
 		do {
-			DirectoryPath.current = Directory.createTempDirectory().path
-			let current = try DirectoryPath.current.open()
+			Directory.current = Directory.createTempDirectory()
+			let current = Directory.current
 
 			XCTAssertTrue(current.path.exists())
 			let testdir = try current.create(directory: "testdir", ifExists: .throwError)

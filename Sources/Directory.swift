@@ -136,6 +136,43 @@ extension Directory {
 		let newpath = self.path.append(directory: stringpath)
 		return try Directory(create: newpath, ifExists: ifExists)
 	}
+}
+
+extension Directory {
+
+	/// The current working directory.
+	public static var current: Directory {
+		get {
+			do {
+				return try DirectoryPath.current.open()
+			} catch {
+				fatalError("Could not open current directory '\(DirectoryPath.current)':\n\(error)")
+			}
+		}
+		set {
+			guard FileManager().changeCurrentDirectoryPath(newValue.path.absoluteString) else {
+				fatalError("Could not change current directory to \(newValue.path.absoluteString)")
+			}
+		}
+	}
+
+	/// The current user's home directory.
+	public static var home: Directory {
+		do {
+			return try DirectoryPath.home.open()
+		} catch {
+			fatalError("Could not open home directory '\(DirectoryPath.home)':\n\(error)")
+		}
+	}
+
+	/// The root directory in the local file system.
+	public static var root: Directory {
+		do {
+			return try DirectoryPath.root.open()
+		} catch {
+			fatalError("Could not open root directory '\(DirectoryPath.root)':\n\(error)")
+		}
+	}
 
 	/// Creates a new empty temporary directory, guaranteed to be unique every time.
 	public static func createTempDirectory() -> Directory {
@@ -146,8 +183,6 @@ extension Directory {
 			return try Directory(open: tempdirectory)
 		} catch let error as NSError {
 			fatalError("Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
-		} catch {
-			fatalError("Unexpected error: \(error)")
 		}
 	}
 }
