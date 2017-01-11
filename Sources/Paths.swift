@@ -315,12 +315,6 @@ extension Path {
 		return pathseparator + components.joined(separator: pathseparator)
 	}
 
-	/// Checks if this path points to an existing item in the local filesystem.
-	/// - Note: Does not check if this path points to the correct type of item (file or directory).
-	public func exists() -> Bool {
-		return FileManager().fileExists(atPath: absoluteString)
-	}
-
 	/// The main part of this path (the last component).
 	public var name: String {
 		return components.last ?? "/"
@@ -344,7 +338,7 @@ extension Path {
 		}
 	}
 
-	/// If relative, turns this into an absolute path.
+	/// If relative, joins base and relative together. Otherwise returns self.
 	public var absolute: Self {
 		return Self(absolute: components)
 	}
@@ -363,6 +357,20 @@ extension Path {
 	/// The hash value of the string representation of this path.
 	public var hashValue: Int {
 		return string.hashValue
+	}
+
+	// MARK: Accesses the filesystem.
+
+	/// Checks if this path points to an existing item in the local filesystem.
+	/// - Note: Does not check if this path points to the correct type of item (file or directory).
+	public func exists() -> Bool {
+		return FileManager().fileExists(atPath: absoluteString)
+	}
+
+	/// A path referring to the same item in the file system, where all symbolic links have been resolved.
+	/// Components of this path which do not exist are returned unchanged.
+	public func resolvingSymlinks() -> Self {
+		return Self(self.url.resolvingSymlinksInPath())!
 	}
 }
 

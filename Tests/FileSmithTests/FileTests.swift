@@ -48,6 +48,9 @@ class FileTests: XCTestCase {
 			XCTAssertEqual(edit_link.read(), "")
 			XCTAssertEqual(read_link.read(), "line 3 of file1.txt\n")
 
+			XCTAssertEqual(read_link.path.resolvingSymlinks(), edit_file1.path.absolute.resolvingSymlinks())
+			XCTAssertEqual(FilePath("/doesntexist/doesntexist.txt").resolvingSymlinks().string, "/doesntexist/doesntexist.txt")
+			
 			//create dir
 		} catch {
 			XCTFail(String(describing: error))

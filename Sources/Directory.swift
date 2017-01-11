@@ -15,12 +15,8 @@ extension Path {
 	internal func verifyIsInSandbox() throws {
 		if !Directory.sandbox { return }
 		if DirectoryPath.current.isAParentOf(self) { return }
-		if DirectoryPath.current.isAParentOf(resolvingSymlinks) { return }
+		if DirectoryPath.current.isAParentOf(resolvingSymlinks()) { return }
 		throw FileSystemError.outsideSandbox(path: self)
-	}
-
-	internal var resolvingSymlinks: Self {
-		return Self(self.url.resolvingSymlinksInPath())!
 	}
 }
 
