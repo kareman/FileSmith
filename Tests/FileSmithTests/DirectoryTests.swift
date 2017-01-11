@@ -25,7 +25,7 @@ class DirectoryTests: XCTestCase {
 
 	func testSandboxMode() {
 		Directory.sandbox = true
-		DirectoryPath.current = Directory.createTempDirectory().path
+		Directory.current = Directory.createTempDirectory()
 		do {
 			let trespassingfolder = "/tmp/"+ProcessInfo.processInfo.globallyUniqueString
 			_ = try Directory(create: trespassingfolder, ifExists: .throwError)

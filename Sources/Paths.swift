@@ -32,6 +32,7 @@ public protocol Path: CustomStringConvertible {
 	init(absolute components: [String])
 	init(base: [String], relative: [String])
 	init(_ stringpath: String)
+	init?(_ url: URL)
 }
 
 // MARK: Structs.
@@ -479,28 +480,12 @@ extension Path {
 	public var url: URL {
 		return URL(fileURLWithPath: absoluteString, isDirectory: self is DirectoryPath)
 	}
-}
 
-extension AnyPath {
 	/// Creates a path from a URL.
 	///
-	/// - returns: AnyPath if URL is a file URL. Otherwise nil.
+	/// - returns: Path if URL is a file URL. Otherwise nil.
 	public init?(_ url: URL) {
 		guard url.isFileURL else { return nil }
-		self.init(absolute: url.standardizedFileURL.pathComponents.dropFirst().array)
-	}
-}
-
-extension DirectoryPath {
-	/// Creates a path from a URL.
-	///
-	/// - returns: Path if URL is a file URL and has a directory path. Otherwise nil.
-	public init?(_ url: URL) {
-		if #available(OSX 10.11, *) {
-			guard url.isFileURL && url.hasDirectoryPath else { return nil }
-		} else {
-			guard url.isFileURL else { return nil }
-		}
 		self.init(absolute: url.standardizedFileURL.pathComponents.dropFirst().array)
 	}
 }
@@ -513,7 +498,7 @@ extension FilePath {
 		if #available(OSX 10.11, *) {
 			guard url.isFileURL && !url.hasDirectoryPath else { return nil }
 		} else {
-			guard url.isFileURL else { return nil }
+			guard url.isFileURL && !url.path.hasSuffix(pathseparator) else { return nil }
 		}
 		self.init(absolute: url.standardizedFileURL.pathComponents.dropFirst().array)
 	}

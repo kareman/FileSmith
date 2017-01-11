@@ -15,12 +15,12 @@ extension Path {
 	internal func verifyIsInSandbox() throws {
 		if !Directory.sandbox { return }
 		if DirectoryPath.current.isAParentOf(self) { return }
-		if let s = symbolicLinkTo, DirectoryPath.current.isAParentOf(s) { return }
+		if DirectoryPath.current.isAParentOf(resolvingSymlinks) { return }
 		throw FileSystemError.outsideSandbox(path: self)
 	}
 
-	internal var symbolicLinkTo: Self? {
-		return (try? FileManager().destinationOfSymbolicLink(atPath: absoluteString)).map { Self.init("/"+$0) }
+	internal var resolvingSymlinks: Self {
+		return Self(self.url.resolvingSymlinksInPath())!
 	}
 }
 
