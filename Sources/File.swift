@@ -61,6 +61,10 @@ public class File: TextOutputStreamable {
 	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
 		return PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }
 	}
+
+	public func close() {
+		filehandle.closeFile()
+	}
 }
 
 extension FilePath {
@@ -73,7 +77,7 @@ extension FilePath {
 
 public class EditableFile: File {
 
-	public convenience init(open path: FilePath, type: FileType? = nil) throws {
+	public convenience init(open path: FilePath) throws {
 		try path.verifyIsInSandbox()
 		guard let filehandle = FileHandle(forUpdatingAtPath: path.absoluteString) else {
 			try File.errorForFile(at: path.absoluteString, writing: true)
