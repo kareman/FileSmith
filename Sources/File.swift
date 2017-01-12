@@ -126,16 +126,6 @@ extension EditableFile: TextOutputStream {
 		filehandle.write(string, encoding: encoding)
 	}
 
-	/// Replaces the entire contents of the file with the string.
-	/// - warning: The current contents of the file will be lost.
-	/// - warning: Will crash if this is not a regular file.
-	public func overwrite(_ string: String) {
-		filehandle.seek(toFileOffset: 0)
-		filehandle.write(string, encoding: encoding)
-		filehandle.truncateFile(atOffset: filehandle.offsetInFile)
-		filehandle.synchronizeFile()
-	}
-
 	public func delete() throws {
 		try FileManager().removeItem(atPath: path.absoluteString)
 	}
