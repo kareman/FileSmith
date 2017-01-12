@@ -133,6 +133,11 @@ extension EditableFile: TextOutputStream {
 		filehandle.seek(toFileOffset: 0)
 		filehandle.write(string, encoding: encoding)
 		filehandle.truncateFile(atOffset: filehandle.offsetInFile)
+		filehandle.synchronizeFile()
+	}
+
+	public func delete() throws {
+		try FileManager().removeItem(atPath: path.absoluteString)
 	}
 }
 

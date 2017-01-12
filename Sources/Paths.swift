@@ -363,6 +363,8 @@ extension Path {
 
 	/// Checks if this path points to an existing item in the local filesystem.
 	/// - Note: Does not check if this path points to the correct type of item (file or directory).
+	///
+	/// If this is a symbolic link which points to a non-existing path, then the result is false.
 	public func exists() -> Bool {
 		return FileManager().fileExists(atPath: absoluteString)
 	}

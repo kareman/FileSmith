@@ -195,11 +195,11 @@
 				BAD418481DFCB61200137546 /* Paths.swift */,
 				BAD418451DFCB61200137546 /* Directory.swift */,
 				BAD418461DFCB61200137546 /* File.swift */,
-				BAD418471DFCB61200137546 /* General.swift */,
-				BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */,
 				BA8527CF1E1D6AC500D89498 /* Errors.swift */,
 				BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */,
 				BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */,
+				BAD418471DFCB61200137546 /* General.swift */,
+				BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
