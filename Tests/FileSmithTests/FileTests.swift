@@ -30,7 +30,7 @@ class FileTests: XCTestCase {
 
 			let read_file1 = try path_file1.open()
 			XCTAssertEqual(read_file1.readSome(), "line 1 of file1.txt\n")
-			edit_file1.write("line 2 of file1.txt\n")
+			try path_file1.edit().write("line 2 of file1.txt\n")
 			XCTAssertEqual(read_file1.read(), "line 2 of file1.txt\n")
 
 			var contents = ""

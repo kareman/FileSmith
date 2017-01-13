@@ -42,6 +42,11 @@ class DirectoryTests: XCTestCase {
 		}
 	}
 
+	func testStandardDirectories() {
+		XCTAssertNil(Directory.home.path.relativeComponents)
+		XCTAssertEqual(Directory.root.path.string, "/")
+	}
+
 	func testDirectory() {
 		do {
 			Directory.current = Directory.createTempDirectory()

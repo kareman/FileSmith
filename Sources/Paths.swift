@@ -78,9 +78,8 @@ public struct AnyPath: Path {
 	public var components: [String] {
 		if let rel = _relativestart, rel != _components.endIndex, _components[rel] == ".." {
 			return fixDotDots(_components)
-		} else {
-			return _components
 		}
+		return _components
 	}
 }
 
@@ -229,7 +228,7 @@ extension Path {
 
 		if self is FilePath {
 			precondition(!stringpath.hasSuffix(pathseparator),
-				"Trying to create a FilePath with a directory path (ending in '\(pathseparator)'). Use DirectoryPath instead.")
+				"Trying to create a FilePath from \(stringpath) (ending in '\(pathseparator)'). If this is a directory, use DirectoryPath instead. If it is a file, remove the trailing \(pathseparator). If it is unknown, use AnyPath")
 		}
 	}
 }
@@ -289,6 +288,15 @@ public func path(detectTypeOf stringpath: String) -> Path? {
 
 extension Path {
 
+	/// Creates a new path from another path. 
+	public init<P: Path>(_ inpath: P) {
+		if let base = inpath.baseComponents, let rel = inpath.relativeComponents {
+			self.init(base: base, relative: rel)
+		} else {
+			self.init(absolute: inpath.components)
+		}
+	}
+
 	/// The relative or absolute string representation of this path.
 	public var string: String {
 		return relativeString ?? absoluteString
@@ -333,9 +341,8 @@ extension Path {
 	public var nameWithoutExtension: String {
 		if let lastdot = name.characters.lastIndex(of: "."), lastdot != name.startIndex {
 			return name.substring(to: lastdot)
-		} else {
-			return name
 		}
+		return name
 	}
 
 	/// If relative, joins base and relative together. Otherwise returns self.
@@ -410,13 +417,13 @@ extension DirectoryPath {
 		}
 	}
 
-	/// Add a file path to the end of this directory path.
+	/// Adds a file path to the end of this directory path.
 	public func append(file stringpath: String) -> FilePath {
 		let (newcomponents, _) = parseComponents(stringpath)
 		return append(newcomponents)
 	}
 
-	/// Add a directory path to the end of this directory path.
+	/// Adds a directory path to the end of this directory path.
 	public func append(directory stringpath: String) -> DirectoryPath {
 		let (newcomponents, _) = parseComponents(stringpath)
 		return append(newcomponents)
@@ -425,14 +432,6 @@ extension DirectoryPath {
 	public static func +<P: Path>(leftdir: DirectoryPath, rightpath: P) -> P {
 		let rightcomponents = rightpath.relativeComponents ?? rightpath.components
 		return leftdir.append(rightcomponents)
-	}
-
-	public static func +(dir: DirectoryPath, file: String) -> FilePath {
-		return dir.append(file: file)
-	}
-
-	public static func +(leftdir: DirectoryPath, rightdir: String) -> DirectoryPath {
-		return leftdir.append(directory: rightdir)
 	}
 
 	/// Checks if the absolute version of the provided path begins with the absolute version of this path.
@@ -459,21 +458,13 @@ extension AnyPath: Equatable, Hashable {
 
 extension FilePath: Equatable, Hashable {
 	public static func ==(left: FilePath, right: FilePath) -> Bool {
-		if let l = left.relativeComponents, let r = right.relativeComponents {
-			return l == r
-		} else {
-			return left.components == right.components
-		}
+		return AnyPath(left) == AnyPath(right)
 	}
 }
 
 extension DirectoryPath: Equatable, Hashable {
 	public static func ==(left: DirectoryPath, right: DirectoryPath) -> Bool {
-		if let l = left.relativeComponents, let r = right.relativeComponents {
-			return l == r
-		} else {
-			return left.components == right.components
-		}
+		return AnyPath(left) == AnyPath(right)
 	}
 }
 
@@ -483,12 +474,12 @@ extension Path {
 
 	/// If relative, converts this path to a Foundation.URL.
 	public var relativeURL: URL? {
-		return relativeString.map { URL(fileURLWithPath: $0, isDirectory: self is DirectoryPath) }
+		return relativeString.map { URL(fileURLWithPath: $0) }
 	}
 
 	/// Converts this path to a Foundation.URL.
 	public var url: URL {
-		return URL(fileURLWithPath: absoluteString, isDirectory: self is DirectoryPath)
+		return URL(fileURLWithPath: absoluteString)
 	}
 
 	/// Creates a path from a URL.
@@ -505,7 +496,7 @@ extension FilePath {
 	///
 	/// - returns: Path if URL is a file URL and does not have a directory path. Otherwise nil.
 	public init?(_ url: URL) {
-		if #available(OSX 10.11, *) {
+		if #available(OSX 10.11, iOS 9.0, tvOS 10.0, watchOS 3.0, *) {
 			guard url.isFileURL && !url.hasDirectoryPath else { return nil }
 		} else {
 			guard url.isFileURL && !url.path.hasSuffix(pathseparator) else { return nil }

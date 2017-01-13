@@ -10,6 +10,7 @@ import FileSmith
 import Foundation
 
 class PathTests: XCTestCase {
+
 	func testAddPaths() {
 		let absolutedir: DirectoryPath = "/tmp"
 		let relativedir: DirectoryPath = "relativedir"
@@ -17,6 +18,10 @@ class PathTests: XCTestCase {
 
 		XCTAssertEqual(String(describing: absolutedir + file), "/tmp/file")
 		XCTAssertEqual((relativedir + file).string, "relativedir/file")
+
+		let _: DirectoryPath = DirectoryPath.home + "something"
+		let _: FilePath = DirectoryPath.home + "something"
+		// let _ = DirectoryPath.home + "dir" // Will not and should not compile.
 	}
 
 	func testRelativeFilePath() {
@@ -25,7 +30,7 @@ class PathTests: XCTestCase {
 		XCTAssertEqual(filepath.base?.string, FileManager.default.currentDirectoryPath)
 		XCTAssertEqual(filepath.base?.url, DirectoryPath.current.url)
 		XCTAssertEqual(filepath.relativeString, "folder1/file1.txt")
-		XCTAssertEqual(filepath.relativeURL, URL(fileURLWithPath: "folder1/file1.txt", isDirectory: false))
+		XCTAssertEqual(filepath.relativeURL, URL(fileURLWithPath: "folder1/file1.txt"))
 		XCTAssertEqual(filepath.string, "folder1/file1.txt")
 	}
 
@@ -35,7 +40,7 @@ class PathTests: XCTestCase {
 		XCTAssertEqual(directorypath.base?.string, FileManager.default.currentDirectoryPath)
 		XCTAssertEqual(directorypath.base?.url, DirectoryPath.current.url)
 		XCTAssertEqual(directorypath.relativeString, "directory1/directory2")
-		XCTAssertEqual(directorypath.relativeURL, URL(fileURLWithPath: "directory1/directory2", isDirectory: true))
+		XCTAssertEqual(directorypath.relativeURL, URL(fileURLWithPath: "directory1/directory2"))
 		XCTAssertEqual(directorypath.string, "directory1/directory2")
 
 		directorypath = "."
@@ -88,8 +93,12 @@ class PathTests: XCTestCase {
 			"/tmp/directory1/directory2")
 		XCTAssertEqual(FilePath(URL(fileURLWithPath:"/tmp/directory1/file2"))?.string, "/tmp/directory1/file2")
 		XCTAssertEqual(
-			DirectoryPath(URL(fileURLWithPath:"/tmp/directory1/directory2/", isDirectory: true))?.string,
+			DirectoryPath(URL(fileURLWithPath:"/tmp/directory1/directory2/"))?.string,
 			"/tmp/directory1/directory2")
+
+		XCTAssertNil(FilePath(URL(string:"http://blog.nottoobadsoftware.com/tag/swift/")!))
+		XCTAssertNil(AnyPath(URL(string:"http://blog.nottoobadsoftware.com/tag/swift/")!))
+		XCTAssertNil(DirectoryPath(URL(string:"http://blog.nottoobadsoftware.com/tag/swift/")!))
 	}
 
 	func testPathTypeDetection() {
