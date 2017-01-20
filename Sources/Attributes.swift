@@ -20,6 +20,7 @@ public enum FileType: Equatable, Hashable {
 	case blockSpecial
 	case socket
 	case brokenSymbolicLink
+	case namedPipe
 	case unknown
 
 	fileprivate init(_ fileinfo: stat) {
@@ -30,6 +31,7 @@ public enum FileType: Equatable, Hashable {
 		case S_IFBLK:  self = .blockSpecial
 		case S_IFSOCK: self = .socket
 		case S_IFLNK:  self = .brokenSymbolicLink
+		case S_IFIFO:  self = .namedPipe
 		default:       self = .unknown
 		}
 	}
