@@ -92,6 +92,15 @@ class DirectoryTests: XCTestCase {
 			XCTAssertEqual(Set(testdir.directories(recursive: true)), Set(["dir", "dir/newerdir"]))
 			XCTAssertEqual(Set(testdir.files(recursive: true)), Set(["file.txt", "file2.txt", "dir/file.txt"]))
 
+			let link_to_dir = try testdir.create(symbolicLink: "link_to_dir", to: dir, ifExists: .throwError)
+			XCTAssertThrowsError(try testdir.create(symbolicLink: "link_to_dir", to: dir, ifExists: .throwError))
+			XCTAssertThrowsError(try testdir.create(symbolicLink: "file.txt", to: dir, ifExists: .throwError))
+			XCTAssertTrue(link_to_dir.path.exists())
+			XCTAssertTrue(link_to_dir.contains("newerdir"))
+			try testdir.create(symbolicLink: "link_to_dir", to: dir, ifExists: .replace)
+			try testdir.create(symbolicLink: "link_to_dir", to: dir, ifExists: .open)
+			XCTAssertThrowsError(try testdir.create(symbolicLink: "link_to_dir", to: newerdir, ifExists: .open))
+
 			XCTAssertEqual(testdir.directories("dir/*").map {$0.string}, ["dir/newerdir"])
 			try testdir.create(directory: "dir", ifExists: .replace)
 			XCTAssertEqual(testdir.directories("dir/*"), [])
@@ -106,6 +115,7 @@ extension DirectoryTests {
 	public static var allTests = [
 		("testSubDirectories", testSubDirectories),
 		("testSandboxMode", testSandboxMode),
+		("testStandardDirectories", testStandardDirectories),
 		("testDirectory", testDirectory),
 		]
 }

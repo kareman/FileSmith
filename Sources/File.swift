@@ -23,7 +23,7 @@ public class File: TextOutputStreamable {
 		guard let type = FileType(stringpath) else {
 			throw FileSystemError.notFound(path: FilePath(stringpath))
 		}
-		if case .directory = type {
+		if type == .directory {
 			throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
 		}
 		throw FileSystemError.invalidAccess(path: FilePath(stringpath), writing: writing)

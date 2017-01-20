@@ -44,7 +44,7 @@ class FileTests: XCTestCase {
 			XCTAssertThrowsError(try File(createSymbolicLink: "file1.txt", to: edit_file1, ifExists: .throwError))
 			XCTAssertThrowsError(try EditableFile(createSymbolicLink: "file1.txt", to: edit_file1, ifExists: .throwError))
 
-			let read_link = try File(createSymbolicLink: "link_to_file1.txt", to: edit_file1, ifExists: .throwError)
+			let read_link = try current.create(symbolicLink: "link_to_file1.txt", to: edit_file1, ifExists: .throwError)
 			XCTAssertEqual(FileType("link_to_file1.txt"), .regularFile)
 			XCTAssertNil(FileType("doesntexist.txt"))
 			XCTAssertEqual(FileType.isSymbolicLink("link_to_file1.txt"), true)
@@ -67,7 +67,7 @@ class FileTests: XCTestCase {
 			XCTAssertFalse(edit_link.path.exists())
 			XCTAssertEqual(FileType(edit_link.path), .brokenSymbolicLink)
 
-			// these will succeed, but I don't think they should.
+			// these succeed, but I don't think they should.
 			edit_link.write("won't be written.")
 			XCTAssertEqual(edit_link.read(), "")
 
