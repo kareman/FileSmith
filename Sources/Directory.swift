@@ -53,8 +53,8 @@ public class Directory {
 				throw FileSystemError.notDirectory(path: FilePath(stringpath))
 			}
 			switch ifExists {
-			case .throwError:	throw FileSystemError.alreadyExists(path: path)
-			case .open: return
+			case .throwError: throw FileSystemError.alreadyExists(path: path)
+			case .open:       return
 			case .replace:
 				try self.path.verifyIsInSandbox()
 				try FileManager().removeItem(atPath: stringpath)
@@ -131,6 +131,16 @@ extension Directory {
 	public func create(directory stringpath: String, ifExists: AlreadyExistsOptions) throws -> Directory {
 		let newpath = self.path.append(directory: stringpath)
 		return try Directory(create: newpath, ifExists: ifExists)
+	}
+
+	public func open(file stringpath: String) throws -> File {
+		let newpath = self.path.append(file: stringpath)
+		return try File(open: newpath)
+	}
+
+	public func open(directory stringpath: String) throws -> Directory {
+		let newpath = self.path.append(directory: stringpath)
+		return try Directory(open: newpath)
 	}
 }
 
