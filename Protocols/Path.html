@@ -311,8 +311,34 @@ If this exists, then so do relativeComponents.</p>
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Creates a path from a string. 
-If the string begins with a &rsquo;/&rsquo; it is absolute, otherwise it is relative to the current working directory.</p>
+                        <p>Creates a path from a URL.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">Path</span><span class="p">:</span> <span class="kt">CustomStringConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9FileSmith4PathcFV10Foundation3URLGSqx_"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9FileSmith4PathcFV10Foundation3URLGSqx_">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
 
                       </div>
                       <div class="declaration">
@@ -483,37 +509,6 @@ If the string begins with a &rsquo;/&rsquo; it is absolute, otherwise it is rela
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FE9FileSmithPS_4Path6existsFT_Sb"></a>
-                    <a name="//apple_ref/swift/Method/exists()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FE9FileSmithPS_4Path6existsFT_Sb">exists()</a>
-                    </code>
-                      <span class="declaration-note">
-                        Extension method
-                      </span>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Checks if this path points to an existing item in the local filesystem.
-- Note: Does not check if this path points to the correct type of item (file or directory).</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">exists</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:vE9FileSmithPS_4Path4nameSS"></a>
                     <a name="//apple_ref/swift/Property/name" class="dashAnchor"></a>
                     <a class="token" href="#/s:vE9FileSmithPS_4Path4nameSS">name</a>
@@ -617,7 +612,7 @@ If the string begins with a &rsquo;/&rsquo; it is absolute, otherwise it is rela
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If relative, turns this into an absolute path.</p>
+                        <p>If relative, joins base and relative together. Otherwise returns self.</p>
 
                       </div>
                       <div class="declaration">
@@ -715,6 +710,81 @@ If the string begins with a &rsquo;/&rsquo; it is absolute, otherwise it is rela
               </ul>
             </div>
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Accesses%20the%20filesystem."></a>
+                <a name="//apple_ref/swift/Section/Accesses the filesystem." class="dashAnchor"></a>
+                <a href="#/Accesses%20the%20filesystem.">
+                  <h3 class="section-name">Accesses the filesystem.</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE9FileSmithPS_4Path6existsFT_Sb"></a>
+                    <a name="//apple_ref/swift/Method/exists()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9FileSmithPS_4Path6existsFT_Sb">exists()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checks if this path points to an existing item in the local filesystem.
+- Note: Does not check if this path points to the correct type of item (file or directory).</p>
+
+<p>If this is a symbolic link which points to a non-existing path, then the result is false.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">exists</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE9FileSmithPS_4Path17resolvingSymlinksFT_x"></a>
+                    <a name="//apple_ref/swift/Method/resolvingSymlinks()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9FileSmithPS_4Path17resolvingSymlinksFT_x">resolvingSymlinks()</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A path referring to the same item in the file system, where all symbolic links have been resolved.
+Components of this path which do not exist are returned unchanged.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resolvingSymlinks</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
               <ul>
                 <li class="item">
                   <div>
@@ -781,7 +851,7 @@ If the string begins with a &rsquo;/&rsquo; it is absolute, otherwise it is rela
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-01-07)</p>
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-01-20)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
