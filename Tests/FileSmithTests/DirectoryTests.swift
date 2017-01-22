@@ -109,6 +109,32 @@ class DirectoryTests: XCTestCase {
 			XCTFail(String(describing: error))
 		}
 	}
+
+
+	/// The code examples under "Usage" in the readme.
+	func testReadme() {
+		do {
+			Directory.current = Directory.createTempDirectory()
+			print(DirectoryPath.current)
+
+			let dirpath = DirectoryPath("dir/dir1")
+			let dir1 = try dirpath.create(ifExists: .replace)
+			let dir2 = try Directory(create: "dir/dir2", ifExists: .throwError)
+			let dir3 = try dir2.create(directory: "dir3", ifExists: .open) // dir/dir2/dir3
+			let dir1_link = try Directory(createSymbolicLink: "dir1_link", to: dir1, ifExists: .open)
+			let dir2_link = try dir1.create(symbolicLink: "dir2_link", to: dir2, ifExists: .open)
+
+			let filepath = FilePath("dir/file1.txt")
+			let file1 = try filepath.create(ifExists: .open)
+			let file2 = try EditableFile(create: "file2.txt", ifExists: .open)
+			let file3 = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
+			let file1_link = try File(createSymbolicLink: "file1_link", to: file1, ifExists: .open)
+			let file2_link = try dir2.create(symbolicLink: "file2_link", to: file2, ifExists: .open)
+
+		} catch {
+			XCTFail(String(describing: error))
+		}
+	}
 }
 
 extension DirectoryTests {

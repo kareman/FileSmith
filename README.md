@@ -18,19 +18,29 @@ Handling files in code can feel a bit risky sometimes (especially when you're us
 The location of an item _which may or may not exist_ in the local file system. It is either a [DirectoryPath](https://kareman.github.io/FileSmith/Structs/DirectoryPath.html), [FilePath](https://kareman.github.io/FileSmith/Structs/FilePath.html) or [AnyPath](https://kareman.github.io/FileSmith/Structs/AnyPath.html).
 
 **File:**
-A regular file or something _file-like_ which you can read from and/or write to, like streams, pipes or sockets. Or symbolic links to any of these.
+An existing regular file or something _file-like_ which you can read from and/or write to, like streams, pipes or sockets. Or symbolic links to any of these.
 
 **Directory:**
-A directory or a symbolic link to a directory. Basically anything you can `cd` into in the terminal.
+An existing directory or a symbolic link to a directory. Basically anything you can `cd` into in the terminal.
 
 ## Usage
 
-#### Directories
+#### Create
 
 ```swift
-let dir = try Directory(open: "dir") 
-let dir2 = try directorypath.open()
+let dirpath = DirectoryPath("dir/dir1")
+let dir1 = try dirpath.create(ifExists: .replace)
+let dir2 = try Directory(create: "dir/dir2", ifExists: .throwError)
+let dir3 = try dir2.create(directory: "dir3", ifExists: .open) // dir/dir2/dir3
+let dir1_link = try Directory(createSymbolicLink: "dir1_link", to: dir1, ifExists: .open)
+let dir2_link = try dir1.create(symbolicLink: "dir2_link", to: dir2, ifExists: .open)
 
+let filepath = FilePath("dir/file1.txt")
+let file1 = try filepath.create(ifExists: .open)
+let file2 = try EditableFile(create: "file2.txt", ifExists: .open)
+let file3 = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
+let file1_link = try File(createSymbolicLink: "file1_link", to: file1, ifExists: .open)
+let file2_link = try dir2.create(symbolicLink: "file2_link", to: file2, ifExists: .open)
 ```
 
 #### Miscellaneous niceties
