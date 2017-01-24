@@ -36,7 +36,7 @@ class DirectoryTests: XCTestCase {
 		}
 
 		do {
-			try DirectoryPath.current.open().create(directory: "newdir", ifExists: .throwError)
+			try Directory.current.create(directory: "newdir", ifExists: .throwError)
 		} catch {
 			XCTFail(String(describing: error))
 		}
@@ -45,6 +45,11 @@ class DirectoryTests: XCTestCase {
 	func testStandardDirectories() {
 		XCTAssertNil(Directory.home.path.relativeComponents)
 		XCTAssertEqual(Directory.root.path.string, "/")
+	}
+
+	func testDontDeleteTheCurrentWorkDirectory() {
+		Directory.current = Directory.createTempDirectory()
+		XCTAssertThrowsError(try Directory.current.delete())
 	}
 
 	func testDirectory() {

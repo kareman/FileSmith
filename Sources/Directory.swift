@@ -144,6 +144,7 @@ extension Directory {
 	}
 
 	public func delete() throws {
+		try path.verifyIsInSandbox()
 		try FileManager().removeItem(atPath: path.absoluteString)
 	}
 }

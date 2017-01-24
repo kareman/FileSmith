@@ -435,8 +435,8 @@ extension DirectoryPath {
 	}
 
 	/// Checks if the absolute version of the provided path begins with the absolute version of this path.
-	func isAParentOf<P: Path>(_ path: P) -> Bool {
-		return path.absolute.components.starts(with: self.absolute.components)
+	public func isAParentOf<P: Path>(_ path: P) -> Bool {
+		return path.absolute.components.starts(with: self.absolute.components) && path.components.count != self.components.count
 	}
 }
 

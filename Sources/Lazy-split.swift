@@ -103,8 +103,7 @@ public struct PartialSourceLazySplitSequence <Base: Collection>: IteratorProtoco
 		}
 		if g?.remaining == nil, let next = next() {
 			return head + next
-		} else {
-			return head
 		}
+		return head
 	}
 }

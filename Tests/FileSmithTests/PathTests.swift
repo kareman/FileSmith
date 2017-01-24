@@ -141,6 +141,13 @@ class PathTests: XCTestCase {
 		XCTAssertEqual(relativedir.parent().name, "..")
 		XCTAssertEqual(FilePath("/../dir1/dir2/..").name, "dir1")
 	}
+
+	func testIsAParentOf() {
+		XCTAssertTrue(DirectoryPath("/a/b/").isAParentOf(AnyPath("/a/b/c")))
+		XCTAssertFalse(DirectoryPath("/a/b/").isAParentOf(AnyPath("/c/b/c")))
+		XCTAssertFalse(DirectoryPath("/a/b/").isAParentOf(AnyPath("/a/")))
+		XCTAssertFalse(DirectoryPath("/a/b/").isAParentOf(DirectoryPath("/a/b/")))
+	}
 }
 
 extension PathTests {
