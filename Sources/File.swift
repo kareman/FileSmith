@@ -7,11 +7,11 @@
 
 import Foundation
 
-public class File: TextOutputStreamable {
+public class File: ReadableStream {
 	public let path: FilePath
 	public var encoding: String.Encoding = .utf8
 	public let type: FileType
-	let filehandle: FileHandle
+	internal let filehandle: FileHandle
 
 	fileprivate init(path: FilePath, filehandle: FileHandle, type: FileType? = nil) {
 		self.filehandle = filehandle
@@ -42,13 +42,6 @@ public class File: TextOutputStreamable {
 	}
 
 
-	/// Writes the text in this file to the given TextOutputStream.
-	public func write<Target : TextOutputStream>(to target: inout Target) {
-		while let text = filehandle.readSome(encoding: encoding) {
-			target.write(text)
-		}
-	}
-
 	public func read() -> String {
 		return filehandle.read(encoding: encoding)
 	}
@@ -57,22 +50,33 @@ public class File: TextOutputStreamable {
 		return filehandle.readSome(encoding: encoding)
 	}
 
-	/// Splits stream lazily into lines.
-	public func lines () -> LazyMapSequence<PartialSourceLazySplitSequence<String.CharacterView>, String> {
-		return PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }
-	}
-
 	public func close() {
 		filehandle.closeFile()
 	}
 }
+
+#if os(macOS)
+	extension File {
+
+		/// `handler` will be called whenever there is new text output available.
+		/// Pass `nil` to remove any preexisting handlers.
+		public func onOutput(handler: ((String) -> ())? ) {
+			guard let h = handler else { filehandle.readabilityHandler = nil; return }
+
+			filehandle.readabilityHandler = { fh in
+				if let output = fh.readSome() {
+					h(output)
+				}
+			}
+		}
+	}
+#endif
 
 extension FilePath {
 	public func open() throws -> File {
 		return try File(open: self)
 	}
 }
-
 
 
 public class EditableFile: File {
@@ -122,7 +126,7 @@ public class EditableFile: File {
 	}
 }
 
-extension EditableFile: TextOutputStream {
+extension EditableFile: WriteableStream {
 	/// Appends the string to the file.
 	/// Nothing is overwritten, just added to the end of the file.
 	public func write(_ string: String) {

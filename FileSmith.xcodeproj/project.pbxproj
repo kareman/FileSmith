@@ -49,6 +49,10 @@
 		BAD418561DFCB62100137546 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418461DFCB61200137546 /* File.swift */; };
 		BAD418571DFCB62100137546 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418471DFCB61200137546 /* General.swift */; };
 		BAD418581DFCB62100137546 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* Paths.swift */; };
+		BAECCB4E1E37E0F000371187 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECCB4D1E37E0F000371187 /* Stream.swift */; };
+		BAECCB4F1E37E0F000371187 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECCB4D1E37E0F000371187 /* Stream.swift */; };
+		BAECCB501E37E0F000371187 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECCB4D1E37E0F000371187 /* Stream.swift */; };
+		BAECCB511E37E0F000371187 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECCB4D1E37E0F000371187 /* Stream.swift */; };
 		DD7502881C68FEDE006590AF /* FileSmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6DA0F1BF000BD002C0205 /* FileSmith.framework */; };
 		DD7502921C690C7A006590AF /* FileSmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D9F01BEFFFBE002C0205 /* FileSmith.framework */; };
 /* End PBXBuildFile section */
@@ -96,6 +100,7 @@
 		BAD418591DFCB64800137546 /* DirectoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTests.swift; sourceTree = "<group>"; };
 		BAD4185A1DFCB64800137546 /* FileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
 		BAD4185B1DFCB64800137546 /* PathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathTests.swift; sourceTree = "<group>"; };
+		BAECCB4D1E37E0F000371187 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
 		DD75027A1C68FCFC006590AF /* FileSmith-macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileSmith-macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD75028D1C690C7A006590AF /* FileSmith-tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileSmith-tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -198,6 +203,7 @@
 				BA8527CF1E1D6AC500D89498 /* Errors.swift */,
 				BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */,
 				BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */,
+				BAECCB4D1E37E0F000371187 /* Stream.swift */,
 				BAD418471DFCB61200137546 /* General.swift */,
 				BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */,
 			);
@@ -518,6 +524,7 @@
 				BAD4184C1DFCB61200137546 /* Paths.swift in Sources */,
 				BA8527D01E1D6AC500D89498 /* Errors.swift in Sources */,
 				BAD4184A1DFCB61200137546 /* File.swift in Sources */,
+				BAECCB4E1E37E0F000371187 /* Stream.swift in Sources */,
 				BACC7F8F1E1ED7B700F754C0 /* Attributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,6 +550,7 @@
 				BAD418541DFCB61F00137546 /* Paths.swift in Sources */,
 				BA8527D21E1D6AC500D89498 /* Errors.swift in Sources */,
 				BAD418521DFCB61F00137546 /* File.swift in Sources */,
+				BAECCB501E37E0F000371187 /* Stream.swift in Sources */,
 				BACC7F911E1ED7B700F754C0 /* Attributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,6 +566,7 @@
 				BAD418581DFCB62100137546 /* Paths.swift in Sources */,
 				BA8527D31E1D6AC500D89498 /* Errors.swift in Sources */,
 				BAD418561DFCB62100137546 /* File.swift in Sources */,
+				BAECCB511E37E0F000371187 /* Stream.swift in Sources */,
 				BACC7F921E1ED7B700F754C0 /* Attributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,6 +582,7 @@
 				BAD418501DFCB61F00137546 /* Paths.swift in Sources */,
 				BA8527D11E1D6AC500D89498 /* Errors.swift in Sources */,
 				BAD4184E1DFCB61F00137546 /* File.swift in Sources */,
+				BAECCB4F1E37E0F000371187 /* Stream.swift in Sources */,
 				BACC7F901E1ED7B700F754C0 /* Attributes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
