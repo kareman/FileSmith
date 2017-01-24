@@ -23,35 +23,104 @@ An existing regular file or something _file-like_ which you can read from and/or
 **Directory:**
 An existing directory or a symbolic link to a directory. Basically anything you can `cd` into in the terminal.
 
+**Item:**
+(for lack of a better term)
+A file or a directory. Anything with a path in the file system.
+
+## Paths
+
+## Files
+
+#### Types
+
+When opening files symbolic links are always followed, so the type of a file is never .symbolicLink, but can be .brokenSymbolicLink for symbolic links whose targets do not exist.
+
+```swift
+file1.type
+
+public enum FileType: Equatable, Hashable {
+	case regularFile
+	case directory
+	case characterSpecial
+	case blockSpecial
+	case socket
+	case brokenSymbolicLink
+	case namedPipe
+	case unknown
+}
+```
+
 ## Usage
+
+#### Change current working directory
+
+```swift
+DirectoryPath.current = "/tmp"
+Directory.current = Directory.createTempDirectory()
+```
 
 #### Create
 
 ```swift
 let dirpath = DirectoryPath("dir/dir1")
-let dir1 = try dirpath.create(ifExists: .replace)
-let dir2 = try Directory(create: "dir/dir2", ifExists: .throwError)
-let dir3 = try dir2.create(directory: "dir3", ifExists: .open) // dir/dir2/dir3
-let dir1_link = try Directory(createSymbolicLink: "dir1_link", to: dir1, ifExists: .open)
-let dir2_link = try dir1.create(symbolicLink: "dir2_link", to: dir2, ifExists: .open)
+var dir1 = try dirpath.create(ifExists: .replace)
+var dir2 = try Directory(create: "dir/dir2", ifExists: .throwError)
+var dir3 = try dir2.create(directory: "dir3", ifExists: .open) // dir/dir2/dir3
 
 let filepath = FilePath("dir/file1.txt")
-let file1 = try filepath.create(ifExists: .open)
-let file2 = try EditableFile(create: "file2.txt", ifExists: .open)
-let file3 = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
+var file1_edit = try filepath.create(ifExists: .open)
+let file2_edit = try EditableFile(create: "file2.txt", ifExists: .open)
+let file3_edit = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
+```
+
+#### Open
+
+```swift
+dir1 = try dirpath.open()
+dir2 = try Directory(open: "dir/dir2")
+dir3 = try dir2.open(directory: "dir3")
+
+let file1 = try filepath.open()
+let file2 = try File(open: "file2.txt")
+let file3 = try dir1.open(file: "file3.txt")
+```
+
+#### Read/Write
+
+```swift
+file1_edit.encoding = .utf16 // .utf8 by default
+file1_edit.write("some text...")
+file2.write(to: &file1_edit)
+
+let contents: String = file3.read()
+for line in file3.lines() { // a lazy sequence
+	// ...
+}
+while let text = file3.readSome() {
+	// read pipes etc. piece by piece, instead of waiting until they are closed.
+}
+```
+
+#### Symbolic links
+
+```swift
+let dir1_link = try Directory(createSymbolicLink: "dir1_link", to: dir1, ifExists: .open)
+let dir2_link = try dir1.create(symbolicLink: "dir2_link", to: dir2, ifExists: .open)
 let file1_link = try File(createSymbolicLink: "file1_link", to: file1, ifExists: .open)
 let file2_link = try dir2.create(symbolicLink: "file2_link", to: file2, ifExists: .open)
 ```
 
-#### Miscellaneous niceties
+#### Misc
 
 ```swift
-// change to a new temporary directory
-Directory.current = Directory.createTempDirectory()
+// the path of a file or directory
+file1.path // FilePath
+dir1.path  // DirectoryPath
 
+// remove files and directories
+try file1_edit.delete()
+try dir1.delete()
 ```
-
-
 
 ## License
 

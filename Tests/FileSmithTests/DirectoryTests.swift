@@ -114,23 +114,58 @@ class DirectoryTests: XCTestCase {
 	/// The code examples under "Usage" in the readme.
 	func testReadme() {
 		do {
-			Directory.current = Directory.createTempDirectory()
-			print(DirectoryPath.current)
+			// #### FilePaths
 
+
+			// #### Change current working directory
+			DirectoryPath.current = "/tmp"
+			Directory.current = Directory.createTempDirectory()
+
+			// #### Create
 			let dirpath = DirectoryPath("dir/dir1")
-			let dir1 = try dirpath.create(ifExists: .replace)
-			let dir2 = try Directory(create: "dir/dir2", ifExists: .throwError)
-			let dir3 = try dir2.create(directory: "dir3", ifExists: .open) // dir/dir2/dir3
-			let dir1_link = try Directory(createSymbolicLink: "dir1_link", to: dir1, ifExists: .open)
-			let dir2_link = try dir1.create(symbolicLink: "dir2_link", to: dir2, ifExists: .open)
+			var dir1 = try dirpath.create(ifExists: .replace)
+			var dir2 = try Directory(create: "dir/dir2", ifExists: .throwError)
+			var dir3 = try dir2.create(directory: "dir3", ifExists: .open) // dir/dir2/dir3
 
 			let filepath = FilePath("dir/file1.txt")
-			let file1 = try filepath.create(ifExists: .open)
-			let file2 = try EditableFile(create: "file2.txt", ifExists: .open)
-			let file3 = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
+			var file1_edit = try filepath.create(ifExists: .open)
+			let file2_edit = try EditableFile(create: "file2.txt", ifExists: .open)
+			let file3_edit = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
+
+			// #### Open
+			dir1 = try dirpath.open()
+			dir2 = try Directory(open: "dir/dir2")
+			dir3 = try dir2.open(directory: "dir3")
+
+			let file1 = try filepath.open()
+			let file2 = try File(open: "file2.txt")
+			let file3 = try dir1.open(file: "file3.txt")
+
+			// #### Read/Write
+			file1_edit.encoding = .utf16 // .utf8 by default
+			file1_edit.write("some text...")
+			file2.write(to: &file1_edit)
+
+			let contents: String = file3.read()
+			for line in file3.lines() { // a lazy sequence
+				// ...
+			}
+			while let text = file3.readSome() {
+				// read pipes etc. piece by piece, instead of waiting until they are closed.
+			}
+
+			// #### Symbolic links
+			let dir1_link = try Directory(createSymbolicLink: "dir1_link", to: dir1, ifExists: .open)
+			let dir2_link = try dir1.create(symbolicLink: "dir2_link", to: dir2, ifExists: .open)
 			let file1_link = try File(createSymbolicLink: "file1_link", to: file1, ifExists: .open)
 			let file2_link = try dir2.create(symbolicLink: "file2_link", to: file2, ifExists: .open)
 
+			// #### Misc
+			try file1_edit.delete()
+			try dir1.delete()
+
+			// Suppress unused variables warning.
+			_ = [dir3,file2_edit,file3_edit,contents,dir1_link,dir2_link,file1_link,file2_link]
 		} catch {
 			XCTFail(String(describing: error))
 		}
