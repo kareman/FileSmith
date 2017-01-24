@@ -142,6 +142,10 @@ extension Directory {
 		let newpath = self.path.append(directory: stringpath)
 		return try Directory(open: newpath)
 	}
+
+	public func delete() throws {
+		try FileManager().removeItem(atPath: path.absoluteString)
+	}
 }
 
 extension Directory {

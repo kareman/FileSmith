@@ -116,6 +116,10 @@ public class EditableFile: File {
 	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
 		try self.init(create: FilePath(stringpath), ifExists: ifExists)
 	}
+
+	public func delete() throws {
+		try FileManager().removeItem(atPath: path.absoluteString)
+	}
 }
 
 extension EditableFile: TextOutputStream {
@@ -124,10 +128,6 @@ extension EditableFile: TextOutputStream {
 	public func write(_ string: String) {
 		if type == .regularFile { _ = filehandle.seekToEndOfFile() }
 		filehandle.write(string, encoding: encoding)
-	}
-
-	public func delete() throws {
-		try FileManager().removeItem(atPath: path.absoluteString)
 	}
 }
 
