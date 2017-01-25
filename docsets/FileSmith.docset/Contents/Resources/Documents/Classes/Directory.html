@@ -14,7 +14,7 @@
     <a title="Directory Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">FileSmith Docs</a> (55% documented)</p>
+        <p><a href="../index.html">FileSmith Docs</a> (54% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -35,10 +35,10 @@
                 <a href="../Classes/Directory.html">Directory</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/EditableFile.html">EditableFile</a>
+                <a href="../Classes/ReadableFile.html">ReadableFile</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Classes/File.html">File</a>
+                <a href="../Classes/WritableFile.html">WritableFile</a>
               </li>
             </ul>
           </li>
@@ -90,7 +90,16 @@
             <a href="../Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Protocols/File.html">File</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Protocols/Path.html">Path</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ReadableStream.html">ReadableStream</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/WritableStream.html">WritableStream</a>
               </li>
             </ul>
           </li>
@@ -247,71 +256,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9FileSmith9DirectorycFzT18createSymbolicLinkVS_13DirectoryPath2toS0_8ifExistsOS_20AlreadyExistsOptions_S0_"></a>
-                    <a name="//apple_ref/swift/Method/init(createSymbolicLink:to:ifExists:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9FileSmith9DirectorycFzT18createSymbolicLinkVS_13DirectoryPath2toS0_8ifExistsOS_20AlreadyExistsOptions_S0_">init(createSymbolicLink:to:ifExists:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FC9FileSmith9Directory6createFzT12symbolicLinkSS2toS0_8ifExistsOS_20AlreadyExistsOptions_S0_"></a>
-                    <a name="//apple_ref/swift/Method/create(symbolicLink:to:ifExists:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9FileSmith9Directory6createFzT12symbolicLinkSS2toS0_8ifExistsOS_20AlreadyExistsOptions_S0_">create(symbolicLink:to:ifExists:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FC9FileSmith9Directory6createFzT12symbolicLinkSS2toCS_4File8ifExistsOS_20AlreadyExistsOptions_S1_"></a>
-                    <a name="//apple_ref/swift/Method/create(symbolicLink:to:ifExists:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9FileSmith9Directory6createFzT12symbolicLinkSS2toCS_4File8ifExistsOS_20AlreadyExistsOptions_S1_">create(symbolicLink:to:ifExists:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:FC9FileSmith9Directory11directoriesFSSGSaVS_13DirectoryPath_"></a>
                     <a name="//apple_ref/swift/Method/directories(_:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:FC9FileSmith9Directory11directoriesFSSGSaVS_13DirectoryPath_">directories(_:)</a>
@@ -426,9 +370,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9FileSmith9Directory6createFzT4fileSS8ifExistsOS_20AlreadyExistsOptions_CS_12EditableFile"></a>
+                    <a name="/s:FC9FileSmith9Directory6createFzT4fileSS8ifExistsOS_20AlreadyExistsOptions_CS_12WritableFile"></a>
                     <a name="//apple_ref/swift/Method/create(file:ifExists:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9FileSmith9Directory6createFzT4fileSS8ifExistsOS_20AlreadyExistsOptions_CS_12EditableFile">create(file:ifExists:)</a>
+                    <a class="token" href="#/s:FC9FileSmith9Directory6createFzT4fileSS8ifExistsOS_20AlreadyExistsOptions_CS_12WritableFile">create(file:ifExists:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -448,6 +392,63 @@
                     <a name="/s:FC9FileSmith9Directory6createFzT9directorySS8ifExistsOS_20AlreadyExistsOptions_S0_"></a>
                     <a name="//apple_ref/swift/Method/create(directory:ifExists:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:FC9FileSmith9Directory6createFzT9directorySS8ifExistsOS_20AlreadyExistsOptions_S0_">create(directory:ifExists:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9FileSmith9Directory4openFzT4fileSS_CS_12ReadableFile"></a>
+                    <a name="//apple_ref/swift/Method/open(file:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9FileSmith9Directory4openFzT4fileSS_CS_12ReadableFile">open(file:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9FileSmith9Directory4openFzT9directorySS_S0_"></a>
+                    <a name="//apple_ref/swift/Method/open(directory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9FileSmith9Directory4openFzT9directorySS_S0_">open(directory:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9FileSmith9Directory6deleteFzT_T_"></a>
+                    <a name="//apple_ref/swift/Method/delete()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9FileSmith9Directory6deleteFzT_T_">delete()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -575,10 +576,75 @@
                 </li>
               </ul>
             </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9FileSmith9DirectorycFzT18createSymbolicLinkVS_13DirectoryPath2toS0_8ifExistsOS_20AlreadyExistsOptions_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(createSymbolicLink:to:ifExists:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9FileSmith9DirectorycFzT18createSymbolicLinkVS_13DirectoryPath2toS0_8ifExistsOS_20AlreadyExistsOptions_S0_">init(createSymbolicLink:to:ifExists:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9FileSmith9Directory6createFzT12symbolicLinkSS2toS0_8ifExistsOS_20AlreadyExistsOptions_S0_"></a>
+                    <a name="//apple_ref/swift/Method/create(symbolicLink:to:ifExists:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9FileSmith9Directory6createFzT12symbolicLinkSS2toS0_8ifExistsOS_20AlreadyExistsOptions_S0_">create(symbolicLink:to:ifExists:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9FileSmith9Directory6createuRxS_4FilerFzT12symbolicLinkSS2toPS1__8ifExistsOS_20AlreadyExistsOptions_x"></a>
+                    <a name="//apple_ref/swift/Method/create(symbolicLink:to:ifExists:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9FileSmith9Directory6createuRxS_4FilerFzT12symbolicLinkSS2toPS1__8ifExistsOS_20AlreadyExistsOptions_x">create(symbolicLink:to:ifExists:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-01-20)</p>
+          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-01-26)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AlreadyExistsOptions Enum Reference</title>
+    <title>WritableStream Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/AlreadyExistsOptions" class="dashAnchor"></a>
-    <a title="AlreadyExistsOptions Enum Reference"></a>
+    <a name="//apple_ref/swift/Protocol/WritableStream" class="dashAnchor"></a>
+    <a title="WritableStream Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">FileSmith Docs</a> (54% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">FileSmith Reference</a>
         <img id="carat" src="../img/carat.png" />
-        AlreadyExistsOptions Enum Reference
+        WritableStream Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -128,8 +128,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>AlreadyExistsOptions</h1>
-            <p>Undocumented</p>
+            <h1>WritableStream</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">WritableStream</span> <span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStream</span></code></pre>
+
+                </div>
+              </div>
+            <p>An output stream, like standard output or a writeable file.</p>
 
           </section>
           <section class="section task-group-section">
@@ -138,9 +144,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO9FileSmith20AlreadyExistsOptions4openFMS0_S0_"></a>
-                    <a name="//apple_ref/swift/Element/open" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO9FileSmith20AlreadyExistsOptions4openFMS0_S0_">open</a>
+                    <a name="/s:vP9FileSmith14WritableStream8encodingVE10FoundationSS8Encoding"></a>
+                    <a name="//apple_ref/swift/Property/encoding" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP9FileSmith14WritableStream8encodingVE10FoundationSS8Encoding">encoding</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -151,24 +157,13 @@
                         <p>Undocumented</p>
 
                       </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:FO9FileSmith20AlreadyExistsOptions10throwErrorFMS0_S0_"></a>
-                    <a name="//apple_ref/swift/Element/throwError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO9FileSmith20AlreadyExistsOptions10throwErrorFMS0_S0_">throwError</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">WritableStream</span> <span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStream</span></code></pre>
 
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -176,9 +171,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FO9FileSmith20AlreadyExistsOptions7replaceFMS0_S0_"></a>
-                    <a name="//apple_ref/swift/Element/replace" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FO9FileSmith20AlreadyExistsOptions7replaceFMS0_S0_">replace</a>
+                    <a name="/s:FP9FileSmith14WritableStream5writeFSST_"></a>
+                    <a name="//apple_ref/swift/Method/write(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9FileSmith14WritableStream5writeFSST_">write(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -186,8 +181,78 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Write the textual representation of <code>x</code> to the stream.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">write</span><span class="p">(</span><span class="n">_</span> <span class="nv">x</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FP9FileSmith14WritableStream5closeFT_T_"></a>
+                    <a name="//apple_ref/swift/Method/close()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9FileSmith14WritableStream5closeFT_T_">close()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Close the stream. Must be called on local streams when finished writing.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">close</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FE9FileSmithPS_14WritableStream5printFTGSaP__9separatorSS10terminatorSS_T_"></a>
+                    <a name="//apple_ref/swift/Method/print(_:separator:terminator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9FileSmithPS_14WritableStream5printFTGSaP__9separatorSS10terminatorSS_T_">print(_:separator:terminator:)</a>
+                    </code>
+                      <span class="declaration-note">
+                        Extension method
+                      </span>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Writes the textual representations of the given items into the stream.
+Works exactly the same way as the built-in <code>print</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">print</span><span class="p">(</span><span class="n">_</span> <span class="nv">items</span><span class="p">:</span> <span class="kt">Any</span><span class="o">...</span><span class="p">,</span> <span class="nv">separator</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">" "</span><span class="p">,</span> <span class="nv">terminator</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
