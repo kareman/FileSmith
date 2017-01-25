@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "52D6D9EF1BEFFFBE002C0205"
+               BlueprintIdentifier = "OBJ_27"
                BuildableName = "FileSmith.framework"
-               BlueprintName = "FileSmith-tvOS"
+               BlueprintName = "FileSmith"
                ReferencedContainer = "container:FileSmith.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,22 +32,13 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DD75028C1C690C7A006590AF"
-               BuildableName = "FileSmith-tvOS Tests.xctest"
-               BlueprintName = "FileSmith-tvOS Tests"
+               BlueprintIdentifier = "OBJ_42"
+               BuildableName = "FileSmithTests.xctest"
+               BlueprintName = "FileSmithTests"
                ReferencedContainer = "container:FileSmith.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52D6D9EF1BEFFFBE002C0205"
-            BuildableName = "FileSmith.framework"
-            BlueprintName = "FileSmith-tvOS"
-            ReferencedContainer = "container:FileSmith.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,9 +55,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52D6D9EF1BEFFFBE002C0205"
+            BlueprintIdentifier = "OBJ_27"
             BuildableName = "FileSmith.framework"
-            BlueprintName = "FileSmith-tvOS"
+            BlueprintName = "FileSmith"
             ReferencedContainer = "container:FileSmith.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +73,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "52D6D9EF1BEFFFBE002C0205"
+            BlueprintIdentifier = "OBJ_27"
             BuildableName = "FileSmith.framework"
-            BlueprintName = "FileSmith-tvOS"
+            BlueprintName = "FileSmith"
             ReferencedContainer = "container:FileSmith.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

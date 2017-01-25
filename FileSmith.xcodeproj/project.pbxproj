@@ -3,1065 +3,418 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52D6D9871BEFF229002C0205 /* FileSmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* FileSmith.framework */; };
-		BA68BBE71E037A2F00F13E62 /* Lazy-split.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */; };
-		BA68BBE81E037A4900F13E62 /* Lazy-split.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */; };
-		BA68BBE91E037A4A00F13E62 /* Lazy-split.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */; };
-		BA68BBEA1E037A4A00F13E62 /* Lazy-split.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */; };
-		BA8527D01E1D6AC500D89498 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8527CF1E1D6AC500D89498 /* Errors.swift */; };
-		BA8527D11E1D6AC500D89498 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8527CF1E1D6AC500D89498 /* Errors.swift */; };
-		BA8527D21E1D6AC500D89498 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8527CF1E1D6AC500D89498 /* Errors.swift */; };
-		BA8527D31E1D6AC500D89498 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8527CF1E1D6AC500D89498 /* Errors.swift */; };
-		BA877D181DFCC1FF00595DA7 /* PathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4185B1DFCB64800137546 /* PathTests.swift */; };
-		BA877D191DFCC20100595DA7 /* PathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4185B1DFCB64800137546 /* PathTests.swift */; };
-		BA877D1A1DFCC20200595DA7 /* PathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4185B1DFCB64800137546 /* PathTests.swift */; };
-		BA877D1E1DFCC21200595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
-		BA877D1F1DFCC21300595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
-		BA877D201DFCC21400595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
-		BACC4A541E246A9400AFFC69 /* SymbolicLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */; };
-		BACC4A551E246A9400AFFC69 /* SymbolicLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */; };
-		BACC4A561E246A9400AFFC69 /* SymbolicLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */; };
-		BACC4A571E246A9400AFFC69 /* SymbolicLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */; };
-		BACC7F8F1E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
-		BACC7F901E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
-		BACC7F911E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
-		BACC7F921E1ED7B700F754C0 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */; };
-		BAD418491DFCB61200137546 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418451DFCB61200137546 /* Directory.swift */; };
-		BAD4184A1DFCB61200137546 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418461DFCB61200137546 /* File.swift */; };
-		BAD4184B1DFCB61200137546 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418471DFCB61200137546 /* General.swift */; };
-		BAD4184C1DFCB61200137546 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* Paths.swift */; };
-		BAD4184D1DFCB61F00137546 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418451DFCB61200137546 /* Directory.swift */; };
-		BAD4184E1DFCB61F00137546 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418461DFCB61200137546 /* File.swift */; };
-		BAD4184F1DFCB61F00137546 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418471DFCB61200137546 /* General.swift */; };
-		BAD418501DFCB61F00137546 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* Paths.swift */; };
-		BAD418511DFCB61F00137546 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418451DFCB61200137546 /* Directory.swift */; };
-		BAD418521DFCB61F00137546 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418461DFCB61200137546 /* File.swift */; };
-		BAD418531DFCB61F00137546 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418471DFCB61200137546 /* General.swift */; };
-		BAD418541DFCB61F00137546 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* Paths.swift */; };
-		BAD418551DFCB62100137546 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418451DFCB61200137546 /* Directory.swift */; };
-		BAD418561DFCB62100137546 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418461DFCB61200137546 /* File.swift */; };
-		BAD418571DFCB62100137546 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418471DFCB61200137546 /* General.swift */; };
-		BAD418581DFCB62100137546 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418481DFCB61200137546 /* Paths.swift */; };
-		BAECCB4E1E37E0F000371187 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECCB4D1E37E0F000371187 /* Stream.swift */; };
-		BAECCB4F1E37E0F000371187 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECCB4D1E37E0F000371187 /* Stream.swift */; };
-		BAECCB501E37E0F000371187 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECCB4D1E37E0F000371187 /* Stream.swift */; };
-		BAECCB511E37E0F000371187 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAECCB4D1E37E0F000371187 /* Stream.swift */; };
-		DD7502881C68FEDE006590AF /* FileSmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6DA0F1BF000BD002C0205 /* FileSmith.framework */; };
-		DD7502921C690C7A006590AF /* FileSmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D9F01BEFFFBE002C0205 /* FileSmith.framework */; };
+		OBJ_32 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Attributes.swift */; };
+		OBJ_33 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Directory.swift */; };
+		OBJ_34 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Errors.swift */; };
+		OBJ_35 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* File.swift */; };
+		OBJ_36 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* General.swift */; };
+		OBJ_37 /* Lazy-split.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Lazy-split.swift */; };
+		OBJ_38 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* Paths.swift */; };
+		OBJ_39 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Stream.swift */; };
+		OBJ_40 /* SymbolicLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* SymbolicLinks.swift */; };
+		OBJ_47 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* DirectoryTests.swift */; };
+		OBJ_48 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* FileTests.swift */; };
+		OBJ_49 /* PathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* PathTests.swift */; };
+		OBJ_51 /* FileSmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* FileSmith.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		52D6D9881BEFF229002C0205 /* PBXContainerItemProxy */ = {
+		BA24FF2E1E393A7B00C4CB37 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 52D6D9731BEFF229002C0205 /* Project object */;
+			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 52D6D97B1BEFF229002C0205;
-			remoteInfo = FilesAndDirectories;
-		};
-		DD7502801C68FCFC006590AF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52D6D9731BEFF229002C0205 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52D6DA0E1BF000BD002C0205;
-			remoteInfo = "FilesAndDirectories-macOS";
-		};
-		DD7502931C690C7A006590AF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 52D6D9731BEFF229002C0205 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 52D6D9EF1BEFFFBE002C0205;
-			remoteInfo = "FilesAndDirectories-tvOS";
+			remoteGlobalIDString = OBJ_27;
+			remoteInfo = FileSmith;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		52D6D97C1BEFF229002C0205 /* FileSmith.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileSmith.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		52D6D9861BEFF229002C0205 /* FileSmith-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileSmith-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		52D6D9E21BEFFF6E002C0205 /* FileSmith.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileSmith.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		52D6D9F01BEFFFBE002C0205 /* FileSmith.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileSmith.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		52D6DA0F1BF000BD002C0205 /* FileSmith.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FileSmith.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD2FAA261CD0B6D800659CF4 /* FileSmith.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = FileSmith.plist; path = FileSmith.xcodeproj/FileSmith.plist; sourceTree = SOURCE_ROOT; };
-		AD2FAA281CD0B6E100659CF4 /* FileSmithTests.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = FileSmithTests.plist; path = FileSmith.xcodeproj/FileSmithTests.plist; sourceTree = SOURCE_ROOT; };
-		BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Lazy-split.swift"; path = "Sources/Lazy-split.swift"; sourceTree = "<group>"; };
-		BA8527CF1E1D6AC500D89498 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = Sources/Errors.swift; sourceTree = "<group>"; };
-		BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SymbolicLinks.swift; path = Sources/SymbolicLinks.swift; sourceTree = "<group>"; };
-		BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Attributes.swift; path = Sources/Attributes.swift; sourceTree = "<group>"; };
-		BAD418451DFCB61200137546 /* Directory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Directory.swift; path = Sources/Directory.swift; sourceTree = "<group>"; };
-		BAD418461DFCB61200137546 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = Sources/File.swift; sourceTree = "<group>"; };
-		BAD418471DFCB61200137546 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = General.swift; path = Sources/General.swift; sourceTree = "<group>"; };
-		BAD418481DFCB61200137546 /* Paths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Paths.swift; path = Sources/Paths.swift; sourceTree = "<group>"; };
-		BAD418591DFCB64800137546 /* DirectoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTests.swift; sourceTree = "<group>"; };
-		BAD4185B1DFCB64800137546 /* PathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathTests.swift; sourceTree = "<group>"; };
-		BAECCB4D1E37E0F000371187 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stream.swift; path = Sources/Stream.swift; sourceTree = "<group>"; };
-		DD75027A1C68FCFC006590AF /* FileSmith-macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileSmith-macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD75028D1C690C7A006590AF /* FileSmith-tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileSmith-tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_10 /* Directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
+		OBJ_11 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		OBJ_12 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		OBJ_13 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		OBJ_14 /* Lazy-split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lazy-split.swift"; sourceTree = "<group>"; };
+		OBJ_15 /* Paths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paths.swift; sourceTree = "<group>"; };
+		OBJ_16 /* Stream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		OBJ_17 /* SymbolicLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolicLinks.swift; sourceTree = "<group>"; };
+		OBJ_20 /* DirectoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTests.swift; sourceTree = "<group>"; };
+		OBJ_21 /* FileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
+		OBJ_22 /* PathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTests.swift; sourceTree = "<group>"; };
+		OBJ_25 /* FileSmith.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileSmith.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_26 /* FileSmithTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = FileSmithTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_9 /* Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		52D6D9781BEFF229002C0205 /* Frameworks */ = {
+		OBJ_41 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52D6D9831BEFF229002C0205 /* Frameworks */ = {
+		OBJ_50 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
-				52D6D9871BEFF229002C0205 /* FileSmith.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9DE1BEFFF6E002C0205 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9EC1BEFFFBE002C0205 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6DA0B1BF000BD002C0205 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD7502771C68FCFC006590AF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DD7502881C68FEDE006590AF /* FileSmith.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD75028A1C690C7A006590AF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DD7502921C690C7A006590AF /* FileSmith.framework in Frameworks */,
+				OBJ_51 /* FileSmith.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		52D6D9721BEFF229002C0205 = {
+		OBJ_18 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				BAD418441DFCB5E700137546 /* Sources */,
-				BAD4185F1DFCB65400137546 /* Tests */,
-				52D6D99C1BEFF38C002C0205 /* Configs */,
-				52D6D97D1BEFF229002C0205 /* Products */,
+				OBJ_19 /* FileSmithTests */,
 			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
-		52D6D97D1BEFF229002C0205 /* Products */ = {
+		OBJ_19 /* FileSmithTests */ = {
 			isa = PBXGroup;
 			children = (
-				52D6D97C1BEFF229002C0205 /* FileSmith.framework */,
-				52D6D9861BEFF229002C0205 /* FileSmith-iOS Tests.xctest */,
-				52D6D9E21BEFFF6E002C0205 /* FileSmith.framework */,
-				52D6D9F01BEFFFBE002C0205 /* FileSmith.framework */,
-				52D6DA0F1BF000BD002C0205 /* FileSmith.framework */,
-				DD75027A1C68FCFC006590AF /* FileSmith-macOS Tests.xctest */,
-				DD75028D1C690C7A006590AF /* FileSmith-tvOS Tests.xctest */,
+				OBJ_20 /* DirectoryTests.swift */,
+				OBJ_21 /* FileTests.swift */,
+				OBJ_22 /* PathTests.swift */,
 			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		52D6D99C1BEFF38C002C0205 /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-				DD7502721C68FC1B006590AF /* Frameworks */,
-				DD7502731C68FC20006590AF /* Tests */,
-			);
-			path = Configs;
-			sourceTree = "<group>";
-		};
-		BAD418441DFCB5E700137546 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				BAD418481DFCB61200137546 /* Paths.swift */,
-				BAD418451DFCB61200137546 /* Directory.swift */,
-				BAD418461DFCB61200137546 /* File.swift */,
-				BA8527CF1E1D6AC500D89498 /* Errors.swift */,
-				BACC7F8E1E1ED7B700F754C0 /* Attributes.swift */,
-				BACC4A531E246A9400AFFC69 /* SymbolicLinks.swift */,
-				BAECCB4D1E37E0F000371187 /* Stream.swift */,
-				BAD418471DFCB61200137546 /* General.swift */,
-				BA68BBE61E037A2F00F13E62 /* Lazy-split.swift */,
-			);
-			name = Sources;
-			sourceTree = "<group>";
-		};
-		BAD4185F1DFCB65400137546 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				BAD4185B1DFCB64800137546 /* PathTests.swift */,
-				BAD418591DFCB64800137546 /* DirectoryTests.swift */,
-			);
-			name = Tests;
+			name = FileSmithTests;
 			path = Tests/FileSmithTests;
 			sourceTree = SOURCE_ROOT;
 		};
-		DD7502721C68FC1B006590AF /* Frameworks */ = {
+		OBJ_24 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AD2FAA261CD0B6D800659CF4 /* FileSmith.plist */,
+				OBJ_25 /* FileSmith.framework */,
+				OBJ_26 /* FileSmithTests.xctest */,
 			);
-			name = Frameworks;
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_18 /* Tests */,
+				OBJ_24 /* Products */,
+			);
+			name = "";
 			sourceTree = "<group>";
 		};
-		DD7502731C68FC20006590AF /* Tests */ = {
+		OBJ_7 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				AD2FAA281CD0B6E100659CF4 /* FileSmithTests.plist */,
+				OBJ_8 /* FileSmith */,
 			);
-			name = Tests;
+			path = Sources;
 			sourceTree = "<group>";
+		};
+		OBJ_8 /* FileSmith */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* Attributes.swift */,
+				OBJ_10 /* Directory.swift */,
+				OBJ_11 /* Errors.swift */,
+				OBJ_12 /* File.swift */,
+				OBJ_13 /* General.swift */,
+				OBJ_14 /* Lazy-split.swift */,
+				OBJ_15 /* Paths.swift */,
+				OBJ_16 /* Stream.swift */,
+				OBJ_17 /* SymbolicLinks.swift */,
+			);
+			name = FileSmith;
+			path = Sources;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		52D6D9791BEFF229002C0205 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9DF1BEFFF6E002C0205 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9ED1BEFFFBE002C0205 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6DA0C1BF000BD002C0205 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		52D6D97B1BEFF229002C0205 /* FileSmith-iOS */ = {
+		OBJ_27 /* FileSmith */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "FileSmith-iOS" */;
+			buildConfigurationList = OBJ_28 /* Build configuration list for PBXNativeTarget "FileSmith" */;
 			buildPhases = (
-				52D6D9771BEFF229002C0205 /* Sources */,
-				52D6D9781BEFF229002C0205 /* Frameworks */,
-				52D6D9791BEFF229002C0205 /* Headers */,
-				52D6D97A1BEFF229002C0205 /* Resources */,
+				OBJ_31 /* Sources */,
+				OBJ_41 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "FileSmith-iOS";
-			productName = FilesAndDirectories;
-			productReference = 52D6D97C1BEFF229002C0205 /* FileSmith.framework */;
+			name = FileSmith;
+			productName = FileSmith;
+			productReference = OBJ_25 /* FileSmith.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		52D6D9851BEFF229002C0205 /* FileSmith-iOS Tests */ = {
+		OBJ_42 /* FileSmithTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 52D6D9931BEFF229002C0205 /* Build configuration list for PBXNativeTarget "FileSmith-iOS Tests" */;
+			buildConfigurationList = OBJ_43 /* Build configuration list for PBXNativeTarget "FileSmithTests" */;
 			buildPhases = (
-				52D6D9821BEFF229002C0205 /* Sources */,
-				52D6D9831BEFF229002C0205 /* Frameworks */,
-				52D6D9841BEFF229002C0205 /* Resources */,
+				OBJ_46 /* Sources */,
+				OBJ_50 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				52D6D9891BEFF229002C0205 /* PBXTargetDependency */,
+				OBJ_52 /* PBXTargetDependency */,
 			);
-			name = "FileSmith-iOS Tests";
-			productName = FilesAndDirectoriesTests;
-			productReference = 52D6D9861BEFF229002C0205 /* FileSmith-iOS Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		52D6D9E11BEFFF6E002C0205 /* FileSmith-watchOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52D6D9E71BEFFF6E002C0205 /* Build configuration list for PBXNativeTarget "FileSmith-watchOS" */;
-			buildPhases = (
-				52D6D9DD1BEFFF6E002C0205 /* Sources */,
-				52D6D9DE1BEFFF6E002C0205 /* Frameworks */,
-				52D6D9DF1BEFFF6E002C0205 /* Headers */,
-				52D6D9E01BEFFF6E002C0205 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "FileSmith-watchOS";
-			productName = "FilesAndDirectories-watchOS";
-			productReference = 52D6D9E21BEFFF6E002C0205 /* FileSmith.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		52D6D9EF1BEFFFBE002C0205 /* FileSmith-tvOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52D6DA011BEFFFBE002C0205 /* Build configuration list for PBXNativeTarget "FileSmith-tvOS" */;
-			buildPhases = (
-				52D6D9EB1BEFFFBE002C0205 /* Sources */,
-				52D6D9EC1BEFFFBE002C0205 /* Frameworks */,
-				52D6D9ED1BEFFFBE002C0205 /* Headers */,
-				52D6D9EE1BEFFFBE002C0205 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "FileSmith-tvOS";
-			productName = "FilesAndDirectories-tvOS";
-			productReference = 52D6D9F01BEFFFBE002C0205 /* FileSmith.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		52D6DA0E1BF000BD002C0205 /* FileSmith-macOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52D6DA201BF000BD002C0205 /* Build configuration list for PBXNativeTarget "FileSmith-macOS" */;
-			buildPhases = (
-				52D6DA0A1BF000BD002C0205 /* Sources */,
-				52D6DA0B1BF000BD002C0205 /* Frameworks */,
-				52D6DA0C1BF000BD002C0205 /* Headers */,
-				52D6DA0D1BF000BD002C0205 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "FileSmith-macOS";
-			productName = "FilesAndDirectories-macOS";
-			productReference = 52D6DA0F1BF000BD002C0205 /* FileSmith.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		DD7502791C68FCFC006590AF /* FileSmith-macOS Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DD7502821C68FCFC006590AF /* Build configuration list for PBXNativeTarget "FileSmith-macOS Tests" */;
-			buildPhases = (
-				DD7502761C68FCFC006590AF /* Sources */,
-				DD7502771C68FCFC006590AF /* Frameworks */,
-				DD7502781C68FCFC006590AF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DD7502811C68FCFC006590AF /* PBXTargetDependency */,
-			);
-			name = "FileSmith-macOS Tests";
-			productName = "FilesAndDirectories-OS Tests";
-			productReference = DD75027A1C68FCFC006590AF /* FileSmith-macOS Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		DD75028C1C690C7A006590AF /* FileSmith-tvOS Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DD7502951C690C7A006590AF /* Build configuration list for PBXNativeTarget "FileSmith-tvOS Tests" */;
-			buildPhases = (
-				DD7502891C690C7A006590AF /* Sources */,
-				DD75028A1C690C7A006590AF /* Frameworks */,
-				DD75028B1C690C7A006590AF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DD7502941C690C7A006590AF /* PBXTargetDependency */,
-			);
-			name = "FileSmith-tvOS Tests";
-			productName = "FilesAndDirectories-tvOS Tests";
-			productReference = DD75028D1C690C7A006590AF /* FileSmith-tvOS Tests.xctest */;
+			name = FileSmithTests;
+			productName = FileSmithTests;
+			productReference = OBJ_26 /* FileSmithTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		52D6D9731BEFF229002C0205 /* Project object */ = {
+		OBJ_1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0810;
-				ORGANIZATIONNAME = FileSmith;
-				TargetAttributes = {
-					52D6D97B1BEFF229002C0205 = {
-						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0810;
-					};
-					52D6D9851BEFF229002C0205 = {
-						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
-					};
-					52D6D9E11BEFFF6E002C0205 = {
-						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
-					};
-					52D6D9EF1BEFFFBE002C0205 = {
-						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
-					};
-					52D6DA0E1BF000BD002C0205 = {
-						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
-					};
-					DD7502791C68FCFC006590AF = {
-						CreatedOnToolsVersion = 7.2.1;
-						LastSwiftMigration = 0800;
-					};
-					DD75028C1C690C7A006590AF = {
-						CreatedOnToolsVersion = 7.2.1;
-						LastSwiftMigration = 0800;
-					};
-				};
+				LastUpgradeCheck = 0820;
 			};
-			buildConfigurationList = 52D6D9761BEFF229002C0205 /* Build configuration list for PBXProject "FileSmith" */;
-			compatibilityVersion = "Xcode 8.0";
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "FileSmith" */;
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 52D6D9721BEFF229002C0205;
-			productRefGroup = 52D6D97D1BEFF229002C0205 /* Products */;
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_24 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				52D6D97B1BEFF229002C0205 /* FileSmith-iOS */,
-				52D6DA0E1BF000BD002C0205 /* FileSmith-macOS */,
-				52D6D9E11BEFFF6E002C0205 /* FileSmith-watchOS */,
-				52D6D9EF1BEFFFBE002C0205 /* FileSmith-tvOS */,
-				52D6D9851BEFF229002C0205 /* FileSmith-iOS Tests */,
-				DD7502791C68FCFC006590AF /* FileSmith-macOS Tests */,
-				DD75028C1C690C7A006590AF /* FileSmith-tvOS Tests */,
+				OBJ_27 /* FileSmith */,
+				OBJ_42 /* FileSmithTests */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		52D6D97A1BEFF229002C0205 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9841BEFF229002C0205 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9E01BEFFF6E002C0205 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9EE1BEFFFBE002C0205 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6DA0D1BF000BD002C0205 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD7502781C68FCFC006590AF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD75028B1C690C7A006590AF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		52D6D9771BEFF229002C0205 /* Sources */ = {
+		OBJ_31 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
-				BAD4184B1DFCB61200137546 /* General.swift in Sources */,
-				BACC4A541E246A9400AFFC69 /* SymbolicLinks.swift in Sources */,
-				BAD418491DFCB61200137546 /* Directory.swift in Sources */,
-				BA68BBE71E037A2F00F13E62 /* Lazy-split.swift in Sources */,
-				BAD4184C1DFCB61200137546 /* Paths.swift in Sources */,
-				BA8527D01E1D6AC500D89498 /* Errors.swift in Sources */,
-				BAD4184A1DFCB61200137546 /* File.swift in Sources */,
-				BAECCB4E1E37E0F000371187 /* Stream.swift in Sources */,
-				BACC7F8F1E1ED7B700F754C0 /* Attributes.swift in Sources */,
+				OBJ_32 /* Attributes.swift in Sources */,
+				OBJ_33 /* Directory.swift in Sources */,
+				OBJ_34 /* Errors.swift in Sources */,
+				OBJ_35 /* File.swift in Sources */,
+				OBJ_36 /* General.swift in Sources */,
+				OBJ_37 /* Lazy-split.swift in Sources */,
+				OBJ_38 /* Paths.swift in Sources */,
+				OBJ_39 /* Stream.swift in Sources */,
+				OBJ_40 /* SymbolicLinks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		52D6D9821BEFF229002C0205 /* Sources */ = {
+		OBJ_46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 0;
 			files = (
-				BA877D181DFCC1FF00595DA7 /* PathTests.swift in Sources */,
-				BA877D1E1DFCC21200595DA7 /* DirectoryTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9DD1BEFFF6E002C0205 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BAD418531DFCB61F00137546 /* General.swift in Sources */,
-				BACC4A561E246A9400AFFC69 /* SymbolicLinks.swift in Sources */,
-				BAD418511DFCB61F00137546 /* Directory.swift in Sources */,
-				BA68BBE91E037A4A00F13E62 /* Lazy-split.swift in Sources */,
-				BAD418541DFCB61F00137546 /* Paths.swift in Sources */,
-				BA8527D21E1D6AC500D89498 /* Errors.swift in Sources */,
-				BAD418521DFCB61F00137546 /* File.swift in Sources */,
-				BAECCB501E37E0F000371187 /* Stream.swift in Sources */,
-				BACC7F911E1ED7B700F754C0 /* Attributes.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6D9EB1BEFFFBE002C0205 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BAD418571DFCB62100137546 /* General.swift in Sources */,
-				BACC4A571E246A9400AFFC69 /* SymbolicLinks.swift in Sources */,
-				BAD418551DFCB62100137546 /* Directory.swift in Sources */,
-				BA68BBEA1E037A4A00F13E62 /* Lazy-split.swift in Sources */,
-				BAD418581DFCB62100137546 /* Paths.swift in Sources */,
-				BA8527D31E1D6AC500D89498 /* Errors.swift in Sources */,
-				BAD418561DFCB62100137546 /* File.swift in Sources */,
-				BAECCB511E37E0F000371187 /* Stream.swift in Sources */,
-				BACC7F921E1ED7B700F754C0 /* Attributes.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		52D6DA0A1BF000BD002C0205 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BAD4184F1DFCB61F00137546 /* General.swift in Sources */,
-				BACC4A551E246A9400AFFC69 /* SymbolicLinks.swift in Sources */,
-				BAD4184D1DFCB61F00137546 /* Directory.swift in Sources */,
-				BA68BBE81E037A4900F13E62 /* Lazy-split.swift in Sources */,
-				BAD418501DFCB61F00137546 /* Paths.swift in Sources */,
-				BA8527D11E1D6AC500D89498 /* Errors.swift in Sources */,
-				BAD4184E1DFCB61F00137546 /* File.swift in Sources */,
-				BAECCB4F1E37E0F000371187 /* Stream.swift in Sources */,
-				BACC7F901E1ED7B700F754C0 /* Attributes.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD7502761C68FCFC006590AF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BA877D191DFCC20100595DA7 /* PathTests.swift in Sources */,
-				BA877D1F1DFCC21300595DA7 /* DirectoryTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD7502891C690C7A006590AF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BA877D1A1DFCC20200595DA7 /* PathTests.swift in Sources */,
-				BA877D201DFCC21400595DA7 /* DirectoryTests.swift in Sources */,
+				OBJ_47 /* DirectoryTests.swift in Sources */,
+				OBJ_48 /* FileTests.swift in Sources */,
+				OBJ_49 /* PathTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		52D6D9891BEFF229002C0205 /* PBXTargetDependency */ = {
+		OBJ_52 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 52D6D97B1BEFF229002C0205 /* FileSmith-iOS */;
-			targetProxy = 52D6D9881BEFF229002C0205 /* PBXContainerItemProxy */;
-		};
-		DD7502811C68FCFC006590AF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52D6DA0E1BF000BD002C0205 /* FileSmith-macOS */;
-			targetProxy = DD7502801C68FCFC006590AF /* PBXContainerItemProxy */;
-		};
-		DD7502941C690C7A006590AF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 52D6D9EF1BEFFFBE002C0205 /* FileSmith-tvOS */;
-			targetProxy = DD7502931C690C7A006590AF /* PBXContainerItemProxy */;
+			target = OBJ_27 /* FileSmith */;
+			targetProxy = BA24FF2E1E393A7B00C4CB37 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		52D6D98E1BEFF229002C0205 /* Debug */ = {
+		OBJ_29 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmith_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = FileSmith;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				TARGET_NAME = FileSmith;
+			};
+			name = Debug;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				OTHER_SWIFT_FLAGS = "-DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				USE_HEADERMAP = NO;
 			};
 			name = Debug;
 		};
-		52D6D98F1BEFF229002C0205 /* Release */ = {
+		OBJ_30 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmith_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = FileSmith;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				TARGET_NAME = FileSmith;
+			};
+			name = Release;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		52D6D9911BEFF229002C0205 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/FileSmith.xcodeproj/FileSmith.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-iOS";
-				PRODUCT_NAME = FileSmith;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		52D6D9921BEFF229002C0205 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/FileSmith.xcodeproj/FileSmith.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-iOS";
-				PRODUCT_NAME = FileSmith;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		52D6D9941BEFF229002C0205 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmithTests.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-iOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		52D6D9951BEFF229002C0205 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmithTests.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-iOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		52D6D9E81BEFFF6E002C0205 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/FileSmith.xcodeproj/FileSmith.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-watchOS";
-				PRODUCT_NAME = FileSmith;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		52D6D9E91BEFFF6E002C0205 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/FileSmith.xcodeproj/FileSmith.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-watchOS";
-				PRODUCT_NAME = FileSmith;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		52D6DA021BEFFFBE002C0205 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/FileSmith.xcodeproj/FileSmith.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-tvOS";
-				PRODUCT_NAME = FileSmith;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-			};
-			name = Debug;
-		};
-		52D6DA031BEFFFBE002C0205 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/FileSmith.xcodeproj/FileSmith.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-tvOS";
-				PRODUCT_NAME = FileSmith;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-			};
-			name = Release;
-		};
-		52D6DA211BF000BD002C0205 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/FileSmith.xcodeproj/FileSmith.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=200";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-macOS";
-				PRODUCT_NAME = FileSmith;
+				OTHER_SWIFT_FLAGS = "-DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		52D6DA221BF000BD002C0205 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = "$(SRCROOT)/FileSmith.xcodeproj/FileSmith.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-macOS";
-				PRODUCT_NAME = FileSmith;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
+				USE_HEADERMAP = NO;
 			};
 			name = Release;
 		};
-		DD7502831C68FCFC006590AF /* Debug */ = {
+		OBJ_44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmithTests.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-macOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmithTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				TARGET_NAME = FileSmithTests;
 			};
 			name = Debug;
 		};
-		DD7502841C68FCFC006590AF /* Release */ = {
+		OBJ_45 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmithTests.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-macOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		DD7502961C690C7A006590AF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmithTests.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-tvOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_VERSION = 3.0;
-				TVOS_DEPLOYMENT_TARGET = 9.1;
-			};
-			name = Debug;
-		};
-		DD7502971C690C7A006590AF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmithTests.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-tvOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TVOS_DEPLOYMENT_TARGET = 9.1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmithTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				TARGET_NAME = FileSmithTests;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		52D6D9761BEFF229002C0205 /* Build configuration list for PBXProject "FileSmith" */ = {
+		OBJ_2 /* Build configuration list for PBXProject "FileSmith" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				52D6D98E1BEFF229002C0205 /* Debug */,
-				52D6D98F1BEFF229002C0205 /* Release */,
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		52D6D9901BEFF229002C0205 /* Build configuration list for PBXNativeTarget "FileSmith-iOS" */ = {
+		OBJ_28 /* Build configuration list for PBXNativeTarget "FileSmith" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				52D6D9911BEFF229002C0205 /* Debug */,
-				52D6D9921BEFF229002C0205 /* Release */,
+				OBJ_29 /* Debug */,
+				OBJ_30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
-		52D6D9931BEFF229002C0205 /* Build configuration list for PBXNativeTarget "FileSmith-iOS Tests" */ = {
+		OBJ_43 /* Build configuration list for PBXNativeTarget "FileSmithTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				52D6D9941BEFF229002C0205 /* Debug */,
-				52D6D9951BEFF229002C0205 /* Release */,
+				OBJ_44 /* Debug */,
+				OBJ_45 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52D6D9E71BEFFF6E002C0205 /* Build configuration list for PBXNativeTarget "FileSmith-watchOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52D6D9E81BEFFF6E002C0205 /* Debug */,
-				52D6D9E91BEFFF6E002C0205 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52D6DA011BEFFFBE002C0205 /* Build configuration list for PBXNativeTarget "FileSmith-tvOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52D6DA021BEFFFBE002C0205 /* Debug */,
-				52D6DA031BEFFFBE002C0205 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52D6DA201BF000BD002C0205 /* Build configuration list for PBXNativeTarget "FileSmith-macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				52D6DA211BF000BD002C0205 /* Debug */,
-				52D6DA221BF000BD002C0205 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DD7502821C68FCFC006590AF /* Build configuration list for PBXNativeTarget "FileSmith-macOS Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DD7502831C68FCFC006590AF /* Debug */,
-				DD7502841C68FCFC006590AF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DD7502951C690C7A006590AF /* Build configuration list for PBXNativeTarget "FileSmith-tvOS Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DD7502961C690C7A006590AF /* Debug */,
-				DD7502971C690C7A006590AF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 52D6D9731BEFF229002C0205 /* Project object */;
+	rootObject = OBJ_1 /* Project object */;
 }
