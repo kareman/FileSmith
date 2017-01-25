@@ -74,7 +74,7 @@ extension ReadableStream {
 }
 
 /// An output stream, like standard output or a writeable file.
-public protocol WriteableStream : class, TextOutputStream {
+public protocol WritableStream : class, TextOutputStream {
 
 	var encoding: String.Encoding {get set}
 
@@ -85,7 +85,7 @@ public protocol WriteableStream : class, TextOutputStream {
 	func close()
 }
 
-extension WriteableStream {
+extension WritableStream {
 
 	/// Writes the textual representations of the given items into the stream.
 	/// Works exactly the same way as the built-in `print`.
@@ -100,8 +100,8 @@ extension WriteableStream {
 	}
 }
 
-/// Singleton WriteableStream used only for `print`ing to stdout.
-internal class StdoutStream: WriteableStream {
+/// Singleton WritableStream used only for `print`ing to stdout.
+internal class StdoutStream: WritableStream {
 	public var encoding: String.Encoding = .utf8
 
 	private init () { }

@@ -90,7 +90,7 @@ extension FilePath {
 }
 
 
-public final class WritableFile: File, WriteableStream {
+public final class WritableFile: File, WritableStream {
 	public let path: FilePath
 	public var encoding: String.Encoding = .utf8
 	public let type: FileType

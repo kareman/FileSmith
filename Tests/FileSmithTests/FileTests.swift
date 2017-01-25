@@ -96,5 +96,6 @@ class FileTests: XCTestCase {
 extension FileTests {
 	public static var allTests = [
 		("testFiles", testFiles),
+		("testOverwrite", testOverwrite),
 		]
 }
