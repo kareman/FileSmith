@@ -78,6 +78,19 @@ class FileTests: XCTestCase {
 			XCTFail(String(describing: error))
 		}
 	}
+
+	func testOverwrite() {
+		do {
+			Directory.current = Directory.createTempDirectory()
+			let file = try WritableFile(create: "file.txt", ifExists: .throwError)
+			file.print("line 1")
+			XCTAssertEqual(try String(contentsOfFile: "file.txt"), "line 1\n")
+			file.overwrite("something else than line 1\n")
+			XCTAssertEqual(try String(contentsOfFile: "file.txt"), "something else than line 1\n")
+		} catch {
+			XCTFail(String(describing: error))
+		}
+	}
 }
 
 extension FileTests {
