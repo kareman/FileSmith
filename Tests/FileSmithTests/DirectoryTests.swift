@@ -134,7 +134,7 @@ class DirectoryTests: XCTestCase {
 
 			let filepath = FilePath("dir/file1.txt")
 			var file1_edit = try filepath.create(ifExists: .open)
-			let file2_edit = try EditableFile(create: "file2.txt", ifExists: .open)
+			let file2_edit = try WriteableFile(create: "file2.txt", ifExists: .open)
 			let file3_edit = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
 
 			// #### Open
@@ -143,7 +143,7 @@ class DirectoryTests: XCTestCase {
 			dir3 = try dir2.open(directory: "dir3")
 
 			let file1 = try filepath.open()
-			let file2 = try File(open: "file2.txt")
+			let file2 = try ReadableFile(open: "file2.txt")
 			let file3 = try dir1.open(file: "file3.txt")
 
 			// #### Read/Write
@@ -162,8 +162,8 @@ class DirectoryTests: XCTestCase {
 			// #### Symbolic links
 			let dir1_link = try Directory(createSymbolicLink: "dir1_link", to: dir1, ifExists: .open)
 			let dir2_link = try dir1.create(symbolicLink: "dir2_link", to: dir2, ifExists: .open)
-			let file1_link = try File(createSymbolicLink: "file1_link", to: file1, ifExists: .open)
-			let file2_link = try dir2.create(symbolicLink: "file2_link", to: file2, ifExists: .open)
+			let file1_link = try ReadableFile(createSymbolicLink: "file1_link", to: file1, ifExists: .open)
+			let file2_link = try dir2.create(symbolicLink: "file2_link", to: file2, ifExists: .open) as ReadableFile
 
 			// #### Misc
 			try file1_edit.delete()

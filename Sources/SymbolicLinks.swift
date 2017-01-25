@@ -9,7 +9,7 @@
 import Foundation
 
 extension File {
-	public convenience init(createSymbolicLink newlink: FilePath, to target: File, ifExists: AlreadyExistsOptions) throws {
+	public init(createSymbolicLink newlink: FilePath, to target: File, ifExists: AlreadyExistsOptions) throws {
 		if let newlinktype = FileType(newlink) {
 			guard newlinktype != .directory else { throw FileSystemError.isDirectory(path: newlink) }
 			switch ifExists {
@@ -70,8 +70,8 @@ extension Directory {
 	}
 
 	@discardableResult
-	public func create(symbolicLink newlink: String, to target: File, ifExists: AlreadyExistsOptions) throws -> File {
+	public func create<F:File>(symbolicLink newlink: String, to target: File, ifExists: AlreadyExistsOptions) throws -> F {
 		let newpath = self.path.append(file: newlink)
-		return try File(createSymbolicLink: newpath, to: target, ifExists: ifExists)
+		return try F(createSymbolicLink: newpath, to: target, ifExists: ifExists)
 	}
 }

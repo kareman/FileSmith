@@ -122,9 +122,9 @@ extension Directory {
 	}
 
 	@discardableResult
-	public func create(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> EditableFile {
+	public func create(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> WriteableFile {
 		let newpath = self.path.append(file: stringpath)
-		return try EditableFile(create: newpath, ifExists: ifExists)
+		return try WriteableFile(create: newpath, ifExists: ifExists)
 	}
 
 	@discardableResult
@@ -133,9 +133,9 @@ extension Directory {
 		return try Directory(create: newpath, ifExists: ifExists)
 	}
 
-	public func open(file stringpath: String) throws -> File {
+	public func open(file stringpath: String) throws -> ReadableFile {
 		let newpath = self.path.append(file: stringpath)
-		return try File(open: newpath)
+		return try ReadableFile(open: newpath)
 	}
 
 	public func open(directory stringpath: String) throws -> Directory {

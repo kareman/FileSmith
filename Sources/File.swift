@@ -7,16 +7,33 @@
 
 import Foundation
 
-public class File: ReadableStream {
+public protocol File {
+	var path: FilePath { get }
+	var encoding: String.Encoding { get set }
+	var type: FileType { get }
+
+	init(path: FilePath, filehandle: FileHandle)
+	init(open stringpath: String) throws
+	init(open path: FilePath) throws
+}
+
+extension File {
+	public init(open stringpath: String) throws {
+		try self.init(open: FilePath(stringpath))
+	}
+}
+
+
+public final class ReadableFile: File, ReadableStream {
 	public let path: FilePath
 	public var encoding: String.Encoding = .utf8
 	public let type: FileType
 	internal let filehandle: FileHandle
 
-	fileprivate init(path: FilePath, filehandle: FileHandle, type: FileType? = nil) {
+	public required init(path: FilePath, filehandle: FileHandle) {
 		self.filehandle = filehandle
 		self.path = path
-		self.type = type ?? FileType(fileDescriptor: filehandle.fileDescriptor)
+		self.type = FileType(fileDescriptor: filehandle.fileDescriptor)
 	}
 
 	fileprivate static func errorForFile(at stringpath: String, writing: Bool) throws {
@@ -29,18 +46,13 @@ public class File: ReadableStream {
 		throw FileSystemError.invalidAccess(path: FilePath(stringpath), writing: writing)
 	}
 
-	public convenience init(open path: FilePath) throws {
+	public convenience required init(open path: FilePath) throws {
 		guard let filehandle = FileHandle(forReadingAtPath: path.absoluteString) else {
-			try File.errorForFile(at: path.absoluteString, writing: false)
+			try ReadableFile.errorForFile(at: path.absoluteString, writing: false)
 			fatalError("Should have thrown error when opening \(path.absoluteString)")
 		}
 		self.init(path: path, filehandle: filehandle)
 	}
-
-	public convenience init(open stringpath: String) throws {
-		try self.init(open: FilePath(stringpath))
-	}
-
 
 	public func read() -> String {
 		return filehandle.read(encoding: encoding)
@@ -56,7 +68,7 @@ public class File: ReadableStream {
 }
 
 #if os(macOS)
-	extension File {
+	extension ReadableFile {
 
 		/// `handler` will be called whenever there is new text output available.
 		/// Pass `nil` to remove any preexisting handlers.
@@ -73,18 +85,28 @@ public class File: ReadableStream {
 #endif
 
 extension FilePath {
-	public func open() throws -> File {
-		return try File(open: self)
+	public func open() throws -> ReadableFile {
+		return try ReadableFile(open: self)
 	}
 }
 
 
-public class EditableFile: File {
+public final class WriteableFile: File, WriteableStream {
+	public let path: FilePath
+	public var encoding: String.Encoding = .utf8
+	public let type: FileType
+	internal let filehandle: FileHandle
+
+	public init(path: FilePath, filehandle: FileHandle) {
+		self.filehandle = filehandle
+		self.path = path
+		self.type = FileType(fileDescriptor: filehandle.fileDescriptor)
+	}
 
 	public convenience init(open path: FilePath) throws {
 		try path.verifyIsInSandbox()
 		guard let filehandle = FileHandle(forUpdatingAtPath: path.absoluteString) else {
-			try File.errorForFile(at: path.absoluteString, writing: true)
+			try ReadableFile.errorForFile(at: path.absoluteString, writing: true)
 			fatalError("Should have thrown error when opening \(path.absoluteString)")
 		}
 		self.init(path: path, filehandle: filehandle)
@@ -113,7 +135,7 @@ public class EditableFile: File {
 	}
 
 	public convenience init(create path: FilePath, ifExists: AlreadyExistsOptions) throws {
-		try EditableFile.createFile(path: path, ifExists: ifExists)
+		try WriteableFile.createFile(path: path, ifExists: ifExists)
 		try self.init(open: path)
 	}
 
@@ -124,24 +146,26 @@ public class EditableFile: File {
 	public func delete() throws {
 		try FileManager().removeItem(atPath: path.absoluteString)
 	}
-}
 
-extension EditableFile: WriteableStream {
 	/// Appends the string to the file.
 	/// Nothing is overwritten, just added to the end of the file.
 	public func write(_ string: String) {
 		if type == .regularFile { _ = filehandle.seekToEndOfFile() }
 		filehandle.write(string, encoding: encoding)
 	}
+
+	public func close() {
+		filehandle.closeFile()
+	}
 }
 
 extension FilePath {
-	public func edit() throws -> EditableFile {
-		return try EditableFile(open: self)
+	public func edit() throws -> WriteableFile {
+		return try WriteableFile(open: self)
 	}
 
 	@discardableResult
-	public func create(ifExists: AlreadyExistsOptions) throws -> EditableFile {
-		return try EditableFile(create: self, ifExists: ifExists)
+	public func create(ifExists: AlreadyExistsOptions) throws -> WriteableFile {
+		return try WriteableFile(create: self, ifExists: ifExists)
 	}
 }
