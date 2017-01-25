@@ -90,7 +90,7 @@ extension FilePath {
 }
 
 
-public final class WriteableFile: File, WriteableStream {
+public final class WritableFile: File, WriteableStream {
 	public let path: FilePath
 	public var encoding: String.Encoding = .utf8
 	public let type: FileType
@@ -106,7 +106,7 @@ public final class WriteableFile: File, WriteableStream {
 	public convenience init(open path: FilePath) throws {
 		try path.verifyIsInSandbox()
 		guard let filehandle = FileHandle(forWritingAtPath: path.absoluteString) else {
-			try WriteableFile.errorForFile(at: path.absoluteString, writing: true)
+			try WritableFile.errorForFile(at: path.absoluteString, writing: true)
 			fatalError("Should have thrown error when opening \(path.absoluteString)")
 		}
 		self.init(path: path, filehandle: filehandle)
@@ -135,7 +135,7 @@ public final class WriteableFile: File, WriteableStream {
 	}
 
 	public convenience init(create path: FilePath, ifExists: AlreadyExistsOptions) throws {
-		try WriteableFile.createFile(path: path, ifExists: ifExists)
+		try WritableFile.createFile(path: path, ifExists: ifExists)
 		try self.init(open: path)
 	}
 
@@ -159,12 +159,12 @@ public final class WriteableFile: File, WriteableStream {
 }
 
 extension FilePath {
-	public func edit() throws -> WriteableFile {
-		return try WriteableFile(open: self)
+	public func edit() throws -> WritableFile {
+		return try WritableFile(open: self)
 	}
 
 	@discardableResult
-	public func create(ifExists: AlreadyExistsOptions) throws -> WriteableFile {
-		return try WriteableFile(create: self, ifExists: ifExists)
+	public func create(ifExists: AlreadyExistsOptions) throws -> WritableFile {
+		return try WritableFile(create: self, ifExists: ifExists)
 	}
 }

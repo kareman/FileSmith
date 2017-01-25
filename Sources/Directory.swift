@@ -122,9 +122,9 @@ extension Directory {
 	}
 
 	@discardableResult
-	public func create(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> WriteableFile {
+	public func create(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> WritableFile {
 		let newpath = self.path.append(file: stringpath)
-		return try WriteableFile(create: newpath, ifExists: ifExists)
+		return try WritableFile(create: newpath, ifExists: ifExists)
 	}
 
 	@discardableResult

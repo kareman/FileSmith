@@ -134,7 +134,7 @@ class DirectoryTests: XCTestCase {
 
 			let filepath = FilePath("dir/file1.txt")
 			var file1_edit = try filepath.create(ifExists: .open)
-			let file2_edit = try WriteableFile(create: "file2.txt", ifExists: .open)
+			let file2_edit = try WritableFile(create: "file2.txt", ifExists: .open)
 			let file3_edit = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
 
 			// #### Open

@@ -39,9 +39,9 @@ class FileTests: XCTestCase {
 			XCTAssertEqual(try ReadableFile(open: "file1.txt").lines().array, ["line 1 of file1.txt","line 2 of file1.txt",""])
 
 			XCTAssertThrowsError(try ReadableFile(open: "doesntexist.txt"))
-			XCTAssertThrowsError(try WriteableFile(open: "doesntexist.txt"))
-			XCTAssertThrowsError(try WriteableFile(create: "file1.txt", ifExists: .throwError))
-			XCTAssertThrowsError(try WriteableFile(createSymbolicLink: "file1.txt", to: write_file1, ifExists: .throwError))
+			XCTAssertThrowsError(try WritableFile(open: "doesntexist.txt"))
+			XCTAssertThrowsError(try WritableFile(create: "file1.txt", ifExists: .throwError))
+			XCTAssertThrowsError(try WritableFile(createSymbolicLink: "file1.txt", to: write_file1, ifExists: .throwError))
 
 			let read_link: ReadableFile = try current.create(symbolicLink: "link_to_file1.txt", to: write_file1, ifExists: .throwError)
 			XCTAssertEqual(FileType("link_to_file1.txt"), .regularFile)
@@ -51,7 +51,7 @@ class FileTests: XCTestCase {
 			XCTAssertNil(FileType.isSymbolicLink("doesntexist.txt"))
 			XCTAssertEqual(read_link.readSome(), "line 1 of file1.txt\nline 2 of file1.txt\n")
 
-			let write_link = try WriteableFile(createSymbolicLink: "link_to_file1.txt", to: write_file1, ifExists: .open)
+			let write_link = try WritableFile(createSymbolicLink: "link_to_file1.txt", to: write_file1, ifExists: .open)
 			write_link.write("line 3 of file1.txt\n")
 			XCTAssertEqual( try String(contentsOfFile: path_file1.absoluteString), "line 1 of file1.txt\nline 2 of file1.txt\nline 3 of file1.txt\n")
 
@@ -70,8 +70,8 @@ class FileTests: XCTestCase {
 			let dirpath = DirectoryPath("dir")
 			try dirpath.create(ifExists: .throwError)
 			XCTAssertThrowsError(try ReadableFile(open: "dir"))
-			XCTAssertThrowsError(try WriteableFile(open: "dir"))
-			XCTAssertThrowsError(try WriteableFile(create: "dir", ifExists: .open))
+			XCTAssertThrowsError(try WritableFile(open: "dir"))
+			XCTAssertThrowsError(try WritableFile(create: "dir", ifExists: .open))
 
 			write_link.close()
 		} catch {
