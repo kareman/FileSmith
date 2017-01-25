@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Stream.swift
 //  FileSmith
 //
 //  Created by Kåre Morstøl on 24/01/2017.

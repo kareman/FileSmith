@@ -19,9 +19,6 @@
 		BA877D181DFCC1FF00595DA7 /* PathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4185B1DFCB64800137546 /* PathTests.swift */; };
 		BA877D191DFCC20100595DA7 /* PathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4185B1DFCB64800137546 /* PathTests.swift */; };
 		BA877D1A1DFCC20200595DA7 /* PathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4185B1DFCB64800137546 /* PathTests.swift */; };
-		BA877D1B1DFCC20B00595DA7 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4185A1DFCB64800137546 /* FileTests.swift */; };
-		BA877D1C1DFCC20C00595DA7 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4185A1DFCB64800137546 /* FileTests.swift */; };
-		BA877D1D1DFCC20D00595DA7 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4185A1DFCB64800137546 /* FileTests.swift */; };
 		BA877D1E1DFCC21200595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
 		BA877D1F1DFCC21300595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
 		BA877D201DFCC21400595DA7 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD418591DFCB64800137546 /* DirectoryTests.swift */; };
@@ -98,9 +95,8 @@
 		BAD418471DFCB61200137546 /* General.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = General.swift; path = Sources/General.swift; sourceTree = "<group>"; };
 		BAD418481DFCB61200137546 /* Paths.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Paths.swift; path = Sources/Paths.swift; sourceTree = "<group>"; };
 		BAD418591DFCB64800137546 /* DirectoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryTests.swift; sourceTree = "<group>"; };
-		BAD4185A1DFCB64800137546 /* FileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
 		BAD4185B1DFCB64800137546 /* PathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathTests.swift; sourceTree = "<group>"; };
-		BAECCB4D1E37E0F000371187 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
+		BAECCB4D1E37E0F000371187 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stream.swift; path = Sources/Stream.swift; sourceTree = "<group>"; };
 		DD75027A1C68FCFC006590AF /* FileSmith-macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileSmith-macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD75028D1C690C7A006590AF /* FileSmith-tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FileSmith-tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -215,7 +211,6 @@
 			children = (
 				BAD4185B1DFCB64800137546 /* PathTests.swift */,
 				BAD418591DFCB64800137546 /* DirectoryTests.swift */,
-				BAD4185A1DFCB64800137546 /* FileTests.swift */,
 			);
 			name = Tests;
 			path = Tests/FileSmithTests;
@@ -533,7 +528,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA877D1B1DFCC20B00595DA7 /* FileTests.swift in Sources */,
 				BA877D181DFCC1FF00595DA7 /* PathTests.swift in Sources */,
 				BA877D1E1DFCC21200595DA7 /* DirectoryTests.swift in Sources */,
 			);
@@ -591,7 +585,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA877D1C1DFCC20C00595DA7 /* FileTests.swift in Sources */,
 				BA877D191DFCC20100595DA7 /* PathTests.swift in Sources */,
 				BA877D1F1DFCC21300595DA7 /* DirectoryTests.swift in Sources */,
 			);
@@ -601,7 +594,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA877D1D1DFCC20D00595DA7 /* FileTests.swift in Sources */,
 				BA877D1A1DFCC20200595DA7 /* PathTests.swift in Sources */,
 				BA877D201DFCC21400595DA7 /* DirectoryTests.swift in Sources */,
 			);
@@ -899,7 +891,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=200";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.FileSmith.FileSmith-macOS";
 				PRODUCT_NAME = FileSmith;
 				SDKROOT = macosx;

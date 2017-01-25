@@ -6,7 +6,7 @@
 //  Copyright © 2017 FileSmith. All rights reserved.
 //
 
-#if os(macOS) || os(iOS)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	import Darwin
 #else
 	import Glibc

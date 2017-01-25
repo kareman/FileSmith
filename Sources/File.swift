@@ -66,7 +66,7 @@ public final class ReadableFile: File, ReadableStream {
 	}
 }
 
-#if os(macOS)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	extension ReadableFile {
 
 		/// `handler` will be called whenever there is new text output available.
