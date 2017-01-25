@@ -12,7 +12,6 @@ public protocol File {
 	var encoding: String.Encoding { get set }
 	var type: FileType { get }
 
-	init(path: FilePath, filehandle: FileHandle)
 	init(open stringpath: String) throws
 	init(open path: FilePath) throws
 }
@@ -20,6 +19,16 @@ public protocol File {
 extension File {
 	public init(open stringpath: String) throws {
 		try self.init(open: FilePath(stringpath))
+	}
+
+	fileprivate static func errorForFile(at stringpath: String, writing: Bool) throws {
+		guard let type = FileType(stringpath) else {
+			throw FileSystemError.notFound(path: FilePath(stringpath))
+		}
+		if type == .directory {
+			throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
+		}
+		throw FileSystemError.invalidAccess(path: FilePath(stringpath), writing: writing)
 	}
 }
 
@@ -36,17 +45,7 @@ public final class ReadableFile: File, ReadableStream {
 		self.type = FileType(fileDescriptor: filehandle.fileDescriptor)
 	}
 
-	fileprivate static func errorForFile(at stringpath: String, writing: Bool) throws {
-		guard let type = FileType(stringpath) else {
-			throw FileSystemError.notFound(path: FilePath(stringpath))
-		}
-		if type == .directory {
-			throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
-		}
-		throw FileSystemError.invalidAccess(path: FilePath(stringpath), writing: writing)
-	}
-
-	public convenience required init(open path: FilePath) throws {
+	public convenience init(open path: FilePath) throws {
 		guard let filehandle = FileHandle(forReadingAtPath: path.absoluteString) else {
 			try ReadableFile.errorForFile(at: path.absoluteString, writing: false)
 			fatalError("Should have thrown error when opening \(path.absoluteString)")
@@ -99,14 +98,15 @@ public final class WriteableFile: File, WriteableStream {
 
 	public init(path: FilePath, filehandle: FileHandle) {
 		self.filehandle = filehandle
+		self.filehandle.seekToEndOfFile()
 		self.path = path
 		self.type = FileType(fileDescriptor: filehandle.fileDescriptor)
 	}
 
 	public convenience init(open path: FilePath) throws {
 		try path.verifyIsInSandbox()
-		guard let filehandle = FileHandle(forUpdatingAtPath: path.absoluteString) else {
-			try ReadableFile.errorForFile(at: path.absoluteString, writing: true)
+		guard let filehandle = FileHandle(forWritingAtPath: path.absoluteString) else {
+			try WriteableFile.errorForFile(at: path.absoluteString, writing: true)
 			fatalError("Should have thrown error when opening \(path.absoluteString)")
 		}
 		self.init(path: path, filehandle: filehandle)
@@ -150,7 +150,6 @@ public final class WriteableFile: File, WriteableStream {
 	/// Appends the string to the file.
 	/// Nothing is overwritten, just added to the end of the file.
 	public func write(_ string: String) {
-		if type == .regularFile { _ = filehandle.seekToEndOfFile() }
 		filehandle.write(string, encoding: encoding)
 	}
 
