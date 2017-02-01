@@ -122,6 +122,41 @@ try file1_edit.delete()
 try dir1.delete()
 ```
 
+## Installation
+
+### [Swift Package Manager](https://github.com/apple/swift-package-manager)
+
+Add `.Package(url: "https://github.com/kareman/FileSmith", "0.1.0-alpha")` to your Package.swift:
+
+```swift
+import PackageDescription
+
+let package = Package(
+	name: "somename",
+	dependencies: [
+		.Package(url: "https://github.com/kareman/FileSmith", "0.1.0-alpha")
+		 ]
+	)
+```
+
+and run `swift build`.
+
+### [Carthage](https://github.com/Carthage/Carthage)
+
+Add `github "kareman/FileSmith"` to your Cartfile, then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for further instructions.
+
+[carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
+
+### [CocoaPods](https://cocoapods.org/)
+
+Add `FileSmith` to your `Podfile`.
+
+```Ruby
+pod "FootlessParser", git: "https://github.com/kareman/FileSmith.git"
+```
+
+Then run `pod install` to install it.
+
 ## License
 
 Released under the MIT License (MIT), http://opensource.org/licenses/MIT
