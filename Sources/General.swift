@@ -58,14 +58,16 @@ func filterFiles(glob pattern: String) -> [String] {
 	return []
 }
 
-func subdirectoriesRecursively(at dirpath: String) -> [String] {
-	let stringpathlength = dirpath.characters.count + 1
-	let directoryEnumerator = FileManager().enumerator(at: URL(fileURLWithPath: dirpath), includingPropertiesForKeys: [])!
+/// Lists the contents of a directory.
+/// - note: Does not traverse symbolic links to directories.
+/// - returns: Lazy sequence of string paths. Directories end in '/', symbolic links to directories do not.
+func contentsOfDirectory(at dirpath: String, recursive: Bool) -> LazyMapSequence<FileManager.DirectoryEnumerator,String> {
+	let options: FileManager.DirectoryEnumerationOptions = (recursive ? [] : .skipsSubdirectoryDescendants)
+	let directoryEnumerator = FileManager().enumerator(at: URL(fileURLWithPath: dirpath), includingPropertiesForKeys: [], options: options)!
 
-	return directoryEnumerator.flatMap {
+	return directoryEnumerator.lazy.map {
 		// URL.path drops the / at the end. And absoluteString begins with "file://".
 		let filepath = ($0 as! URL).absoluteString.characters
-		guard filepath.last == Character(pathseparator) else { return nil }
-		return String(filepath.dropFirst(stringpathlength+7))
+		return String(filepath.dropFirst(+7))
 	}
 }

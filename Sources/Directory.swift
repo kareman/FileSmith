@@ -81,34 +81,31 @@ extension DirectoryPath {
 }
 
 extension Directory {
-	public func directories(_ pattern: String = "*/") -> [DirectoryPath] {
-		let pathprefix = path.absoluteString + pathseparator
-		let pathprefixcount = pathprefix.utf8.count - 1
-		return filterFiles(glob: pathprefix + pattern)
-			.filter { $0.hasSuffix(pathseparator) }
-			.map { DirectoryPath(base: path.components,
-			                     relative: parseComponents(String($0.utf8.dropFirst(pathprefixcount))!).components) }
+
+	static func filter<P: Path>(pattern: String, relativeTo path: DirectoryPath) -> [P] {
+		let pathprefixcount = path.components.count
+		return filterFiles(glob: pattern)
+			.flatMap(FileSmith.path(detectTypeOf:))
+			.flatMap { ($0 as? P) }
+			.map { P(base: path.components,
+			     relative: Array($0.components.dropFirst(pathprefixcount)))
+			}
 	}
 
-	public func directories(_ pattern: String = "*/", recursive: Bool) -> [DirectoryPath] {
-		guard recursive else { return directories(pattern) }
-		return (subdirectoriesRecursively(at: path.absoluteString) + [""])
-			.flatMap { directories($0 + pathseparator + pattern) }
+	func filesOrDirectories<P: Path>(_ pattern: String = "*/", recursive: Bool = false) -> [P] {
+		return Directory.filter(pattern: path.absoluteString + pathseparator + pattern, relativeTo: path)
+			+ (!recursive ? [] : (contentsOfDirectory(at: path.absoluteString, recursive: true))
+			.flatMap(FileSmith.path(detectTypeOf:))
+			.flatMap { $0 as? DirectoryPath }
+			.flatMap { Directory.filter(pattern: $0.absoluteString + pathseparator + pattern, relativeTo: path) })
 	}
 
-	public func files(_ pattern: String = "*") -> [FilePath] {
-		let pathprefix = path.absoluteString + pathseparator
-		let pathprefixcount = pathprefix.utf8.count - 1
-		return filterFiles(glob: pathprefix + pattern)
-			.filter { !$0.hasSuffix(pathseparator) }
-			.map { FilePath(base: path.components,
-			                relative: parseComponents(String($0.utf8.dropFirst(pathprefixcount))!).components) }
+	public func directories(_ pattern: String = "*", recursive: Bool = false) -> [DirectoryPath] {
+		return filesOrDirectories(pattern, recursive: recursive)
 	}
 
-	public func files(_ pattern: String = "*", recursive: Bool) -> [FilePath] {
-		guard recursive else { return files(pattern) }
-		return (subdirectoriesRecursively(at: path.absoluteString) + [""])
-			.flatMap { files($0 + pathseparator + pattern) }
+	public func files(_ pattern: String = "*", recursive: Bool = false) -> [FilePath] {
+		return filesOrDirectories(pattern, recursive: recursive)
 	}
 
 	public func contains(_ stringpath: String) -> Bool {

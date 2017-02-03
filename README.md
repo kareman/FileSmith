@@ -101,6 +101,14 @@ while let text = file3.readSome() {
 }
 ```
 
+#### Search/Filter
+
+```swift
+Directory.current.files(recursive: true)       // [file2.txt, dir/file1.txt, dir/dir1/file3.txt]
+dir1.files("*3.*", recursive: true)            // [file3.txt]
+Directory.current.directories(recursive: true) // [dir, dir/dir1, dir/dir2, dir/dir2/dir3]
+```
+
 #### Symbolic links
 
 ```swift

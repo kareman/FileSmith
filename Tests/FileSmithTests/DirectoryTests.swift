@@ -94,9 +94,6 @@ class DirectoryTests: XCTestCase {
 			XCTAssertEqual(testdir.files("file?.*").map {$0.string}, ["file2.txt"])
 			XCTAssertEqual(testdir.directories().map {$0.string}, ["dir"])
 
-			XCTAssertEqual(Set(testdir.directories(recursive: true)), Set(["dir", "dir/newerdir"]))
-			XCTAssertEqual(Set(testdir.files(recursive: true)), Set(["file.txt", "file2.txt", "dir/file.txt"]))
-
 			let link_to_dir = try testdir.create(symbolicLink: "link_to_dir", to: dir, ifExists: .throwError)
 			XCTAssertThrowsError(try testdir.create(symbolicLink: "link_to_dir", to: dir, ifExists: .throwError))
 			XCTAssertThrowsError(try testdir.create(symbolicLink: "file.txt", to: dir, ifExists: .throwError))
@@ -105,6 +102,10 @@ class DirectoryTests: XCTestCase {
 			try testdir.create(symbolicLink: "link_to_dir", to: dir, ifExists: .replace)
 			try testdir.create(symbolicLink: "link_to_dir", to: dir, ifExists: .open)
 			XCTAssertThrowsError(try testdir.create(symbolicLink: "link_to_dir", to: newerdir, ifExists: .open))
+			XCTAssertEqual(testdir.directories().map {$0.string}, ["dir", "link_to_dir"])
+
+			XCTAssertEqual(Set(testdir.directories(recursive: true)), Set(["link_to_dir", "dir", "dir/newerdir", "link_to_dir/newerdir"]))
+			XCTAssertEqual(Set(testdir.files(recursive: true)), Set(["file.txt", "file2.txt", "dir/file.txt", "link_to_dir/file.txt"]))
 
 			XCTAssertEqual(testdir.directories("dir/*").map {$0.string}, ["dir/newerdir"])
 			try testdir.create(directory: "dir", ifExists: .replace)
@@ -158,6 +159,11 @@ class DirectoryTests: XCTestCase {
 			while let text = file3.readSome() {
 				// read pipes etc. piece by piece, instead of waiting until they are closed.
 			}
+
+			// #### Search/Filter
+			Directory.current.files(recursive: true) // [file2.txt, dir/file1.txt, dir/dir1/file3.txt]
+			dir1.files("*3.*", recursive: true) // [file3.txt]
+			Directory.current.directories(recursive: true) // [dir, dir/dir1, dir/dir2, dir/dir2/dir3]
 
 			// #### Symbolic links
 			let dir1_link = try Directory(createSymbolicLink: "dir1_link", to: dir1, ifExists: .open)
