@@ -53,7 +53,7 @@ class FileTests: XCTestCase {
 
 			let write_link = try WritableFile(createSymbolicLink: "link_to_file1.txt", to: write_file1, ifExists: .open)
 			write_link.write("line 3 of file1.txt\n")
-			XCTAssertEqual( try String(contentsOfFile: path_file1.absoluteString), "line 1 of file1.txt\nline 2 of file1.txt\nline 3 of file1.txt\n")
+			XCTAssertEqual(try String(contentsOfFile: path_file1.absoluteString), "line 1 of file1.txt\nline 2 of file1.txt\nline 3 of file1.txt\n")
 
 			XCTAssertEqual(read_link.path.resolvingSymlinks(), write_file1.path.absolute.resolvingSymlinks())
 			XCTAssertEqual(FilePath("/doesntexist/doesntexist.txt").resolvingSymlinks().string, "/doesntexist/doesntexist.txt")

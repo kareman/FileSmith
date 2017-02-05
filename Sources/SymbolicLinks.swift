@@ -22,7 +22,7 @@ extension File {
 				let currenttarget = try FilePath(FileManager().destinationOfSymbolicLink(atPath: newlink.absoluteString))
 				// if currenttarget is relative, its base is the directory of newlink.
 				let currenttargetabsolutepath = currenttarget.relativeComponents.map(newlink.parent().append) ?? currenttarget
-				guard target.path == currenttargetabsolutepath else {
+				guard target.path.absolute == currenttargetabsolutepath else {
 					throw FileSystemError.invalidAccess(path: newlink, writing: true)
 				}
 				try self.init(open: newlink)
@@ -49,7 +49,7 @@ extension Directory {
 				let currenttarget = try DirectoryPath(FileManager().destinationOfSymbolicLink(atPath: newlink.absoluteString))
 				// if currenttarget is relative, its base is the directory of newlink.
 				let currenttargetabsolutepath = currenttarget.relativeComponents.map(newlink.parent().append) ?? currenttarget
-				guard target.path == currenttargetabsolutepath else {
+				guard target.path.absolute == currenttargetabsolutepath else {
 					throw FileSystemError.invalidAccess(path: newlink, writing: true)
 				}
 				try self.init(open: newlink)

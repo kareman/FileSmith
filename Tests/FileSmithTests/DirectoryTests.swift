@@ -15,9 +15,9 @@ class DirectoryTests: XCTestCase {
 		do {
 			let dir = try Directory(open: "/")
 			let subdirs = dir.directories()
-			XCTAssert(subdirs.contains(DirectoryPath("tmp")))
-			XCTAssert(subdirs.contains(DirectoryPath("bin")))
-			XCTAssert(subdirs.contains(DirectoryPath("usr")))
+			XCTAssert(subdirs.contains(DirectoryPath(base: "/", relative: "tmp")))
+			XCTAssert(subdirs.contains(DirectoryPath(base: "/", relative: "bin")))
+			XCTAssert(subdirs.contains(DirectoryPath(base: "/", relative: "usr")))
 		} catch {
 			XCTFail(String(describing: error))
 		}
@@ -104,8 +104,8 @@ class DirectoryTests: XCTestCase {
 			XCTAssertThrowsError(try testdir.create(symbolicLink: "link_to_dir", to: newerdir, ifExists: .open))
 			XCTAssertEqual(testdir.directories().map {$0.string}, ["dir", "link_to_dir"])
 
-			XCTAssertEqual(Set(testdir.directories(recursive: true)), Set(["link_to_dir", "dir", "dir/newerdir", "link_to_dir/newerdir"]))
-			XCTAssertEqual(Set(testdir.files(recursive: true)), Set(["file.txt", "file2.txt", "dir/file.txt", "link_to_dir/file.txt"]))
+			XCTAssertEqual(Set(testdir.directories(recursive: true).map(String.init(describing: ))), Set(["link_to_dir", "dir", "dir/newerdir", "link_to_dir/newerdir"]))
+			XCTAssertEqual(Set(testdir.files(recursive: true).map(String.init(describing: ))), Set(["file.txt", "file2.txt", "dir/file.txt", "link_to_dir/file.txt"]))
 
 			XCTAssertEqual(testdir.directories("dir/*").map {$0.string}, ["dir/newerdir"])
 			try testdir.create(directory: "dir", ifExists: .replace)

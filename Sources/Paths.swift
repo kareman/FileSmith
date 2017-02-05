@@ -363,7 +363,7 @@ extension Path {
 
 	/// The hash value of the string representation of this path.
 	public var hashValue: Int {
-		return string.hashValue
+		return relativeString.map {$0.hashValue &+ base!.string.hashValue} ?? absoluteString.hashValue
 	}
 
 	// MARK: Accesses the filesystem.
@@ -448,11 +448,13 @@ public func ==<P:Path>(left: P, right: P) -> Bool where P:Equatable {
 
 extension AnyPath: Equatable, Hashable {
 	public static func ==(left: AnyPath, right: AnyPath) -> Bool {
-		if let l = left.relativeComponents, let r = right.relativeComponents {
-			return l == r
-		} else {
-			return left.components == right.components
+		guard (left.relativeComponents == nil) == (right.relativeComponents == nil) else {
+			return false
 		}
+		if let leftrel = left.relativeComponents, let rightrel = right.relativeComponents {
+			return (leftrel == rightrel) && (left.baseComponents! == right.baseComponents!)
+		}
+		return left.components == right.components
 	}
 }
 
