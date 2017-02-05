@@ -118,14 +118,14 @@
 		OBJ_8 /* FileSmith */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_15 /* Paths.swift */,
 				OBJ_9 /* Attributes.swift */,
 				OBJ_10 /* Directory.swift */,
-				OBJ_11 /* Errors.swift */,
 				OBJ_12 /* File.swift */,
+				OBJ_16 /* Stream.swift */,
+				OBJ_11 /* Errors.swift */,
 				OBJ_13 /* General.swift */,
 				OBJ_14 /* Lazy-split.swift */,
-				OBJ_15 /* Paths.swift */,
-				OBJ_16 /* Stream.swift */,
 				OBJ_17 /* SymbolicLinks.swift */,
 			);
 			name = FileSmith;

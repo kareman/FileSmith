@@ -120,20 +120,34 @@ class DirectoryTests: XCTestCase {
 	/// The code examples under "Usage" in the readme.
 	func testReadme() {
 		do {
-			// #### FilePaths
-
-
 			// #### Change current working directory
 			DirectoryPath.current = "/tmp"
 			Directory.current = Directory.createTempDirectory()
 
-			// #### Create
+			// #### Paths
 			let dirpath = DirectoryPath("dir/dir1")
+			var filepath: FilePath = "file.txt"
+			filepath = FilePath(base: "dir", relative: "file.txt")
+			filepath = FilePath("dir/file.txt")
+
+			filepath.relativeString
+			filepath.base?.string
+			filepath.absoluteString
+			filepath.string // relativeString ?? absoluteString
+			filepath.name
+			filepath.nameWithoutExtension
+			filepath.extension
+
+
+			dirpath.append(file: "file.txt")  // FilePath("dir/dir1/file.txt")
+			dirpath.append(directory: "dir2") // DirectoryPath("dir/dir1/dir2")
+			dirpath.isAParentOf(filepath)
+
+			// #### Create
 			var dir1 = try dirpath.create(ifExists: .replace)
 			var dir2 = try Directory(create: "dir/dir2", ifExists: .throwError)
 			var dir3 = try dir2.create(directory: "dir3", ifExists: .open) // dir/dir2/dir3
 
-			let filepath = FilePath("dir/file1.txt")
 			var file1_edit = try filepath.create(ifExists: .open)
 			let file2_edit = try WritableFile(create: "file2.txt", ifExists: .open)
 			let file3_edit = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
@@ -161,8 +175,8 @@ class DirectoryTests: XCTestCase {
 			}
 
 			// #### Search/Filter
-			Directory.current.files(recursive: true) // [file2.txt, dir/file1.txt, dir/dir1/file3.txt]
-			dir1.files("*3.*", recursive: true) // [file3.txt]
+			Directory.current.files(recursive: true)       // [file2.txt, dir/file1.txt, dir/dir1/file3.txt]
+			dir1.files("*3.*", recursive: true)            // [file3.txt]
 			Directory.current.directories(recursive: true) // [dir, dir/dir1, dir/dir2, dir/dir2/dir3]
 
 			// #### Symbolic links
@@ -189,5 +203,6 @@ extension DirectoryTests {
 		("testSandboxMode", testSandboxMode),
 		("testStandardDirectories", testStandardDirectories),
 		("testDirectory", testDirectory),
+		("testReadme", testReadme),
 		]
 }

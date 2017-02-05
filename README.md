@@ -4,13 +4,11 @@
 
 A strongly typed Swift library for working with local files and directories.
 
+Because when working with paths you almost always know which are for directories and which are for files, so why not let the compiler in on it too?
+
 Still a work in progress and has not been properly tested, so use at your own risk. This readme is also clearly far from finished.
 
 [API documentation](https://kareman.github.io/FileSmith/)
-
-## Safety first
-
-Handling files in code can feel a bit risky sometimes (especially when you're using a brand-new library) so FileSmith has a built in safety feature: when `Directory.sandbox == true` (and it is by default) you can only change files or create new files and directories if they are under the current working directory. Trying to make changes elsewhere throws an error.
 
 ## Terms
 
@@ -27,28 +25,9 @@ An existing directory or a symbolic link to a directory. Basically anything you 
 (for lack of a better term)
 A file or a directory. Anything with a path in the file system.
 
-## Paths
+## Safety first
 
-## Files
-
-#### Types
-
-When opening files symbolic links are always followed, so the type of a file is never .symbolicLink, but can be .brokenSymbolicLink for symbolic links whose targets do not exist.
-
-```swift
-file1.type
-
-public enum FileType: Equatable, Hashable {
-	case regularFile
-	case directory
-	case characterSpecial
-	case blockSpecial
-	case socket
-	case brokenSymbolicLink
-	case namedPipe
-	case unknown
-}
-```
+When `Directory.sandbox == true` (and it is by default) you can only change files or create new files and directories if they are under the current working directory. Trying to make changes elsewhere throws an error.
 
 ## Usage
 
@@ -59,15 +38,36 @@ DirectoryPath.current = "/tmp"
 Directory.current = Directory.createTempDirectory()
 ```
 
+#### [Paths](https://kareman.github.io/FileSmith/Protocols/Path.html)
+
+```swift
+// common functionality
+let dirpath = DirectoryPath("dir/dir1")
+var filepath: FilePath = "file.txt"
+filepath = FilePath(base: "dir", relative: "file.txt")
+filepath = FilePath("dir/file.txt")
+
+filepath.relativeString
+filepath.base?.string
+filepath.absoluteString
+filepath.string // relativeString ?? absoluteString
+filepath.name
+filepath.nameWithoutExtension
+filepath.extension
+
+// DirectoryPath only
+dirpath.append(file: "file.txt")  // FilePath("dir/dir1/file.txt")
+dirpath.append(directory: "dir2") // DirectoryPath("dir/dir1/dir2")
+dirpath.isAParentOf(filepath)
+```
+
 #### Create
 
 ```swift
-let dirpath = DirectoryPath("dir/dir1")
 var dir1 = try dirpath.create(ifExists: .replace)
 var dir2 = try Directory(create: "dir/dir2", ifExists: .throwError)
 var dir3 = try dir2.create(directory: "dir3", ifExists: .open) // dir/dir2/dir3
 
-let filepath = FilePath("dir/file1.txt")
 var file1_edit = try filepath.create(ifExists: .open)
 let file2_edit = try EditableFile(create: "file2.txt", ifExists: .open)
 let file3_edit = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
@@ -130,6 +130,26 @@ try file1_edit.delete()
 try dir1.delete()
 ```
 
+## Types
+
+When opening files symbolic links are always followed, so the type of a file is never .symbolicLink, but can be .brokenSymbolicLink for symbolic links whose targets do not exist.
+
+```swift
+FileType("file.txt")
+FileType(filepath)
+
+public enum FileType: Equatable, Hashable {
+	case regularFile
+	case directory
+	case characterSpecial
+	case blockSpecial
+	case socket
+	case brokenSymbolicLink
+	case namedPipe
+	case unknown
+}
+```
+
 ## Installation
 
 ### [Swift Package Manager](https://github.com/apple/swift-package-manager)
@@ -160,7 +180,7 @@ Add `github "kareman/FileSmith"` to your Cartfile, then run `carthage update` an
 Add `FileSmith` to your `Podfile`.
 
 ```Ruby
-pod "FootlessParser", git: "https://github.com/kareman/FileSmith.git"
+pod "FileSmith", git: "https://github.com/kareman/FileSmith.git"
 ```
 
 Then run `pod install` to install it.
