@@ -13,7 +13,7 @@
     <a title="FileSmith  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">FileSmith Docs</a> (54% documented)</p>
+        <p><a href="index.html">FileSmith Docs</a> (55% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -133,12 +133,11 @@
 
 <p>A strongly typed Swift library for working with local files and directories.</p>
 
+<p>Because when working with paths you almost always know which are for directories and which are for files, so why not let the compiler in on it too?</p>
+
 <p>Still a work in progress and has not been properly tested, so use at your own risk. This readme is also clearly far from finished.</p>
 
 <p><a href="https://kareman.github.io/FileSmith/">API documentation</a></p>
-<a href='#safety-first' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='safety-first'>Safety first</h2>
-
-<p>Handling files in code can feel a bit risky sometimes (especially when you&rsquo;re using a brand-new library) so FileSmith has a built in safety feature: when <code>Directory.sandbox == true</code> (and it is by default) you can only change files or create new files and directories if they are under the current working directory. Trying to make changes elsewhere throws an error.</p>
 <a href='#terms' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='terms'>Terms</h2>
 
 <p><strong>Path:</strong>
@@ -153,36 +152,39 @@ An existing directory or a symbolic link to a directory. Basically anything you 
 <p><strong>Item:</strong>
 (for lack of a better term)
 A file or a directory. Anything with a path in the file system.</p>
-<a href='#paths' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='paths'>Paths</h2>
-<a href='#files' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='files'>Files</h2>
-<a href='#types' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='types'>Types</h4>
+<a href='#safety-first' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='safety-first'>Safety first</h2>
 
-<p>When opening files symbolic links are always followed, so the type of a file is never .symbolicLink, but can be .brokenSymbolicLink for symbolic links whose targets do not exist.</p>
-<pre class="highlight swift"><code><span class="n">file1</span><span class="o">.</span><span class="n">type</span>
-
-<span class="kd">public</span> <span class="kd">enum</span> <span class="kt">FileType</span><span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Hashable</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="n">regularFile</span>
-    <span class="k">case</span> <span class="n">directory</span>
-    <span class="k">case</span> <span class="n">characterSpecial</span>
-    <span class="k">case</span> <span class="n">blockSpecial</span>
-    <span class="k">case</span> <span class="n">socket</span>
-    <span class="k">case</span> <span class="n">brokenSymbolicLink</span>
-    <span class="k">case</span> <span class="n">namedPipe</span>
-    <span class="k">case</span> <span class="n">unknown</span>
-<span class="p">}</span>
-</code></pre>
+<p>When <code>Directory.sandbox == true</code> (and it is by default) you can only change files or create new files and directories if they are under the current working directory. Trying to make changes elsewhere throws an error.</p>
 <a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
 <a href='#change-current-working-directory' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='change-current-working-directory'>Change current working directory</h4>
 <pre class="highlight swift"><code><span class="kt">DirectoryPath</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="s">"/tmp"</span>
 <span class="kt">Directory</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="kt">Directory</span><span class="o">.</span><span class="nf">createTempDirectory</span><span class="p">()</span>
 </code></pre>
+<a href='#a-href-https-kareman-github-io-filesmith-protocols-path-html-paths-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='a-href-https-kareman-github-io-filesmith-protocols-path-html-paths-a'><a href="https://kareman.github.io/FileSmith/Protocols/Path.html">Paths</a></h4>
+<pre class="highlight swift"><code><span class="c1">// common functionality</span>
+<span class="k">let</span> <span class="nv">dirpath</span> <span class="o">=</span> <span class="kt">DirectoryPath</span><span class="p">(</span><span class="s">"dir/dir1"</span><span class="p">)</span>
+<span class="k">var</span> <span class="nv">filepath</span><span class="p">:</span> <span class="kt">FilePath</span> <span class="o">=</span> <span class="s">"file.txt"</span>
+<span class="n">filepath</span> <span class="o">=</span> <span class="kt">FilePath</span><span class="p">(</span><span class="nv">base</span><span class="p">:</span> <span class="s">"dir"</span><span class="p">,</span> <span class="nv">relative</span><span class="p">:</span> <span class="s">"file.txt"</span><span class="p">)</span>
+<span class="n">filepath</span> <span class="o">=</span> <span class="kt">FilePath</span><span class="p">(</span><span class="s">"dir/file.txt"</span><span class="p">)</span>
+
+<span class="n">filepath</span><span class="o">.</span><span class="n">relativeString</span>
+<span class="n">filepath</span><span class="o">.</span><span class="n">base</span><span class="p">?</span><span class="o">.</span><span class="n">string</span>
+<span class="n">filepath</span><span class="o">.</span><span class="n">absoluteString</span>
+<span class="n">filepath</span><span class="o">.</span><span class="n">string</span> <span class="c1">// relativeString ?? absoluteString</span>
+<span class="n">filepath</span><span class="o">.</span><span class="n">name</span>
+<span class="n">filepath</span><span class="o">.</span><span class="n">nameWithoutExtension</span>
+<span class="n">filepath</span><span class="o">.</span><span class="kd">extension</span>
+
+<span class="c1">// DirectoryPath only</span>
+<span class="n">dirpath</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="nv">file</span><span class="p">:</span> <span class="s">"file.txt"</span><span class="p">)</span>  <span class="c1">// FilePath("dir/dir1/file.txt")</span>
+<span class="n">dirpath</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="nv">directory</span><span class="p">:</span> <span class="s">"dir2"</span><span class="p">)</span> <span class="c1">// DirectoryPath("dir/dir1/dir2")</span>
+<span class="n">dirpath</span><span class="o">.</span><span class="nf">isAParentOf</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+</code></pre>
 <a href='#create' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='create'>Create</h4>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dirpath</span> <span class="o">=</span> <span class="kt">DirectoryPath</span><span class="p">(</span><span class="s">"dir/dir1"</span><span class="p">)</span>
-<span class="k">var</span> <span class="nv">dir1</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dirpath</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">replace</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">var</span> <span class="nv">dir1</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dirpath</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">replace</span><span class="p">)</span>
 <span class="k">var</span> <span class="nv">dir2</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Directory</span><span class="p">(</span><span class="nv">create</span><span class="p">:</span> <span class="s">"dir/dir2"</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">throwError</span><span class="p">)</span>
 <span class="k">var</span> <span class="nv">dir3</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dir2</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">directory</span><span class="p">:</span> <span class="s">"dir3"</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span> <span class="c1">// dir/dir2/dir3</span>
 
-<span class="k">let</span> <span class="nv">filepath</span> <span class="o">=</span> <span class="kt">FilePath</span><span class="p">(</span><span class="s">"dir/file1.txt"</span><span class="p">)</span>
 <span class="k">var</span> <span class="nv">file1_edit</span> <span class="o">=</span> <span class="k">try</span> <span class="n">filepath</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">file2_edit</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">EditableFile</span><span class="p">(</span><span class="nv">create</span><span class="p">:</span> <span class="s">"file2.txt"</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">file3_edit</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dir1</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">file</span><span class="p">:</span> <span class="s">"file3.txt"</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span> <span class="c1">// dir/dir1/file3</span>
@@ -209,6 +211,11 @@ A file or a directory. Anything with a path in the file system.</p>
     <span class="c1">// read pipes etc. piece by piece, instead of waiting until they are closed.</span>
 <span class="p">}</span>
 </code></pre>
+<a href='#search-filter' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='search-filter'>Search/Filter</h4>
+<pre class="highlight swift"><code><span class="kt">Directory</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="nf">files</span><span class="p">(</span><span class="nv">recursive</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>       <span class="c1">// [file2.txt, dir/file1.txt, dir/dir1/file3.txt]</span>
+<span class="n">dir1</span><span class="o">.</span><span class="nf">files</span><span class="p">(</span><span class="s">"*3.*"</span><span class="p">,</span> <span class="nv">recursive</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>            <span class="c1">// [file3.txt]</span>
+<span class="kt">Directory</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="nf">directories</span><span class="p">(</span><span class="nv">recursive</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span> <span class="c1">// [dir, dir/dir1, dir/dir2, dir/dir2/dir3]</span>
+</code></pre>
 <a href='#symbolic-links' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='symbolic-links'>Symbolic links</h4>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dir1_link</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Directory</span><span class="p">(</span><span class="nv">createSymbolicLink</span><span class="p">:</span> <span class="s">"dir1_link"</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span> <span class="n">dir1</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">dir2_link</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dir1</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">symbolicLink</span><span class="p">:</span> <span class="s">"dir2_link"</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span> <span class="n">dir2</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
@@ -224,6 +231,48 @@ A file or a directory. Anything with a path in the file system.</p>
 <span class="k">try</span> <span class="n">file1_edit</span><span class="o">.</span><span class="nf">delete</span><span class="p">()</span>
 <span class="k">try</span> <span class="n">dir1</span><span class="o">.</span><span class="nf">delete</span><span class="p">()</span>
 </code></pre>
+<a href='#types' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='types'>Types</h2>
+
+<p>When opening files symbolic links are always followed, so the type of a file is never .symbolicLink, but can be .brokenSymbolicLink for symbolic links whose targets do not exist.</p>
+<pre class="highlight swift"><code><span class="kt">FileType</span><span class="p">(</span><span class="s">"file.txt"</span><span class="p">)</span>
+<span class="kt">FileType</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+<span class="kd">public</span> <span class="kd">enum</span> <span class="kt">FileType</span><span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Hashable</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">regularFile</span>
+    <span class="k">case</span> <span class="n">directory</span>
+    <span class="k">case</span> <span class="n">characterSpecial</span>
+    <span class="k">case</span> <span class="n">blockSpecial</span>
+    <span class="k">case</span> <span class="n">socket</span>
+    <span class="k">case</span> <span class="n">brokenSymbolicLink</span>
+    <span class="k">case</span> <span class="n">namedPipe</span>
+    <span class="k">case</span> <span class="n">unknown</span>
+<span class="p">}</span>
+</code></pre>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+<a href='#a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a'><a href="https://github.com/apple/swift-package-manager">Swift Package Manager</a></h3>
+
+<p>Add <code>.Package(url: &quot;https://github.com/kareman/FileSmith&quot;, &quot;0.1.0-alpha&quot;)</code> to your Package.swift:</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
+
+<span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="s">"somename"</span><span class="p">,</span>
+    <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/kareman/FileSmith"</span><span class="p">,</span> <span class="s">"0.1.0-alpha"</span><span class="p">)</span>
+         <span class="p">]</span>
+    <span class="p">)</span>
+</code></pre>
+
+<p>and run <code>swift build</code>.</p>
+<a href='#a-href-https-github-com-carthage-carthage-carthage-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='a-href-https-github-com-carthage-carthage-carthage-a'><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
+
+<p>Add <code>github &quot;kareman/FileSmith&quot;</code> to your Cartfile, then run <code>carthage update</code> and add the resulting framework to the <q>Embedded Binaries</q> section of the application. See <a href="https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">Carthage&rsquo;s README</a> for further instructions.</p>
+<a href='#a-href-https-cocoapods-org-cocoapods-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='a-href-https-cocoapods-org-cocoapods-a'><a href="https://cocoapods.org/">CocoaPods</a></h3>
+
+<p>Add <code>FileSmith</code> to your <code>Podfile</code>.</p>
+<pre class="highlight plaintext"><code>pod "FileSmith", git: "https://github.com/kareman/FileSmith.git"
+</code></pre>
+
+<p>Then run <code>pod install</code> to install it.</p>
 <a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
 
 <p>Released under the MIT License (MIT), <a href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a></p>
@@ -233,7 +282,7 @@ A file or a directory. Anything with a path in the file system.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-01-26)</p>
+          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-05)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
