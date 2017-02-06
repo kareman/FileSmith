@@ -91,11 +91,18 @@ class FileTests: XCTestCase {
 			XCTFail(String(describing: error))
 		}
 	}
+
+	func testStandardInOut() {
+		_ = ReadableFile.stdin
+		_ = WritableFile.stdout
+		_ = WritableFile.stderror
+	}
 }
 
 extension FileTests {
 	public static var allTests = [
 		("testFiles", testFiles),
 		("testOverwrite", testOverwrite),
+		("testStandardInOut", testStandardInOut),
 		]
 }

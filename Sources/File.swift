@@ -39,7 +39,7 @@ public final class ReadableFile: File, ReadableStream {
 	public let type: FileType
 	internal let filehandle: FileHandle
 
-	public required init(path: FilePath, filehandle: FileHandle) {
+	private init(path: FilePath, filehandle: FileHandle) {
 		self.filehandle = filehandle
 		self.path = path
 		self.type = FileType(fileDescriptor: filehandle.fileDescriptor)
@@ -53,6 +53,13 @@ public final class ReadableFile: File, ReadableStream {
 		self.init(path: path, filehandle: filehandle)
 	}
 
+
+	/// Creates a new ReadableFile which reads from the provided file handle.
+	/// The path is "/dev/fd/" + the file handle's filedescriptor.
+	public convenience init(filehandle: FileHandle) {
+		self.init(path: FilePath("/dev/fd/\(filehandle.fileDescriptor)"), filehandle: filehandle)
+	}
+
 	public func read() -> String {
 		return filehandle.read(encoding: encoding)
 	}
@@ -64,6 +71,11 @@ public final class ReadableFile: File, ReadableStream {
 	public func close() {
 		filehandle.closeFile()
 	}
+
+	/// A ReadableStream which reads from standard input.
+	static public var stdin: ReadableStream = {
+		ReadableFile(path: "/dev/stdin", filehandle: FileHandle.standardInput)
+	}()
 }
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
@@ -96,7 +108,7 @@ public final class WritableFile: File, WritableStream {
 	public let type: FileType
 	internal let filehandle: FileHandle
 
-	public init(path: FilePath, filehandle: FileHandle) {
+	private init(path: FilePath, filehandle: FileHandle) {
 		self.filehandle = filehandle
 		self.filehandle.seekToEndOfFile()
 		self.path = path
@@ -110,6 +122,12 @@ public final class WritableFile: File, WritableStream {
 			fatalError("Should have thrown error when opening \(path.absoluteString)")
 		}
 		self.init(path: path, filehandle: filehandle)
+	}
+
+	/// Creates a new WritableFile which writes to the provided file handle.
+	/// The path is "/dev/fd/" + the file handle's filedescriptor.
+	public convenience init(filehandle: FileHandle) {
+		self.init(path: FilePath("/dev/fd/\(filehandle.fileDescriptor)"), filehandle: filehandle)
 	}
 
 	fileprivate static func createFile(path: FilePath, ifExists: AlreadyExistsOptions) throws {
@@ -166,6 +184,14 @@ public final class WritableFile: File, WritableStream {
 		filehandle.truncateFile(atOffset: filehandle.offsetInFile)
 		filehandle.synchronizeFile()
 	}
+
+	/// A WritableStream which writes to the standard output.
+	static public var stdout: WritableStream = StdoutStream.default
+
+	/// A WritableStream which writes to the standard error.
+	static public var stderror: WritableStream = {
+		WritableFile(path: "/dev/stderr", filehandle: FileHandle.standardError)
+	}()
 }
 
 extension FilePath {
