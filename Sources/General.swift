@@ -27,14 +27,14 @@ extension Sequence {
 
 import Foundation
 
-#if os(Linux)
-	import Glibc
-#else
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 	import Darwin
+#else
+	import Glibc
 #endif
 
 func filterFiles(glob pattern: String) -> [String] {
-	#if !os(Linux)
+	#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 		let pattern = pattern.hasPrefix("//") ? String(pattern.characters.dropFirst()) : pattern
 	#endif
 	var globresult = glob_t()
@@ -46,10 +46,10 @@ func filterFiles(glob pattern: String) -> [String] {
 
 	let flags = GLOB_TILDE | GLOB_BRACE | GLOB_MARK
 	if glob(cpattern, flags, nil, &globresult) == 0 {
-		#if os(Linux)
-			let matchc = globresult.gl_pathc
-		#else
+		#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
 			let matchc = globresult.gl_matchc
+		#else
+			let matchc = globresult.gl_pathc
 		#endif
 		return (0..<Int(matchc)).flatMap { index in
 			return String(validatingUTF8: globresult.gl_pathv[index]!)

@@ -34,7 +34,7 @@ extension FileHandle {
 extension FileHandle {
 
 	func write(_ string: String, encoding: String.Encoding = .utf8) {
-		#if os(Linux)
+		#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
 			guard !string.isEmpty else {return}
 		#endif
 		guard let data = string.data(using: encoding, allowLossyConversion: false) else {
