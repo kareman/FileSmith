@@ -108,7 +108,7 @@ internal class StdoutStream: WritableStream {
 	static var `default`: StdoutStream { return StdoutStream() }
 
 	public func write <T> (_ x: T) {
-		print(x, terminator: "")
+		Swift.print(x, terminator: "")
 	}
 
 	public func close () {}

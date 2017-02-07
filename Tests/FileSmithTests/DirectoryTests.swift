@@ -26,8 +26,9 @@ class DirectoryTests: XCTestCase {
 	func testSandboxMode() {
 		Directory.sandbox = true
 		Directory.current = Directory.createTempDirectory()
+		let trespassingfolder = "/tmp/"+ProcessInfo.processInfo.globallyUniqueString
+
 		do {
-			let trespassingfolder = "/tmp/"+ProcessInfo.processInfo.globallyUniqueString
 			_ = try Directory(create: trespassingfolder, ifExists: .throwError)
 			XCTFail("Should not be able to create folder outside of current folder \(DirectoryPath.current)")
 		} catch FileSystemError.outsideSandbox {
@@ -37,6 +38,9 @@ class DirectoryTests: XCTestCase {
 
 		do {
 			try Directory.current.create(directory: "newdir", ifExists: .throwError)
+
+			Directory.sandbox = false
+			_ = try Directory(create: trespassingfolder, ifExists: .throwError)
 		} catch {
 			XCTFail(String(describing: error))
 		}
@@ -52,7 +56,50 @@ class DirectoryTests: XCTestCase {
 		XCTAssertThrowsError(try Directory.current.delete())
 	}
 
-	func testDirectory() {
+	func testOpenDirectory() {
+		Directory.current = Directory.createTempDirectory()
+		let name = "newthing"
+
+		AssertThrows(FileSystemError.notFound(path: DirectoryPath(name))) {
+			_ = try Directory(open: name)
+		}
+		AssertThrows(FileSystemError.notDirectory(path: FilePath(name))) {
+			_ = try WritableFile(create: name, ifExists: .throwError)
+			_ = try Directory(open: name)
+		}
+		AssertDoesNotThrow {
+			try FileManager().removeItem(atPath: name)
+			try FileManager().createDirectory(atPath: name, withIntermediateDirectories: false)
+			let dir = try Directory(open: name)
+			XCTAssert(dir.path.exists())
+		}
+	}
+
+	func testCreateDirectory() {
+		Directory.current = Directory.createTempDirectory()
+		let name = "newthing"
+
+		AssertThrows(FileSystemError.notDirectory(path: FilePath(name))) {
+			_ = try WritableFile(create: name, ifExists: .throwError)
+			_ = try Directory(create: name, ifExists: .open)
+		}
+		AssertThrows(FileSystemError.alreadyExists(path: DirectoryPath(name))) {
+			try FileManager().removeItem(atPath: name)
+			try FileManager().createDirectory(atPath: name, withIntermediateDirectories: false)
+			_ = try Directory(create: name, ifExists: .throwError)
+		}
+		AssertDoesNotThrow {
+			try FileManager().removeItem(atPath: name)
+			var dir = try Directory(create: name, ifExists: .throwError)
+			dir = try Directory(create: name, ifExists: .open)
+			try dir.create(file: "file", ifExists: .throwError)
+			XCTAssertTrue(FileManager().fileExists(atPath: name+"/file"))
+			dir = try Directory(create: name, ifExists: .replace)
+			XCTAssertFalse(FileManager().fileExists(atPath: name+"/file"))
+		}
+	}
+
+	func testDirectoryInAMultitudeOfWays() {
 		do {
 			Directory.current = Directory.createTempDirectory()
 			let current = Directory.current
@@ -202,7 +249,10 @@ extension DirectoryTests {
 		("testSubDirectories", testSubDirectories),
 		("testSandboxMode", testSandboxMode),
 		("testStandardDirectories", testStandardDirectories),
-		("testDirectory", testDirectory),
+		("testDontDeleteTheCurrentWorkDirectory", testDontDeleteTheCurrentWorkDirectory),
+		("testOpenDirectory", testOpenDirectory),
+		("testCreateDirectory", testCreateDirectory),
+		("testDirectoryInAMultitudeOfWays", testDirectoryInAMultitudeOfWays),
 		("testReadme", testReadme),
 		]
 }

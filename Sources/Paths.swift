@@ -187,7 +187,7 @@ func fixDotDots(_ components: [String]) -> [String] {
 func parseComponents(_ stringpath: String) -> (components: [String], isRelative: Bool) {
 	func prepareComponents<C: Collection>(_ components: C) -> [String]
 		where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
-			return fixDotDots(components.filter { $0 != "" && $0 != "." })
+			return fixDotDots(components.filter { !$0.isEmpty && $0 != "." })
 	}
 
 	let stringpath = stringpath.isEmpty ? "." : stringpath
@@ -195,10 +195,9 @@ func parseComponents(_ stringpath: String) -> (components: [String], isRelative:
 	if components.first == "" {
 		return (prepareComponents(components), false)
 	} else if components.first == "~" {
-		return (homedircomponents + prepareComponents(components.dropFirst()), false)
-	} else {
-		return (prepareComponents(components), true)
+		return (prepareComponents(homedircomponents + components.dropFirst()), false)
 	}
+	return (prepareComponents(components), true)
 }
 
 extension Path {
@@ -213,7 +212,6 @@ extension Path {
 		let base = DirectoryPath(base)
 		self.init(base: base.components, relative: rel.components)
 	}
-
 
 	/// Creates a path from a string. 
 	/// If the string begins with a '/' it is absolute, otherwise it is relative to the current working directory.
@@ -289,7 +287,7 @@ public func path(detectTypeOf stringpath: String) -> Path? {
 extension Path {
 
 	/// Creates a new path from another path. 
-	public init<P: Path>(_ inpath: P) {
+	public init(_ inpath: Path) {
 		if let base = inpath.baseComponents, let rel = inpath.relativeComponents {
 			self.init(base: base, relative: rel)
 		} else {
@@ -356,9 +354,8 @@ extension Path {
 		precondition(levels > 0, "Cannot go up less than one level of parent directories")
 		if let relative = relativeComponents, levels < relative.count, relative[relative.count - levels] != ".." {
 			return DirectoryPath(base: baseComponents!, relative: Array(relative.dropLast(levels)))
-		} else {
-			return DirectoryPath(absolute: Array(self.components.dropLast(levels)))
 		}
+		return DirectoryPath(absolute: Array(self.components.dropLast(levels)))
 	}
 
 	/// The hash value of the string representation of this path.
@@ -412,9 +409,8 @@ extension DirectoryPath {
 	internal func append<P: Path>(_ newcomponents: [String]) -> P {
 		if let relativeComponents = self.relativeComponents {
 			return P(base: self.baseComponents!, relative: fixDotDots(relativeComponents + newcomponents))
-		} else {
-			return P(absolute: fixDotDots(self.components + newcomponents))
 		}
+		return P(absolute: fixDotDots(self.components + newcomponents))
 	}
 
 	/// Adds a file path to the end of this directory path.

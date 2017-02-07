@@ -53,10 +53,9 @@ public final class ReadableFile: File, ReadableStream {
 		self.init(path: path, filehandle: filehandle)
 	}
 
-
 	/// Creates a new ReadableFile which reads from the provided file handle.
 	/// The path is "/dev/fd/" + the file handle's filedescriptor.
-	public convenience init(filehandle: FileHandle) {
+	public convenience init(_ filehandle: FileHandle) {
 		self.init(path: FilePath("/dev/fd/\(filehandle.fileDescriptor)"), filehandle: filehandle)
 	}
 
@@ -110,9 +109,9 @@ public final class WritableFile: File, WritableStream {
 
 	private init(path: FilePath, filehandle: FileHandle) {
 		self.filehandle = filehandle
-		self.filehandle.seekToEndOfFile()
 		self.path = path
 		self.type = FileType(fileDescriptor: filehandle.fileDescriptor)
+		if self.type == .regularFile { self.filehandle.seekToEndOfFile() }
 	}
 
 	public convenience init(open path: FilePath) throws {
@@ -126,7 +125,7 @@ public final class WritableFile: File, WritableStream {
 
 	/// Creates a new WritableFile which writes to the provided file handle.
 	/// The path is "/dev/fd/" + the file handle's filedescriptor.
-	public convenience init(filehandle: FileHandle) {
+	public convenience init(_ filehandle: FileHandle) {
 		self.init(path: FilePath("/dev/fd/\(filehandle.fileDescriptor)"), filehandle: filehandle)
 	}
 
@@ -203,4 +202,9 @@ extension FilePath {
 	public func create(ifExists: AlreadyExistsOptions) throws -> WritableFile {
 		return try WritableFile(create: self, ifExists: ifExists)
 	}
+}
+
+public func streams() -> (WritableFile,ReadableFile) {
+	let pipe = Pipe()
+	return (WritableFile(pipe.fileHandleForWriting), ReadableFile(pipe.fileHandleForReading))
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BAA3A14B1E4A622200763386 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA3A14A1E4A622200763386 /* TestHelpers.swift */; };
 		OBJ_32 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Attributes.swift */; };
 		OBJ_33 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Directory.swift */; };
 		OBJ_34 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Errors.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BAA3A14A1E4A622200763386 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		OBJ_12 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		OBJ_19 /* FileSmithTests */ = {
 			isa = PBXGroup;
 			children = (
+				BAA3A14A1E4A622200763386 /* TestHelpers.swift */,
 				OBJ_20 /* DirectoryTests.swift */,
 				OBJ_21 /* FileTests.swift */,
 				OBJ_22 /* PathTests.swift */,
@@ -218,6 +221,7 @@
 				OBJ_47 /* DirectoryTests.swift in Sources */,
 				OBJ_48 /* FileTests.swift in Sources */,
 				OBJ_49 /* PathTests.swift in Sources */,
+				BAA3A14B1E4A622200763386 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

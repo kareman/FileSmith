@@ -22,8 +22,9 @@ class FileTests: XCTestCase {
 			XCTAssertEqual(current.files().count, 0)
 
 			let path_file1 = FilePath("file1.txt")
-			let write_file1 = try path_file1.create(ifExists: .throwError)
+			var write_file1 = try path_file1.create(ifExists: .throwError)
 			XCTAssertThrowsError(try path_file1.create(ifExists: .throwError))
+			write_file1 = try path_file1.edit()
 			write_file1.write("line 1 of file1.txt\n")
 
 			XCTAssertEqual(try ReadableFile(open: path_file1).read(), "line 1 of file1.txt\n")
@@ -74,6 +75,7 @@ class FileTests: XCTestCase {
 			XCTAssertThrowsError(try WritableFile(create: "dir", ifExists: .open))
 
 			write_link.close()
+			read_link.close()
 		} catch {
 			XCTFail(String(describing: error))
 		}
@@ -94,8 +96,23 @@ class FileTests: XCTestCase {
 
 	func testStandardInOut() {
 		_ = ReadableFile.stdin
-		_ = WritableFile.stdout
+		WritableFile.stdout.print(2, "words")
 		_ = WritableFile.stderror
+	}
+
+	func testStreamsPrint() {
+		let (input,output) = streams()
+
+		XCTAssert(input.path.exists())
+		XCTAssert(output.path.exists())
+
+		input.print("Write",3,"words")
+		XCTAssertEqual(output.readSome(), "Write 3 words\n")
+		input.print("No","spaces", separator: "", terminator:"theend")
+		XCTAssertEqual(output.readSome(), "Nospacestheend")
+
+		input.close()
+		XCTAssertEqual(output.read(), "")
 	}
 }
 
@@ -104,5 +121,6 @@ extension FileTests {
 		("testFiles", testFiles),
 		("testOverwrite", testOverwrite),
 		("testStandardInOut", testStandardInOut),
+		("testStreamsPrint", testStreamsPrint),
 		]
 }

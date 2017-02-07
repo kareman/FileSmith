@@ -142,6 +142,12 @@ class PathTests: XCTestCase {
 		XCTAssertEqual(FilePath("/../dir1/dir2/..").name, "dir1")
 	}
 
+	func testCertainCharactersAtBeginningOfPath() {
+		XCTAssertEqual(DirectoryPath("~/").absoluteString, NSHomeDirectoryForUser(NSUserName())!)
+		XCTAssertEqual(DirectoryPath(".").absolute, DirectoryPath.current)
+		XCTAssertEqual(DirectoryPath("./"), DirectoryPath(""))
+	}
+
 	func testIsAParentOf() {
 		XCTAssertTrue(DirectoryPath("/a/b/").isAParentOf(AnyPath("/a/b/c")))
 		XCTAssertFalse(DirectoryPath("/a/b/").isAParentOf(AnyPath("/c/b/c")))

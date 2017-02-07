@@ -36,14 +36,14 @@ public class Directory {
 	/// - Parameter path: The path to the directory.
 	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile.
 	public init(open path: DirectoryPath) throws {
-		self.path = path.absolute
-		let stringpath = self.path.string
+		self.path = path
+		let stringpath = self.path.absoluteString
 
 		guard let type = FileType(stringpath) else {
 			throw FileSystemError.notFound(path: path)
 		}
 		guard type == .directory else {
-			throw FileSystemError.notDirectory(path: FilePath(stringpath))
+			throw FileSystemError.notDirectory(path: FilePath(path))
 		}
 		guard FileManager().isReadableFile(atPath: stringpath) else {
 			throw FileSystemError.invalidAccess(path: path, writing: false)
@@ -66,12 +66,12 @@ public class Directory {
 	///   - ifExists: What to do if it already exists: open, throw error or replace.
 	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.
 	public init(create path: DirectoryPath, ifExists: AlreadyExistsOptions) throws {
-		self.path = path.absolute
-		let stringpath = self.path.string
+		self.path = path
+		let stringpath = self.path.absoluteString
 
 		if let type = FileType(stringpath) {
 			guard type == .directory else {
-				throw FileSystemError.notDirectory(path: FilePath(stringpath))
+				throw FileSystemError.notDirectory(path: FilePath(path))
 			}
 			switch ifExists {
 			case .throwError: throw FileSystemError.alreadyExists(path: path)

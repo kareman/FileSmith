@@ -6,7 +6,7 @@
 //  Copyright © 2017 FileSmith. All rights reserved.
 //
 
-public enum FileSystemError: Error {
+public enum FileSystemError: Error, Equatable {
 	case alreadyExists(path: Path)
 	case notFound(path: Path)
 	case isDirectory(path: Path)
@@ -14,6 +14,31 @@ public enum FileSystemError: Error {
 	case invalidAccess(path: Path, writing: Bool)
 	case couldNotCreate(path: Path)
 	case outsideSandbox(path: Path)
+
+
+	/// Determines if two FileSystemErrors are equal.
+	/// Does not check the types of the paths, just that they are equal in content.
+	/// - Returns: True iff the two FileSystemErrors are of the same type, and the paths have the same content. Otherwise False.
+	public static func ==(left: FileSystemError, right: FileSystemError) -> Bool {
+		switch (left, right) {
+		case (.alreadyExists(path: let l), .alreadyExists(path: let r)):
+			return AnyPath(l) == AnyPath(r)
+		case (.notFound(path: let l), .notFound(path: let r)):
+			return AnyPath(l) == AnyPath(r)
+		case (.isDirectory(path: let l), .isDirectory(path: let r)):
+			return AnyPath(l) == AnyPath(r)
+		case (.notDirectory(path: let l), .notDirectory(path: let r)):
+			return AnyPath(l) == AnyPath(r)
+		case (.invalidAccess(path: let l, writing: let lw), .invalidAccess(path: let r, writing: let rw)):
+			return (AnyPath(l) == AnyPath(r)) && (lw == rw)
+		case (.couldNotCreate(path: let l), .couldNotCreate(path: let r)):
+			return AnyPath(l) == AnyPath(r)
+		case (.outsideSandbox(path: let l), .outsideSandbox(path: let r)):
+			return AnyPath(l) == AnyPath(r)
+		default:
+			return false
+		}
+	}
 }
 
 extension Path {
@@ -49,4 +74,5 @@ extension FileSystemError: CustomStringConvertible {
 			return FilePath(absolute: path.components).locationDescription + " is not in the current working directory \(DirectoryPath.current.string). Set Directory.sandbox to 'false' if you want to change the file system outside of the current working directory."
 		}
 	}
+
 }

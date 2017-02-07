@@ -11,7 +11,7 @@ import Foundation
 extension File {
 	public init(createSymbolicLink newlink: FilePath, to target: File, ifExists: AlreadyExistsOptions) throws {
 		if let newlinktype = FileType(newlink) {
-			guard newlinktype != .directory else { throw FileSystemError.isDirectory(path: newlink) }
+			guard newlinktype != .directory else { throw FileSystemError.isDirectory(path: DirectoryPath(newlink)) }
 			switch ifExists {
 			case .throwError:
 				throw FileSystemError.alreadyExists(path: newlink)
@@ -38,7 +38,7 @@ extension File {
 extension Directory {
 	public convenience init(createSymbolicLink newlink: DirectoryPath, to target: Directory, ifExists: AlreadyExistsOptions) throws {
 		if let newlinktype = FileType(newlink) {
-			guard newlinktype == .directory else { throw FileSystemError.notDirectory(path: newlink) }
+			guard newlinktype == .directory else { throw FileSystemError.notDirectory(path: FilePath(newlink)) }
 			switch ifExists {
 			case .throwError:
 				throw FileSystemError.alreadyExists(path: newlink)
