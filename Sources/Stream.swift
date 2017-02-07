@@ -52,7 +52,6 @@ public protocol ReadableStream : class, TextOutputStreamable {
 
 	/// Whatever amount of text the stream feels like providing.
 	/// If the source is a file this will read everything at once.
-
 	/// - returns: more text from the stream, or nil if we have reached the end.
 	func readSome () -> String?
 

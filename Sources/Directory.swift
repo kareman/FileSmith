@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+/// What to do if trying to create a file or directory that already exists.
 public enum AlreadyExistsOptions {
 	case open, throwError, replace
 }
@@ -20,11 +22,19 @@ extension Path {
 	}
 }
 
+/// A directory which exists in the local filesystem (at least at the time of initialisation).
 public class Directory {
+	
+	/// If true, you can only to make changes to the file system in the current working directory, or any of its subdirectories.
 	public static var sandbox = true
-
+				
+	/// The path to this directory.
 	public let path: DirectoryPath
 
+	/// Opens an already existing directory.
+	///
+	/// - Parameter path: The path to the directory.
+	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile.
 	public init(open path: DirectoryPath) throws {
 		self.path = path.absolute
 		let stringpath = self.path.string
@@ -40,10 +50,21 @@ public class Directory {
 		}
 	}
 
+	/// Opens an already existing directory.
+	///
+	/// - Parameter stringpath: The string path to the directory.
+	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile.
 	public convenience init(open stringpath: String) throws {
 		try self.init(open: DirectoryPath(stringpath))
 	}
 
+
+	/// Creates a new directory.
+	///
+	/// - Parameters:
+	///   - path:  The path where the new directory should be created. 
+	///   - ifExists: What to do if it already exists: open, throw error or replace.
+	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.
 	public init(create path: DirectoryPath, ifExists: AlreadyExistsOptions) throws {
 		self.path = path.absolute
 		let stringpath = self.path.string
@@ -64,16 +85,31 @@ public class Directory {
 		try FileManager().createDirectory(atPath: stringpath, withIntermediateDirectories: true, attributes: nil)
 	}
 
+	/// Creates a new directory.
+	///
+	/// - Parameters:
+	///   - path: The string path where the new directory should be created.
+	///   - ifExists: What to do if it already exists: open, throw error or replace.
+	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.
 	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
 		try self.init(create: DirectoryPath(stringpath), ifExists: ifExists)
 	}
 }
 
 extension DirectoryPath {
+
+	/// Returns a Directory object if there is a directory at this path.
+	///
+	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile.
 	public func open() throws -> Directory {
 		return try Directory(open: self)
 	}
 
+	/// Creates a new directory at this path.
+	///
+	/// - Parameter ifExists: What to do if it already exists: open, throw error or replace.
+	/// - Returns: A Directory object with this path. 
+	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.
 	@discardableResult
 	public func create(ifExists: AlreadyExistsOptions) throws -> Directory {
 		return try Directory(create: self, ifExists: ifExists)
