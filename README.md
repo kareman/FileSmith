@@ -4,11 +4,10 @@
 
 A strongly typed Swift library for working with local files and directories.
 
-Because when working with paths you almost always know which are for directories and which are for files, so why not let the compiler in on it too?
+It differentiates between file paths and directory paths, and between paths and actual files and directories, because the programmer knows which are which and when the compiler knows it too it can be much more helpful. 
 
-Still a work in progress and has not been properly tested, so use at your own risk. This readme is also clearly far from finished.
-
-[API documentation](https://kareman.github.io/FileSmith/)
+See also:
+- [API documentation](https://kareman.github.io/FileSmith/)
 
 ## Terms
 
@@ -69,7 +68,7 @@ var dir2 = try Directory(create: "dir/dir2", ifExists: .throwError)
 var dir3 = try dir2.create(directory: "dir3", ifExists: .open) // dir/dir2/dir3
 
 var file1_edit = try filepath.create(ifExists: .open)
-let file2_edit = try EditableFile(create: "file2.txt", ifExists: .open)
+let file2_edit = try WritableFile(create: "file2.txt", ifExists: .open)
 let file3_edit = try dir1.create(file: "file3.txt", ifExists: .open) // dir/dir1/file3
 ```
 
@@ -81,7 +80,7 @@ dir2 = try Directory(open: "dir/dir2")
 dir3 = try dir2.open(directory: "dir3")
 
 let file1 = try filepath.open()
-let file2 = try File(open: "file2.txt")
+let file2 = try ReadableFile(open: "file2.txt")
 let file3 = try dir1.open(file: "file3.txt")
 ```
 
@@ -114,8 +113,8 @@ Directory.current.directories(recursive: true) // [dir, dir/dir1, dir/dir2, dir/
 ```swift
 let dir1_link = try Directory(createSymbolicLink: "dir1_link", to: dir1, ifExists: .open)
 let dir2_link = try dir1.create(symbolicLink: "dir2_link", to: dir2, ifExists: .open)
-let file1_link = try File(createSymbolicLink: "file1_link", to: file1, ifExists: .open)
-let file2_link = try dir2.create(symbolicLink: "file2_link", to: file2, ifExists: .open)
+let file1_link = try ReadableFile(createSymbolicLink: "file1_link", to: file1, ifExists: .open)
+let file2_link = try dir2.create(symbolicLink: "file2_link", to: file2, ifExists: .open) as ReadableFile
 ```
 
 #### Misc
