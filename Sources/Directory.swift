@@ -25,7 +25,7 @@ extension Path {
 /// A directory which exists in the local filesystem (at least at the time of initialisation).
 public class Directory {
 	
-	/// If true, you can only to make changes to the file system in the current working directory, or any of its subdirectories.
+	/// If true, then you can only make changes to the file system in the current working directory, or any of its subdirectories.
 	public static var sandbox = true
 				
 	/// The path to this directory.
@@ -34,7 +34,7 @@ public class Directory {
 	/// Opens an already existing directory.
 	///
 	/// - Parameter path: The path to the directory.
-	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile.
+	/// - Throws: FileSystemError.notFound, .notDirectory, .invalidAccess.
 	public init(open path: DirectoryPath) throws {
 		self.path = path
 		let stringpath = self.path.absoluteString
@@ -53,7 +53,7 @@ public class Directory {
 	/// Opens an already existing directory.
 	///
 	/// - Parameter stringpath: The string path to the directory.
-	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile.
+	/// - Throws: FileSystemError.notFound, .notDirectory, .invalidAccess.
 	public convenience init(open stringpath: String) throws {
 		try self.init(open: DirectoryPath(stringpath))
 	}
@@ -62,9 +62,9 @@ public class Directory {
 	/// Creates a new directory.
 	///
 	/// - Parameters:
-	///   - path:  The path where the new directory should be created. 
+	///   - path: The path where the new directory should be created. 
 	///   - ifExists: What to do if it already exists: open, throw error or replace.
-	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.
+	/// - Throws: FileSystemError.notDirectory, .alreadyExists, .outsideSandbox.
 	public init(create path: DirectoryPath, ifExists: AlreadyExistsOptions) throws {
 		self.path = path
 		let stringpath = self.path.absoluteString
@@ -90,7 +90,7 @@ public class Directory {
 	/// - Parameters:
 	///   - path: The string path where the new directory should be created.
 	///   - ifExists: What to do if it already exists: open, throw error or replace.
-	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.
+	/// - Throws: FileSystemError.notDirectory, .alreadyExists, .outsideSandbox.
 	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
 		try self.init(create: DirectoryPath(stringpath), ifExists: ifExists)
 	}
@@ -100,7 +100,7 @@ extension DirectoryPath {
 
 	/// Returns a Directory object if there is a directory at this path.
 	///
-	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile.
+	/// - Throws: FileSystemError.notFound, .notDirectory, .invalidAccess.
 	public func open() throws -> Directory {
 		return try Directory(open: self)
 	}
@@ -109,7 +109,7 @@ extension DirectoryPath {
 	///
 	/// - Parameter ifExists: What to do if it already exists: open, throw error or replace.
 	/// - Returns: A Directory object with this path. 
-	/// - Throws: FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.
+	/// - Throws: FileSystemError.notDirectory, .alreadyExists, .outsideSandbox.
 	@discardableResult
 	public func create(ifExists: AlreadyExistsOptions) throws -> Directory {
 		return try Directory(create: self, ifExists: ifExists)
@@ -128,7 +128,7 @@ extension Directory {
 			}
 	}
 
-	func filesOrDirectories<P: Path>(_ pattern: String = "*/", recursive: Bool = false) -> [P] {
+	func filesOrDirectories<P: Path>(_ pattern: String, recursive: Bool = false) -> [P] {
 		return Directory.filter(pattern: path.absoluteString + pathseparator + pattern, relativeTo: path)
 			+ (!recursive ? [] : (contentsOfDirectory(at: path.absoluteString, recursive: true))
 			.flatMap(FileSmith.path(detectTypeOf:))
@@ -136,46 +136,98 @@ extension Directory {
 			.flatMap { Directory.filter(pattern: $0.absoluteString + pathseparator + pattern, relativeTo: path) })
 	}
 
+	/// Lists all directories under this directory matching the pattern.
+	///
+	/// - Parameters:
+	///   - pattern: A glob pattern, supporting wilcards "*" and "?". The default is "*", matching everything.
+	///   - recursive: If true, searches all subdirectories and their subdirectories etc. The default is `false`.
+	/// - Returns: An array of DirectoryPath.
 	public func directories(_ pattern: String = "*", recursive: Bool = false) -> [DirectoryPath] {
 		return filesOrDirectories(pattern, recursive: recursive)
 	}
 
+	/// Lists all files under this directory matching the pattern.
+	///
+	/// - Parameters:
+	///   - pattern: A glob pattern, supporting wilcards "*" and "?". The default is "*", matching everything.
+	///   - recursive: If true, searches all subdirectories and their subdirectories etc. The default is `false`.
+	/// - Returns: An array of FilePath.
 	public func files(_ pattern: String = "*", recursive: Bool = false) -> [FilePath] {
 		return filesOrDirectories(pattern, recursive: recursive)
 	}
 
+	/// Returns true if there is a file or directory at 'stringpath' relative to this directory.
 	public func contains(_ stringpath: String) -> Bool {
 		return FileManager().fileExists(atPath: path.absoluteString + pathseparator + stringpath)
 	}
 
+	/// Throws an error if there is not a file or directory at 'stringpath' relative to this directory.
+	/// - Throws: FileSystemError.notFound.
 	public func verifyContains(_ stringpath: String) throws {
 		guard self.contains(stringpath) else {
 			throw FileSystemError.notFound(path: AnyPath(base: path.absoluteString, relative: stringpath))
 		}
 	}
 
+	/// Creates a new file at 'stringpath', relative to this directory.
+	///
+	/// - Parameters:
+	///   - path: The path where the new file should be created.
+	///   - ifExists: What to do if it already exists: open, throw error or replace.
+	/// - Returns: A WritableFile ready to write to the new file.
+	/// - Throws: FileSystemError.isDirectory, .couldNotCreate, .alreadyExists, .outsideSandbox.
 	@discardableResult
 	public func create(file stringpath: String, ifExists: AlreadyExistsOptions) throws -> WritableFile {
 		let newpath = self.path.append(file: stringpath)
 		return try WritableFile(create: newpath, ifExists: ifExists)
 	}
 
+	/// Creates a new directory at 'stringpath', relative to this directory.
+	///
+	/// - Parameters:
+	///   - path: The path where the new directory should be created.
+	///   - ifExists: What to do if it already exists: open, throw error or replace.
+	/// - Returns: A WritableFile ready to write to the new file.
+	/// - Throws: FileSystemError.notDirectory, .alreadyExists, .outsideSandbox.
 	@discardableResult
 	public func create(directory stringpath: String, ifExists: AlreadyExistsOptions) throws -> Directory {
 		let newpath = self.path.append(directory: stringpath)
 		return try Directory(create: newpath, ifExists: ifExists)
 	}
 
+	/// Opens for reading the file at 'stringpath', relative to this directory.
+	///
+	/// - Parameter stringpath: the path to the file, relative to this directory.
+	/// - Returns: A ReadableFile ready to read from the file. 
+	/// - Throws: FileSystemError.notFound, .isDirectory, .invalidAccess.
 	public func open(file stringpath: String) throws -> ReadableFile {
 		let newpath = self.path.append(file: stringpath)
 		return try ReadableFile(open: newpath)
 	}
 
+	/// Opens for writing the file at 'stringpath', relative to this directory.
+	///
+	/// - Parameter stringpath: the path to the file, relative to this directory.
+	/// - Returns: A WritableFile ready to write to the file.
+	/// - Throws: FileSystemError.notFound, .isDirectory, .invalidAccess, .outsideSandbox.
+	public func edit(file stringpath: String) throws -> WritableFile {
+		let newpath = self.path.append(file: stringpath)
+		return try WritableFile(open: newpath)
+	}
+
+	/// Opens the directory at 'stringpath', relative to this directory.
+	///
+	/// - Parameter stringpath: the path to the directory, relative to this directory.
+	/// - Returns: A Directory object.
+	/// - Throws: FileSystemError.notFound, .notDirectory, .invalidAccess.
 	public func open(directory stringpath: String) throws -> Directory {
 		let newpath = self.path.append(directory: stringpath)
 		return try Directory(open: newpath)
 	}
 
+	/// Deletes this directory. For ever.
+	///
+	/// - Throws: FileSystemError.outsideSandbox.
 	public func delete() throws {
 		try path.verifyIsInSandbox()
 		try FileManager().removeItem(atPath: path.absoluteString)

@@ -74,5 +74,4 @@ extension FileSystemError: CustomStringConvertible {
 			return FilePath(absolute: path.components).locationDescription + " is not in the current working directory \(DirectoryPath.current.absoluteString). Set Directory.sandbox to 'false' if you want to change the file system outside of the current working directory."
 		}
 	}
-
 }

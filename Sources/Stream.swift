@@ -55,13 +55,13 @@ public protocol ReadableStream : class, TextOutputStreamable {
 	/// - returns: more text from the stream, or nil if we have reached the end.
 	func readSome () -> String?
 
-	/// Read everything at once.
+	/// Reads everything at once.
 	func read () -> String
 }
 
 extension ReadableStream {
 
-	/// Split stream lazily into lines.
+	/// Splits stream lazily into lines.
 	public func lines () -> LazySequence<AnySequence<String>> {
 		return AnySequence(PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }).lazy
 	}
@@ -77,10 +77,11 @@ public protocol WritableStream : class, TextOutputStream {
 
 	var encoding: String.Encoding {get set}
 
-	/// Write the textual representation of `x` to the stream.
+	/// Writes the textual representation of `x` to the stream.
 	func write(_ x: String)
 
-	/// Close the stream. Must be called on local streams when finished writing.
+	/// Closes the stream. Must be called on non-file streams when finished writing,
+	/// to prevent a deadlock when reading.
 	func close()
 }
 
