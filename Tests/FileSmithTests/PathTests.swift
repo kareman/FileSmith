@@ -167,5 +167,7 @@ extension PathTests {
 		("testURL", testURL),
 		("testPathTypeDetection", testPathTypeDetection),
 		("testDotDot", testDotDot),
+		("testCertainCharactersAtBeginningOfPath", testCertainCharactersAtBeginningOfPath),
+		("testIsAParentOf", testIsAParentOf),
 		]
 }

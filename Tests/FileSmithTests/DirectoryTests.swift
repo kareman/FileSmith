@@ -44,6 +44,7 @@ class DirectoryTests: XCTestCase {
 		} catch {
 			XCTFail(String(describing: error))
 		}
+		Directory.sandbox = true
 	}
 
 	func testStandardDirectories() {

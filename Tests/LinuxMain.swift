@@ -6,6 +6,7 @@ import XCTest
 let tests: [XCTestCaseEntry] = [
 	testCase(PathTests.allTests),
 	testCase(DirectoryTests.allTests),
+	testCase(FileTests.allTests),
 	]
 
 XCTMain(tests)

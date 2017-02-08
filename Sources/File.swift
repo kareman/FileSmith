@@ -111,7 +111,7 @@ public final class WritableFile: File, WritableStream {
 		self.filehandle = filehandle
 		self.path = path
 		self.type = FileType(fileDescriptor: filehandle.fileDescriptor)
-		if self.type == .regularFile { self.filehandle.seekToEndOfFile() }
+		if self.type == .regularFile { _ = self.filehandle.seekToEndOfFile() }
 	}
 
 	public convenience init(open path: FilePath) throws {
