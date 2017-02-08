@@ -14,7 +14,7 @@
     <a title="Directory Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">FileSmith Docs</a> (63% documented)</p>
+        <p><a href="../index.html">FileSmith Docs</a> (74% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -157,7 +157,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>If true, you can only to make changes to the file system in the current working directory, or any of its subdirectories.</p>
+                        <p>If true, then you can only make changes to the file system in the current working directory, or any of its subdirectories.</p>
 
                       </div>
                       <div class="declaration">
@@ -221,7 +221,7 @@
 
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    FileSystemError.notFound, .notDirectory, .isReadableFile.
+    FileSystemError.notFound, .notDirectory, .invalidAccess.
 
 </div>
 
@@ -280,7 +280,7 @@
 
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    FileSystemError.notFound, .notDirectory, .isReadableFile.
+    FileSystemError.notFound, .notDirectory, .invalidAccess.
 
 </div>
 
@@ -334,12 +334,12 @@
 <p><li>Parameters:</p>
 
 <p><ul>
-<li>path:  The path where the new directory should be created.</li>
+<li>path: The path where the new directory should be created.</li>
 <li>ifExists: What to do if it already exists: open, throw error or replace.</li>
 </ul></li>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.</p>
+    FileSystemError.notDirectory, .alreadyExists, .outsideSandbox.</p>
 
 <p></div></p>
 
@@ -411,7 +411,7 @@
 </ul></li>
 <div class="aside aside-throws">
     <p class="aside-title">Throws</p>
-    FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.</p>
+    FileSystemError.notDirectory, .alreadyExists, .outsideSandbox.</p>
 
 <p></div></p>
 
@@ -477,16 +477,66 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Lists all directories under this directory matching the pattern.</p>
+
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>pattern: A glob pattern, supporting wilcards <q><em></q> and <q>?</q>. The default is <q></em></q>, matching everything.</li>
+<li>recursive: If true, searches all subdirectories and their subdirectories etc. The default is <code>false</code>.</li>
+</ul></li>
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    An array of DirectoryPath.</p>
+
+<p></div></p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">directories</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"*"</span><span class="p">,</span> <span class="nv">recursive</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/DirectoryPath.html">DirectoryPath</a></span><span class="p">]</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A glob pattern, supporting wilcards “”, matching everything.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>recursive</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If true, searches all subdirectories and their subdirectories etc. The default is <code>false</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An array of DirectoryPath.</p>
+
                       </div>
                     </section>
                   </div>
@@ -504,16 +554,66 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Lists all files under this directory matching the pattern.</p>
+
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>pattern: A glob pattern, supporting wilcards <q><em></q> and <q>?</q>. The default is <q></em></q>, matching everything.</li>
+<li>recursive: If true, searches all subdirectories and their subdirectories etc. The default is <code>false</code>.</li>
+</ul></li>
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    An array of FilePath.</p>
+
+<p></div></p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">files</span><span class="p">(</span><span class="n">_</span> <span class="nv">pattern</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"*"</span><span class="p">,</span> <span class="nv">recursive</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt"><a href="../Structs/FilePath.html">FilePath</a></span><span class="p">]</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pattern</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A glob pattern, supporting wilcards “”, matching everything.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>recursive</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If true, searches all subdirectories and their subdirectories etc. The default is <code>false</code>.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An array of FilePath.</p>
+
                       </div>
                     </section>
                   </div>
@@ -531,14 +631,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Returns true if there is a file or directory at &lsquo;stringpath&rsquo; relative to this directory.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">contains</span><span class="p">(</span><span class="n">_</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -558,14 +658,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Throws an error if there is not a file or directory at &lsquo;stringpath&rsquo; relative to this directory.
+- Throws: FileSystemError.notFound.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">verifyContains</span><span class="p">(</span><span class="n">_</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -585,16 +686,71 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new file at &lsquo;stringpath&rsquo;, relative to this directory.</p>
+
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>path: The path where the new file should be created.</li>
+<li>ifExists: What to do if it already exists: open, throw error or replace.</li>
+</ul></li>
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    A WritableFile ready to write to the new file.</p>
+
+<p></div>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.isDirectory, .couldNotCreate, .alreadyExists, .outsideSandbox.</p>
+
+<p></div></p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="n">file</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="kt"><a href="../Enums/AlreadyExistsOptions.html">AlreadyExistsOptions</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/WritableFile.html">WritableFile</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The path where the new file should be created.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ifExists</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>What to do if it already exists: open, throw error or replace.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A WritableFile ready to write to the new file.</p>
+
                       </div>
                     </section>
                   </div>
@@ -612,16 +768,71 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new directory at &lsquo;stringpath&rsquo;, relative to this directory.</p>
+
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>path: The path where the new directory should be created.</li>
+<li>ifExists: What to do if it already exists: open, throw error or replace.</li>
+</ul></li>
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    A WritableFile ready to write to the new file.</p>
+
+<p></div>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notDirectory, .alreadyExists, .outsideSandbox.</p>
+
+<p></div></p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="n">directory</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="kt"><a href="../Enums/AlreadyExistsOptions.html">AlreadyExistsOptions</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Directory</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The path where the new directory should be created.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ifExists</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>What to do if it already exists: open, throw error or replace.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A WritableFile ready to write to the new file.</p>
+
                       </div>
                     </section>
                   </div>
@@ -639,16 +850,129 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Opens for reading the file at &lsquo;stringpath&rsquo;, relative to this directory.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter stringpath: the path to the file, relative to this directory.
+
+</div>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    A ReadableFile ready to read from the file. 
+
+</div>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notFound, .isDirectory, .invalidAccess.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">file</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ReadableFile.html">ReadableFile</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>stringpath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the path to the file, relative to this directory.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A ReadableFile ready to read from the file.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC9FileSmith9Directory4editFzT4fileSS_CS_12WritableFile"></a>
+                    <a name="//apple_ref/swift/Method/edit(file:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9FileSmith9Directory4editFzT4fileSS_CS_12WritableFile">edit(file:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Opens for writing the file at &lsquo;stringpath&rsquo;, relative to this directory.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter stringpath: the path to the file, relative to this directory.
+
+</div>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    A WritableFile ready to write to the file.
+
+</div>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notFound, .isDirectory, .invalidAccess, .outsideSandbox.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">edit</span><span class="p">(</span><span class="n">file</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/WritableFile.html">WritableFile</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>stringpath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the path to the file, relative to this directory.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A WritableFile ready to write to the file.</p>
+
                       </div>
                     </section>
                   </div>
@@ -666,16 +990,59 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Opens the directory at &lsquo;stringpath&rsquo;, relative to this directory.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter stringpath: the path to the directory, relative to this directory.
+
+</div>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    A Directory object.
+
+</div>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notFound, .notDirectory, .invalidAccess.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">(</span><span class="n">directory</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">Directory</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>stringpath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the path to the directory, relative to this directory.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A Directory object.</p>
+
                       </div>
                     </section>
                   </div>
@@ -693,14 +1060,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Deletes this directory. For ever.</p>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.outsideSandbox.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">delete</span><span class="p">()</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>

@@ -14,7 +14,7 @@
     <a title="WritableStream Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">FileSmith Docs</a> (63% documented)</p>
+        <p><a href="../index.html">FileSmith Docs</a> (74% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -184,7 +184,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Write the textual representation of <code>x</code> to the stream.</p>
+                        <p>Writes the textual representation of <code>x</code> to the stream.</p>
 
                       </div>
                       <div class="declaration">
@@ -211,7 +211,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Close the stream. Must be called on local streams when finished writing.</p>
+                        <p>Closes the stream. Must be called on non-file streams when finished writing,
+to prevent a deadlock when reading.</p>
 
                       </div>
                       <div class="declaration">

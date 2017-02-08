@@ -14,7 +14,7 @@
     <a title="File Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">FileSmith Docs</a> (63% documented)</p>
+        <p><a href="../index.html">FileSmith Docs</a> (74% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -151,8 +151,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The path to the file</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">path</span><span class="p">:</span> <span class="kt"><a href="../Structs/FilePath.html">FilePath</a></span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -170,8 +178,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The encoding for the text, if any, in the file.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -189,8 +205,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>What type of file or file-like item this is.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/FileType.html">FileType</a></span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -216,7 +240,19 @@
                       </div>
                       <h4>Default Implementation</h4>
                       <div class="default_impl abstract">
-                        <p>Undocumented</p>
+                        <p>Opens the file at ‘stringpath’.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter stringpath: the path to the file.
+
+</div>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notFound, .isDirectory, .invalidAccess.
+
+</div>
 
                       </div>
                     </section>

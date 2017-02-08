@@ -14,7 +14,7 @@
     <a title="ReadableFile Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">FileSmith Docs</a> (63% documented)</p>
+        <p><a href="../index.html">FileSmith Docs</a> (74% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -132,7 +132,13 @@
         <section>
           <section class="section">
             <h1>ReadableFile</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">ReadableFile</span><span class="p">:</span> <span class="kt"><a href="../Protocols/File.html">File</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/ReadableStream.html">ReadableStream</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>A class for reading text from a file.</p>
 
           </section>
           <section class="section task-group-section">
@@ -141,9 +147,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC9FileSmith12ReadableFile4pathVS_8FilePath"></a>
+                    <a name="/s:vP9FileSmith4File4pathVS_8FilePath"></a>
                     <a name="//apple_ref/swift/Property/path" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC9FileSmith12ReadableFile4pathVS_8FilePath">path</a>
+                    <a class="token" href="#/s:vP9FileSmith4File4pathVS_8FilePath">path</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -151,8 +157,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A class for reading text from a file.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">path</span><span class="p">:</span> <span class="kt"><a href="../Structs/FilePath.html">FilePath</a></span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -160,9 +174,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC9FileSmith12ReadableFile8encodingVE10FoundationSS8Encoding"></a>
+                    <a name="/s:vP9FileSmith4File8encodingVE10FoundationSS8Encoding"></a>
                     <a name="//apple_ref/swift/Property/encoding" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC9FileSmith12ReadableFile8encodingVE10FoundationSS8Encoding">encoding</a>
+                    <a class="token" href="#/s:vP9FileSmith4File8encodingVE10FoundationSS8Encoding">encoding</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -170,8 +184,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A class for reading text from a file.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">encoding</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="kt">Encoding</span> <span class="o">=</span> <span class="o">.</span><span class="n">utf8</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -179,9 +201,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vC9FileSmith12ReadableFile4typeOS_8FileType"></a>
+                    <a name="/s:vP9FileSmith4File4typeOS_8FileType"></a>
                     <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vC9FileSmith12ReadableFile4typeOS_8FileType">type</a>
+                    <a class="token" href="#/s:vP9FileSmith4File4typeOS_8FileType">type</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -189,8 +211,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A class for reading text from a file.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt"><a href="../Enums/FileType.html">FileType</a></span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -208,8 +238,48 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Opens the file at ‘path’ for reading.</p>
 
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter path: the path to the file.
+
+</div>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notFound, .isDirectory, .invalidAccess.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">open</span> <span class="nv">path</span><span class="p">:</span> <span class="kt"><a href="../Structs/FilePath.html">FilePath</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the path to the file.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -245,9 +315,9 @@ The path is <q>/dev/fd/</q> + the file handle&rsquo;s filedescriptor.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FP9FileSmith14ReadableStream4readFT_SS"></a>
+                    <a name="/s:FC9FileSmith12ReadableFile4readFT_SS"></a>
                     <a name="//apple_ref/swift/Method/read()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP9FileSmith14ReadableStream4readFT_SS">read()</a>
+                    <a class="token" href="#/s:FC9FileSmith12ReadableFile4readFT_SS">read()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -255,8 +325,7 @@ The path is <q>/dev/fd/</q> + the file handle&rsquo;s filedescriptor.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates a new ReadableFile which reads from the provided file handle.
-The path is <q>/dev/fd/</q> + the file handle&rsquo;s filedescriptor.</p>
+                        <p>Read everything.</p>
 
                       </div>
                       <div class="declaration">
@@ -283,8 +352,7 @@ The path is <q>/dev/fd/</q> + the file handle&rsquo;s filedescriptor.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Creates a new ReadableFile which reads from the provided file handle.
-The path is <q>/dev/fd/</q> + the file handle&rsquo;s filedescriptor.</p>
+                        <p>Read everything.</p>
 
                       </div>
                       <div class="declaration">
@@ -318,6 +386,14 @@ The path is <q>/dev/fd/</q> + the file handle&rsquo;s filedescriptor.</p>
                       <div class="abstract">
                         <p>Undocumented</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">ReadableFile</span><span class="p">:</span> <span class="kt"><a href="../Protocols/File.html">File</a></span><span class="p">,</span> <span class="kt"><a href="../Protocols/ReadableStream.html">ReadableStream</a></span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
