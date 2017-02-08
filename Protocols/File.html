@@ -14,7 +14,7 @@
     <a title="File Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">FileSmith Docs</a> (74% documented)</p>
+        <p><a href="../index.html">FileSmith Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -85,7 +85,7 @@
                 <a href="../Functions.html#/s:F9FileSmith4pathFT12detectTypeOfSS_GSqPS_4Path__">path(detectTypeOf:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F9FileSmith7streamsFT_TCS_12WritableFileCS_12ReadableFile_">streams()</a>
+                <a href="../Functions.html#/s:F9FileSmith7streamsFT_TPS_14WritableStream_PS_14ReadableStream__">streams()</a>
               </li>
             </ul>
           </li>
@@ -205,7 +205,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>What type of file or file-like item this is.</p>
+                        <p>The type of file or file-like item this is.</p>
 
                       </div>
                       <div class="declaration">
@@ -235,7 +235,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Opens the file at ‘stringpath’.</p>
 
                       </div>
                       <h4>Default Implementation</h4>
@@ -255,6 +255,14 @@
 </div>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="n">open</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -271,8 +279,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Opens the file at ‘path’.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="n">open</span> <span class="nv">path</span><span class="p">:</span> <span class="kt"><a href="../Structs/FilePath.html">FilePath</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -297,8 +313,75 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a symbolic link at &lsquo;newlink&rsquo; pointing to the file at &lsquo;target&rsquo;.</p>
 
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>newlink: The path to the new symbolic link.</li>
+<li>target: The file the new link should point to.</li>
+<li>ifExists: What to do if there already is something at newlink: open, throw error or replace.</li>
+</ul></li>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.isDirectory, .alreadyExists, .outsideSandbox, .invalidAccess.</p>
+
+<p></div></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">createSymbolicLink</span> <span class="nv">newlink</span><span class="p">:</span> <span class="kt"><a href="../Structs/FilePath.html">FilePath</a></span><span class="p">,</span> <span class="n">to</span> <span class="nv">target</span><span class="p">:</span> <span class="kt">File</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="kt"><a href="../Enums/AlreadyExistsOptions.html">AlreadyExistsOptions</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newlink</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The path to the new symbolic link.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>target</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The file the new link should point to.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ifExists</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>What to do if there already is something at newlink: open, throw error or replace.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -309,7 +392,7 @@
         </section>
         <section id="footer">
           <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-08)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

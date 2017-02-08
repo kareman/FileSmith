@@ -14,7 +14,7 @@
     <a title="FilePath Struct Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">FileSmith Docs</a> (74% documented)</p>
+        <p><a href="../index.html">FileSmith Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -85,7 +85,7 @@
                 <a href="../Functions.html#/s:F9FileSmith4pathFT12detectTypeOfSS_GSqPS_4Path__">path(detectTypeOf:)</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Functions.html#/s:F9FileSmith7streamsFT_TCS_12WritableFileCS_12ReadableFile_">streams()</a>
+                <a href="../Functions.html#/s:F9FileSmith7streamsFT_TPS_14WritableStream_PS_14ReadableStream__">streams()</a>
               </li>
             </ul>
           </li>
@@ -359,16 +359,33 @@ Any &rsquo;..&rsquo; not at the beginning have been resolved, and there are no e
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Opens the file at ‘path’ for reading.</p>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    A ReadableFile ready to read from the file.
+
+</div>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notFound, .isDirectory, .invalidAccess.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FilePath</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Path.html">Path</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">open</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/ReadableFile.html">ReadableFile</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A ReadableFile ready to read from the file.</p>
+
                       </div>
                     </section>
                   </div>
@@ -390,16 +407,23 @@ Any &rsquo;..&rsquo; not at the beginning have been resolved, and there are no e
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Opens the file at this path for writing.
+- Returns: A WritableFile for writing to the new file.
+- Throws: FileSystemError.notFound, .isDirectory, .invalidAccess.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FilePath</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Path.html">Path</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">edit</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/WritableFile.html">WritableFile</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A WritableFile for writing to the new file.</p>
+
                       </div>
                     </section>
                   </div>
@@ -417,16 +441,39 @@ Any &rsquo;..&rsquo; not at the beginning have been resolved, and there are no e
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new file at this path for writing.
+- Parameters:
+  - ifExists: What to do if it already exists: open, throw error or replace.
+- Throws: FileSystemError.isDirectory, .couldNotCreate, .alreadyExists, .outsideSandbox.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FilePath</span><span class="p">:</span> <span class="kt"><a href="../Protocols/Path.html">Path</a></span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">create</span><span class="p">(</span><span class="nv">ifExists</span><span class="p">:</span> <span class="kt"><a href="../Enums/AlreadyExistsOptions.html">AlreadyExistsOptions</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/WritableFile.html">WritableFile</a></span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ifExists</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>What to do if it already exists: open, throw error or replace.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -624,7 +671,7 @@ If the string begins with a &rsquo;/&rsquo; it is absolute, otherwise it is rela
         </section>
         <section id="footer">
           <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-08)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
