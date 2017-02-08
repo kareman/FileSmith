@@ -14,7 +14,7 @@
     <a title="Directory Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">FileSmith Docs</a> (55% documented)</p>
+        <p><a href="../index.html">FileSmith Docs</a> (63% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -84,6 +84,9 @@
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F9FileSmith4pathFT12detectTypeOfSS_GSqPS_4Path__">path(detectTypeOf:)</a>
               </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F9FileSmith7streamsFT_TCS_12WritableFileCS_12ReadableFile_">streams()</a>
+              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -129,7 +132,13 @@
         <section>
           <section class="section">
             <h1>Directory</h1>
-            <p>Undocumented</p>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                </div>
+              </div>
+            <p>A directory which exists in the local filesystem (at least at the time of initialisation).</p>
 
           </section>
           <section class="section task-group-section">
@@ -148,8 +157,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>If true, you can only to make changes to the file system in the current working directory, or any of its subdirectories.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">var</span> <span class="nv">sandbox</span> <span class="o">=</span> <span class="kc">true</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -167,8 +184,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>The path to this directory.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">path</span><span class="p">:</span> <span class="kt"><a href="../Structs/DirectoryPath.html">DirectoryPath</a></span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -186,8 +211,48 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Opens an already existing directory.</p>
 
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter path: The path to the directory.
+
+</div>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notFound, .notDirectory, .isReadableFile.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">open</span> <span class="nv">path</span><span class="p">:</span> <span class="kt"><a href="../Structs/DirectoryPath.html">DirectoryPath</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The path to the directory.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -205,8 +270,48 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Opens an already existing directory.</p>
 
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter stringpath: The string path to the directory.
+
+</div>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notFound, .notDirectory, .isReadableFile.
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">open</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>stringpath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The string path to the directory.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -224,8 +329,61 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new directory.</p>
 
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>path:  The path where the new directory should be created.</li>
+<li>ifExists: What to do if it already exists: open, throw error or replace.</li>
+</ul></li>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.</p>
+
+<p></div></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="n">create</span> <span class="nv">path</span><span class="p">:</span> <span class="kt"><a href="../Structs/DirectoryPath.html">DirectoryPath</a></span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="kt"><a href="../Enums/AlreadyExistsOptions.html">AlreadyExistsOptions</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The path where the new directory should be created.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ifExists</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>What to do if it already exists: open, throw error or replace.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -243,8 +401,61 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new directory.</p>
 
+<p><li>Parameters:</p>
+
+<p><ul>
+<li>path: The string path where the new directory should be created.</li>
+<li>ifExists: What to do if it already exists: open, throw error or replace.</li>
+</ul></li>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    FileSystemError.notFound, .notDirectory, .isReadableFile, .alreadyExists, .outsideSandbox.</p>
+
+<p></div></p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">create</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="kt"><a href="../Enums/AlreadyExistsOptions.html">AlreadyExistsOptions</a></span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>path</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The string path where the new directory should be created.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>ifExists</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>What to do if it already exists: open, throw error or replace.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -269,6 +480,14 @@
                         <p>Undocumented</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -287,6 +506,14 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -307,6 +534,14 @@
                         <p>Undocumented</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -325,6 +560,14 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -345,6 +588,14 @@
                         <p>Undocumented</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -363,6 +614,14 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -383,6 +642,14 @@
                         <p>Undocumented</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -402,6 +669,14 @@
                         <p>Undocumented</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -420,6 +695,14 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -556,6 +839,14 @@
                         <p>Undocumented</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -579,6 +870,14 @@
                         <p>Undocumented</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -598,6 +897,14 @@
                         <p>Undocumented</p>
 
                       </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Directory</span></code></pre>
+
+                        </div>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -606,7 +913,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-05)</p>
+          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

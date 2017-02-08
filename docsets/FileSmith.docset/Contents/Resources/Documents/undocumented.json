@@ -58,182 +58,84 @@
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": null,
-      "symbol": "Directory",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": null,
-      "symbol": "Directory",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": null,
-      "symbol": "Directory",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": null,
-      "symbol": "Directory",
-      "symbol_kind": "source.lang.swift.decl.extension",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 10,
-      "symbol": "AlreadyExistsOptions",
-      "symbol_kind": "source.lang.swift.decl.enum",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 11,
+      "line": 13,
       "symbol": "AlreadyExistsOptions.open",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 11,
+      "line": 13,
       "symbol": "AlreadyExistsOptions.replace",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 11,
+      "line": 13,
       "symbol": "AlreadyExistsOptions.throwError",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 23,
-      "symbol": "Directory",
-      "symbol_kind": "source.lang.swift.decl.class",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 24,
-      "symbol": "Directory.sandbox",
-      "symbol_kind": "source.lang.swift.decl.var.static",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 26,
-      "symbol": "Directory.path",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 28,
-      "symbol": "Directory.init(open:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 43,
-      "symbol": "Directory.init(open:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 47,
-      "symbol": "Directory.init(create:ifExists:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 67,
-      "symbol": "Directory.init(create:ifExists:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 73,
-      "symbol": "DirectoryPath.open()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 78,
-      "symbol": "DirectoryPath.create(ifExists:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 103,
+      "line": 139,
       "symbol": "Directory.directories(_:recursive:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 107,
+      "line": 143,
       "symbol": "Directory.files(_:recursive:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 111,
+      "line": 147,
       "symbol": "Directory.contains(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 115,
+      "line": 151,
       "symbol": "Directory.verifyContains(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 122,
+      "line": 158,
       "symbol": "Directory.create(file:ifExists:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 128,
+      "line": 164,
       "symbol": "Directory.create(directory:ifExists:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 133,
+      "line": 169,
       "symbol": "Directory.open(file:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 138,
+      "line": 174,
       "symbol": "Directory.open(directory:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 143,
+      "line": 179,
       "symbol": "Directory.delete()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -401,13 +303,6 @@
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 42,
-      "symbol": "ReadableFile.init(path:filehandle:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
       "line": 48,
       "symbol": "ReadableFile.init(open:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
@@ -415,93 +310,93 @@
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 64,
+      "line": 70,
       "symbol": "ReadableFile.close()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 87,
+      "line": 98,
       "symbol": "FilePath.open()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 93,
+      "line": 104,
       "symbol": "WritableFile",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 94,
+      "line": 105,
       "symbol": "WritableFile.path",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 95,
+      "line": 106,
       "symbol": "WritableFile.encoding",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 96,
+      "line": 107,
       "symbol": "WritableFile.type",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 99,
-      "symbol": "WritableFile.init(path:filehandle:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 106,
+      "line": 117,
       "symbol": "WritableFile.init(open:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 137,
+      "line": 152,
       "symbol": "WritableFile.init(create:ifExists:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 142,
+      "line": 157,
       "symbol": "WritableFile.init(create:ifExists:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 146,
+      "line": 161,
       "symbol": "WritableFile.delete()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 172,
+      "line": 195,
       "symbol": "FilePath.edit()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
-      "line": 177,
+      "line": 200,
       "symbol": "FilePath.create(ifExists:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/File.swift",
+      "line": 205,
+      "symbol": "streams()",
+      "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
     },
     {
@@ -569,14 +464,14 @@
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Paths.swift",
-      "line": 432,
+      "line": 428,
       "symbol": "DirectoryPath.+(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Paths.swift",
-      "line": 445,
+      "line": 441,
       "symbol": "==(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
@@ -590,7 +485,7 @@
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Stream.swift",
-      "line": 79,
+      "line": 78,
       "symbol": "WritableStream.encoding",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

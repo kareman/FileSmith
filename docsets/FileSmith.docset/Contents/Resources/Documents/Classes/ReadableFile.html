@@ -14,7 +14,7 @@
     <a title="ReadableFile Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">FileSmith Docs</a> (55% documented)</p>
+        <p><a href="../index.html">FileSmith Docs</a> (63% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -83,6 +83,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F9FileSmith4pathFT12detectTypeOfSS_GSqPS_4Path__">path(detectTypeOf:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F9FileSmith7streamsFT_TCS_12WritableFileCS_12ReadableFile_">streams()</a>
               </li>
             </ul>
           </li>
@@ -195,25 +198,6 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9FileSmith12ReadableFilecFT4pathVS_8FilePath10filehandleCSo10FileHandle_S0_"></a>
-                    <a name="//apple_ref/swift/Method/init(path:filehandle:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9FileSmith12ReadableFilecFT4pathVS_8FilePath10filehandleCSo10FileHandle_S0_">init(path:filehandle:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:FC9FileSmith12ReadableFilecFzT4openVS_8FilePath_S0_"></a>
                     <a name="//apple_ref/swift/Method/init(open:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:FC9FileSmith12ReadableFilecFzT4openVS_8FilePath_S0_">init(open:)</a>
@@ -233,6 +217,34 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:FC9FileSmith12ReadableFilecFCSo10FileHandleS0_"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9FileSmith12ReadableFilecFCSo10FileHandleS0_">init(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Creates a new ReadableFile which reads from the provided file handle.
+The path is <q>/dev/fd/</q> + the file handle&rsquo;s filedescriptor.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">filehandle</span><span class="p">:</span> <span class="kt">FileHandle</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:FP9FileSmith14ReadableStream4readFT_SS"></a>
                     <a name="//apple_ref/swift/Method/read()" class="dashAnchor"></a>
                     <a class="token" href="#/s:FP9FileSmith14ReadableStream4readFT_SS">read()</a>
@@ -243,7 +255,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Creates a new ReadableFile which reads from the provided file handle.
+The path is <q>/dev/fd/</q> + the file handle&rsquo;s filedescriptor.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -269,7 +283,9 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        
+                        <p>Creates a new ReadableFile which reads from the provided file handle.
+The path is <q>/dev/fd/</q> + the file handle&rsquo;s filedescriptor.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -302,6 +318,33 @@
                       <div class="abstract">
                         <p>Undocumented</p>
 
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvC9FileSmith12ReadableFile5stdinPS_14ReadableStream_"></a>
+                    <a name="//apple_ref/swift/Variable/stdin" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvC9FileSmith12ReadableFile5stdinPS_14ReadableStream_">stdin</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A ReadableStream which reads from standard input.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">stdin</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ReadableStream.html">ReadableStream</a></span> <span class="o">=</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -343,7 +386,7 @@ Pass <code>nil</code> to remove any preexisting handlers.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-05)</p>
+          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

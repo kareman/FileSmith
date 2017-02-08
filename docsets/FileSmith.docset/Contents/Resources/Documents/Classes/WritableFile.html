@@ -14,7 +14,7 @@
     <a title="WritableFile Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">FileSmith Docs</a> (55% documented)</p>
+        <p><a href="../index.html">FileSmith Docs</a> (63% documented)</p>
         <p class="header-right"><a href="https://github.com/kareman/FileSmith"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -83,6 +83,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Functions.html#/s:F9FileSmith4pathFT12detectTypeOfSS_GSqPS_4Path__">path(detectTypeOf:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:F9FileSmith7streamsFT_TCS_12WritableFileCS_12ReadableFile_">streams()</a>
               </li>
             </ul>
           </li>
@@ -195,9 +198,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9FileSmith12WritableFilecFT4pathVS_8FilePath10filehandleCSo10FileHandle_S0_"></a>
-                    <a name="//apple_ref/swift/Method/init(path:filehandle:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9FileSmith12WritableFilecFT4pathVS_8FilePath10filehandleCSo10FileHandle_S0_">init(path:filehandle:)</a>
+                    <a name="/s:FC9FileSmith12WritableFilecFzT4openVS_8FilePath_S0_"></a>
+                    <a name="//apple_ref/swift/Method/init(open:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9FileSmith12WritableFilecFzT4openVS_8FilePath_S0_">init(open:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -214,9 +217,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FC9FileSmith12WritableFilecFzT4openVS_8FilePath_S0_"></a>
-                    <a name="//apple_ref/swift/Method/init(open:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FC9FileSmith12WritableFilecFzT4openVS_8FilePath_S0_">init(open:)</a>
+                    <a name="/s:FC9FileSmith12WritableFilecFCSo10FileHandleS0_"></a>
+                    <a name="//apple_ref/swift/Method/init(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC9FileSmith12WritableFilecFCSo10FileHandleS0_">init(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -224,8 +227,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Creates a new WritableFile which writes to the provided file handle.
+The path is <q>/dev/fd/</q> + the file handle&rsquo;s filedescriptor.</p>
 
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">_</span> <span class="nv">filehandle</span><span class="p">:</span> <span class="kt">FileHandle</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -372,12 +384,66 @@ Nothing is overwritten, just added to the end of the file.</p>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvC9FileSmith12WritableFile6stdoutPS_14WritableStream_"></a>
+                    <a name="//apple_ref/swift/Variable/stdout" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvC9FileSmith12WritableFile6stdoutPS_14WritableStream_">stdout</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A WritableStream which writes to the standard output.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">stdout</span><span class="p">:</span> <span class="kt"><a href="../Protocols/WritableStream.html">WritableStream</a></span> <span class="o">=</span> <span class="kt">StdoutStream</span><span class="o">.</span><span class="k">default</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:ZvC9FileSmith12WritableFile8stderrorPS_14WritableStream_"></a>
+                    <a name="//apple_ref/swift/Variable/stderror" class="dashAnchor"></a>
+                    <a class="token" href="#/s:ZvC9FileSmith12WritableFile8stderrorPS_14WritableStream_">stderror</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A WritableStream which writes to the standard error.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">public</span> <span class="k">var</span> <span class="nv">stderror</span><span class="p">:</span> <span class="kt"><a href="../Protocols/WritableStream.html">WritableStream</a></span> <span class="o">=</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-05)</p>
+          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
