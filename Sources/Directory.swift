@@ -172,7 +172,7 @@ extension Directory {
 	/// Creates a new file at 'stringpath', relative to this directory.
 	///
 	/// - Parameters:
-	///   - path: The path where the new file should be created.
+	///   - stringpath: The path where the new file should be created.
 	///   - ifExists: What to do if it already exists: open, throw error or replace.
 	/// - Returns: A WritableFile ready to write to the new file.
 	/// - Throws: FileSystemError.isDirectory, .couldNotCreate, .alreadyExists, .outsideSandbox.
@@ -185,7 +185,7 @@ extension Directory {
 	/// Creates a new directory at 'stringpath', relative to this directory.
 	///
 	/// - Parameters:
-	///   - path: The path where the new directory should be created.
+	///   - stringpath: The path where the new directory should be created.
 	///   - ifExists: What to do if it already exists: open, throw error or replace.
 	/// - Returns: A WritableFile ready to write to the new file.
 	/// - Throws: FileSystemError.notDirectory, .alreadyExists, .outsideSandbox.

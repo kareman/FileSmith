@@ -8,15 +8,28 @@
 import Foundation
 
 public protocol File {
+
+	/// The path to the file
 	var path: FilePath { get }
+
+	/// The encoding for the text, if any, in the file.
 	var encoding: String.Encoding { get set }
+
+	/// The type of file or file-like item this is.
 	var type: FileType { get }
 
+	/// Opens the file at ‘stringpath’.
 	init(open stringpath: String) throws
+
+	/// Opens the file at ‘path’.
 	init(open path: FilePath) throws
 }
 
 extension File {
+	/// Opens the file at ‘stringpath’.
+	///
+	/// - Parameter stringpath: the path to the file.
+	/// - Throws: FileSystemError.notFound, .isDirectory, .invalidAccess.
 	public init(open stringpath: String) throws {
 		try self.init(open: FilePath(stringpath))
 	}
@@ -32,11 +45,18 @@ extension File {
 	}
 }
 
-
+/// A class for reading text from a file.
 public final class ReadableFile: File, ReadableStream {
+
+	/// The path to the file
 	public let path: FilePath
+
+	/// The encoding for the text in the file.
 	public var encoding: String.Encoding = .utf8
+
+	/// The type of file or file-like item this is.
 	public let type: FileType
+
 	internal let filehandle: FileHandle
 
 	private init(path: FilePath, filehandle: FileHandle) {
@@ -45,6 +65,10 @@ public final class ReadableFile: File, ReadableStream {
 		self.type = FileType(fileDescriptor: filehandle.fileDescriptor)
 	}
 
+	/// Opens the file at ‘path’ for reading.
+	///
+	/// - Parameter path: the path to the file.
+	/// - Throws: FileSystemError.notFound, .isDirectory, .invalidAccess.
 	public convenience init(open path: FilePath) throws {
 		guard let filehandle = FileHandle(forReadingAtPath: path.absoluteString) else {
 			try ReadableFile.errorForFile(at: path, writing: false)
@@ -59,14 +83,20 @@ public final class ReadableFile: File, ReadableStream {
 		self.init(path: FilePath("/dev/fd/\(filehandle.fileDescriptor)"), filehandle: filehandle)
 	}
 
+	/// Reads everything.
 	public func read() -> String {
 		return filehandle.read(encoding: encoding)
 	}
 
+	/// Reads whatever amount of text the source feels like providing.
+	/// If this is a regular file it will read everything at once.
+	/// - Returns: more text, or nil if we have reached the end.
 	public func readSome() -> String? {
 		return filehandle.readSome(encoding: encoding)
 	}
 
+	/// Closes the source. If it is not a regular file it must be closed when finished writing,
+	/// to prevent deadlock when reading.
 	public func close() {
 		filehandle.closeFile()
 	}
@@ -95,16 +125,28 @@ public final class ReadableFile: File, ReadableStream {
 #endif
 
 extension FilePath {
+
+	/// Opens the file at ‘path’ for reading.
+	///
+	/// - Returns: A ReadableFile ready to read from the file.
+	/// - Throws: FileSystemError.notFound, .isDirectory, .invalidAccess.
 	public func open() throws -> ReadableFile {
 		return try ReadableFile(open: self)
 	}
 }
 
-
+/// A class for writing text to a file.
 public final class WritableFile: File, WritableStream {
+
+	/// The path to the file
 	public let path: FilePath
+
+	/// The encoding for the text in the file.
 	public var encoding: String.Encoding = .utf8
+
+	/// The type of file or file-like item this is.
 	public let type: FileType
+
 	internal let filehandle: FileHandle
 
 	private init(path: FilePath, filehandle: FileHandle) {
@@ -114,6 +156,10 @@ public final class WritableFile: File, WritableStream {
 		if self.type == .regularFile { _ = self.filehandle.seekToEndOfFile() }
 	}
 
+	/// Opens the file at ‘path’ for writing.
+	///
+	/// - Parameter path: the path to the file.
+	/// - Throws: FileSystemError.notFound, .isDirectory, .invalidAccess.
 	public convenience init(open path: FilePath) throws {
 		try path.verifyIsInSandbox()
 		guard let filehandle = FileHandle(forWritingAtPath: path.absoluteString) else {
@@ -149,15 +195,28 @@ public final class WritableFile: File, WritableStream {
 		}
 	}
 
+	/// Creates a new file at 'path' for writing.
+	///
+	/// - Parameters:
+	///   - path: The path where the new file should be created.
+	///   - ifExists: What to do if it already exists: open, throw error or replace.
+	/// - Throws: FileSystemError.isDirectory, .couldNotCreate, .alreadyExists, .outsideSandbox.
 	public convenience init(create path: FilePath, ifExists: AlreadyExistsOptions) throws {
 		try WritableFile.createFile(path: path, ifExists: ifExists)
 		try self.init(open: path)
 	}
 
+	/// Creates a new file at 'stringpath' for writing.
+	///
+	/// - Parameters:
+	///   - stringpath: The path where the new file should be created.
+	///   - ifExists: What to do if it already exists: open, throw error or replace.
+	/// - Throws: FileSystemError.isDirectory, .couldNotCreate, .alreadyExists, .outsideSandbox.
 	public convenience init(create stringpath: String, ifExists: AlreadyExistsOptions) throws {
 		try self.init(create: FilePath(stringpath), ifExists: ifExists)
 	}
 
+	/// Deletes this file. For ever.
 	public func delete() throws {
 		try FileManager().removeItem(atPath: path.absoluteString)
 	}
@@ -168,6 +227,7 @@ public final class WritableFile: File, WritableStream {
 		filehandle.write(string, encoding: encoding)
 	}
 
+	/// Closes the file. No more writing.
 	public func close() {
 		filehandle.closeFile()
 	}
@@ -192,17 +252,26 @@ public final class WritableFile: File, WritableStream {
 }
 
 extension FilePath {
+
+	/// Opens the file at this path for writing.
+	/// - Returns: A WritableFile for writing to the new file.
+	/// - Throws: FileSystemError.notFound, .isDirectory, .invalidAccess.
 	public func edit() throws -> WritableFile {
 		return try WritableFile(open: self)
 	}
 
+	/// Creates a new file at this path for writing.
+	/// - Parameters:
+	///   - ifExists: What to do if it already exists: open, throw error or replace.
+	/// - Throws: FileSystemError.isDirectory, .couldNotCreate, .alreadyExists, .outsideSandbox.
 	@discardableResult
 	public func create(ifExists: AlreadyExistsOptions) throws -> WritableFile {
 		return try WritableFile(create: self, ifExists: ifExists)
 	}
 }
 
-public func streams() -> (WritableFile,ReadableFile) {
+/// Creates and returns 2 connected streams. Whatever you write into the first one you can read from the second.
+public func streams() -> (WritableStream,ReadableStream) {
 	let pipe = Pipe()
 	return (WritableFile(pipe.fileHandleForWriting), ReadableFile(pipe.fileHandleForReading))
 }

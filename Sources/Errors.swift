@@ -15,7 +15,6 @@ public enum FileSystemError: Error, Equatable {
 	case couldNotCreate(path: Path)
 	case outsideSandbox(path: Path)
 
-
 	/// Determines if two FileSystemErrors are equal.
 	/// Does not check the types of the paths, just that they are equal in content.
 	/// - Returns: True iff the two FileSystemErrors are of the same type, and the paths have the same content. Otherwise False.

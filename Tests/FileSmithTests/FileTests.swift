@@ -102,9 +102,6 @@ class FileTests: XCTestCase {
 	func testStreamsPrint() {
 		let (input,output) = streams()
 
-		XCTAssert(input.path.exists())
-		XCTAssert(output.path.exists())
-
 		input.print("Write",3,"words")
 		XCTAssertEqual(output.readSome(), "Write 3 words\n")
 		input.print("No","spaces", separator: "", terminator:"theend")

@@ -9,6 +9,14 @@
 import Foundation
 
 extension File {
+
+	/// Creates a symbolic link at 'newlink' pointing to the file at 'target'.
+	///
+	/// - Parameters:
+	///   - newlink: The path to the new symbolic link.
+	///   - target: The file the new link should point to.
+	///   - ifExists: What to do if there already is something at newlink: open, throw error or replace.
+	/// - Throws: FileSystemError.isDirectory, .alreadyExists, .outsideSandbox, .invalidAccess.
 	public init(createSymbolicLink newlink: FilePath, to target: File, ifExists: AlreadyExistsOptions) throws {
 		if let newlinktype = FileType(newlink) {
 			guard newlinktype != .directory else { throw FileSystemError.isDirectory(path: DirectoryPath(newlink)) }
@@ -36,6 +44,14 @@ extension File {
 }
 
 extension Directory {
+
+	/// Creates a symbolic link at 'newlink' pointing to the directory at 'target'.
+	///
+	/// - Parameters:
+	///   - newlink: The path to the new symbolic link.
+	///   - target: The directory the new link should point to.
+	///   - ifExists: What to do if there already is something at newlink: open, throw error or replace.
+	/// - Throws: FileSystemError.notDirectory, .alreadyExists, .outsideSandbox, .invalidAccess.
 	public convenience init(createSymbolicLink newlink: DirectoryPath, to target: Directory, ifExists: AlreadyExistsOptions) throws {
 		if let newlinktype = FileType(newlink) {
 			guard newlinktype == .directory else { throw FileSystemError.notDirectory(path: FilePath(newlink)) }
@@ -63,12 +79,27 @@ extension Directory {
 }
 
 extension Directory {
+
+	/// Creates a symbolic link at 'newlink' pointing to the directory at 'target'.
+	///
+	/// - Parameters:
+	///   - newlink: The path to the new symbolic link, relative to this directory.
+	///   - target: The directory the new link should point to.
+	///   - ifExists: What to do if there already is something at newlink: open, throw error or replace.
+	/// - Throws: FileSystemError.notDirectory, .alreadyExists, .outsideSandbox, .invalidAccess.
 	@discardableResult
 	public func create(symbolicLink newlink: String, to target: Directory, ifExists: AlreadyExistsOptions) throws -> Directory {
 		let newpath = self.path.append(directory: newlink)
 		return try Directory(createSymbolicLink: newpath, to: target, ifExists: ifExists)
 	}
 
+	/// Creates a symbolic link at 'newlink' pointing to the file at 'target'.
+	///
+	/// - Parameters:
+	///   - newlink: The path to the new symbolic link, relative to this directory.
+	///   - target: The file the new link should point to.
+	///   - ifExists: What to do if there already is something at newlink: open, throw error or replace.
+	/// - Throws: FileSystemError.isDirectory, .alreadyExists, .outsideSandbox, .invalidAccess.
 	@discardableResult
 	public func create<F:File>(symbolicLink newlink: String, to target: File, ifExists: AlreadyExistsOptions) throws -> F {
 		let newpath = self.path.append(file: newlink)
