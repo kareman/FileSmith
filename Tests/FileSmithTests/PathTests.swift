@@ -27,7 +27,7 @@ class PathTests: XCTestCase {
 	func testRelativeFilePath() {
 		let filepath = FilePath("folder1/file1.txt")
 
-		XCTAssertEqual(filepath.base?.string, FileManager.default.currentDirectoryPath)
+		XCTAssertEqual(filepath.base?.absoluteString, FileManager.default.currentDirectoryPath)
 		XCTAssertEqual(filepath.base?.url, DirectoryPath.current.url)
 		XCTAssertEqual(filepath.relativeString, "folder1/file1.txt")
 		XCTAssertEqual(filepath.relativeURL, URL(fileURLWithPath: "folder1/file1.txt"))
@@ -37,7 +37,7 @@ class PathTests: XCTestCase {
 	func testRelativeDirectoryPath() {
 		var directorypath: DirectoryPath = "directory1/directory2"
 
-		XCTAssertEqual(directorypath.base?.string, FileManager.default.currentDirectoryPath)
+		XCTAssertEqual(directorypath.base?.absoluteString, FileManager.default.currentDirectoryPath)
 		XCTAssertEqual(directorypath.base?.url, DirectoryPath.current.url)
 		XCTAssertEqual(directorypath.relativeString, "directory1/directory2")
 		XCTAssertEqual(directorypath.relativeURL, URL(fileURLWithPath: "directory1/directory2"))
@@ -45,8 +45,8 @@ class PathTests: XCTestCase {
 
 		directorypath = "."
 		XCTAssertEqual(directorypath.string, ".")
-		XCTAssertEqual((directorypath.relativeComponents)!, [])
-		XCTAssertEqual(directorypath.base?.string, FileManager.default.currentDirectoryPath)
+		XCTAssertEqual(directorypath.relativeComponents!, [])
+		XCTAssertEqual(directorypath.base?.absoluteString, FileManager.default.currentDirectoryPath)
 	}
 
 	func testAbsoluteFilePath() {

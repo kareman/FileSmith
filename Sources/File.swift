@@ -130,24 +130,22 @@ public final class WritableFile: File, WritableStream {
 	}
 
 	fileprivate static func createFile(path: FilePath, ifExists: AlreadyExistsOptions) throws {
-		let stringpath = path.absoluteString
-
-		if let type = FileType(stringpath) {
+		if let type = FileType(path) {
 			guard type != .directory else {
-				throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
+				throw FileSystemError.isDirectory(path: DirectoryPath(path))
 			}
 			switch ifExists {
-			case .throwError:	throw FileSystemError.alreadyExists(path: path)
-			case .open: return
-			case .replace: break
+			case .throwError: throw FileSystemError.alreadyExists(path: path)
+			case .open:       return
+			case .replace:    break
 			}
 		} else {
 			try path.verifyIsInSandbox()
 			try path.parent().create(ifExists: .open)
 		}
 		try path.verifyIsInSandbox()
-		guard FileManager().createFile(atPath: stringpath, contents: Data(), attributes: nil) else {
-			throw FileSystemError.couldNotCreate(path: FilePath(stringpath))
+		guard FileManager().createFile(atPath: path.absoluteString, contents: Data(), attributes: nil) else {
+			throw FileSystemError.couldNotCreate(path: path)
 		}
 	}
 

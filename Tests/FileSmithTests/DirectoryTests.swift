@@ -49,7 +49,7 @@ class DirectoryTests: XCTestCase {
 
 	func testStandardDirectories() {
 		XCTAssertNil(Directory.home.path.relativeComponents)
-		XCTAssertEqual(Directory.root.path.string, "/")
+		XCTAssertEqual(Directory.root.path.absoluteString, "/")
 	}
 
 	func testDontDeleteTheCurrentWorkDirectory() {

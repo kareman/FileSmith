@@ -145,7 +145,7 @@ extension Directory {
 	}
 
 	public func contains(_ stringpath: String) -> Bool {
-		return FileManager().fileExists(atPath: path.string + pathseparator + stringpath)
+		return FileManager().fileExists(atPath: path.absoluteString + pathseparator + stringpath)
 	}
 
 	public func verifyContains(_ stringpath: String) throws {

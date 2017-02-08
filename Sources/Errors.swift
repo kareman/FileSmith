@@ -43,7 +43,7 @@ public enum FileSystemError: Error, Equatable {
 
 extension Path {
 	fileprivate var locationDescription: String {
-		return string + (base.map {" in " + $0.string} ?? "")
+		return string + (base.map {" in " + $0.absoluteString} ?? "")
 	}
 
 	fileprivate var typeDescription: String {
@@ -71,7 +71,7 @@ extension FileSystemError: CustomStringConvertible {
 		case .couldNotCreate(path: let path):
 			return "Could not create \(path.typeDescription)in \(path.locationDescription)."
 		case .outsideSandbox(path: let path):
-			return FilePath(absolute: path.components).locationDescription + " is not in the current working directory \(DirectoryPath.current.string). Set Directory.sandbox to 'false' if you want to change the file system outside of the current working directory."
+			return FilePath(absolute: path.components).locationDescription + " is not in the current working directory \(DirectoryPath.current.absoluteString). Set Directory.sandbox to 'false' if you want to change the file system outside of the current working directory."
 		}
 	}
 

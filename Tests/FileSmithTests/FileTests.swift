@@ -56,7 +56,7 @@ class FileTests: XCTestCase {
 			XCTAssertEqual(try String(contentsOfFile: path_file1.absoluteString, encoding: .utf8), "line 1 of file1.txt\nline 2 of file1.txt\nline 3 of file1.txt\n")
 
 			XCTAssertEqual(read_link.path.resolvingSymlinks(), write_file1.path.absolute.resolvingSymlinks())
-			XCTAssertEqual(FilePath("/doesntexist/doesntexist.txt").resolvingSymlinks().string, "/doesntexist/doesntexist.txt")
+			XCTAssertEqual(FilePath("/doesntexist/doesntexist.txt").resolvingSymlinks().absoluteString, "/doesntexist/doesntexist.txt")
 
 			try write_file1.delete()
 			XCTAssertFalse(write_file1.path.exists())
