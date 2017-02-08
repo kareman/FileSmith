@@ -21,14 +21,14 @@ extension File {
 		try self.init(open: FilePath(stringpath))
 	}
 
-	fileprivate static func errorForFile(at stringpath: String, writing: Bool) throws {
-		guard let type = FileType(stringpath) else {
-			throw FileSystemError.notFound(path: FilePath(stringpath))
+	fileprivate static func errorForFile(at path: FilePath, writing: Bool) throws {
+		guard let type = FileType(path) else {
+			throw FileSystemError.notFound(path: path)
 		}
 		if type == .directory {
-			throw FileSystemError.isDirectory(path: DirectoryPath(stringpath))
+			throw FileSystemError.isDirectory(path: DirectoryPath(path))
 		}
-		throw FileSystemError.invalidAccess(path: FilePath(stringpath), writing: writing)
+		throw FileSystemError.invalidAccess(path: path, writing: writing)
 	}
 }
 
@@ -47,7 +47,7 @@ public final class ReadableFile: File, ReadableStream {
 
 	public convenience init(open path: FilePath) throws {
 		guard let filehandle = FileHandle(forReadingAtPath: path.absoluteString) else {
-			try ReadableFile.errorForFile(at: path.absoluteString, writing: false)
+			try ReadableFile.errorForFile(at: path, writing: false)
 			fatalError("Should have thrown error when opening \(path.absoluteString)")
 		}
 		self.init(path: path, filehandle: filehandle)
@@ -117,7 +117,7 @@ public final class WritableFile: File, WritableStream {
 	public convenience init(open path: FilePath) throws {
 		try path.verifyIsInSandbox()
 		guard let filehandle = FileHandle(forWritingAtPath: path.absoluteString) else {
-			try WritableFile.errorForFile(at: path.absoluteString, writing: true)
+			try WritableFile.errorForFile(at: path, writing: true)
 			fatalError("Should have thrown error when opening \(path.absoluteString)")
 		}
 		self.init(path: path, filehandle: filehandle)
@@ -182,10 +182,10 @@ public final class WritableFile: File, WritableStream {
 		filehandle.synchronizeFile()
 	}
 
-	/// A WritableStream which writes to the standard output.
+	/// A WritableStream which writes to standard output.
 	static public var stdout: WritableStream = StdoutStream.default
 
-	/// A WritableStream which writes to the standard error.
+	/// A WritableStream which writes to standard error.
 	static public var stderror: WritableStream = {
 		WritableFile(path: "/dev/stderr", filehandle: FileHandle.standardError)
 	}()
