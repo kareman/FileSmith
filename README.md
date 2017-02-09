@@ -172,7 +172,7 @@ and run `swift build`.
 
 Add `github "kareman/FileSmith"` to your Cartfile, then run `carthage update` and add the resulting framework to the "Embedded Binaries" section of the application. See [Carthage's README][carthage-installation] for further instructions.
 
-[carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
+[carthage-installation]: https://github.com/Carthage/Carthage/blob/master/README.md#adding-frameworks-to-an-application
 
 ### [CocoaPods](https://cocoapods.org/)
 
