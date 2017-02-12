@@ -46,34 +46,34 @@ extension FileHandle {
 
 
 /// A stream of text. Does as much as possible lazily.
-public protocol ReadableStream : class, TextOutputStreamable {
+public protocol ReadableStream: class, TextOutputStreamable {
 
 	var encoding: String.Encoding {get set}
 
 	/// Whatever amount of text the stream feels like providing.
 	/// If the source is a file this will read everything at once.
 	/// - returns: more text from the stream, or nil if we have reached the end.
-	func readSome () -> String?
+	func readSome() -> String?
 
 	/// Reads everything at once.
-	func read () -> String
+	func read() -> String
 }
 
 extension ReadableStream {
 
 	/// Splits stream lazily into lines.
-	public func lines () -> LazySequence<AnySequence<String>> {
+	public func lines() -> LazySequence<AnySequence<String>> {
 		return AnySequence(PartialSourceLazySplitSequence({self.readSome()?.characters}, separator: "\n").map { String($0) }).lazy
 	}
 
 	/// Writes the text in this file to the given TextOutputStream.
-	public func write<Target : TextOutputStream>(to target: inout Target) {
+	public func write<Target: TextOutputStream>(to target: inout Target) {
 		while let text = self.readSome() { target.write(text) }
 	}
 }
 
 /// An output stream, like standard output or a writeable file.
-public protocol WritableStream : class, TextOutputStream {
+public protocol WritableStream: class, TextOutputStream {
 
 	var encoding: String.Encoding {get set}
 
@@ -104,13 +104,13 @@ extension WritableStream {
 internal class StdoutStream: WritableStream {
 	public var encoding: String.Encoding = .utf8
 
-	private init () { }
+	private init() {}
 
 	static var `default`: StdoutStream { return StdoutStream() }
 
-	public func write <T> (_ x: T) {
+	public func write<T>(_ x: T) {
 		Swift.print(x, terminator: "")
 	}
 
-	public func close () {}
+	public func close() {}
 }
