@@ -227,7 +227,7 @@ extension Directory {
 
 	/// Deletes this directory. For ever.
 	///
-	/// - Throws: FileSystemError.outsideSandbox.
+	/// - Throws: FileSystemError.outsideSandbox, NSError.
 	public func delete() throws {
 		try path.verifyIsInSandbox()
 		try FileManager().removeItem(atPath: path.absoluteString)

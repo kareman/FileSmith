@@ -77,7 +77,7 @@ public protocol WritableStream: class, TextOutputStream {
 
 	var encoding: String.Encoding {get set}
 
-	/// Writes the textual representation of `x` to the stream.
+	/// Writes `x` to the stream.
 	func write(_ x: String)
 
 	/// Closes the stream. Must be called on non-file streams when finished writing,
@@ -89,6 +89,14 @@ extension WritableStream {
 
 	/// Writes the textual representations of the given items into the stream.
 	/// Works exactly the same way as the built-in `print`.
+	///
+	/// To avoid printing a newline at the end, pass `terminator: ""` or use `write` ìnstead.
+	///
+	/// - Parameters:
+	///   - items: Zero or more items to print, converting them to text with String(describing:).
+	///   - separator: What to print between each item. Default is " ".
+	///   - terminator: What to print at the end. Default is newline.
+	@warn_unqualified_access
 	public func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
 		var iterator = items.lazy.map(String.init(describing:)).makeIterator()
 		iterator.next().map(write)
