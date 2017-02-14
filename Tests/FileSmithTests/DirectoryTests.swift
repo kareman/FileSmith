@@ -13,7 +13,7 @@ class DirectoryTests: XCTestCase {
 
 	func testSubDirectories() {
 		do {
-			let dir = try Directory(open: "/")
+			let dir = try ReadableDirectory(open: "/")
 			let subdirs = dir.directories()
 			XCTAssert(subdirs.contains(DirectoryPath(base: "/", relative: "tmp")))
 			XCTAssert(subdirs.contains(DirectoryPath(base: "/", relative: "bin")))
@@ -24,12 +24,12 @@ class DirectoryTests: XCTestCase {
 	}
 
 	func testSandboxMode() {
-		Directory.sandbox = true
-		Directory.current = Directory.createTempDirectory()
+		sandbox = true
+		WritableDirectory.current = WritableDirectory.createTempDirectory()
 		let trespassingfolder = "/tmp/"+ProcessInfo.processInfo.globallyUniqueString
 
 		do {
-			_ = try Directory(create: trespassingfolder, ifExists: .throwError)
+			_ = try WritableDirectory(create: trespassingfolder, ifExists: .throwError)
 			XCTFail("Should not be able to create folder outside of current folder \(DirectoryPath.current)")
 		} catch FileSystemError.outsideSandbox {
 		} catch {
@@ -37,73 +37,73 @@ class DirectoryTests: XCTestCase {
 		}
 
 		do {
-			try Directory.current.create(directory: "newdir", ifExists: .throwError)
+			try WritableDirectory.current.create(directory: "newdir", ifExists: .throwError)
 
-			Directory.sandbox = false
-			_ = try Directory(create: trespassingfolder, ifExists: .throwError)
+			sandbox = false
+			_ = try WritableDirectory(create: trespassingfolder, ifExists: .throwError)
 		} catch {
 			XCTFail(String(describing: error))
 		}
-		Directory.sandbox = true
+		sandbox = true
 	}
 
 	func testStandardDirectories() {
-		XCTAssertNil(Directory.home.path.relativeComponents)
-		XCTAssertEqual(Directory.root.path.absoluteString, "/")
+		XCTAssertNil(ReadableDirectory.home.path.relativeComponents)
+		XCTAssertEqual(ReadableDirectory.root.path.absoluteString, "/")
 	}
 
 	func testDontDeleteTheCurrentWorkDirectory() {
-		Directory.current = Directory.createTempDirectory()
-		XCTAssertThrowsError(try Directory.current.delete())
+		WritableDirectory.current = WritableDirectory.createTempDirectory()
+		XCTAssertThrowsError(try WritableDirectory.current.delete())
 	}
 
 	func testOpenDirectory() {
-		Directory.current = Directory.createTempDirectory()
+		WritableDirectory.current = WritableDirectory.createTempDirectory()
 		let name = "newthing"
 
 		AssertThrows(FileSystemError.notFound(path: DirectoryPath(name))) {
-			_ = try Directory(open: name)
+			_ = try ReadableDirectory(open: name)
 		}
 		AssertThrows(FileSystemError.notDirectory(path: FilePath(name))) {
 			_ = try WritableFile(create: name, ifExists: .throwError)
-			_ = try Directory(open: name)
+			_ = try ReadableDirectory(open: name)
 		}
 		AssertDoesNotThrow {
 			try FileManager().removeItem(atPath: name)
 			try FileManager().createDirectory(atPath: name, withIntermediateDirectories: false)
-			let dir = try Directory(open: name)
+			let dir = try ReadableDirectory(open: name)
 			XCTAssert(dir.path.exists())
 		}
 	}
 
 	func testCreateDirectory() {
-		Directory.current = Directory.createTempDirectory()
+		WritableDirectory.current = WritableDirectory.createTempDirectory()
 		let name = "newthing"
 
 		AssertThrows(FileSystemError.notDirectory(path: FilePath(name))) {
 			_ = try WritableFile(create: name, ifExists: .throwError)
-			_ = try Directory(create: name, ifExists: .open)
+			_ = try WritableDirectory(create: name, ifExists: .open)
 		}
 		AssertThrows(FileSystemError.alreadyExists(path: DirectoryPath(name))) {
 			try FileManager().removeItem(atPath: name)
 			try FileManager().createDirectory(atPath: name, withIntermediateDirectories: false)
-			_ = try Directory(create: name, ifExists: .throwError)
+			_ = try WritableDirectory(create: name, ifExists: .throwError)
 		}
 		AssertDoesNotThrow {
 			try FileManager().removeItem(atPath: name)
-			var dir = try Directory(create: name, ifExists: .throwError)
-			dir = try Directory(create: name, ifExists: .open)
+			var dir = try WritableDirectory(create: name, ifExists: .throwError)
+			dir = try WritableDirectory(create: name, ifExists: .open)
 			try dir.create(file: "file", ifExists: .throwError)
 			XCTAssertTrue(FileManager().fileExists(atPath: name+"/file"))
-			dir = try Directory(create: name, ifExists: .replace)
+			dir = try WritableDirectory(create: name, ifExists: .replace)
 			XCTAssertFalse(FileManager().fileExists(atPath: name+"/file"))
 		}
 	}
 
 	func testDirectoryInAMultitudeOfWays() {
 		do {
-			Directory.current = Directory.createTempDirectory()
-			let current = Directory.current
+			WritableDirectory.current = WritableDirectory.createTempDirectory()
+			let current = WritableDirectory.current
 
 			XCTAssertTrue(current.path.exists())
 			let testdir = try current.create(directory: "testdir", ifExists: .throwError)

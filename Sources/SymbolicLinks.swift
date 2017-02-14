@@ -43,7 +43,7 @@ extension File {
 	}
 }
 
-extension Directory {
+extension WritableDirectory {
 
 	/// Creates a symbolic link at 'newlink' pointing to the directory at 'target'.
 	///
@@ -52,7 +52,7 @@ extension Directory {
 	///   - target: The directory the new link should point to.
 	///   - ifExists: What to do if there already is something at newlink: open, throw error or replace.
 	/// - Throws: FileSystemError.notDirectory, .alreadyExists, .outsideSandbox, .invalidAccess.
-	public convenience init(createSymbolicLink newlink: DirectoryPath, to target: Directory, ifExists: AlreadyExistsOptions) throws {
+	public convenience init(createSymbolicLink newlink: DirectoryPath, to target: WritableDirectory, ifExists: AlreadyExistsOptions) throws {
 		if let newlinktype = FileType(newlink) {
 			guard newlinktype == .directory else { throw FileSystemError.notDirectory(path: FilePath(newlink)) }
 			switch ifExists {
@@ -78,7 +78,7 @@ extension Directory {
 	}
 }
 
-extension Directory {
+extension WritableDirectory {
 
 	/// Creates a symbolic link at 'newlink' pointing to the directory at 'target'.
 	///
@@ -88,9 +88,9 @@ extension Directory {
 	///   - ifExists: What to do if there already is something at newlink: open, throw error or replace.
 	/// - Throws: FileSystemError.notDirectory, .alreadyExists, .outsideSandbox, .invalidAccess.
 	@discardableResult
-	public func create(symbolicLink newlink: String, to target: Directory, ifExists: AlreadyExistsOptions) throws -> Directory {
+	public func create(symbolicLink newlink: String, to target: WritableDirectory, ifExists: AlreadyExistsOptions) throws -> WritableDirectory {
 		let newpath = self.path.append(directory: newlink)
-		return try Directory(createSymbolicLink: newpath, to: target, ifExists: ifExists)
+		return try WritableDirectory(createSymbolicLink: newpath, to: target, ifExists: ifExists)
 	}
 
 	/// Creates a symbolic link at 'newlink' pointing to the file at 'target'.

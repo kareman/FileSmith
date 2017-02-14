@@ -12,8 +12,8 @@ import Foundation
 class FileTests: XCTestCase {
 	func testFiles() {
 		do {
-			Directory.current = Directory.createTempDirectory()
-			let current = Directory.current
+			WritableDirectory.current = WritableDirectory.createTempDirectory()
+			let current = WritableDirectory.current
 
 			XCTAssertEqual(DirectoryPath.current, current.path)
 			XCTAssertTrue(current.path.exists())
@@ -82,7 +82,7 @@ class FileTests: XCTestCase {
 
 	func testOverwrite() {
 		do {
-			Directory.current = Directory.createTempDirectory()
+			WritableDirectory.current = WritableDirectory.createTempDirectory()
 			let file = try WritableFile(create: "file.txt", ifExists: .throwError)
 			file.print("line 1")
 			XCTAssertEqual(try String(contentsOfFile: "file.txt", encoding: .utf8), "line 1\n")
