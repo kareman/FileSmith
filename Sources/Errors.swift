@@ -60,7 +60,7 @@ extension FileSystemError: CustomStringConvertible {
 		case .alreadyExists(path: let path):
 			return path.locationDescription + " already exists."
 		case .notFound(path: let path):
-			return path.typeDescription + path.locationDescription + " does not exist."
+			return "\(path.typeDescription)'\(path.string)' could not be found\((path.base.map {" in " + $0.absoluteString} ?? ""))."
 		case .isDirectory(path: let path):
 			return path.locationDescription + " is a directory. Expected a file."
 		case .notDirectory(path: let path):
