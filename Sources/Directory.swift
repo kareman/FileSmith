@@ -97,6 +97,11 @@ extension Directory {
 		try self.init(open: DirectoryPath(stringpath))
 	}
 
+	/// Converts a Directory to a different type.
+	public init(_ dir: Directory) throws {
+		try self.init(open: dir.path)
+	}
+
 	static func filter<P: Path>(pattern: String, relativeTo path: DirectoryPath) -> [P] {
 		let pathprefixcount = path.components.count
 		return filterFiles(glob: pattern)
