@@ -425,7 +425,7 @@ extension DirectoryPath {
 		return append(newcomponents)
 	}
 
-	public static func +<P: Path>(leftdir: DirectoryPath, rightpath: P) -> P {
+	public static func + <P: Path>(leftdir: DirectoryPath, rightpath: P) -> P {
 		let rightcomponents = rightpath.relativeComponents ?? rightpath.components
 		return leftdir.append(rightcomponents)
 	}
@@ -438,12 +438,12 @@ extension DirectoryPath {
 
 // MARK: Equatable
 
-public func ==<P:Path>(left: P, right: P) -> Bool where P:Equatable {
+public func == <P:Path>(left: P, right: P) -> Bool where P:Equatable {
 	return left == right
 }
 
 extension AnyPath: Equatable, Hashable {
-	public static func ==(left: AnyPath, right: AnyPath) -> Bool {
+	public static func == (left: AnyPath, right: AnyPath) -> Bool {
 		guard (left.relativeComponents == nil) == (right.relativeComponents == nil) else {
 			return false
 		}
