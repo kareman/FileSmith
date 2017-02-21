@@ -8,6 +8,16 @@ It differentiates between file paths and directory paths, and between paths and 
 
 See also:
 - [API documentation](https://kareman.github.io/FileSmith/)
+- [Why FileSmith was created](http://blog.nottoobadsoftware.com/swift/filesmith-type-safe-file-handling-in-swift)
+
+## Features
+
+- [x] Separate types for file paths, directory paths, reading files, writing files, and directories.
+- [x] Use Swifts native error handling.
+- [x] List the contents of directories (recursively if needed).
+- [x] Filter with glob wildcard patterns.
+- [x] Optionally restrict changes to the current working directory for extra safety.
+- [x] Write text to files the same way you use Swift's `print` function.
 
 ## Terms
 
@@ -89,6 +99,8 @@ let file3 = try dir1.open(file: "file3.txt")
 ```swift
 file1_edit.encoding = .utf16 // .utf8 by default
 file1_edit.write("some text...")
+file1_edit.print("Just like Swift's own 'print' function.")
+file1_edit.print(2, "words", separator: "-", terminator: "")
 file2.write(to: &file1_edit)
 
 let contents: String = file3.read()
