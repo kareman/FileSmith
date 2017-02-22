@@ -134,7 +134,7 @@
             <h1>WritableStream</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">WritableStream</span> <span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStream</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">WritableStream</span><span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStream</span></code></pre>
 
                 </div>
               </div>
@@ -164,7 +164,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">WritableStream</span> <span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStream</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">WritableStream</span><span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStream</span></code></pre>
 
                         </div>
                       </div>
@@ -184,7 +184,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Writes the textual representation of <code>x</code> to the stream.</p>
+                        <p>Writes <code>x</code> to the stream.</p>
 
                       </div>
                       <div class="declaration">
@@ -249,6 +249,18 @@ to prevent deadlock when reading.</p>
                         <p>Writes the textual representations of the given items into the stream.
 Works exactly the same way as the built-in <code>print</code>.</p>
 
+<p>To avoid printing a newline at the end, pass <code>terminator: &quot;&quot;</code> or use <code>write</code> ìnstead.</p>
+
+<ul>
+<li>Parameters:
+
+<ul>
+<li>items: Zero or more items to print, converting them to text with String(describing:).</li>
+<li>separator: What to print between each item. Default is &ldquo; &rdquo;.</li>
+<li>terminator: What to print at the end. Default is newline.</li>
+</ul></li>
+</ul>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -258,6 +270,52 @@ Works exactly the same way as the built-in <code>print</code>.</p>
 
                         </div>
                       </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>items</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Zero or more items to print, converting them to text with String(describing:).</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>separator</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>What to print between each item. Default is “ “.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>terminator</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>What to print at the end. Default is newline.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </section>
                   </div>
                 </li>
@@ -266,7 +324,7 @@ Works exactly the same way as the built-in <code>print</code>.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-08)</p>
+          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-23)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

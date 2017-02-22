@@ -136,9 +136,10 @@
 
 <p>A strongly typed Swift library for working with local files and directories.</p>
 
-<p>Still a work in progress and has not been properly tested, so use at your own risk.</p>
+<p>It differentiates between file paths and directory paths, and between paths and actual files and directories, because the programmer knows which are which and when the compiler knows it too it can be much more helpful. </p>
 
-<p><a href="https://kareman.github.io/FileSmith/">API documentation</a></p>
+<p>See also:
+- <a href="https://kareman.github.io/FileSmith/">API documentation</a></p>
 <a href='#terms' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='terms'>Terms</h2>
 
 <p><strong>Path:</strong>
@@ -187,7 +188,7 @@ A file or a directory. Anything with a path in the file system.</p>
 <span class="k">var</span> <span class="nv">dir3</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dir2</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">directory</span><span class="p">:</span> <span class="s">"dir3"</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span> <span class="c1">// dir/dir2/dir3</span>
 
 <span class="k">var</span> <span class="nv">file1_edit</span> <span class="o">=</span> <span class="k">try</span> <span class="n">filepath</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">file2_edit</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">EditableFile</span><span class="p">(</span><span class="nv">create</span><span class="p">:</span> <span class="s">"file2.txt"</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">file2_edit</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">WritableFile</span><span class="p">(</span><span class="nv">create</span><span class="p">:</span> <span class="s">"file2.txt"</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">file3_edit</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dir1</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">file</span><span class="p">:</span> <span class="s">"file3.txt"</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span> <span class="c1">// dir/dir1/file3</span>
 </code></pre>
 <a href='#open' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='open'>Open</h4>
@@ -196,7 +197,7 @@ A file or a directory. Anything with a path in the file system.</p>
 <span class="n">dir3</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dir2</span><span class="o">.</span><span class="nf">open</span><span class="p">(</span><span class="nv">directory</span><span class="p">:</span> <span class="s">"dir3"</span><span class="p">)</span>
 
 <span class="k">let</span> <span class="nv">file1</span> <span class="o">=</span> <span class="k">try</span> <span class="n">filepath</span><span class="o">.</span><span class="nf">open</span><span class="p">()</span>
-<span class="k">let</span> <span class="nv">file2</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">File</span><span class="p">(</span><span class="nv">open</span><span class="p">:</span> <span class="s">"file2.txt"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">file2</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">ReadableFile</span><span class="p">(</span><span class="nv">open</span><span class="p">:</span> <span class="s">"file2.txt"</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">file3</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dir1</span><span class="o">.</span><span class="nf">open</span><span class="p">(</span><span class="nv">file</span><span class="p">:</span> <span class="s">"file3.txt"</span><span class="p">)</span>
 </code></pre>
 <a href='#read-write' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='read-write'>Read/Write</h4>
@@ -220,8 +221,8 @@ A file or a directory. Anything with a path in the file system.</p>
 <a href='#symbolic-links' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='symbolic-links'>Symbolic links</h4>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dir1_link</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">Directory</span><span class="p">(</span><span class="nv">createSymbolicLink</span><span class="p">:</span> <span class="s">"dir1_link"</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span> <span class="n">dir1</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
 <span class="k">let</span> <span class="nv">dir2_link</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dir1</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">symbolicLink</span><span class="p">:</span> <span class="s">"dir2_link"</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span> <span class="n">dir2</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">file1_link</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">File</span><span class="p">(</span><span class="nv">createSymbolicLink</span><span class="p">:</span> <span class="s">"file1_link"</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span> <span class="n">file1</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">file2_link</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dir2</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">symbolicLink</span><span class="p">:</span> <span class="s">"file2_link"</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span> <span class="n">file2</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">file1_link</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">ReadableFile</span><span class="p">(</span><span class="nv">createSymbolicLink</span><span class="p">:</span> <span class="s">"file1_link"</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span> <span class="n">file1</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">file2_link</span> <span class="o">=</span> <span class="k">try</span> <span class="n">dir2</span><span class="o">.</span><span class="nf">create</span><span class="p">(</span><span class="nv">symbolicLink</span><span class="p">:</span> <span class="s">"file2_link"</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span> <span class="n">file2</span><span class="p">,</span> <span class="nv">ifExists</span><span class="p">:</span> <span class="o">.</span><span class="n">open</span><span class="p">)</span> <span class="k">as</span> <span class="kt">ReadableFile</span>
 </code></pre>
 <a href='#misc' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='misc'>Misc</h4>
 <pre class="highlight swift"><code><span class="c1">// the path of a file or directory</span>
@@ -252,13 +253,13 @@ A file or a directory. Anything with a path in the file system.</p>
 <a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
 <a href='#a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='a-href-https-github-com-apple-swift-package-manager-swift-package-manager-a'><a href="https://github.com/apple/swift-package-manager">Swift Package Manager</a></h3>
 
-<p>Add <code>.Package(url: &quot;https://github.com/kareman/FileSmith&quot;, &quot;0.1.0-alpha&quot;)</code> to your Package.swift:</p>
+<p>Add <code>.Package(url: &quot;https://github.com/kareman/FileSmith&quot;, &quot;0.1.0&quot;)</code> to your Package.swift:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">PackageDescription</span>
 
 <span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="s">"somename"</span><span class="p">,</span>
     <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-        <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/kareman/FileSmith"</span><span class="p">,</span> <span class="s">"0.1.0-alpha"</span><span class="p">)</span>
+        <span class="o">.</span><span class="kt">Package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/kareman/FileSmith"</span><span class="p">,</span> <span class="s">"0.1.0"</span><span class="p">)</span>
          <span class="p">]</span>
     <span class="p">)</span>
 </code></pre>
@@ -266,7 +267,7 @@ A file or a directory. Anything with a path in the file system.</p>
 <p>and run <code>swift build</code>.</p>
 <a href='#a-href-https-github-com-carthage-carthage-carthage-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='a-href-https-github-com-carthage-carthage-carthage-a'><a href="https://github.com/Carthage/Carthage">Carthage</a></h3>
 
-<p>Add <code>github &quot;kareman/FileSmith&quot;</code> to your Cartfile, then run <code>carthage update</code> and add the resulting framework to the <q>Embedded Binaries</q> section of the application. See <a href="https://github.com/Carthage/Carthage#adding-frameworks-to-an-application">Carthage&rsquo;s README</a> for further instructions.</p>
+<p>Add <code>github &quot;kareman/FileSmith&quot;</code> to your Cartfile, then run <code>carthage update</code> and add the resulting framework to the <q>Embedded Binaries</q> section of the application. See <a href="https://github.com/Carthage/Carthage/blob/master/README.md#adding-frameworks-to-an-application">Carthage&rsquo;s README</a> for further instructions.</p>
 <a href='#a-href-https-cocoapods-org-cocoapods-a' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h3 id='a-href-https-cocoapods-org-cocoapods-a'><a href="https://cocoapods.org/">CocoaPods</a></h3>
 
 <p>Add <code>FileSmith</code> to your <code>Podfile</code>.</p>
@@ -283,7 +284,7 @@ A file or a directory. Anything with a path in the file system.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-08)</p>
+          <p>&copy; 2017 <a class="link" href="https://github.com/kareman/FilesAndDirectories" target="_blank" rel="external">kareman</a>. All rights reserved. (Last updated: 2017-02-23)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
