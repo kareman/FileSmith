@@ -139,7 +139,18 @@
 <p>It differentiates between file paths and directory paths, and between paths and actual files and directories, because the programmer knows which are which and when the compiler knows it too it can be much more helpful. </p>
 
 <p>See also:
-- <a href="https://kareman.github.io/FileSmith/">API documentation</a></p>
+- <a href="https://kareman.github.io/FileSmith/">API documentation</a>
+- <a href="http://blog.nottoobadsoftware.com/swift/filesmith-type-safe-file-handling-in-swift">Why FileSmith was created</a></p>
+<a href='#features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='features'>Features</h2>
+
+<ul>
+<li>[x] Separate types for file paths, directory paths, reading files, writing files, and directories.</li>
+<li>[x] Use Swifts native error handling.</li>
+<li>[x] List the contents of directories (recursively if needed).</li>
+<li>[x] Filter with glob wildcard patterns.</li>
+<li>[x] Optionally restrict changes to the current working directory for extra safety.</li>
+<li>[x] Write text to files the same way you use Swift&rsquo;s <code>print</code> function.</li>
+</ul>
 <a href='#terms' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='terms'>Terms</h2>
 
 <p><strong>Path:</strong>
@@ -203,6 +214,8 @@ A file or a directory. Anything with a path in the file system.</p>
 <a href='#read-write' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h4 id='read-write'>Read/Write</h4>
 <pre class="highlight swift"><code><span class="n">file1_edit</span><span class="o">.</span><span class="n">encoding</span> <span class="o">=</span> <span class="o">.</span><span class="n">utf16</span> <span class="c1">// .utf8 by default</span>
 <span class="n">file1_edit</span><span class="o">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"some text..."</span><span class="p">)</span>
+<span class="n">file1_edit</span><span class="o">.</span><span class="nf">print</span><span class="p">(</span><span class="s">"Just like Swift's own 'print' function."</span><span class="p">)</span>
+<span class="n">file1_edit</span><span class="o">.</span><span class="nf">print</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">"words"</span><span class="p">,</span> <span class="nv">separator</span><span class="p">:</span> <span class="s">"-"</span><span class="p">,</span> <span class="nv">terminator</span><span class="p">:</span> <span class="s">""</span><span class="p">)</span>
 <span class="n">file2</span><span class="o">.</span><span class="nf">write</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="o">&amp;</span><span class="n">file1_edit</span><span class="p">)</span>
 
 <span class="k">let</span> <span class="nv">contents</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="n">file3</span><span class="o">.</span><span class="nf">read</span><span class="p">()</span>
