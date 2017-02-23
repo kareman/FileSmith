@@ -7,6 +7,7 @@ A strongly typed Swift library for working with local files and directories.
 It differentiates between file paths and directory paths, and between paths and actual files and directories, because the programmer knows which are which and when the compiler knows it too it can be much more helpful. 
 
 See also:
+
 - [API documentation](https://kareman.github.io/FileSmith/)
 - [Why FileSmith was created](http://blog.nottoobadsoftware.com/swift/filesmith-type-safe-file-handling-in-swift)
 
@@ -16,22 +17,27 @@ See also:
 - [x] Use Swifts native error handling.
 - [x] List the contents of directories (recursively if needed).
 - [x] Filter with glob wildcard patterns.
-- [x] Optionally restrict changes to the current working directory for extra safety.
+- [x] Sandbox mode prohibits changes outside of the current working directory.
 - [x] Write text to files the same way you use Swift's `print` function.
 
 ## Terms
 
 **Path:**
+
 The location of an item _which may or may not exist_ in the local file system. It is either a [DirectoryPath](https://kareman.github.io/FileSmith/Structs/DirectoryPath.html), [FilePath](https://kareman.github.io/FileSmith/Structs/FilePath.html) or [AnyPath](https://kareman.github.io/FileSmith/Structs/AnyPath.html).
 
 **File:**
+
 An existing regular file or something _file-like_ which you can read from and/or write to, like streams, pipes or sockets. Or symbolic links to any of these.
 
 **Directory:**
+
 An existing directory or a symbolic link to a directory. Basically anything you can `cd` into in the terminal.
 
 **Item:**
+
 (for lack of a better term)
+
 A file or a directory. Anything with a path in the file system.
 
 ## Safety first
