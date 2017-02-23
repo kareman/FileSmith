@@ -22,22 +22,17 @@ See also:
 
 ## Terms
 
-**Path:**
-
+**Path:**  
 The location of an item _which may or may not exist_ in the local file system. It is either a [DirectoryPath](https://kareman.github.io/FileSmith/Structs/DirectoryPath.html), [FilePath](https://kareman.github.io/FileSmith/Structs/FilePath.html) or [AnyPath](https://kareman.github.io/FileSmith/Structs/AnyPath.html).
 
-**File:**
-
+**File:**  
 An existing regular file or something _file-like_ which you can read from and/or write to, like streams, pipes or sockets. Or symbolic links to any of these.
 
-**Directory:**
-
+**Directory:**  
 An existing directory or a symbolic link to a directory. Basically anything you can `cd` into in the terminal.
 
-**Item:**
-
-(for lack of a better term)
-
+**Item:**  
+(for lack of a better term)  
 A file or a directory. Anything with a path in the file system.
 
 ## Safety first
