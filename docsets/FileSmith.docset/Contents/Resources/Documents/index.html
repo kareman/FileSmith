@@ -138,9 +138,12 @@
 
 <p>It differentiates between file paths and directory paths, and between paths and actual files and directories, because the programmer knows which are which and when the compiler knows it too it can be much more helpful. </p>
 
-<p>See also:
-- <a href="https://kareman.github.io/FileSmith/">API documentation</a>
-- <a href="http://blog.nottoobadsoftware.com/swift/filesmith-type-safe-file-handling-in-swift">Why FileSmith was created</a></p>
+<p>See also:</p>
+
+<ul>
+<li><a href="https://kareman.github.io/FileSmith/">API documentation</a></li>
+<li><a href="http://blog.nottoobadsoftware.com/swift/filesmith-type-safe-file-handling-in-swift">Why FileSmith was created</a></li>
+</ul>
 <a href='#features' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='features'>Features</h2>
 
 <ul>
@@ -148,22 +151,22 @@
 <li>[x] Use Swifts native error handling.</li>
 <li>[x] List the contents of directories (recursively if needed).</li>
 <li>[x] Filter with glob wildcard patterns.</li>
-<li>[x] Optionally restrict changes to the current working directory for extra safety.</li>
+<li>[x] Sandbox mode prohibits changes outside of the current working directory.</li>
 <li>[x] Write text to files the same way you use Swift&rsquo;s <code>print</code> function.</li>
 </ul>
 <a href='#terms' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='terms'>Terms</h2>
 
-<p><strong>Path:</strong>
+<p><strong>Path:</strong><br>
 The location of an item <em>which may or may not exist</em> in the local file system. It is either a <a href="https://kareman.github.io/FileSmith/Structs/DirectoryPath.html">DirectoryPath</a>, <a href="https://kareman.github.io/FileSmith/Structs/FilePath.html">FilePath</a> or <a href="https://kareman.github.io/FileSmith/Structs/AnyPath.html">AnyPath</a>.</p>
 
-<p><strong>File:</strong>
+<p><strong>File:</strong><br>
 An existing regular file or something <em>file-like</em> which you can read from and/or write to, like streams, pipes or sockets. Or symbolic links to any of these.</p>
 
-<p><strong>Directory:</strong>
+<p><strong>Directory:</strong><br>
 An existing directory or a symbolic link to a directory. Basically anything you can <code>cd</code> into in the terminal.</p>
 
-<p><strong>Item:</strong>
-(for lack of a better term)
+<p><strong>Item:</strong><br>
+(for lack of a better term)<br>
 A file or a directory. Anything with a path in the file system.</p>
 <a href='#safety-first' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='safety-first'>Safety first</h2>
 
