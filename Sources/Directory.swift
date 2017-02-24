@@ -21,6 +21,7 @@ extension Path {
 	}
 }
 
+/// A filesystem item, like a file or a directory.
 public protocol FileSystemItem {
 	associatedtype PathType: Path
 	var path: PathType { get }
@@ -33,28 +34,49 @@ public protocol FileSystemItem {
 }
 
 extension FileSystemItem {
+
+	/// Copies this to another directory.
+	///
+	/// - Parameter toDirectory: The directory to copy this to.
+	/// - Returns: An instance representing the new copy.
+	/// - Throws: NSError.
 	public func copy(toDirectory: DirectoryPath) throws -> Self {
 		let newpath = toDirectory.append(self.path.name) as PathType
 		try FileManager().copyItem(atPath: self.path.absoluteString, toPath: newpath.absoluteString)
 		return try Self(open: newpath)
 	}
 
+	/// Copies this to another directory. The name remains unchanged.
+	///
+	/// - Parameter toDirectory: The directory to copy this to.
+	/// - Returns: An instance representing the new copy.
+	/// - Throws: NSError.
 	public func copy(toDirectory: String) throws -> Self {
 		return try copy(toDirectory: DirectoryPath(toDirectory))
 	}
 }
 
+/// A filesystem item, like a file or a directory. Allows changes.
 internal protocol MutableFileSystemItem: FileSystemItem {
 	var path: PathType { get set }
 }
 
 extension MutableFileSystemItem {
+
+	/// Moves this to another directory. The path is updated with the new location.
+	///
+	/// - Parameter toDirectory: The directory to move this to.
+	/// - Throws: NSError.
 	public mutating func move(toDirectory: DirectoryPath) throws {
 		let newpath = toDirectory.append(self.path.name) as PathType
 		try FileManager().moveItem(atPath: self.path.absoluteString, toPath: newpath.absoluteString)
 		self.path = newpath
 	}
 
+	/// Moves this to another directory. The path is updated with the new location.
+	///
+	/// - Parameter toDirectory: The directory to move this to.
+	/// - Throws: NSError.
 	public mutating func move(toDirectory: String) throws {
 		try self.move(toDirectory: DirectoryPath(toDirectory))
 	}
