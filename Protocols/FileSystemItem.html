@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>ReadableStream Protocol Reference</title>
+    <title>FileSystemItem Protocol Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Protocol/ReadableStream" class="dashAnchor"></a>
-    <a title="ReadableStream Protocol Reference"></a>
+    <a name="//apple_ref/swift/Protocol/FileSystemItem" class="dashAnchor"></a>
+    <a title="FileSystemItem Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">FileSmith Docs</a> (82% documented)</p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">FileSmith Reference</a>
         <img id="carat" src="../img/carat.png" />
-        ReadableStream Protocol Reference
+        FileSystemItem Protocol Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -137,14 +137,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>ReadableStream</h1>
+            <h1>FileSystemItem</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ReadableStream</span><span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStreamable</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">FileSystemItem</span></code></pre>
 
                 </div>
               </div>
-            <p>A stream of text. Does as much as possible lazily.</p>
+            <p>A filesystem item, like a file or a directory.</p>
 
           </section>
           <section class="section task-group-section">
@@ -153,9 +153,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:vP9FileSmith14ReadableStream8encodingVE10FoundationSS8Encoding"></a>
-                    <a name="//apple_ref/swift/Property/encoding" class="dashAnchor"></a>
-                    <a class="token" href="#/s:vP9FileSmith14ReadableStream8encodingVE10FoundationSS8Encoding">encoding</a>
+                    <a name="/s:vP9FileSmith14FileSystemItem4pathwx8PathType"></a>
+                    <a name="//apple_ref/swift/Property/path" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vP9FileSmith14FileSystemItem4pathwx8PathType">path</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -170,7 +170,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">ReadableStream</span><span class="p">:</span> <span class="kd">class</span><span class="p">,</span> <span class="kt">TextOutputStreamable</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">FileSystemItem</span></code></pre>
 
                         </div>
                       </div>
@@ -180,9 +180,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FP9FileSmith14ReadableStream8readSomeFT_GSqSS_"></a>
-                    <a name="//apple_ref/swift/Method/readSome()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP9FileSmith14ReadableStream8readSomeFT_GSqSS_">readSome()</a>
+                    <a name="/s:FP9FileSmith14FileSystemItemcFzT4openSS_x"></a>
+                    <a name="//apple_ref/swift/Method/init(open:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9FileSmith14FileSystemItemcFzT4openSS_x">init(open:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -190,23 +190,16 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Whatever amount of text the stream feels like providing.
-If the source is a file this will read everything at once.
-- returns: more text from the stream, or nil if we have reached the end.</p>
+                        <p>Opens the file or directory at ‘stringpath’.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">readSome</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="n">open</span> <span class="nv">stringpath</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>more text from the stream, or nil if we have reached the end.</p>
-
                       </div>
                     </section>
                   </div>
@@ -214,9 +207,9 @@ If the source is a file this will read everything at once.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FP9FileSmith14ReadableStream4readFT_SS"></a>
-                    <a name="//apple_ref/swift/Method/read()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FP9FileSmith14ReadableStream4readFT_SS">read()</a>
+                    <a name="/s:FP9FileSmith14FileSystemItemcFzT4openwx8PathType_x"></a>
+                    <a name="//apple_ref/swift/Method/init(open:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FP9FileSmith14FileSystemItemcFzT4openwx8PathType_x">init(open:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -224,14 +217,14 @@ If the source is a file this will read everything at once.
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Reads everything at once.</p>
+                        <p>Opens the file or directory at ‘path’.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">read</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight"><code><span class="nf">init</span><span class="p">(</span><span class="n">open</span> <span class="nv">path</span><span class="p">:</span> <span class="kt">PathType</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -245,9 +238,9 @@ If the source is a file this will read everything at once.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FE9FileSmithPS_14ReadableStream5linesFT_GVs12LazySequenceGVs11AnySequenceSS__"></a>
-                    <a name="//apple_ref/swift/Method/lines()" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FE9FileSmithPS_14ReadableStream5linesFT_GVs12LazySequenceGVs11AnySequenceSS__">lines()</a>
+                    <a name="/s:FE9FileSmithPS_14FileSystemItem4copyFzT11toDirectoryVS_13DirectoryPath_x"></a>
+                    <a name="//apple_ref/swift/Method/copy(toDirectory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9FileSmithPS_14FileSystemItem4copyFzT11toDirectoryVS_13DirectoryPath_x">copy(toDirectory:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -258,16 +251,59 @@ If the source is a file this will read everything at once.
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Splits stream lazily into lines.</p>
+                        <p>Copies this to another directory.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter toDirectory: The directory to copy this to.
+
+</div>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    An instance representing the new copy.
+
+</div>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    NSError.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">lines</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">LazySequence</span><span class="o">&lt;</span><span class="kt">AnySequence</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;&gt;</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">copy</span><span class="p">(</span><span class="nv">toDirectory</span><span class="p">:</span> <span class="kt"><a href="../Structs/DirectoryPath.html">DirectoryPath</a></span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>toDirectory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The directory to copy this to.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An instance representing the new copy.</p>
+
                       </div>
                     </section>
                   </div>
@@ -275,9 +311,9 @@ If the source is a file this will read everything at once.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:FE9FileSmithPS_14ReadableStream5writeuRd__s16TextOutputStreamrFT2toRqd___T_"></a>
-                    <a name="//apple_ref/swift/Method/write(to:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:FE9FileSmithPS_14ReadableStream5writeuRd__s16TextOutputStreamrFT2toRqd___T_">write(to:)</a>
+                    <a name="/s:FE9FileSmithPS_14FileSystemItem4copyFzT11toDirectorySS_x"></a>
+                    <a name="//apple_ref/swift/Method/copy(toDirectory:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FE9FileSmithPS_14FileSystemItem4copyFzT11toDirectorySS_x">copy(toDirectory:)</a>
                     </code>
                       <span class="declaration-note">
                         Extension method
@@ -288,16 +324,59 @@ If the source is a file this will read everything at once.
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Writes the text in this file to the given TextOutputStream.</p>
+                        <p>Copies this to another directory. The name remains unchanged.</p>
+
+<div class="aside aside-parameter">
+    <p class="aside-title">Parameter</p>
+    Parameter toDirectory: The directory to copy this to.
+
+</div>
+
+<div class="aside aside-returns">
+    <p class="aside-title">Returns</p>
+    An instance representing the new copy.
+
+</div>
+
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    NSError.
+
+</div>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">write</span><span class="o">&lt;</span><span class="kt">Target</span><span class="p">:</span> <span class="kt">TextOutputStream</span><span class="o">&gt;</span><span class="p">(</span><span class="n">to</span> <span class="nv">target</span><span class="p">:</span> <span class="k">inout</span> <span class="kt">Target</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">copy</span><span class="p">(</span><span class="nv">toDirectory</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="k">Self</span></code></pre>
 
                         </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>toDirectory</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The directory to copy this to.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An instance representing the new copy.</p>
+
                       </div>
                     </section>
                   </div>

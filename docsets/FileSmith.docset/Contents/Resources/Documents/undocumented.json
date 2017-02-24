@@ -58,23 +58,30 @@
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 13,
+      "line": 12,
       "symbol": "AlreadyExistsOptions.open",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 13,
+      "line": 12,
       "symbol": "AlreadyExistsOptions.replace",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
-      "line": 13,
+      "line": 12,
       "symbol": "AlreadyExistsOptions.throwError",
       "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Directory.swift",
+      "line": 27,
+      "symbol": "FileSystemItem.path",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
@@ -226,14 +233,14 @@
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Paths.swift",
-      "line": 428,
+      "line": 431,
       "symbol": "DirectoryPath.+(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/Sources/Paths.swift",
-      "line": 441,
+      "line": 444,
       "symbol": "==(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.free",
       "warning": "undocumented"
