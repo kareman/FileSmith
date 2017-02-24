@@ -413,16 +413,19 @@ extension DirectoryPath {
 		return P(absolute: fixDotDots(self.components + newcomponents))
 	}
 
+	internal func append<P: Path>(_ appendix: String) -> P {
+		let (newcomponents, _) = parseComponents(appendix)
+		return append(newcomponents)
+	}
+
 	/// Adds a file path to the end of this directory path.
 	public func append(file stringpath: String) -> FilePath {
-		let (newcomponents, _) = parseComponents(stringpath)
-		return append(newcomponents)
+		return append(stringpath)
 	}
 
 	/// Adds a directory path to the end of this directory path.
 	public func append(directory stringpath: String) -> DirectoryPath {
-		let (newcomponents, _) = parseComponents(stringpath)
-		return append(newcomponents)
+		return append(stringpath)
 	}
 
 	public static func + <P: Path>(leftdir: DirectoryPath, rightpath: P) -> P {

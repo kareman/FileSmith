@@ -100,6 +100,20 @@ class DirectoryTests: XCTestCase {
 		}
 	}
 
+	func testMoveDirectory() {
+		Directory.current = Directory.createTempDirectory()
+		AssertDoesNotThrow {
+			var dir = try Directory(create: "testdir/dir", ifExists: .throwError)
+			XCTAssertEqual(dir.path.relativeString, "testdir/dir")
+
+			try dir.move(toDirectory: ".")
+
+			XCTAssertEqual(dir.path.relativeString, "dir")
+			XCTAssertTrue(Directory.current.contains("dir"))
+			XCTAssertFalse(Directory.current.contains("testdir/dir"))
+		}
+	}
+
 	func testDirectoryInAMultitudeOfWays() {
 		do {
 			Directory.current = Directory.createTempDirectory()

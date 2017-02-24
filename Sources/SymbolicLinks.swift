@@ -17,7 +17,7 @@ extension File {
 	///   - target: The file the new link should point to.
 	///   - ifExists: What to do if there already is something at newlink: open, throw error or replace.
 	/// - Throws: FileSystemError.isDirectory, .alreadyExists, .outsideSandbox, .invalidAccess.
-	public init(createSymbolicLink newlink: FilePath, to target: File, ifExists: AlreadyExistsOptions) throws {
+	public init<TargetFile:File>(createSymbolicLink newlink: FilePath, to target: TargetFile, ifExists: AlreadyExistsOptions) throws {
 		if let newlinktype = FileType(newlink) {
 			guard newlinktype != .directory else { throw FileSystemError.isDirectory(path: DirectoryPath(newlink)) }
 			switch ifExists {
@@ -101,8 +101,8 @@ extension Directory {
 	///   - ifExists: What to do if there already is something at newlink: open, throw error or replace.
 	/// - Throws: FileSystemError.isDirectory, .alreadyExists, .outsideSandbox, .invalidAccess.
 	@discardableResult
-	public func create<F:File>(symbolicLink newlink: String, to target: File, ifExists: AlreadyExistsOptions) throws -> F {
+	public func create<NewFile:File, TargetFile:File>(symbolicLink newlink: String, to target: TargetFile, ifExists: AlreadyExistsOptions) throws -> NewFile {
 		let newpath = self.path.append(file: newlink)
-		return try F(createSymbolicLink: newpath, to: target, ifExists: ifExists)
+		return try NewFile(createSymbolicLink: newpath, to: target, ifExists: ifExists)
 	}
 }

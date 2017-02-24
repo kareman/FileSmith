@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 /// What to do if trying to create a file or directory that already exists.
 public enum AlreadyExistsOptions {
 	case open, throwError, replace
@@ -22,14 +21,27 @@ extension Path {
 	}
 }
 
+internal protocol FileSystemItem {
+	associatedtype PathType: Path
+	var path: PathType { get set }
+}
+
+extension FileSystemItem {
+	public mutating func move(toDirectory: DirectoryPath) throws {
+		let newpath = toDirectory.append(self.path.name) as PathType
+		try FileManager().moveItem(atPath: self.path.absoluteString, toPath: newpath.absoluteString)
+		self.path = newpath
+	}
+}
+
 /// A directory which exists in the local filesystem (at least at the time of initialisation).
-public class Directory {
-	
+public class Directory: FileSystemItem {
+
 	/// If true, then you can only make changes to the file system in the current working directory, or any of its subdirectories.
 	public static var sandbox = true
 				
 	/// The path to this directory.
-	public let path: DirectoryPath
+	public internal(set) var path: DirectoryPath
 
 	/// Opens an already existing directory.
 	///

@@ -136,10 +136,10 @@ extension FilePath {
 }
 
 /// A class for writing text to a file.
-public final class WritableFile: File, WritableStream {
+public final class WritableFile: File, WritableStream, FileSystemItem {
 
 	/// The path to the file
-	public let path: FilePath
+	public internal(set) var path: FilePath
 
 	/// The encoding for the text in the file.
 	public var encoding: String.Encoding = .utf8

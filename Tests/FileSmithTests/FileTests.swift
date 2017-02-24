@@ -93,6 +93,19 @@ class FileTests: XCTestCase {
 		}
 	}
 
+	func testMoveFile() {
+		Directory.current = Directory.createTempDirectory()
+		AssertDoesNotThrow {
+			var file = try WritableFile(create: "testdir/file.txt", ifExists: .throwError)
+			XCTAssertNotEqual(file.path.parent(), DirectoryPath.current)
+			XCTAssertTrue(try Directory(open: "testdir").contains("file.txt"))
+
+			try file.move(toDirectory: ".")
+			XCTAssertEqual(file.path.parent(), DirectoryPath.current)
+			XCTAssertFalse(try Directory(open: "testdir").contains("file.txt"))
+		}
+	}
+
 	func testStandardInOut() {
 		_ = ReadableFile.stdin
 		WritableFile.stdout.print(2, "words")
