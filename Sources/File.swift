@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol File {
+public protocol File: FileSystemItem {
 
 	/// The path to the file
 	var path: FilePath { get }
@@ -136,7 +136,7 @@ extension FilePath {
 }
 
 /// A class for writing text to a file.
-public final class WritableFile: File, WritableStream, FileSystemItem {
+public final class WritableFile: File, WritableStream, MutableFileSystemItem {
 
 	/// The path to the file
 	public internal(set) var path: FilePath

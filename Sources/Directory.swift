@@ -21,21 +21,47 @@ extension Path {
 	}
 }
 
-internal protocol FileSystemItem {
+public protocol FileSystemItem {
 	associatedtype PathType: Path
-	var path: PathType { get set }
+	var path: PathType { get }
+
+	/// Opens the file or directory at ‘stringpath’.
+	init(open stringpath: String) throws
+
+	/// Opens the file or directory at ‘path’.
+	init(open path: PathType) throws
 }
 
 extension FileSystemItem {
+	public func copy(toDirectory: DirectoryPath) throws -> Self {
+		let newpath = toDirectory.append(self.path.name) as PathType
+		try FileManager().copyItem(atPath: self.path.absoluteString, toPath: newpath.absoluteString)
+		return try Self(open: newpath)
+	}
+
+	public func copy(toDirectory: String) throws -> Self {
+		return try copy(toDirectory: DirectoryPath(toDirectory))
+	}
+}
+
+internal protocol MutableFileSystemItem: FileSystemItem {
+	var path: PathType { get set }
+}
+
+extension MutableFileSystemItem {
 	public mutating func move(toDirectory: DirectoryPath) throws {
 		let newpath = toDirectory.append(self.path.name) as PathType
 		try FileManager().moveItem(atPath: self.path.absoluteString, toPath: newpath.absoluteString)
 		self.path = newpath
 	}
+
+	public mutating func move(toDirectory: String) throws {
+		try self.move(toDirectory: DirectoryPath(toDirectory))
+	}
 }
 
 /// A directory which exists in the local filesystem (at least at the time of initialisation).
-public class Directory: FileSystemItem {
+public class Directory: MutableFileSystemItem {
 
 	/// If true, then you can only make changes to the file system in the current working directory, or any of its subdirectories.
 	public static var sandbox = true
@@ -47,7 +73,7 @@ public class Directory: FileSystemItem {
 	///
 	/// - Parameter path: The path to the directory.
 	/// - Throws: FileSystemError.notFound, .notDirectory, .invalidAccess.
-	public init(open path: DirectoryPath) throws {
+	public required init(open path: DirectoryPath) throws {
 		self.path = path
 		let stringpath = self.path.absoluteString
 
@@ -66,7 +92,7 @@ public class Directory: FileSystemItem {
 	///
 	/// - Parameter stringpath: The string path to the directory.
 	/// - Throws: FileSystemError.notFound, .notDirectory, .invalidAccess.
-	public convenience init(open stringpath: String) throws {
+	public required convenience init(open stringpath: String) throws {
 		try self.init(open: DirectoryPath(stringpath))
 	}
 

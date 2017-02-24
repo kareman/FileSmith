@@ -106,6 +106,19 @@ class FileTests: XCTestCase {
 		}
 	}
 
+	func testCopyFile() {
+		Directory.current = Directory.createTempDirectory()
+		AssertDoesNotThrow {
+			let file = try WritableFile(create: "testdir/file.txt", ifExists: .throwError)
+
+			let newfile = try file.copy(toDirectory: ".")
+			XCTAssertEqual(newfile.path.parent(), DirectoryPath.current)
+			XCTAssertNotEqual(file.path, newfile.path)
+			XCTAssertTrue(try Directory(open: "testdir").contains("file.txt"))
+			XCTAssertTrue(Directory.current.contains("file.txt"))
+		}
+	}
+
 	func testStandardInOut() {
 		_ = ReadableFile.stdin
 		WritableFile.stdout.print(2, "words")
