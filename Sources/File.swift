@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftShell
 
 public protocol File: FileSystemItem {
 
@@ -57,7 +58,7 @@ public final class ReadableFile: File, ReadableStream {
 	/// The type of file or file-like item this is.
 	public let type: FileType
 
-	internal let filehandle: FileHandle
+	public let filehandle: FileHandle
 
 	private init(path: FilePath, filehandle: FileHandle) {
 		self.filehandle = filehandle
@@ -83,46 +84,11 @@ public final class ReadableFile: File, ReadableStream {
 		self.init(path: FilePath("/dev/fd/\(filehandle.fileDescriptor)"), filehandle: filehandle)
 	}
 
-	/// Reads everything.
-	public func read() -> String {
-		return filehandle.read(encoding: encoding)
-	}
-
-	/// Reads whatever amount of text the source feels like providing.
-	/// If this is a regular file it will read everything at once.
-	/// - Returns: more text, or nil if we have reached the end.
-	public func readSome() -> String? {
-		return filehandle.readSome(encoding: encoding)
-	}
-
-	/// Closes the source. If it is not a regular file it must be closed when finished writing,
-	/// to prevent deadlock when reading.
-	public func close() {
-		filehandle.closeFile()
-	}
-
 	/// A ReadableStream which reads from standard input.
 	static public var stdin: ReadableStream = {
 		ReadableFile(path: "/dev/stdin", filehandle: FileHandle.standardInput)
 	}()
 }
-
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-	extension ReadableFile {
-
-		/// `handler` will be called whenever there is new text output available.
-		/// Pass `nil` to remove any preexisting handlers.
-		public func onOutput(handler: ((String) -> ())? ) {
-			guard let h = handler else { filehandle.readabilityHandler = nil; return }
-
-			filehandle.readabilityHandler = { fh in
-				if let output = fh.readSome() {
-					h(output)
-				}
-			}
-		}
-	}
-#endif
 
 extension FilePath {
 
@@ -147,7 +113,7 @@ public final class WritableFile: File, WritableStream, MutableFileSystemItem {
 	/// The type of file or file-like item this is.
 	public let type: FileType
 
-	internal let filehandle: FileHandle
+	public let filehandle: FileHandle
 
 	private init(path: FilePath, filehandle: FileHandle) {
 		self.filehandle = filehandle
@@ -268,10 +234,4 @@ extension FilePath {
 	public func create(ifExists: AlreadyExistsOptions) throws -> WritableFile {
 		return try WritableFile(create: self, ifExists: ifExists)
 	}
-}
-
-/// Creates and returns 2 connected streams. Whatever you write into the first one you can read from the second.
-public func streams() -> (WritableStream,ReadableStream) {
-	let pipe = Pipe()
-	return (WritableFile(pipe.fileHandleForWriting), ReadableFile(pipe.fileHandleForReading))
 }

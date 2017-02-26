@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "9999"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,21 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_27"
+               BlueprintIdentifier = "OBJ_38"
+               BuildableName = "SwiftShell.framework"
+               BlueprintName = "SwiftShell"
+               ReferencedContainer = "container:FileSmith.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_53"
                BuildableName = "FileSmith.framework"
                BlueprintName = "FileSmith"
                ReferencedContainer = "container:FileSmith.xcodeproj">
@@ -33,7 +47,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_42"
+               BlueprintIdentifier = "OBJ_68"
                BuildableName = "FileSmithTests.xctest"
                BlueprintName = "FileSmithTests"
                ReferencedContainer = "container:FileSmith.xcodeproj">
@@ -56,9 +70,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_27"
-            BuildableName = "FileSmith.framework"
-            BlueprintName = "FileSmith"
+            BlueprintIdentifier = "OBJ_38"
+            BuildableName = "SwiftShell.framework"
+            BlueprintName = "SwiftShell"
             ReferencedContainer = "container:FileSmith.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

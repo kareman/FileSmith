@@ -74,7 +74,6 @@ class FileTests: XCTestCase {
 			XCTAssertThrowsError(try WritableFile(create: "dir", ifExists: .open))
 
 			write_link.close()
-			read_link.close()
 		} catch {
 			XCTFail(String(describing: error))
 		}
@@ -124,18 +123,6 @@ class FileTests: XCTestCase {
 		WritableFile.stdout.print(2, "words")
 		_ = WritableFile.stderror
 	}
-
-	func testStreamsPrint() {
-		let (input,output) = streams()
-
-		input.print("Write",3,"words")
-		XCTAssertEqual(output.readSome(), "Write 3 words\n")
-		input.print("No","spaces", separator: "", terminator:"theend")
-		XCTAssertEqual(output.readSome(), "Nospacestheend")
-
-		input.close()
-		XCTAssertEqual(output.read(), "")
-	}
 }
 
 extension FileTests {
@@ -145,6 +132,5 @@ extension FileTests {
 		("testMoveFile", testMoveFile),
 		("testCopyFile", testCopyFile),
 		("testStandardInOut", testStandardInOut),
-		("testStreamsPrint", testStreamsPrint),
 		]
 }
