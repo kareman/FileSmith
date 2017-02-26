@@ -142,6 +142,8 @@ extension FileTests {
 	public static var allTests = [
 		//("testFiles", testFiles),
 		("testOverwrite", testOverwrite),
+		("testMoveFile", testMoveFile),
+		("testCopyFile", testCopyFile),
 		("testStandardInOut", testStandardInOut),
 		("testStreamsPrint", testStreamsPrint),
 		]

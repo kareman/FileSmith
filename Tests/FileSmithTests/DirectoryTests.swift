@@ -202,6 +202,8 @@ extension DirectoryTests {
 		("testDontDeleteTheCurrentWorkDirectory", testDontDeleteTheCurrentWorkDirectory),
 		("testOpenDirectory", testOpenDirectory),
 		("testCreateDirectory", testCreateDirectory),
+		("testMoveDirectory", testMoveDirectory),
+		("testCopyDirectory", testCopyDirectory),
 		("testDirectoryInAMultitudeOfWays", testDirectoryInAMultitudeOfWays),
 		]
 }
