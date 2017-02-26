@@ -42,7 +42,7 @@ extension FileSystemItem {
 	/// - Throws: NSError.
 	public func copy(toDirectory: DirectoryPath) throws -> Self {
 		let newpath = toDirectory.append(self.path.name) as PathType
-		try FileManager().copyItem(atPath: self.path.absoluteString, toPath: newpath.absoluteString)
+		try FixedFileManager().copyItem(atPath: self.path.absoluteString, toPath: newpath.absoluteString)
 		return try Self(open: newpath)
 	}
 

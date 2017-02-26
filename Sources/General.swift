@@ -71,3 +71,30 @@ func contentsOfDirectory(at dirpath: String, recursive: Bool) -> LazyMapSequence
 		return String(filepath.dropFirst(+7))
 	}
 }
+
+open class FixedFileManager: FileManager {
+	#if !(os(macOS) || os(iOS) || os(tvOS) || os(watchOS))
+
+	// Not implemented in swift 3.0.2, nor is it in the swift3.1 branch as of 2017–02–26, but it is in the master branch.
+	// Copied from https://github.com/apple/swift-corelibs-foundation/commit/f57ff6d1132c599c55bf3834159b2bff28ef455e
+	open override func copyItem(atPath srcPath: String, toPath dstPath: String) throws {
+		guard
+			let attrs = try? attributesOfItem(atPath: srcPath),
+			let fileType = attrs[.type] as? FileAttributeType
+			else {
+				return
+		}
+		if fileType == .typeDirectory {
+			try createDirectory(atPath: dstPath, withIntermediateDirectories: false, attributes: nil)
+			let subpaths = try subpathsOfDirectory(atPath: srcPath)
+			for subpath in subpaths {
+				try copyItem(atPath: srcPath + "/" + subpath, toPath: dstPath + "/" + subpath)
+			}
+		} else {
+			if createFile(atPath: dstPath, contents: contents(atPath: srcPath), attributes: nil) == false {
+				throw NSError(domain: NSCocoaErrorDomain, code: CocoaError.fileWriteUnknown.rawValue, userInfo: [NSFilePathErrorKey : NSString(string: dstPath)])
+			}
+		}
+	}
+	#endif
+}
