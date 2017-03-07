@@ -25,6 +25,15 @@ extension Sequence {
 	}
 }
 
+extension Array where Element: Equatable {
+	public func indexOfFirstDifference (_ other: Array<Element>) -> Index? {
+		for i in self.indices {
+			if i >= other.endIndex || self[i] != other[i] { return i }
+		}
+		return nil
+	}
+}
+
 import Foundation
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)

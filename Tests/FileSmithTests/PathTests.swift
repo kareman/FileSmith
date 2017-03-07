@@ -154,6 +154,18 @@ class PathTests: XCTestCase {
 		XCTAssertFalse(DirectoryPath("/a/b/").isAParentOf(AnyPath("/a/")))
 		XCTAssertFalse(DirectoryPath("/a/b/").isAParentOf(DirectoryPath("/a/b/")))
 	}
+
+	func testRelativeTo() {
+		let base = DirectoryPath("/a/b/c")
+		XCTAssertEqual(FilePath("/a/b/c/d").relativeTo(base), base.append(file: "d", relative: true))
+		XCTAssertEqual(FilePath("/a/b/c/d/e").relativeTo(base), base.append(file: "d/e/", relative: true))
+		XCTAssertEqual(DirectoryPath("/a/b/c").relativeTo(base), base.append(directory: ".", relative: true))
+		XCTAssertEqual(DirectoryPath("/a/b").relativeTo(base), base.append(directory: "..", relative: true))
+		XCTAssertEqual(DirectoryPath("/a").relativeTo(base), base.append(directory: "../../", relative: true))
+		XCTAssertEqual(DirectoryPath("/").relativeTo(base), base.append(directory: "../../../", relative: true))
+		XCTAssertEqual(DirectoryPath("/a/x/y/z/").relativeTo(base), base.append(directory: "../../x/y/z/", relative: true))
+		XCTAssertEqual(DirectoryPath("/x/y/z/").relativeTo(base), base.append(directory: "../../../x/y/z/", relative: true))
+	}
 }
 
 extension PathTests {

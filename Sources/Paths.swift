@@ -285,8 +285,7 @@ public func path(detectTypeOf stringpath: String) -> Path? {
 // MARK: Common methods.
 
 extension Path {
-
-	/// Creates a new path from another path. 
+	/// Creates a new path from another path.
 	public init(_ inpath: Path) {
 		if let base = inpath.baseComponents, let rel = inpath.relativeComponents {
 			self.init(base: base, relative: rel)
@@ -358,6 +357,15 @@ extension Path {
 		return DirectoryPath(absolute: Array(self.components.dropLast(levels)))
 	}
 
+	/// A new path pointing to the same item as this path, and whose base path is `base`.
+	///
+	/// - Parameter base: The base of the new path.
+	public func relativeTo(_ base: DirectoryPath) -> Self {
+		let i = components.indexOfFirstDifference(base.components)
+		let nrofdotdots = base.components.count - (i ?? components.count)
+		return Self(base: base.components, relative: Array(repeating: "..", count: nrofdotdots) + components.suffix(from: i ?? components.endIndex))
+	}
+
 	/// The hash value of the string representation of this path.
 	public var hashValue: Int {
 		return relativeString.map {$0.hashValue &+ base!.absoluteString.hashValue} ?? absoluteString.hashValue
@@ -413,19 +421,31 @@ extension DirectoryPath {
 		return P(absolute: fixDotDots(self.components + newcomponents))
 	}
 
-	internal func append<P: Path>(_ appendix: String) -> P {
+	internal func append<P: Path>(_ appendix: String, relative: Bool = false) -> P {
 		let (newcomponents, _) = parseComponents(appendix)
-		return append(newcomponents)
+		return relative ? P(base: components, relative: newcomponents) : append(newcomponents)
 	}
 
-	/// Adds a file path to the end of this directory path.
-	public func append(file stringpath: String) -> FilePath {
-		return append(stringpath)
+	/// Creates a new path by adding a file path to the end of this directory path.
+	///
+	/// - Parameters:
+	///   - stringpath: The path to add.
+	///   - relative: If true, this path will be the base, and `stringpath` will be the relative part.
+	///               If false and this path is relative, the new path will be relative too. Otherwise it is absolute.
+	///               The default is false.
+	public func append(file stringpath: String, relative: Bool = false) -> FilePath {
+		return append(stringpath, relative: relative)
 	}
 
-	/// Adds a directory path to the end of this directory path.
-	public func append(directory stringpath: String) -> DirectoryPath {
-		return append(stringpath)
+	/// Creates a new path by adding a directory path to the end of this directory path.
+	///
+	/// - Parameters:
+	///   - stringpath: The path to add.
+	///   - relative: If true, this path will be the base, and `stringpath` will be the relative part.
+	///               If false and this path is relative, the new path will be relative too. Otherwise it is absolute.
+	///               The default is false.
+	public func append(directory stringpath: String, relative: Bool = false) -> DirectoryPath {
+		return append(stringpath, relative: relative)
 	}
 
 	public static func + <P: Path>(leftdir: DirectoryPath, rightpath: P) -> P {
