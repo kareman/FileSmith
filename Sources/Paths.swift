@@ -411,7 +411,7 @@ extension DirectoryPath {
 
 	/// The path to the root directory in the local file system.
 	public static var root: DirectoryPath {
-		return DirectoryPath(pathseparator)
+		return DirectoryPath(absolute:[])
 	}
 
 	internal func append<P: Path>(_ newcomponents: [String]) -> P {
