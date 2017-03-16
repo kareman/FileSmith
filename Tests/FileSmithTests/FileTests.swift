@@ -123,6 +123,14 @@ class FileTests: XCTestCase {
 		WritableFile.stdout.print(2, "words")
 		_ = WritableFile.stderror
 	}
+
+	func testRunCommandsWithReadableFileAsInput() {
+		Directory.current = Directory.createTempDirectory()
+		AssertDoesNotThrow {
+			try "the entire text".write(toFile: "testfile.txt", atomically: false, encoding: .utf8)
+			XCTAssertEqual(try ReadableFile(open: "testfile.txt").run("cat"), "the entire text")
+		}
+	}
 }
 
 extension FileTests {
@@ -132,5 +140,6 @@ extension FileTests {
 		("testMoveFile", testMoveFile),
 		("testCopyFile", testCopyFile),
 		("testStandardInOut", testStandardInOut),
+		("testRunCommandsWithReadableFileAsInput", testRunCommandsWithReadableFileAsInput),
 		]
 }
