@@ -33,21 +33,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BAC5F1681E64FA2100F075BA /* PBXContainerItemProxy */ = {
+		BA50D2941E9557A6002BA4A5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = OBJ_38;
 			remoteInfo = SwiftShell;
 		};
-		BAC5F1691E64FA2100F075BA /* PBXContainerItemProxy */ = {
+		BA50D2951E9557A6002BA4A5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = OBJ_38;
 			remoteInfo = SwiftShell;
 		};
-		BAC5F16A1E64FA2100F075BA /* PBXContainerItemProxy */ = {
+		BA50D2961E9557A6002BA4A5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -78,7 +78,7 @@
 		OBJ_33 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		OBJ_35 /* SwiftShell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftShell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_36 /* FileSmith.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileSmith.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_37 /* FileSmithTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = FileSmithTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_37 /* FileSmithTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = FileSmithTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* Bash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bash.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,7 +173,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 = {
+		OBJ_5 /*  */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -181,6 +181,7 @@
 				OBJ_28 /* Tests */,
 				OBJ_34 /* Products */,
 			);
+			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -205,7 +206,7 @@
 				OBJ_17 /* Stream */,
 			);
 			name = SwiftShell;
-			path = "Packages/SwiftShell-3.0.0-beta.11/Sources/SwiftShell";
+			path = "Packages/SwiftShell-3.0.0-beta.14/Sources/SwiftShell";
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -269,18 +270,6 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 9999;
-				TargetAttributes = {
-					OBJ_38 = {
-						ProvisioningStyle = Automatic;
-					};
-					OBJ_53 = {
-						ProvisioningStyle = Automatic;
-					};
-					OBJ_68 = {
-						DevelopmentTeam = 9YMSPW3D72;
-						ProvisioningStyle = Automatic;
-					};
-				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "FileSmith" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -289,7 +278,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5;
+			mainGroup = OBJ_5 /*  */;
 			productRefGroup = OBJ_34 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -349,17 +338,17 @@
 		OBJ_67 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = OBJ_38 /* SwiftShell */;
-			targetProxy = BAC5F1681E64FA2100F075BA /* PBXContainerItemProxy */;
+			targetProxy = BA50D2941E9557A6002BA4A5 /* PBXContainerItemProxy */;
 		};
 		OBJ_80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = OBJ_38 /* SwiftShell */;
-			targetProxy = BAC5F1691E64FA2100F075BA /* PBXContainerItemProxy */;
+			targetProxy = BA50D2951E9557A6002BA4A5 /* PBXContainerItemProxy */;
 		};
 		OBJ_81 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = OBJ_53 /* FileSmith */;
-			targetProxy = BAC5F16A1E64FA2100F075BA /* PBXContainerItemProxy */;
+			targetProxy = BA50D2961E9557A6002BA4A5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -373,7 +362,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DXcode";
@@ -395,7 +383,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_OPTIMIZATION_LEVEL = s;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_SWIFT_FLAGS = "-DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -411,8 +398,6 @@
 		OBJ_40 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -433,8 +418,6 @@
 		OBJ_41 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -455,7 +438,6 @@
 		OBJ_55 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -476,7 +458,6 @@
 		OBJ_56 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -497,8 +478,6 @@
 		OBJ_70 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = 9YMSPW3D72;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -506,7 +485,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmithTests_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				TARGET_NAME = FileSmithTests;
@@ -516,8 +495,6 @@
 		OBJ_71 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
-				DEVELOPMENT_TEAM = 9YMSPW3D72;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -525,7 +502,7 @@
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmithTests_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				TARGET_NAME = FileSmithTests;

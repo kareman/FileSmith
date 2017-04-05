@@ -128,7 +128,7 @@ class FileTests: XCTestCase {
 		Directory.current = Directory.createTempDirectory()
 		AssertDoesNotThrow {
 			try "the entire text".write(toFile: "testfile.txt", atomically: false, encoding: .utf8)
-			XCTAssertEqual(try ReadableFile(open: "testfile.txt").run("cat"), "the entire text")
+			XCTAssertEqual(try ReadableFile(open: "testfile.txt").run("cat").stdout, "the entire text")
 		}
 	}
 }

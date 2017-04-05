@@ -1,0 +1,12 @@
+{
+  "autoPin": true,
+  "pins": [
+    {
+      "package": "SwiftShell",
+      "reason": null,
+      "repositoryURL": "https://github.com/kareman/SwiftShell",
+      "version": "3.0.0-beta.14"
+    }
+  ],
+  "version": 1
+}
