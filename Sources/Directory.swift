@@ -339,6 +339,8 @@ extension Directory {
 			return try Directory(open: tempdirectory)
 		} catch let error as NSError {
 			fatalError("Could not create new temporary directory '\(tempdirectory)':\n\(error.localizedDescription)")
+		} catch {
+			fatalError("Could not create new temporary directory '\(tempdirectory)':\n\(error)")
 		}
 	}
 }
