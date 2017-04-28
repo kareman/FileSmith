@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_38"
+               BlueprintIdentifier = "OBJ_39"
                BuildableName = "SwiftShell.framework"
                BlueprintName = "SwiftShell"
                ReferencedContainer = "container:FileSmith.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_53"
+               BlueprintIdentifier = "OBJ_54"
                BuildableName = "FileSmith.framework"
                BlueprintName = "FileSmith"
                ReferencedContainer = "container:FileSmith.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_68"
+               BlueprintIdentifier = "OBJ_69"
                BuildableName = "FileSmithTests.xctest"
                BlueprintName = "FileSmithTests"
                ReferencedContainer = "container:FileSmith.xcodeproj">
@@ -69,7 +69,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_38"
+            BlueprintIdentifier = "OBJ_39"
             BuildableName = "SwiftShell.framework"
             BlueprintName = "SwiftShell"
             ReferencedContainer = "container:FileSmith.xcodeproj">

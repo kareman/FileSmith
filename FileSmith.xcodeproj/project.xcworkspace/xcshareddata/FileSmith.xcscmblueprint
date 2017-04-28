@@ -10,7 +10,7 @@
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C61FF32A-981C-4B40-B993-192BFA549513",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "8524CD90B0B06309637E46DA8633449AD5125738" : "FileSmith\/",
-    "BF7C67668F4701C0AE5156F0E6F0CA70C1C6C61F" : "FileSmith\/Packages\/SwiftShell-3.0.0-beta.14\/"
+    "BF7C67668F4701C0AE5156F0E6F0CA70C1C6C61F" : "FileSmith\/.build\/checkouts\/SwiftShell--3495906201786892477\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "FileSmith",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
