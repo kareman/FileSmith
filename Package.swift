@@ -4,4 +4,4 @@ let package = Package(
     name: "FileSmith"
 )
 
-package.dependencies.append(.Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 3))
+package.dependencies.append(.Package(url: "https://github.com/kareman/SwiftShell.git", majorVersion: 3))
