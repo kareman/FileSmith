@@ -40,7 +40,25 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FileSmith::FileSmith"
+            BuildableName = "FileSmith.framework"
+            BlueprintName = "FileSmith"
+            ReferencedContainer = "container:FileSmith.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "FileSmith::FileSmithTests"
+            BuildableName = "FileSmithTests.xctest"
+            BlueprintName = "FileSmithTests"
+            ReferencedContainer = "container:FileSmith.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">

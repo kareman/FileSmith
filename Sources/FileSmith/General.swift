@@ -44,7 +44,7 @@ import Foundation
 
 func filterFiles(glob pattern: String) -> [String] {
 	#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-		let pattern = pattern.hasPrefix("//") ? String(pattern.characters.dropFirst()) : pattern
+		let pattern = pattern.hasPrefix("//") ? String(pattern.dropFirst()) : pattern
 	#endif
 	var globresult = glob_t()
 	let cpattern = strdup(pattern)
@@ -60,7 +60,7 @@ func filterFiles(glob pattern: String) -> [String] {
 		#else
 			let matchc = globresult.gl_pathc
 		#endif
-		return (0..<Int(matchc)).flatMap { index in
+		return (0..<Int(matchc)).compactMap { index in
 			return String(validatingUTF8: globresult.gl_pathv[index]!)
 		}
 	}
@@ -76,7 +76,7 @@ func contentsOfDirectory(at dirpath: String, recursive: Bool) -> LazyMapSequence
 
 	return directoryEnumerator.lazy.map {
 		// URL.path drops the / at the end. And absoluteString begins with "file://".
-		let filepath = ($0 as! URL).absoluteString.characters
+		let filepath = ($0 as! URL).absoluteString
 		return String(filepath.dropFirst(+7))
 	}
 }

@@ -186,7 +186,7 @@ func fixDotDots(_ components: [String]) -> [String] {
 /// Creates an array of path components from a string.
 func parseComponents(_ stringpath: String) -> (components: [String], isRelative: Bool) {
 	func prepareComponents<C: Collection>(_ components: C) -> [String]
-		where C.Iterator.Element == String, C.SubSequence: Collection, C.SubSequence.Iterator.Element == String {
+		where C.Element == String {
 			return fixDotDots(components.filter { !$0.isEmpty && $0 != "." })
 	}
 
@@ -327,17 +327,17 @@ extension Path {
 
 	/// The extension of the name (as in "file.extension").
 	public var `extension`: String? {
-		guard let lastdot = name.characters.lastIndex(of: "."),
+		guard let lastdot = name.lastIndex(of: "."),
 			lastdot != name.startIndex,
 			lastdot != name.index(before: name.endIndex)
 			else { return nil	}
-		return name.substring(from: name.index(after: lastdot))
+		return String(name[name.index(after: lastdot)...])
 	}
 
 	/// The name without any extension.
 	public var nameWithoutExtension: String {
-		if let lastdot = name.characters.lastIndex(of: "."), lastdot != name.startIndex {
-			return name.substring(to: lastdot)
+		if let lastdot = name.lastIndex(of: "."), lastdot != name.startIndex {
+			return String(name[..<lastdot])
 		}
 		return name
 	}

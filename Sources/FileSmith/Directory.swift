@@ -181,8 +181,8 @@ extension Directory {
 	static func filter<P: Path>(pattern: String, relativeTo path: DirectoryPath) -> [P] {
 		let pathprefixcount = path.components.count
 		return filterFiles(glob: pattern)
-			.flatMap(FileSmith.path(detectTypeOf:))
-			.flatMap { ($0 as? P) }
+			.compactMap(FileSmith.path(detectTypeOf:))
+			.compactMap { ($0 as? P) }
 			.map { P(base: path.components,
 			     relative: Array($0.components.dropFirst(pathprefixcount)))
 			}
@@ -191,8 +191,8 @@ extension Directory {
 	func filesOrDirectories<P: Path>(_ pattern: String, recursive: Bool = false) -> [P] {
 		return Directory.filter(pattern: path.absoluteString + pathseparator + pattern, relativeTo: path)
 			+ (!recursive ? [] : (contentsOfDirectory(at: path.absoluteString, recursive: true))
-			.flatMap(FileSmith.path(detectTypeOf:))
-			.flatMap { $0 as? DirectoryPath }
+			.compactMap(FileSmith.path(detectTypeOf:))
+			.compactMap { $0 as? DirectoryPath }
 			.flatMap { Directory.filter(pattern: $0.absoluteString + pathseparator + pattern, relativeTo: path) })
 	}
 
