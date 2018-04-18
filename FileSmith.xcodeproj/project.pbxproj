@@ -50,28 +50,28 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BA6075A5207EEB1700F4A6A4 /* PBXContainerItemProxy */ = {
+		BA47EC352087DCE600A4EBF0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "SwiftShell::SwiftShell";
 			remoteInfo = SwiftShell;
 		};
-		BA6075A6207EEB1700F4A6A4 /* PBXContainerItemProxy */ = {
+		BA47EC362087DCE600A4EBF0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "FileSmith::FileSmith";
 			remoteInfo = FileSmith;
 		};
-		BA6075A7207EEB1700F4A6A4 /* PBXContainerItemProxy */ = {
+		BA47EC372087DCE600A4EBF0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "SwiftShell::SwiftShell";
 			remoteInfo = SwiftShell;
 		};
-		BA6075A8207EEB1700F4A6A4 /* PBXContainerItemProxy */ = {
+		BA47EC382087DCE700A4EBF0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
@@ -160,18 +160,18 @@
 		OBJ_22 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_23 /* SwiftShell 4.1.0-beta1 */,
+				OBJ_23 /* SwiftShell 4.1.0 */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		OBJ_23 /* SwiftShell 4.1.0-beta1 */ = {
+		OBJ_23 /* SwiftShell 4.1.0 */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_24 /* SwiftShell */,
 				OBJ_37 /* Package.swift */,
 			);
-			name = "SwiftShell 4.1.0-beta1";
+			name = "SwiftShell 4.1.0";
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_24 /* SwiftShell */ = {
@@ -211,9 +211,9 @@
 		OBJ_38 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				"FileSmith::FileSmith::Product" /* FileSmith.framework */,
 				"FileSmith::FileSmithTests::Product" /* FileSmithTests.xctest */,
 				"SwiftShell::SwiftShell::Product" /* SwiftShell.framework */,
+				"FileSmith::FileSmith::Product" /* FileSmith.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -430,22 +430,22 @@
 		OBJ_56 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftShell::SwiftShell" /* SwiftShell */;
-			targetProxy = BA6075A5207EEB1700F4A6A4 /* PBXContainerItemProxy */;
+			targetProxy = BA47EC352087DCE600A4EBF0 /* PBXContainerItemProxy */;
 		};
 		OBJ_68 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "FileSmith::FileSmithTests" /* FileSmithTests */;
-			targetProxy = BA6075A8207EEB1700F4A6A4 /* PBXContainerItemProxy */;
+			targetProxy = BA47EC382087DCE700A4EBF0 /* PBXContainerItemProxy */;
 		};
 		OBJ_81 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "FileSmith::FileSmith" /* FileSmith */;
-			targetProxy = BA6075A6207EEB1700F4A6A4 /* PBXContainerItemProxy */;
+			targetProxy = BA47EC362087DCE600A4EBF0 /* PBXContainerItemProxy */;
 		};
 		OBJ_82 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "SwiftShell::SwiftShell" /* SwiftShell */;
-			targetProxy = BA6075A7207EEB1700F4A6A4 /* PBXContainerItemProxy */;
+			targetProxy = BA47EC372087DCE600A4EBF0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

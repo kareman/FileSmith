@@ -7,7 +7,7 @@ let package = Package(
 	name: "FileSmith",
 	dependencies: [
 		// Dependencies declare other packages that this package depends on.
-		.package(url: "https://github.com/kareman/SwiftShell.git", from: "4.1.0-beta.1")
+		.package(url: "https://github.com/kareman/SwiftShell.git", from: "4.1.0")
 	],
 	targets: [
 		// Targets are the basic building blocks of a package. A target can define a module or a test suite.
