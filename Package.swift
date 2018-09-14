@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
 	name: "FileSmith",
+	products: [
+            .library(name: "FileSmith", targets: ["FileSmith"])
+        ],
 	dependencies: [
 		// Dependencies declare other packages that this package depends on.
 		.package(url: "https://github.com/kareman/SwiftShell.git", from: "4.1.0")
