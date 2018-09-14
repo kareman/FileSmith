@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import FileSmith
+@testable import FileSmith
 import Foundation
 
 class FileTests: XCTestCase {
