@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "SwiftShell::SwiftShell"
-               BuildableName = "SwiftShell.framework"
-               BlueprintName = "SwiftShell"
+               BlueprintIdentifier = "FileSmith::FileSmith"
+               BuildableName = "FileSmith.framework"
+               BlueprintName = "FileSmith"
                ReferencedContainer = "container:FileSmith.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FileSmith::FileSmith"
-               BuildableName = "FileSmith.framework"
-               BlueprintName = "FileSmith"
+               BlueprintIdentifier = "SwiftShell::SwiftShell"
+               BuildableName = "SwiftShell.framework"
+               BlueprintName = "SwiftShell"
                ReferencedContainer = "container:FileSmith.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -70,9 +70,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "SwiftShell::SwiftShell"
-            BuildableName = "SwiftShell.framework"
-            BlueprintName = "SwiftShell"
+            BlueprintIdentifier = "FileSmith::FileSmith"
+            BuildableName = "FileSmith.framework"
+            BlueprintName = "FileSmith"
             ReferencedContainer = "container:FileSmith.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
