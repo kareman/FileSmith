@@ -160,18 +160,18 @@
 		OBJ_22 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_23 /* SwiftShell 4.1.1 */,
+				OBJ_23 /* SwiftShell 4.1.2 */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		OBJ_23 /* SwiftShell 4.1.1 */ = {
+		OBJ_23 /* SwiftShell 4.1.2 */ = {
 			isa = PBXGroup;
 			children = (
 				OBJ_24 /* SwiftShell */,
 				OBJ_37 /* Package.swift */,
 			);
-			name = "SwiftShell 4.1.1";
+			name = "SwiftShell 4.1.2";
 			sourceTree = SOURCE_ROOT;
 		};
 		OBJ_24 /* SwiftShell */ = {
@@ -218,7 +218,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -227,7 +227,6 @@
 				OBJ_22 /* Dependencies */,
 				OBJ_38 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -361,7 +360,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_38 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
