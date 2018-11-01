@@ -21,7 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		OBJ_103 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* Package.swift */; };
+		BAA05727218BAE3B004C2BB6 /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA05726218BAE3B004C2BB6 /* SwiftShell.framework */; };
 		OBJ_47 /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Attributes.swift */; };
 		OBJ_48 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Directory.swift */; };
 		OBJ_49 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Errors.swift */; };
@@ -29,47 +29,21 @@
 		OBJ_51 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* General.swift */; };
 		OBJ_52 /* Paths.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Paths.swift */; };
 		OBJ_53 /* SymbolicLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* SymbolicLinks.swift */; };
-		OBJ_55 /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftShell::SwiftShell::Product" /* SwiftShell.framework */; };
 		OBJ_63 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_74 /* DirectoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* DirectoryTests.swift */; };
 		OBJ_75 /* FileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* FileTests.swift */; };
 		OBJ_76 /* PathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* PathTests.swift */; };
 		OBJ_77 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* TestHelpers.swift */; };
 		OBJ_79 /* FileSmith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "FileSmith::FileSmith::Product" /* FileSmith.framework */; };
-		OBJ_80 /* SwiftShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "SwiftShell::SwiftShell::Product" /* SwiftShell.framework */; };
-		OBJ_87 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* Bash.swift */; };
-		OBJ_88 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* Command.swift */; };
-		OBJ_89 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* Context.swift */; };
-		OBJ_90 /* FileHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* FileHandle.swift */; };
-		OBJ_91 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* Files.swift */; };
-		OBJ_92 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* Array.swift */; };
-		OBJ_93 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* Process.swift */; };
-		OBJ_94 /* Lazy-split.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* Lazy-split.swift */; };
-		OBJ_95 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* Stream.swift */; };
-		OBJ_96 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BAB4C9B9216CD6E5005A471D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "SwiftShell::SwiftShell";
-			remoteInfo = SwiftShell;
-		};
 		BAB4C9BA216CD6E5005A471D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = OBJ_1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = "FileSmith::FileSmith";
 			remoteInfo = FileSmith;
-		};
-		BAB4C9BB216CD6E5005A471D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = OBJ_1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = "SwiftShell::SwiftShell";
-			remoteInfo = SwiftShell;
 		};
 		BAB4C9BC216CD6E6005A471D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -81,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BAA05726218BAE3B004C2BB6 /* SwiftShell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftShell.framework; path = Carthage/Build/Mac/SwiftShell.framework; sourceTree = "<group>"; };
 		"FileSmith::FileSmith::Product" /* FileSmith.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FileSmith.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"FileSmith::FileSmithTests::Product" /* FileSmithTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = FileSmithTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_10 /* Directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
@@ -93,20 +68,8 @@
 		OBJ_19 /* FileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTests.swift; sourceTree = "<group>"; };
 		OBJ_20 /* PathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathTests.swift; sourceTree = "<group>"; };
 		OBJ_21 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
-		OBJ_25 /* Bash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bash.swift; sourceTree = "<group>"; };
-		OBJ_26 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
-		OBJ_27 /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
-		OBJ_28 /* FileHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHandle.swift; sourceTree = "<group>"; };
-		OBJ_29 /* Files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Files.swift; sourceTree = "<group>"; };
-		OBJ_31 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		OBJ_32 /* Process.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Process.swift; sourceTree = "<group>"; };
-		OBJ_34 /* Lazy-split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lazy-split.swift"; sourceTree = "<group>"; };
-		OBJ_35 /* Stream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
-		OBJ_36 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		OBJ_37 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/karemorstol/Programming/Libraries/FileSmith/FileSmith/.build/checkouts/SwiftShell.git--7315839884107259463/Package.swift"; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
-		"SwiftShell::SwiftShell::Product" /* SwiftShell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftShell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_55 /* SwiftShell.framework in Frameworks */,
+				BAA05727218BAE3B004C2BB6 /* SwiftShell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,20 +86,20 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_79 /* FileSmith.framework in Frameworks */,
-				OBJ_80 /* SwiftShell.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		OBJ_97 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 0;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BAA05725218BAE3B004C2BB6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BAA05726218BAE3B004C2BB6 /* SwiftShell.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		OBJ_16 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,63 +120,11 @@
 			path = Tests/FileSmithTests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_22 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_23 /* SwiftShell 4.1.2 */,
-			);
-			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		OBJ_23 /* SwiftShell 4.1.2 */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_24 /* SwiftShell */,
-				OBJ_37 /* Package.swift */,
-			);
-			name = "SwiftShell 4.1.2";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_24 /* SwiftShell */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_25 /* Bash.swift */,
-				OBJ_26 /* Command.swift */,
-				OBJ_27 /* Context.swift */,
-				OBJ_28 /* FileHandle.swift */,
-				OBJ_29 /* Files.swift */,
-				OBJ_30 /* General */,
-				OBJ_32 /* Process.swift */,
-				OBJ_33 /* Stream */,
-				OBJ_36 /* String.swift */,
-			);
-			name = SwiftShell;
-			path = ".build/checkouts/SwiftShell.git--7315839884107259463/Sources/SwiftShell";
-			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_30 /* General */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_31 /* Array.swift */,
-			);
-			path = General;
-			sourceTree = "<group>";
-		};
-		OBJ_33 /* Stream */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_34 /* Lazy-split.swift */,
-				OBJ_35 /* Stream.swift */,
-			);
-			path = Stream;
-			sourceTree = "<group>";
-		};
 		OBJ_38 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"FileSmith::FileSmithTests::Product" /* FileSmithTests.xctest */,
 				"FileSmith::FileSmith::Product" /* FileSmith.framework */,
-				"SwiftShell::SwiftShell::Product" /* SwiftShell.framework */,
 			);
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -224,8 +135,8 @@
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
 				OBJ_16 /* Tests */,
-				OBJ_22 /* Dependencies */,
 				OBJ_38 /* Products */,
+				BAA05725218BAE3B004C2BB6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -265,7 +176,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				OBJ_56 /* PBXTargetDependency */,
 			);
 			name = FileSmith;
 			productName = FileSmith;
@@ -283,7 +193,6 @@
 			);
 			dependencies = (
 				OBJ_81 /* PBXTargetDependency */,
-				OBJ_82 /* PBXTargetDependency */,
 			);
 			name = FileSmithTests;
 			productName = FileSmithTests;
@@ -304,36 +213,6 @@
 			productName = FileSmithPackageDescription;
 			productType = "com.apple.product-type.framework";
 		};
-		"SwiftShell::SwiftPMPackageDescription" /* SwiftShellPackageDescription */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_99 /* Build configuration list for PBXNativeTarget "SwiftShellPackageDescription" */;
-			buildPhases = (
-				OBJ_102 /* Sources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SwiftShellPackageDescription;
-			productName = SwiftShellPackageDescription;
-			productType = "com.apple.product-type.framework";
-		};
-		"SwiftShell::SwiftShell" /* SwiftShell */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_83 /* Build configuration list for PBXNativeTarget "SwiftShell" */;
-			buildPhases = (
-				OBJ_86 /* Sources */,
-				OBJ_97 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SwiftShell;
-			productName = SwiftShell;
-			productReference = "SwiftShell::SwiftShell::Product" /* SwiftShell.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -346,9 +225,6 @@
 						LastSwiftMigration = 1000;
 					};
 					"FileSmith::FileSmithTests" = {
-						LastSwiftMigration = 1000;
-					};
-					"SwiftShell::SwiftShell" = {
 						LastSwiftMigration = 1000;
 					};
 				};
@@ -369,21 +245,11 @@
 				"FileSmith::SwiftPMPackageDescription" /* FileSmithPackageDescription */,
 				"FileSmith::FileSmithPackageTests::ProductTarget" /* FileSmithPackageTests */,
 				"FileSmith::FileSmithTests" /* FileSmithTests */,
-				"SwiftShell::SwiftShell" /* SwiftShell */,
-				"SwiftShell::SwiftPMPackageDescription" /* SwiftShellPackageDescription */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_102 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_103 /* Package.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		OBJ_46 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
@@ -417,31 +283,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_86 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 0;
-			files = (
-				OBJ_87 /* Bash.swift in Sources */,
-				OBJ_88 /* Command.swift in Sources */,
-				OBJ_89 /* Context.swift in Sources */,
-				OBJ_90 /* FileHandle.swift in Sources */,
-				OBJ_91 /* Files.swift in Sources */,
-				OBJ_92 /* Array.swift in Sources */,
-				OBJ_93 /* Process.swift in Sources */,
-				OBJ_94 /* Lazy-split.swift in Sources */,
-				OBJ_95 /* Stream.swift in Sources */,
-				OBJ_96 /* String.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		OBJ_56 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "SwiftShell::SwiftShell" /* SwiftShell */;
-			targetProxy = BAB4C9B9216CD6E5005A471D /* PBXContainerItemProxy */;
-		};
 		OBJ_68 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = "FileSmith::FileSmithTests" /* FileSmithTests */;
@@ -452,32 +296,9 @@
 			target = "FileSmith::FileSmith" /* FileSmith */;
 			targetProxy = BAB4C9BA216CD6E5005A471D /* PBXContainerItemProxy */;
 		};
-		OBJ_82 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = "SwiftShell::SwiftShell" /* SwiftShell */;
-			targetProxy = BAB4C9BB216CD6E5005A471D /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_100 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 4 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk";
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		OBJ_101 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				LD = /usr/bin/true;
-				OTHER_SWIFT_FLAGS = "-swift-version 4 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk";
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
 		OBJ_3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -487,7 +308,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_NS_ASSERTIONS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
 				GCC_OPTIMIZATION_LEVEL = 0;
+				LD_RUNPATH_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-DXcode";
@@ -508,7 +332,10 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
 				GCC_OPTIMIZATION_LEVEL = s;
+				LD_RUNPATH_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/Mac";
+				LIBRARY_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_SWIFT_FLAGS = "-DXcode";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -527,6 +354,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmith_Info.plist;
@@ -550,6 +378,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = FileSmith.xcodeproj/FileSmith_Info.plist;
@@ -634,52 +463,6 @@
 			};
 			name = Release;
 		};
-		OBJ_84 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = FileSmith.xcodeproj/SwiftShell_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = SwiftShell;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGET_NAME = SwiftShell;
-			};
-			name = Debug;
-		};
-		OBJ_85 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
-				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = FileSmith.xcodeproj/SwiftShell_Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
-				OTHER_CFLAGS = "$(inherited)";
-				OTHER_LDFLAGS = "$(inherited)";
-				OTHER_SWIFT_FLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = SwiftShell;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGET_NAME = SwiftShell;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -724,24 +507,6 @@
 			buildConfigurations = (
 				OBJ_71 /* Debug */,
 				OBJ_72 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_83 /* Build configuration list for PBXNativeTarget "SwiftShell" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_84 /* Debug */,
-				OBJ_85 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		OBJ_99 /* Build configuration list for PBXNativeTarget "SwiftShellPackageDescription" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				OBJ_100 /* Debug */,
-				OBJ_101 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
