@@ -170,7 +170,7 @@ public enum FileType: Equatable, Hashable {
 
 ### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
-Add `.Package(url: "https://github.com/kareman/FileSmith", "0.2.1")` to your Package.swift:
+Add `.package(url: "https://github.com/kareman/FileSmith", from: "0.2.2")` to your Package.swift:
 
 ```swift
 import PackageDescription
@@ -178,8 +178,8 @@ import PackageDescription
 let package = Package(
 	name: "somename",
 	dependencies: [
-		.Package(url: "https://github.com/kareman/FileSmith", "0.2.1")
-		 ]
+		.package(url: "https://github.com/kareman/FileSmith", from: "0.2.2")
+		]
 	)
 ```
 
