@@ -13,7 +13,7 @@ It differentiates between file paths and directory paths, and between paths and 
 See also:
 
 - [API documentation](https://kareman.github.io/FileSmith/)
-- [Why FileSmith was created](http://blog.nottoobadsoftware.com/swift/filesmith-type-safe-file-handling-in-swift)
+- [Why FileSmith was created](https://nottoobadsoftware.com/blog/swift/filesmith-type-safe-file-handling-in-swift)
 
 ## Features
 
@@ -199,5 +199,5 @@ Then run `pod install` to install it.
 
 Released under the MIT License (MIT), http://opensource.org/licenses/MIT
 
-Kåre Morstøl, [NotTooBad Software](http://nottoobadsoftware.com)
+Kåre Morstøl, [NotTooBad Software](https://nottoobadsoftware.com)
 
