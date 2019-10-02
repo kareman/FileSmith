@@ -170,7 +170,7 @@ public enum FileType: Equatable, Hashable {
 
 ### [Swift Package Manager](https://github.com/apple/swift-package-manager)
 
-Add `.package(url: "https://github.com/kareman/FileSmith", from: "0.2.2")` to your Package.swift:
+Add `.package(url: "https://github.com/kareman/FileSmith", from: "0.3.0")` to your Package.swift:
 
 ```swift
 import PackageDescription
@@ -178,7 +178,7 @@ import PackageDescription
 let package = Package(
 	name: "somename",
 	dependencies: [
-		.package(url: "https://github.com/kareman/FileSmith", from: "0.2.2")
+		.package(url: "https://github.com/kareman/FileSmith", from: "0.3.0")
 		]
 	)
 ```
@@ -189,7 +189,7 @@ and run `swift build`.
 
 Add `FileSmith` to your `Podfile`.
 
-```Ruby
+```ruby
 pod "FileSmith", git: "https://github.com/kareman/FileSmith.git"
 ```
 
