@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   s.source_files = 'Sources/FileSmith/*.swift'
   s.osx.deployment_target = '10.10'
   s.ios.deployment_target = '9.0'
-  s.dependency 'SwiftShell', '~> 4.1.2'
+  s.dependency 'SwiftShell', '~> 5.0.1'
 end

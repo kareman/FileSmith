@@ -169,7 +169,7 @@ public struct FilePath: Path {
 /// Removes any pair of [<directory name>, '..'].
 /// - Returns: an array where any '..' are only at the beginning. 
 func fixDotDots(_ components: [String]) -> [String] {
-	guard let firstdotdot = components.index(of: "..") else { return components }
+	guard let firstdotdot = components.firstIndex(of: "..") else { return components }
 	var components = components
 	var i = max(1,firstdotdot)
 	while i < components.endIndex {
@@ -364,11 +364,6 @@ extension Path {
 		let i = components.indexOfFirstDifference(base.components)
 		let nrofdotdots = base.components.count - (i ?? components.count)
 		return Self(base: base.components, relative: Array(repeating: "..", count: nrofdotdots) + components.suffix(from: i ?? components.endIndex))
-	}
-
-	/// The hash value of the string representation of this path.
-	public var hashValue: Int {
-		return relativeString.map {$0.hashValue &+ base!.absoluteString.hashValue} ?? absoluteString.hashValue
 	}
 
 	// MARK: Accesses the filesystem.
